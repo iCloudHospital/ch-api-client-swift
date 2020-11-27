@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 Cartfile
 CloudHospitalClient.podspec
 CloudHospitalClient/Classes/OpenAPIs/APIHelper.swift

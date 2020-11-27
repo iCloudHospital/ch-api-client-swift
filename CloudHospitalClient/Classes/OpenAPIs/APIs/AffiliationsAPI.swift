@@ -7,6 +7,7 @@
 
 import Foundation
 
+extension CloudHospitalClientAPI {
 
 
 open class AffiliationsAPI {
@@ -202,4 +203,5 @@ open class AffiliationsAPI {
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
+}
 }

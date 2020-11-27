@@ -7,6 +7,7 @@
 
 import Foundation
 
+extension CloudHospitalClientAPI {
 
 
 open class CHAdminsAPI {
@@ -251,4 +252,5 @@ open class CHAdminsAPI {
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
+}
 }

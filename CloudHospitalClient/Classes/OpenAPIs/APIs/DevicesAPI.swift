@@ -7,6 +7,7 @@
 
 import Foundation
 
+extension CloudHospitalClientAPI {
 
 
 open class DevicesAPI {
@@ -221,4 +222,5 @@ open class DevicesAPI {
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
+}
 }

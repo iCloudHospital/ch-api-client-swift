@@ -1,11 +1,14 @@
 Pod::Spec.new do |s|
   s.name = 'CloudHospitalClient'
   s.ios.deployment_target = '9.0'
-  s.version = '1.3'
-  s.source = { :git => 'https://github.com/iCloudHospital/ch-api-client-swift.git', :tag => s.version.to_s }
-  s.authors = 'Hyounwoo Sung'
-  s.license = { :type => 'MIT', :file => 'LICENSE' }
-  s.homepage = 'https://github.com/iCloudHospital/ch-api-client-swift'
+  s.osx.deployment_target = '10.11'
+  s.tvos.deployment_target = '9.0'
+  s.watchos.deployment_target = '3.0'
+  s.version = '1.3.1'
+  s.source = { :git => 'git@github.com:OpenAPITools/openapi-generator.git', :tag => 'v1.3.1' }
+  s.authors = 'OpenAPI Generator'
+  s.license = 'Proprietary'
+  s.homepage = 'https://github.com/OpenAPITools/openapi-generator'
   s.summary = 'CloudHospitalClient Swift SDK'
   s.source_files = 'CloudHospitalClient/Classes/**/*.swift'
 end

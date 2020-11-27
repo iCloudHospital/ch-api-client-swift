@@ -7,6 +7,7 @@
 
 import Foundation
 
+extension CloudHospitalClientAPI {
 
 
 open class DoctorSpecialtiesAPI {
@@ -111,4 +112,5 @@ open class DoctorSpecialtiesAPI {
         return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
+}
 }
