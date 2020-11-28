@@ -7,7 +7,6 @@
 
 import Foundation
 
-extension CloudHospitalClientAPI {
 
 
 open class CountriesAPI {
@@ -279,5 +278,4 @@ open class CountriesAPI {
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
-}
 }

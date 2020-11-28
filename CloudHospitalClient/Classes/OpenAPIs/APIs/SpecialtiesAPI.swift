@@ -7,7 +7,6 @@
 
 import Foundation
 
-extension CloudHospitalClientAPI {
 
 
 open class SpecialtiesAPI {
@@ -287,5 +286,4 @@ open class SpecialtiesAPI {
         return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
-}
 }
