@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = '3.0'
   s.version = '1.3.5'
   s.source = { :git => 'https://github.com/icloudhospital/ch-api-client-swift.git', :tag => s.version.to_s }
-  s.authors = 'OpenAPI Generator'
+  s.authors = 'CloudHospital'
   s.license = 'Proprietary'
   s.homepage = 'https://github.com/icloudhospital/ch-api-client-swift'
   s.summary = 'CloudHospitalClient Swift SDK'
