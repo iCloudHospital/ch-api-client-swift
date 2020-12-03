@@ -14,6 +14,7 @@ public struct CountryViewModel: Codable {
     public var name: String?
     public var slug: String?
     public var description: String?
+    public var content: String?
     public var hospitalsCount: Int?
     public var doctorsCount: Int?
     public var specialitiesCount: Int?
@@ -22,11 +23,12 @@ public struct CountryViewModel: Codable {
     public var medias: [MediaViewModel]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, hospitalsCount: Int? = nil, doctorsCount: Int? = nil, specialitiesCount: Int? = nil, packagesCount: Int? = nil, articlesCount: Int? = nil, medias: [MediaViewModel]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, content: String? = nil, hospitalsCount: Int? = nil, doctorsCount: Int? = nil, specialitiesCount: Int? = nil, packagesCount: Int? = nil, articlesCount: Int? = nil, medias: [MediaViewModel]? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.name = name
         self.slug = slug
         self.description = description
+        self.content = content
         self.hospitalsCount = hospitalsCount
         self.doctorsCount = doctorsCount
         self.specialitiesCount = specialitiesCount

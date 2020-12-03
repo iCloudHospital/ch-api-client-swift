@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **normalizedName** | **String** |  | [optional] 
 **slug** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
+**content** | **String** |  | [optional] 
 **hospitals** | [Hospital] |  | [optional] 
 **medias** | [Media] |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 

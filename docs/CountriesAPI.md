@@ -127,7 +127,7 @@ Sample request:        PUT /api/v1/countries/1      {          \"name\": \"USA\"
 import CloudHospitalClient
 
 let countryId = 987 // UUID | 
-let updateCountryCommand = UpdateCountryCommand(name: "name_example", description: "description_example", medias: [{...}]) // UpdateCountryCommand |  (optional)
+let updateCountryCommand = UpdateCountryCommand(name: "name_example", description: "description_example", content: "content_example", medias: [{...}]) // UpdateCountryCommand |  (optional)
 
 // Update country.
 CountriesAPI.apiV1CountriesCountryIdPut(countryId: countryId, updateCountryCommand: updateCountryCommand) { (response, error) in
@@ -242,7 +242,7 @@ Sample request:        POST /api/v1/countries      {          \"name\": \"Korea\
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createCountryCommand = CreateCountryCommand(name: "name_example", description: "description_example", medias: [{...}]) // CreateCountryCommand |  (optional)
+let createCountryCommand = CreateCountryCommand(name: "name_example", description: "description_example", content: "content_example", medias: [{...}]) // CreateCountryCommand |  (optional)
 
 // Create a country.
 CountriesAPI.apiV1CountriesPost(createCountryCommand: createCountryCommand) { (response, error) in

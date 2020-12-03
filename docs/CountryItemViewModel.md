@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **name** | **String** |  | [optional] 
 **slug** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
+**content** | **String** |  | [optional] 
 **hospitalsCount** | **Int** |  | [optional] 
 **doctorsCount** | **Int** |  | [optional] 
 **specialitiesCount** | **Int** |  | [optional] 

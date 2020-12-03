@@ -15,16 +15,18 @@ public struct Country: Codable {
     public var normalizedName: String?
     public var slug: String?
     public var description: String?
+    public var content: String?
     public var hospitals: [Hospital]?
     public var medias: [Media]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, name: String? = nil, normalizedName: String? = nil, slug: String? = nil, description: String? = nil, hospitals: [Hospital]? = nil, medias: [Media]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, name: String? = nil, normalizedName: String? = nil, slug: String? = nil, description: String? = nil, content: String? = nil, hospitals: [Hospital]? = nil, medias: [Media]? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.name = name
         self.normalizedName = normalizedName
         self.slug = slug
         self.description = description
+        self.content = content
         self.hospitals = hospitals
         self.medias = medias
         self.auditableEntity = auditableEntity
