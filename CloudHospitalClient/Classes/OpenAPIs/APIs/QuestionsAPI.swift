@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 
 
@@ -16,17 +17,20 @@ open class QuestionsAPI {
      - parameter hospitalId: (path)  
      - parameter createQuestionCommand: (body)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<UUID, Error>
      */
-    open class func apiV1HospitalsHospitalIdQuestionsPost(hospitalId: UUID, createQuestionCommand: CreateQuestionCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
-        apiV1HospitalsHospitalIdQuestionsPostWithRequestBuilder(hospitalId: hospitalId, createQuestionCommand: createQuestionCommand).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1HospitalsHospitalIdQuestionsPost(hospitalId: UUID, createQuestionCommand: CreateQuestionCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<UUID, Error> {
+        return Future<UUID, Error>.init { promise in
+            apiV1HospitalsHospitalIdQuestionsPostWithRequestBuilder(hospitalId: hospitalId, createQuestionCommand: createQuestionCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -61,17 +65,20 @@ open class QuestionsAPI {
      - parameter hospitalId: (path)  
      - parameter questionId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<Bool, Error>
      */
-    open class func apiV1HospitalsHospitalIdQuestionsQuestionIdDelete(hospitalId: UUID, questionId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: Bool?,_ error: Error?) -> Void)) {
-        apiV1HospitalsHospitalIdQuestionsQuestionIdDeleteWithRequestBuilder(hospitalId: hospitalId, questionId: questionId).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1HospitalsHospitalIdQuestionsQuestionIdDelete(hospitalId: UUID, questionId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error>.init { promise in
+            apiV1HospitalsHospitalIdQuestionsQuestionIdDeleteWithRequestBuilder(hospitalId: hospitalId, questionId: questionId).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -109,17 +116,20 @@ open class QuestionsAPI {
      - parameter hospitalId: (path)  
      - parameter questionId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<QuestionViewModel, Error>
      */
-    open class func apiV1HospitalsHospitalIdQuestionsQuestionIdGet(hospitalId: UUID, questionId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: QuestionViewModel?,_ error: Error?) -> Void)) {
-        apiV1HospitalsHospitalIdQuestionsQuestionIdGetWithRequestBuilder(hospitalId: hospitalId, questionId: questionId).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1HospitalsHospitalIdQuestionsQuestionIdGet(hospitalId: UUID, questionId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<QuestionViewModel, Error> {
+        return Future<QuestionViewModel, Error>.init { promise in
+            apiV1HospitalsHospitalIdQuestionsQuestionIdGetWithRequestBuilder(hospitalId: hospitalId, questionId: questionId).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -158,17 +168,20 @@ open class QuestionsAPI {
      - parameter questionId: (path)  
      - parameter updateQuestionCommand: (body)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<Bool, Error>
      */
-    open class func apiV1HospitalsHospitalIdQuestionsQuestionIdPut(hospitalId: UUID, questionId: UUID, updateQuestionCommand: UpdateQuestionCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: Bool?,_ error: Error?) -> Void)) {
-        apiV1HospitalsHospitalIdQuestionsQuestionIdPutWithRequestBuilder(hospitalId: hospitalId, questionId: questionId, updateQuestionCommand: updateQuestionCommand).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1HospitalsHospitalIdQuestionsQuestionIdPut(hospitalId: UUID, questionId: UUID, updateQuestionCommand: UpdateQuestionCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error>.init { promise in
+            apiV1HospitalsHospitalIdQuestionsQuestionIdPutWithRequestBuilder(hospitalId: hospitalId, questionId: questionId, updateQuestionCommand: updateQuestionCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -215,17 +228,20 @@ open class QuestionsAPI {
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<QuestionsViewModel, Error>
      */
-    open class func apiV1HospitalsQuestionsGet(id: UUID? = nil, title: String? = nil, hospitalId: UUID? = nil, patientId: UUID? = nil, questionType: QuestionType? = nil, questionStatus: QuestionStatus? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: QuestionsViewModel?,_ error: Error?) -> Void)) {
-        apiV1HospitalsQuestionsGetWithRequestBuilder(id: id, title: title, hospitalId: hospitalId, patientId: patientId, questionType: questionType, questionStatus: questionStatus, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1HospitalsQuestionsGet(id: UUID? = nil, title: String? = nil, hospitalId: UUID? = nil, patientId: UUID? = nil, questionType: QuestionType? = nil, questionStatus: QuestionStatus? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<QuestionsViewModel, Error> {
+        return Future<QuestionsViewModel, Error>.init { promise in
+            apiV1HospitalsQuestionsGetWithRequestBuilder(id: id, title: title, hospitalId: hospitalId, patientId: patientId, questionType: questionType, questionStatus: questionStatus, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**

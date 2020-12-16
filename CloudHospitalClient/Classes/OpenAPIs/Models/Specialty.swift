@@ -20,9 +20,10 @@ public struct Specialty: Codable {
     public var specialtyType: SpecialtyType?
     public var hospitalSpecialties: [HospitalSpecialty]?
     public var doctorSpecialties: [DoctorSpecialty]?
+    public var medias: [Media]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, name: String? = nil, normalizedName: String? = nil, slug: String? = nil, description: String? = nil, content: String? = nil, specialtyTypeId: UUID? = nil, specialtyType: SpecialtyType? = nil, hospitalSpecialties: [HospitalSpecialty]? = nil, doctorSpecialties: [DoctorSpecialty]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, name: String? = nil, normalizedName: String? = nil, slug: String? = nil, description: String? = nil, content: String? = nil, specialtyTypeId: UUID? = nil, specialtyType: SpecialtyType? = nil, hospitalSpecialties: [HospitalSpecialty]? = nil, doctorSpecialties: [DoctorSpecialty]? = nil, medias: [Media]? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.name = name
         self.normalizedName = normalizedName
@@ -33,6 +34,7 @@ public struct Specialty: Codable {
         self.specialtyType = specialtyType
         self.hospitalSpecialties = hospitalSpecialties
         self.doctorSpecialties = doctorSpecialties
+        self.medias = medias
         self.auditableEntity = auditableEntity
     }
 

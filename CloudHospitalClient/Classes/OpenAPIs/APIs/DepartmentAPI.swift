@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 
 
@@ -23,17 +24,20 @@ open class DepartmentAPI {
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<DepartmentsViewModel, Error>
      */
-    open class func apiV1HospitalsDepartmentsGet(id: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, name: String? = nil, additionalInfo: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: DepartmentsViewModel?,_ error: Error?) -> Void)) {
-        apiV1HospitalsDepartmentsGetWithRequestBuilder(id: id, hospitalId: hospitalId, hospitalName: hospitalName, name: name, additionalInfo: additionalInfo, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1HospitalsDepartmentsGet(id: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, name: String? = nil, additionalInfo: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DepartmentsViewModel, Error> {
+        return Future<DepartmentsViewModel, Error>.init { promise in
+            apiV1HospitalsDepartmentsGetWithRequestBuilder(id: id, hospitalId: hospitalId, hospitalName: hospitalName, name: name, additionalInfo: additionalInfo, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -80,17 +84,20 @@ open class DepartmentAPI {
      - parameter hospitalId: (path)  
      - parameter departmentId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<Bool, Error>
      */
-    open class func apiV1HospitalsHospitalIdDepartmentsDepartmentIdDelete(hospitalId: UUID, departmentId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: Bool?,_ error: Error?) -> Void)) {
-        apiV1HospitalsHospitalIdDepartmentsDepartmentIdDeleteWithRequestBuilder(hospitalId: hospitalId, departmentId: departmentId).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1HospitalsHospitalIdDepartmentsDepartmentIdDelete(hospitalId: UUID, departmentId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error>.init { promise in
+            apiV1HospitalsHospitalIdDepartmentsDepartmentIdDeleteWithRequestBuilder(hospitalId: hospitalId, departmentId: departmentId).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -128,17 +135,20 @@ open class DepartmentAPI {
      - parameter hospitalId: (path)  
      - parameter departmentId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<DepartmentViewModel, Error>
      */
-    open class func apiV1HospitalsHospitalIdDepartmentsDepartmentIdGet(hospitalId: UUID, departmentId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: DepartmentViewModel?,_ error: Error?) -> Void)) {
-        apiV1HospitalsHospitalIdDepartmentsDepartmentIdGetWithRequestBuilder(hospitalId: hospitalId, departmentId: departmentId).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1HospitalsHospitalIdDepartmentsDepartmentIdGet(hospitalId: UUID, departmentId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DepartmentViewModel, Error> {
+        return Future<DepartmentViewModel, Error>.init { promise in
+            apiV1HospitalsHospitalIdDepartmentsDepartmentIdGetWithRequestBuilder(hospitalId: hospitalId, departmentId: departmentId).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -174,17 +184,20 @@ open class DepartmentAPI {
      - parameter departmentId: (path)  
      - parameter createDepartmentCommand: (body)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<Department, Error>
      */
-    open class func apiV1HospitalsHospitalIdDepartmentsDepartmentIdPost(hospitalId: UUID, departmentId: String, createDepartmentCommand: CreateDepartmentCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: Department?,_ error: Error?) -> Void)) {
-        apiV1HospitalsHospitalIdDepartmentsDepartmentIdPostWithRequestBuilder(hospitalId: hospitalId, departmentId: departmentId, createDepartmentCommand: createDepartmentCommand).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1HospitalsHospitalIdDepartmentsDepartmentIdPost(hospitalId: UUID, departmentId: String, createDepartmentCommand: CreateDepartmentCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Department, Error> {
+        return Future<Department, Error>.init { promise in
+            apiV1HospitalsHospitalIdDepartmentsDepartmentIdPostWithRequestBuilder(hospitalId: hospitalId, departmentId: departmentId, createDepartmentCommand: createDepartmentCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -224,17 +237,20 @@ open class DepartmentAPI {
      - parameter departmentId: (path)  
      - parameter updateDepartmentCommand: (body)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<Bool, Error>
      */
-    open class func apiV1HospitalsHospitalIdDepartmentsDepartmentIdPut(hospitalId: UUID, departmentId: UUID, updateDepartmentCommand: UpdateDepartmentCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: Bool?,_ error: Error?) -> Void)) {
-        apiV1HospitalsHospitalIdDepartmentsDepartmentIdPutWithRequestBuilder(hospitalId: hospitalId, departmentId: departmentId, updateDepartmentCommand: updateDepartmentCommand).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1HospitalsHospitalIdDepartmentsDepartmentIdPut(hospitalId: UUID, departmentId: UUID, updateDepartmentCommand: UpdateDepartmentCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error>.init { promise in
+            apiV1HospitalsHospitalIdDepartmentsDepartmentIdPutWithRequestBuilder(hospitalId: hospitalId, departmentId: departmentId, updateDepartmentCommand: updateDepartmentCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
