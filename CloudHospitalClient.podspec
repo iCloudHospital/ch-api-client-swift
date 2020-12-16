@@ -12,6 +12,5 @@ Pod::Spec.new do |s|
   s.summary = 'CloudHospitalClient Swift SDK'
   s.source_files = 'CloudHospitalClient/Classes/**/*.swift'
   s.dependency 'Alamofire', '~> 4.9.1'
-  s.dependency 'Combine'
 
 end
