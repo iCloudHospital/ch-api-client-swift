@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 
 
@@ -16,17 +17,20 @@ open class DealPackagesAPI {
      - parameter dealId: (path)  
      - parameter packageId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<Bool, Error>
      */
-    open class func apiV1DealsDealIdPackagesPackageIdDelete(dealId: UUID, packageId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: Bool?,_ error: Error?) -> Void)) {
-        apiV1DealsDealIdPackagesPackageIdDeleteWithRequestBuilder(dealId: dealId, packageId: packageId).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DealsDealIdPackagesPackageIdDelete(dealId: UUID, packageId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error>.init { promise in
+            apiV1DealsDealIdPackagesPackageIdDeleteWithRequestBuilder(dealId: dealId, packageId: packageId).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -63,17 +67,20 @@ open class DealPackagesAPI {
      - parameter dealId: (path)  
      - parameter packageId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<DealPackageViewModel, Error>
      */
-    open class func apiV1DealsDealIdPackagesPackageIdGet(dealId: UUID, packageId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: DealPackageViewModel?,_ error: Error?) -> Void)) {
-        apiV1DealsDealIdPackagesPackageIdGetWithRequestBuilder(dealId: dealId, packageId: packageId).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DealsDealIdPackagesPackageIdGet(dealId: UUID, packageId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DealPackageViewModel, Error> {
+        return Future<DealPackageViewModel, Error>.init { promise in
+            apiV1DealsDealIdPackagesPackageIdGetWithRequestBuilder(dealId: dealId, packageId: packageId).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -108,17 +115,20 @@ open class DealPackagesAPI {
      - parameter packageId: (path)  
      - parameter updateDealPackageCommand: (body)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<Bool, Error>
      */
-    open class func apiV1DealsDealIdPackagesPackageIdPut(dealId: UUID, packageId: UUID, updateDealPackageCommand: UpdateDealPackageCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: Bool?,_ error: Error?) -> Void)) {
-        apiV1DealsDealIdPackagesPackageIdPutWithRequestBuilder(dealId: dealId, packageId: packageId, updateDealPackageCommand: updateDealPackageCommand).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DealsDealIdPackagesPackageIdPut(dealId: UUID, packageId: UUID, updateDealPackageCommand: UpdateDealPackageCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error>.init { promise in
+            apiV1DealsDealIdPackagesPackageIdPutWithRequestBuilder(dealId: dealId, packageId: packageId, updateDealPackageCommand: updateDealPackageCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -156,17 +166,20 @@ open class DealPackagesAPI {
      - parameter dealId: (path)  
      - parameter createDealPackageCommand: (body)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<UUID, Error>
      */
-    open class func apiV1DealsDealIdPackagesPost(dealId: UUID, createDealPackageCommand: CreateDealPackageCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: UUID?,_ error: Error?) -> Void)) {
-        apiV1DealsDealIdPackagesPostWithRequestBuilder(dealId: dealId, createDealPackageCommand: createDealPackageCommand).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DealsDealIdPackagesPost(dealId: UUID, createDealPackageCommand: CreateDealPackageCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<UUID, Error> {
+        return Future<UUID, Error>.init { promise in
+            apiV1DealsDealIdPackagesPostWithRequestBuilder(dealId: dealId, createDealPackageCommand: createDealPackageCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**

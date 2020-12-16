@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 
 
@@ -13,17 +14,20 @@ open class ImagesAPI {
     /**
 
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<Void, Error>
      */
-    open class func apiV1ImagesPost(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: Void?,_ error: Error?) -> Void)) {
-        apiV1ImagesPostWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case .success:
-                completion((), nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1ImagesPost(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Void, Error> {
+        return Future<Void, Error>.init { promise in
+            apiV1ImagesPostWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case .success:
+                    promise(.success(()))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**

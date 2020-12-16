@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 
 
@@ -22,17 +23,20 @@ open class SearchAPI {
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<DealSearchResultViewModel, Error>
      */
-    open class func apiV1SearchDealsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: DealSearchResultViewModel?,_ error: Error?) -> Void)) {
-        apiV1SearchDealsGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1SearchDealsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DealSearchResultViewModel, Error> {
+        return Future<DealSearchResultViewModel, Error>.init { promise in
+            apiV1SearchDealsGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -83,17 +87,20 @@ open class SearchAPI {
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<DoctorSearchResultViewModel, Error>
      */
-    open class func apiV1SearchDoctorsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: DoctorSearchResultViewModel?,_ error: Error?) -> Void)) {
-        apiV1SearchDoctorsGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1SearchDoctorsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DoctorSearchResultViewModel, Error> {
+        return Future<DoctorSearchResultViewModel, Error>.init { promise in
+            apiV1SearchDoctorsGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -144,17 +151,20 @@ open class SearchAPI {
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<AzureSearchViewModel, Error>
      */
-    open class func apiV1SearchGetcountGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: AzureSearchViewModel?,_ error: Error?) -> Void)) {
-        apiV1SearchGetcountGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1SearchGetcountGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<AzureSearchViewModel, Error> {
+        return Future<AzureSearchViewModel, Error>.init { promise in
+            apiV1SearchGetcountGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -205,17 +215,20 @@ open class SearchAPI {
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<HospitalSearchResultViewModel, Error>
      */
-    open class func apiV1SearchHospitalsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: HospitalSearchResultViewModel?,_ error: Error?) -> Void)) {
-        apiV1SearchHospitalsGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1SearchHospitalsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalSearchResultViewModel, Error> {
+        return Future<HospitalSearchResultViewModel, Error>.init { promise in
+            apiV1SearchHospitalsGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -266,17 +279,20 @@ open class SearchAPI {
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<SpecialtySearchResultViewModel, Error>
      */
-    open class func apiV1SearchSpecialtiesGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: SpecialtySearchResultViewModel?,_ error: Error?) -> Void)) {
-        apiV1SearchSpecialtiesGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1SearchSpecialtiesGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtySearchResultViewModel, Error> {
+        return Future<SpecialtySearchResultViewModel, Error>.init { promise in
+            apiV1SearchSpecialtiesGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -327,17 +343,20 @@ open class SearchAPI {
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<SpecialtyTypeSearchResultViewModel, Error>
      */
-    open class func apiV1SearchSpecialtytypesGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: SpecialtyTypeSearchResultViewModel?,_ error: Error?) -> Void)) {
-        apiV1SearchSpecialtytypesGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1SearchSpecialtytypesGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypeSearchResultViewModel, Error> {
+        return Future<SpecialtyTypeSearchResultViewModel, Error>.init { promise in
+            apiV1SearchSpecialtytypesGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**

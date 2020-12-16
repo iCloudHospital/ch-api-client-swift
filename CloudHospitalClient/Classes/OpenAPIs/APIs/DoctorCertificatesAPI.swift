@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 
 
@@ -24,17 +25,20 @@ open class DoctorCertificatesAPI {
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<DoctorCertificatesViewModel, Error>
      */
-    open class func apiV1DoctorsCertificatesGet(id: UUID? = nil, doctorId: UUID? = nil, doctorName: String? = nil, certificate: String? = nil, activeFrom: Date? = nil, activeTo: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: DoctorCertificatesViewModel?,_ error: Error?) -> Void)) {
-        apiV1DoctorsCertificatesGetWithRequestBuilder(id: id, doctorId: doctorId, doctorName: doctorName, certificate: certificate, activeFrom: activeFrom, activeTo: activeTo, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DoctorsCertificatesGet(id: UUID? = nil, doctorId: UUID? = nil, doctorName: String? = nil, certificate: String? = nil, activeFrom: Date? = nil, activeTo: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DoctorCertificatesViewModel, Error> {
+        return Future<DoctorCertificatesViewModel, Error>.init { promise in
+            apiV1DoctorsCertificatesGetWithRequestBuilder(id: id, doctorId: doctorId, doctorName: doctorName, certificate: certificate, activeFrom: activeFrom, activeTo: activeTo, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -83,17 +87,20 @@ open class DoctorCertificatesAPI {
      - parameter doctorId: (path)  
      - parameter certificateId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<Bool, Error>
      */
-    open class func apiV1DoctorsDoctorIdCertificatesCertificateIdDelete(doctorId: UUID, certificateId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: Bool?,_ error: Error?) -> Void)) {
-        apiV1DoctorsDoctorIdCertificatesCertificateIdDeleteWithRequestBuilder(doctorId: doctorId, certificateId: certificateId).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DoctorsDoctorIdCertificatesCertificateIdDelete(doctorId: UUID, certificateId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error>.init { promise in
+            apiV1DoctorsDoctorIdCertificatesCertificateIdDeleteWithRequestBuilder(doctorId: doctorId, certificateId: certificateId).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -131,17 +138,20 @@ open class DoctorCertificatesAPI {
      - parameter doctorId: (path)  
      - parameter certificateId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<DoctorCertificateViewModel, Error>
      */
-    open class func apiV1DoctorsDoctorIdCertificatesCertificateIdGet(doctorId: UUID, certificateId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: DoctorCertificateViewModel?,_ error: Error?) -> Void)) {
-        apiV1DoctorsDoctorIdCertificatesCertificateIdGetWithRequestBuilder(doctorId: doctorId, certificateId: certificateId).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DoctorsDoctorIdCertificatesCertificateIdGet(doctorId: UUID, certificateId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DoctorCertificateViewModel, Error> {
+        return Future<DoctorCertificateViewModel, Error>.init { promise in
+            apiV1DoctorsDoctorIdCertificatesCertificateIdGetWithRequestBuilder(doctorId: doctorId, certificateId: certificateId).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -177,17 +187,20 @@ open class DoctorCertificatesAPI {
      - parameter certificateId: (path)  
      - parameter updateDoctorCertificateCommand: (body)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<Bool, Error>
      */
-    open class func apiV1DoctorsDoctorIdCertificatesCertificateIdPut(doctorId: UUID, certificateId: UUID, updateDoctorCertificateCommand: UpdateDoctorCertificateCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: Bool?,_ error: Error?) -> Void)) {
-        apiV1DoctorsDoctorIdCertificatesCertificateIdPutWithRequestBuilder(doctorId: doctorId, certificateId: certificateId, updateDoctorCertificateCommand: updateDoctorCertificateCommand).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DoctorsDoctorIdCertificatesCertificateIdPut(doctorId: UUID, certificateId: UUID, updateDoctorCertificateCommand: UpdateDoctorCertificateCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error>.init { promise in
+            apiV1DoctorsDoctorIdCertificatesCertificateIdPutWithRequestBuilder(doctorId: doctorId, certificateId: certificateId, updateDoctorCertificateCommand: updateDoctorCertificateCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -226,17 +239,20 @@ open class DoctorCertificatesAPI {
      - parameter doctorId: (path)  
      - parameter createDoctorCertificateCommand: (body)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<DoctorCertificate, Error>
      */
-    open class func apiV1DoctorsDoctorIdCertificatesPost(doctorId: UUID, createDoctorCertificateCommand: CreateDoctorCertificateCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: DoctorCertificate?,_ error: Error?) -> Void)) {
-        apiV1DoctorsDoctorIdCertificatesPostWithRequestBuilder(doctorId: doctorId, createDoctorCertificateCommand: createDoctorCertificateCommand).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DoctorsDoctorIdCertificatesPost(doctorId: UUID, createDoctorCertificateCommand: CreateDoctorCertificateCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DoctorCertificate, Error> {
+        return Future<DoctorCertificate, Error>.init { promise in
+            apiV1DoctorsDoctorIdCertificatesPostWithRequestBuilder(doctorId: doctorId, createDoctorCertificateCommand: createDoctorCertificateCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**

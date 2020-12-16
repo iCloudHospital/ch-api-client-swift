@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 
 
@@ -16,17 +17,20 @@ open class DoctorSpecialtiesAPI {
      - parameter doctorId: (path)  
      - parameter specialtyId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<DoctorSpecialtyViewModel, Error>
      */
-    open class func apiV1DoctorsDoctorIdSpecialtySpecialtyIdPost(doctorId: UUID, specialtyId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: DoctorSpecialtyViewModel?,_ error: Error?) -> Void)) {
-        apiV1DoctorsDoctorIdSpecialtySpecialtyIdPostWithRequestBuilder(doctorId: doctorId, specialtyId: specialtyId).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DoctorsDoctorIdSpecialtySpecialtyIdPost(doctorId: UUID, specialtyId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DoctorSpecialtyViewModel, Error> {
+        return Future<DoctorSpecialtyViewModel, Error>.init { promise in
+            apiV1DoctorsDoctorIdSpecialtySpecialtyIdPostWithRequestBuilder(doctorId: doctorId, specialtyId: specialtyId).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
@@ -65,17 +69,20 @@ open class DoctorSpecialtiesAPI {
      - parameter specailtyId: (path)  
      - parameter hospitalId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AnyPublisher<Bool, Error>
      */
-    open class func apiV1DoctorsHospitalIdDoctorsDoctorIdDelete(doctorId: UUID, specailtyId: UUID, hospitalId: String, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, completion: @escaping ((_ data: Bool?,_ error: Error?) -> Void)) {
-        apiV1DoctorsHospitalIdDoctorsDoctorIdDeleteWithRequestBuilder(doctorId: doctorId, specailtyId: specailtyId, hospitalId: hospitalId).execute(apiResponseQueue) { result -> Void in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DoctorsHospitalIdDoctorsDoctorIdDelete(doctorId: UUID, specailtyId: UUID, hospitalId: String, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error>.init { promise in
+            apiV1DoctorsHospitalIdDoctorsDoctorIdDeleteWithRequestBuilder(doctorId: doctorId, specailtyId: specailtyId, hospitalId: hospitalId).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
             }
-        }
+        }.eraseToAnyPublisher()
     }
 
     /**
