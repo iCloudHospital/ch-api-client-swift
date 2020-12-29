@@ -3,13 +3,13 @@ targets:
   CloudHospitalClient:
     type: framework
     platform: iOS
-    deploymentTarget: "10.0"
+    deploymentTarget: "14.0"
     sources: [CloudHospitalClient]
     info:
       path: ./Info.plist
-      version: 1.10.0
+      version: 1.4.1
     settings:
       APPLICATION_EXTENSION_API_ONLY: true
     scheme: {}
     dependencies:
-    - carthage: Alamofire
+      - carthage: Alamofire
