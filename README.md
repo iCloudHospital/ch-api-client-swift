@@ -141,6 +141,8 @@ Class | Method | HTTP request | Description
 *ManagersAPI* | [**apiV1ManagersManagerIdPut**](docs/ManagersAPI.md#apiv1managersmanageridput) | **PUT** /api/v1/managers/{managerId} | Update hospital manager.
 *ManagersAPI* | [**apiV1ManagersPost**](docs/ManagersAPI.md#apiv1managerspost) | **POST** /api/v1/managers | Create hospital manager.
 *MoviesAPI* | [**apiV1MoviesPost**](docs/MoviesAPI.md#apiv1moviespost) | **POST** /api/v1/movies | 
+*NotificationsAPI* | [**apiV1NotificationsCheckPost**](docs/NotificationsAPI.md#apiv1notificationscheckpost) | **POST** /api/v1/notifications/check | Check notification.
+*NotificationsAPI* | [**apiV1NotificationsGet**](docs/NotificationsAPI.md#apiv1notificationsget) | **GET** /api/v1/notifications | Get all notifications.
 *PartnersAPI* | [**apiV1PartnersGet**](docs/PartnersAPI.md#apiv1partnersget) | **GET** /api/v1/partners | Get all partners.
 *PartnersAPI* | [**apiV1PartnersPartnerIdDelete**](docs/PartnersAPI.md#apiv1partnerspartneriddelete) | **DELETE** /api/v1/partners/{partnerId} | Delete patner.
 *PartnersAPI* | [**apiV1PartnersPartnerIdGet**](docs/PartnersAPI.md#apiv1partnerspartneridget) | **GET** /api/v1/partners/{partnerId} | Get partner.
@@ -238,6 +240,7 @@ Class | Method | HTTP request | Description
  - [ChangeEmailCommand](docs/ChangeEmailCommand.md)
  - [ChangeLog](docs/ChangeLog.md)
  - [ChargeStatus](docs/ChargeStatus.md)
+ - [CheckNotificationsCommand](docs/CheckNotificationsCommand.md)
  - [CommunicationUserTokenModel](docs/CommunicationUserTokenModel.md)
  - [ConfirmEmailCommand](docs/ConfirmEmailCommand.md)
  - [Consultation](docs/Consultation.md)
@@ -357,6 +360,9 @@ Class | Method | HTTP request | Description
  - [MediaSearchViewModel](docs/MediaSearchViewModel.md)
  - [MediaType](docs/MediaType.md)
  - [MediaViewModel](docs/MediaViewModel.md)
+ - [NotificationCode](docs/NotificationCode.md)
+ - [NotificationViewModel](docs/NotificationViewModel.md)
+ - [NotificationsViewModel](docs/NotificationsViewModel.md)
  - [PagedListMetaData](docs/PagedListMetaData.md)
  - [PartnerItemViewModel](docs/PartnerItemViewModel.md)
  - [PartnerViewModel](docs/PartnerViewModel.md)

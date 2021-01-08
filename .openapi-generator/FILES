@@ -27,6 +27,7 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/IdentityAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ImagesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ManagersAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/MoviesAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/NotificationsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/PartnersAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/PatientsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ProfilesAPI.swift
@@ -76,6 +77,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/CHManagersViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ChangeEmailCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ChangeLog.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ChargeStatus.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/CheckNotificationsCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CommunicationUserTokenModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ConfirmEmailCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Consultation.swift
@@ -195,6 +197,9 @@ CloudHospitalClient/Classes/OpenAPIs/Models/Media.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/MediaSearchViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/MediaType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/MediaViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/NotificationCode.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/NotificationViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/NotificationsViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/PagedListMetaData.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/PartnerItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/PartnerViewModel.swift
@@ -332,6 +337,7 @@ docs/CHManagersViewModel.md
 docs/ChangeEmailCommand.md
 docs/ChangeLog.md
 docs/ChargeStatus.md
+docs/CheckNotificationsCommand.md
 docs/CommunicationUserTokenModel.md
 docs/CommunicationsAPI.md
 docs/ConfirmEmailCommand.md
@@ -470,6 +476,10 @@ docs/MediaSearchViewModel.md
 docs/MediaType.md
 docs/MediaViewModel.md
 docs/MoviesAPI.md
+docs/NotificationCode.md
+docs/NotificationViewModel.md
+docs/NotificationsAPI.md
+docs/NotificationsViewModel.md
 docs/PagedListMetaData.md
 docs/PartnerItemViewModel.md
 docs/PartnerViewModel.md
