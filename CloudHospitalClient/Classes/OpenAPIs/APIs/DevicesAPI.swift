@@ -57,51 +57,6 @@ open class DevicesAPI {
     }
 
     /**
-     Get device.
-     
-     - parameter deviceId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<DeviceViewModel, Error>
-     */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1DevicesDeviceIdGet(deviceId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DeviceViewModel, Error> {
-        return Future<DeviceViewModel, Error>.init { promise in
-            apiV1DevicesDeviceIdGetWithRequestBuilder(deviceId: deviceId).execute(apiResponseQueue) { result -> Void in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body!))
-                case let .failure(error):
-                    promise(.failure(error))
-                }
-            }
-        }.eraseToAnyPublisher()
-    }
-
-    /**
-     Get device.
-     - GET /api/v1/devices/{deviceId}
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter deviceId: (path)  
-     - returns: RequestBuilder<DeviceViewModel> 
-     */
-    open class func apiV1DevicesDeviceIdGetWithRequestBuilder(deviceId: UUID) -> RequestBuilder<DeviceViewModel> {
-        var path = "/api/v1/devices/{deviceId}"
-        let deviceIdPreEscape = "\(APIHelper.mapValueToPathItem(deviceId))"
-        let deviceIdPostEscape = deviceIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{deviceId}", with: deviceIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<DeviceViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
      Create device login.
      
      - parameter deviceId: (path)  
@@ -196,6 +151,78 @@ open class DevicesAPI {
     }
 
     /**
+     Get all devices.
+     
+     - parameter id: (query)  (optional)
+     - parameter token: (query)  (optional)
+     - parameter platform: (query)  (optional)
+     - parameter appAlert: (query)  (optional)
+     - parameter eventAlert: (query)  (optional)
+     - parameter noticeAlert: (query)  (optional)
+     - parameter page: (query)  (optional)
+     - parameter limit: (query)  (optional)
+     - parameter lastRetrieved: (query)  (optional)
+     - parameter current: (query)  (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<DevicesViewModel, Error>
+     */
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DevicesGet(id: UUID? = nil, token: String? = nil, platform: Platform? = nil, appAlert: Bool? = nil, eventAlert: Bool? = nil, noticeAlert: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DevicesViewModel, Error> {
+        return Future<DevicesViewModel, Error>.init { promise in
+            apiV1DevicesGetWithRequestBuilder(id: id, token: token, platform: platform, appAlert: appAlert, eventAlert: eventAlert, noticeAlert: noticeAlert, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    /**
+     Get all devices.
+     - GET /api/v1/devices
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter id: (query)  (optional)
+     - parameter token: (query)  (optional)
+     - parameter platform: (query)  (optional)
+     - parameter appAlert: (query)  (optional)
+     - parameter eventAlert: (query)  (optional)
+     - parameter noticeAlert: (query)  (optional)
+     - parameter page: (query)  (optional)
+     - parameter limit: (query)  (optional)
+     - parameter lastRetrieved: (query)  (optional)
+     - parameter current: (query)  (optional)
+     - returns: RequestBuilder<DevicesViewModel> 
+     */
+    open class func apiV1DevicesGetWithRequestBuilder(id: UUID? = nil, token: String? = nil, platform: Platform? = nil, appAlert: Bool? = nil, eventAlert: Bool? = nil, noticeAlert: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<DevicesViewModel> {
+        let path = "/api/v1/devices"
+        let URLString = CloudHospitalClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(), 
+            "Token": token?.encodeToJSON(), 
+            "Platform": platform?.encodeToJSON(), 
+            "AppAlert": appAlert?.encodeToJSON(), 
+            "EventAlert": eventAlert?.encodeToJSON(), 
+            "NoticeAlert": noticeAlert?.encodeToJSON(), 
+            "page": page?.encodeToJSON(), 
+            "limit": limit?.encodeToJSON(), 
+            "lastRetrieved": lastRetrieved?.encodeToJSON(), 
+            "Current": current?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<DevicesViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
      Create device.
      
      - parameter createDeviceCommand: (body)  (optional)
@@ -235,6 +262,51 @@ open class DevicesAPI {
         let requestBuilder: RequestBuilder<UUID>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Get device.
+     
+     - parameter token: (path)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<DeviceViewModel, Error>
+     */
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DevicesTokenGet(token: String, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DeviceViewModel, Error> {
+        return Future<DeviceViewModel, Error>.init { promise in
+            apiV1DevicesTokenGetWithRequestBuilder(token: token).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    /**
+     Get device.
+     - GET /api/v1/devices/{token}
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter token: (path)  
+     - returns: RequestBuilder<DeviceViewModel> 
+     */
+    open class func apiV1DevicesTokenGetWithRequestBuilder(token: String) -> RequestBuilder<DeviceViewModel> {
+        var path = "/api/v1/devices/{token}"
+        let tokenPreEscape = "\(APIHelper.mapValueToPathItem(token))"
+        let tokenPostEscape = tokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{token}", with: tokenPostEscape, options: .literal, range: nil)
+        let URLString = CloudHospitalClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<DeviceViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
 }

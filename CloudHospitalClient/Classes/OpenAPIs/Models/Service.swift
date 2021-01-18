@@ -15,6 +15,7 @@ public struct Service: Codable {
     public var normalizedName: String?
     public var slug: String?
     public var description: String?
+    public var content: String?
     public var normalizedDescription: String?
     public var hospitalId: UUID?
     public var specialtyId: UUID?
@@ -27,14 +28,16 @@ public struct Service: Codable {
     public var priceReuqest: Bool?
     public var order: Int?
     public var dealPackageServices: [DealPackageService]?
+    public var medias: [Media]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, name: String? = nil, normalizedName: String? = nil, slug: String? = nil, description: String? = nil, normalizedDescription: String? = nil, hospitalId: UUID? = nil, specialtyId: UUID? = nil, packageServiceId: UUID? = nil, hospitalSpecialty: HospitalSpecialty? = nil, procedure: Procedure? = nil, serviceCategoryId: UUID? = nil, minPrice: Double? = nil, maxPrice: Double? = nil, priceReuqest: Bool? = nil, order: Int? = nil, dealPackageServices: [DealPackageService]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, name: String? = nil, normalizedName: String? = nil, slug: String? = nil, description: String? = nil, content: String? = nil, normalizedDescription: String? = nil, hospitalId: UUID? = nil, specialtyId: UUID? = nil, packageServiceId: UUID? = nil, hospitalSpecialty: HospitalSpecialty? = nil, procedure: Procedure? = nil, serviceCategoryId: UUID? = nil, minPrice: Double? = nil, maxPrice: Double? = nil, priceReuqest: Bool? = nil, order: Int? = nil, dealPackageServices: [DealPackageService]? = nil, medias: [Media]? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.name = name
         self.normalizedName = normalizedName
         self.slug = slug
         self.description = description
+        self.content = content
         self.normalizedDescription = normalizedDescription
         self.hospitalId = hospitalId
         self.specialtyId = specialtyId
@@ -47,6 +50,7 @@ public struct Service: Codable {
         self.priceReuqest = priceReuqest
         self.order = order
         self.dealPackageServices = dealPackageServices
+        self.medias = medias
         self.auditableEntity = auditableEntity
     }
 

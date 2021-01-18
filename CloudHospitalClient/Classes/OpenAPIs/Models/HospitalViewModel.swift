@@ -10,7 +10,6 @@ import Foundation
 
 public struct HospitalViewModel: Codable {
 
-    public var specialties: [HospitalSpecialtyItemViewModel]?
     public var id: UUID?
     public var name: String?
     public var slug: String?
@@ -45,8 +44,7 @@ public struct HospitalViewModel: Codable {
     public var location: LocationViewModel?
     public var auditableEntity: AuditableEntity?
 
-    public init(specialties: [HospitalSpecialtyItemViewModel]? = nil, id: UUID? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, logo: String? = nil, overview: String? = nil, bedsCount: Int? = nil, operationsPerYear: Int? = nil, foundationYear: Int? = nil, medicalStaffCount: Int? = nil, doctorCount: Int? = nil, countryId: UUID? = nil, countryName: String? = nil, marketingType: MarketingType? = nil, consultationEnabled: Bool? = nil, consultationFee: Double? = nil, timeZone: String? = nil, articlesCount: Int? = nil, packagesCount: Int? = nil, equipmentsCount: Int? = nil, reviewsCount: Int? = nil, departmentsCount: Int? = nil, specialtiesCount: Int? = nil, accreditationsCount: Int? = nil, doctorAffiliationsCount: Int? = nil, managerAffiliationsCount: Int? = nil, specialtiesSummerized: String? = nil, awards: [AwardViewModel]? = nil, medias: [MediaViewModel]? = nil, accreditations: [AccreditationViewModel]? = nil, evaluations: [HospitalEvaluationViewModel]? = nil, location: LocationViewModel? = nil, auditableEntity: AuditableEntity? = nil) {
-        self.specialties = specialties
+    public init(id: UUID? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, logo: String? = nil, overview: String? = nil, bedsCount: Int? = nil, operationsPerYear: Int? = nil, foundationYear: Int? = nil, medicalStaffCount: Int? = nil, doctorCount: Int? = nil, countryId: UUID? = nil, countryName: String? = nil, marketingType: MarketingType? = nil, consultationEnabled: Bool? = nil, consultationFee: Double? = nil, timeZone: String? = nil, articlesCount: Int? = nil, packagesCount: Int? = nil, equipmentsCount: Int? = nil, reviewsCount: Int? = nil, departmentsCount: Int? = nil, specialtiesCount: Int? = nil, accreditationsCount: Int? = nil, doctorAffiliationsCount: Int? = nil, managerAffiliationsCount: Int? = nil, specialtiesSummerized: String? = nil, awards: [AwardViewModel]? = nil, medias: [MediaViewModel]? = nil, accreditations: [AccreditationViewModel]? = nil, evaluations: [HospitalEvaluationViewModel]? = nil, location: LocationViewModel? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.name = name
         self.slug = slug

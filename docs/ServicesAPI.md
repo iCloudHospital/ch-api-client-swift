@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdPut**](ServicesAPI.md#apiv1hospitalshospitalidspecialtiesspecialtyidservicesserviceidput) | **PUT** /api/v1/hospitals/{hospitalId}/specialties/{specialtyId}/services/{serviceId} | Update service.
 [**apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesquencePut**](ServicesAPI.md#apiv1hospitalshospitalidspecialtiesspecialtyidservicesquenceput) | **PUT** /api/v1/hospitals/{hospitalId}/specialties/{specialtyId}/servicesquence | Update service sequence.
 [**apiV1HospitalsServicesGet**](ServicesAPI.md#apiv1hospitalsservicesget) | **GET** /api/v1/hospitals/services | Get all services.
+[**apiV1HospitalsServicesSlugsSlugGet**](ServicesAPI.md#apiv1hospitalsservicesslugsslugget) | **GET** /api/v1/hospitals/services/slugs/{slug} | Get service by slug.
 
 
 # **apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesPost**
@@ -352,6 +353,54 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ServicesViewModel**](ServicesViewModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV1HospitalsServicesSlugsSlugGet**
+```swift
+    open class func apiV1HospitalsServicesSlugsSlugGet(slug: String, completion: @escaping (_ data: ServiceViewModel?, _ error: Error?) -> Void)
+```
+
+Get service by slug.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let slug = "slug_example" // String | 
+
+// Get service by slug.
+ServicesAPI.apiV1HospitalsServicesSlugsSlugGet(slug: slug) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **slug** | **String** |  | 
+
+### Return type
+
+[**ServiceViewModel**](ServiceViewModel.md)
 
 ### Authorization
 

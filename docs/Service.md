@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **normalizedName** | **String** |  | [optional] 
 **slug** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
+**content** | **String** |  | [optional] 
 **normalizedDescription** | **String** |  | [optional] 
 **hospitalId** | **UUID** |  | [optional] 
 **specialtyId** | **UUID** |  | [optional] 
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 **priceReuqest** | **Bool** |  | [optional] 
 **order** | **Int** |  | [optional] 
 **dealPackageServices** | [DealPackageService] |  | [optional] 
+**medias** | [Media] |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

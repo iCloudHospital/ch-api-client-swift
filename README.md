@@ -90,10 +90,11 @@ Class | Method | HTTP request | Description
 *DepartmentAPI* | [**apiV1HospitalsHospitalIdDepartmentsDepartmentIdPost**](docs/DepartmentAPI.md#apiv1hospitalshospitaliddepartmentsdepartmentidpost) | **POST** /api/v1/hospitals/{hospitalId}/departments/{departmentId} | Create department.
 *DepartmentAPI* | [**apiV1HospitalsHospitalIdDepartmentsDepartmentIdPut**](docs/DepartmentAPI.md#apiv1hospitalshospitaliddepartmentsdepartmentidput) | **PUT** /api/v1/hospitals/{hospitalId}/departments/{departmentId} | Update department.
 *DevicesAPI* | [**apiV1DevicesDeviceIdDelete**](docs/DevicesAPI.md#apiv1devicesdeviceiddelete) | **DELETE** /api/v1/devices/{deviceId} | Delete device.
-*DevicesAPI* | [**apiV1DevicesDeviceIdGet**](docs/DevicesAPI.md#apiv1devicesdeviceidget) | **GET** /api/v1/devices/{deviceId} | Get device.
 *DevicesAPI* | [**apiV1DevicesDeviceIdLoginsPost**](docs/DevicesAPI.md#apiv1devicesdeviceidloginspost) | **POST** /api/v1/devices/{deviceId}/logins | Create device login.
 *DevicesAPI* | [**apiV1DevicesDeviceIdPut**](docs/DevicesAPI.md#apiv1devicesdeviceidput) | **PUT** /api/v1/devices/{deviceId} | Update device.
+*DevicesAPI* | [**apiV1DevicesGet**](docs/DevicesAPI.md#apiv1devicesget) | **GET** /api/v1/devices | Get all devices.
 *DevicesAPI* | [**apiV1DevicesPost**](docs/DevicesAPI.md#apiv1devicespost) | **POST** /api/v1/devices | Create device.
+*DevicesAPI* | [**apiV1DevicesTokenGet**](docs/DevicesAPI.md#apiv1devicestokenget) | **GET** /api/v1/devices/{token} | Get device.
 *DoctorCertificatesAPI* | [**apiV1DoctorsCertificatesGet**](docs/DoctorCertificatesAPI.md#apiv1doctorscertificatesget) | **GET** /api/v1/doctors/certificates | Get all certificates.
 *DoctorCertificatesAPI* | [**apiV1DoctorsDoctorIdCertificatesCertificateIdDelete**](docs/DoctorCertificatesAPI.md#apiv1doctorsdoctoridcertificatescertificateiddelete) | **DELETE** /api/v1/doctors/{doctorId}/certificates/{certificateId} | Delete certificate.
 *DoctorCertificatesAPI* | [**apiV1DoctorsDoctorIdCertificatesCertificateIdGet**](docs/DoctorCertificatesAPI.md#apiv1doctorsdoctoridcertificatescertificateidget) | **GET** /api/v1/doctors/{doctorId}/certificates/{certificateId} | Get certificate.
@@ -183,6 +184,7 @@ Class | Method | HTTP request | Description
 *ServicesAPI* | [**apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdPut**](docs/ServicesAPI.md#apiv1hospitalshospitalidspecialtiesspecialtyidservicesserviceidput) | **PUT** /api/v1/hospitals/{hospitalId}/specialties/{specialtyId}/services/{serviceId} | Update service.
 *ServicesAPI* | [**apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesquencePut**](docs/ServicesAPI.md#apiv1hospitalshospitalidspecialtiesspecialtyidservicesquenceput) | **PUT** /api/v1/hospitals/{hospitalId}/specialties/{specialtyId}/servicesquence | Update service sequence.
 *ServicesAPI* | [**apiV1HospitalsServicesGet**](docs/ServicesAPI.md#apiv1hospitalsservicesget) | **GET** /api/v1/hospitals/services | Get all services.
+*ServicesAPI* | [**apiV1HospitalsServicesSlugsSlugGet**](docs/ServicesAPI.md#apiv1hospitalsservicesslugsslugget) | **GET** /api/v1/hospitals/services/slugs/{slug} | Get service by slug.
 *SpecialtiesAPI* | [**apiV1SpecialtiesGet**](docs/SpecialtiesAPI.md#apiv1specialtiesget) | **GET** /api/v1/specialties | Get all specialties.
 *SpecialtiesAPI* | [**apiV1SpecialtiesPost**](docs/SpecialtiesAPI.md#apiv1specialtiespost) | **POST** /api/v1/specialties | Create specialty.
 *SpecialtiesAPI* | [**apiV1SpecialtiesSlugsSlugGet**](docs/SpecialtiesAPI.md#apiv1specialtiesslugsslugget) | **GET** /api/v1/specialties/slugs/{slug} | Get specialty by slug.
@@ -299,8 +301,10 @@ Class | Method | HTTP request | Description
  - [DepartmentViewModel](docs/DepartmentViewModel.md)
  - [DepartmentsViewModel](docs/DepartmentsViewModel.md)
  - [Device](docs/Device.md)
+ - [DeviceItemViewModel](docs/DeviceItemViewModel.md)
  - [DeviceLogin](docs/DeviceLogin.md)
  - [DeviceViewModel](docs/DeviceViewModel.md)
+ - [DevicesViewModel](docs/DevicesViewModel.md)
  - [Doctor](docs/Doctor.md)
  - [DoctorAffiliation](docs/DoctorAffiliation.md)
  - [DoctorAffiliationViewModel](docs/DoctorAffiliationViewModel.md)

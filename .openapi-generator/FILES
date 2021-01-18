@@ -136,8 +136,10 @@ CloudHospitalClient/Classes/OpenAPIs/Models/DepartmentItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DepartmentViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DepartmentsViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Device.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/DeviceItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DeviceLogin.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DeviceViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/DevicesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Doctor.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorAffiliation.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorAffiliationViewModel.swift
@@ -402,9 +404,11 @@ docs/DepartmentItemViewModel.md
 docs/DepartmentViewModel.md
 docs/DepartmentsViewModel.md
 docs/Device.md
+docs/DeviceItemViewModel.md
 docs/DeviceLogin.md
 docs/DeviceViewModel.md
 docs/DevicesAPI.md
+docs/DevicesViewModel.md
 docs/Doctor.md
 docs/DoctorAffiliation.md
 docs/DoctorAffiliationViewModel.md

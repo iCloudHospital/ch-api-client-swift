@@ -3,7 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**specialties** | [HospitalSpecialtyItemViewModel] |  | [optional] 
 **id** | **UUID** |  | [optional] 
 **name** | **String** |  | [optional] 
 **slug** | **String** |  | [optional] 
