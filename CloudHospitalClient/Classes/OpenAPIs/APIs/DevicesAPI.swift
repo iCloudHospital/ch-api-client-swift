@@ -227,11 +227,11 @@ open class DevicesAPI {
      
      - parameter createDeviceCommand: (body)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<UUID, Error>
+     - returns: AnyPublisher<DeviceViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1DevicesPost(createDeviceCommand: CreateDeviceCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<UUID, Error> {
-        return Future<UUID, Error>.init { promise in
+    open class func apiV1DevicesPost(createDeviceCommand: CreateDeviceCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DeviceViewModel, Error> {
+        return Future<DeviceViewModel, Error>.init { promise in
             apiV1DevicesPostWithRequestBuilder(createDeviceCommand: createDeviceCommand).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
@@ -250,16 +250,16 @@ open class DevicesAPI {
        - type: oauth2
        - name: oauth2
      - parameter createDeviceCommand: (body)  (optional)
-     - returns: RequestBuilder<UUID> 
+     - returns: RequestBuilder<DeviceViewModel> 
      */
-    open class func apiV1DevicesPostWithRequestBuilder(createDeviceCommand: CreateDeviceCommand? = nil) -> RequestBuilder<UUID> {
+    open class func apiV1DevicesPostWithRequestBuilder(createDeviceCommand: CreateDeviceCommand? = nil) -> RequestBuilder<DeviceViewModel> {
         let path = "/api/v1/devices"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createDeviceCommand)
 
         let url = URLComponents(string: URLString)
 
-        let requestBuilder: RequestBuilder<UUID>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<DeviceViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }

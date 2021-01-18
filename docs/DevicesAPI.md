@@ -228,7 +228,7 @@ Name | Type | Description  | Notes
 
 # **apiV1DevicesPost**
 ```swift
-    open class func apiV1DevicesPost(createDeviceCommand: CreateDeviceCommand? = nil, completion: @escaping (_ data: UUID?, _ error: Error?) -> Void)
+    open class func apiV1DevicesPost(createDeviceCommand: CreateDeviceCommand? = nil, completion: @escaping (_ data: DeviceViewModel?, _ error: Error?) -> Void)
 ```
 
 Create device.
@@ -261,7 +261,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**UUID**
+[**DeviceViewModel**](DeviceViewModel.md)
 
 ### Authorization
 
