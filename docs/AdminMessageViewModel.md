@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **customType** | **String** |  | [optional] 
 **channelUrl** | **String** |  | [optional] 
 **mentionType** | **String** |  | [optional] 
-**mentionedUsers** | **[Any]** |  | [optional] 
 **isRemoved** | **Bool** |  | [optional] 
 **message** | **String** |  | [optional] 
 **data** | **String** |  | [optional] 
