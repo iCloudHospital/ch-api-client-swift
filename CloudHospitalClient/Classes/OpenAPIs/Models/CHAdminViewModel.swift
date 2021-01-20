@@ -10,9 +10,6 @@ import Foundation
 
 public struct CHAdminViewModel: Codable {
 
-    public var userType: String?
-    public var languages: [UserLanguageViewModel]?
-    public var locations: [UserLocationViewModel]?
     public var id: UUID?
     public var userName: String?
     public var firstName: String?
@@ -27,11 +24,11 @@ public struct CHAdminViewModel: Codable {
     public var timeZone: String?
     public var communicationUserId: String?
     public var auditableEntity: AuditableEntity?
+    public var userType: String?
+    public var languages: [UserLanguageViewModel]?
+    public var locations: [UserLocationViewModel]?
 
-    public init(userType: String? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil, id: UUID? = nil, userName: String? = nil, firstName: String? = nil, lastName: String? = nil, fullname: String? = nil, phone: String? = nil, email: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, auditableEntity: AuditableEntity? = nil) {
-        self.userType = userType
-        self.languages = languages
-        self.locations = locations
+    public init(id: UUID? = nil, userName: String? = nil, firstName: String? = nil, lastName: String? = nil, fullname: String? = nil, phone: String? = nil, email: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, auditableEntity: AuditableEntity? = nil, userType: String? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil) {
         self.id = id
         self.userName = userName
         self.firstName = firstName
@@ -46,6 +43,9 @@ public struct CHAdminViewModel: Codable {
         self.timeZone = timeZone
         self.communicationUserId = communicationUserId
         self.auditableEntity = auditableEntity
+        self.userType = userType
+        self.languages = languages
+        self.locations = locations
     }
 
 }

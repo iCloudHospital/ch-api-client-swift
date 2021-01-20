@@ -10,7 +10,6 @@ import Foundation
 
 public struct PartnerItemViewModel: Codable {
 
-    public var referralCount: Int?
     public var id: UUID?
     public var userName: String?
     public var firstName: String?
@@ -25,9 +24,9 @@ public struct PartnerItemViewModel: Codable {
     public var timeZone: String?
     public var communicationUserId: String?
     public var auditableEntity: AuditableEntity?
+    public var referralCount: Int?
 
-    public init(referralCount: Int? = nil, id: UUID? = nil, userName: String? = nil, firstName: String? = nil, lastName: String? = nil, fullname: String? = nil, phone: String? = nil, email: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, auditableEntity: AuditableEntity? = nil) {
-        self.referralCount = referralCount
+    public init(id: UUID? = nil, userName: String? = nil, firstName: String? = nil, lastName: String? = nil, fullname: String? = nil, phone: String? = nil, email: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, auditableEntity: AuditableEntity? = nil, referralCount: Int? = nil) {
         self.id = id
         self.userName = userName
         self.firstName = firstName
@@ -42,6 +41,7 @@ public struct PartnerItemViewModel: Codable {
         self.timeZone = timeZone
         self.communicationUserId = communicationUserId
         self.auditableEntity = auditableEntity
+        self.referralCount = referralCount
     }
 
 }

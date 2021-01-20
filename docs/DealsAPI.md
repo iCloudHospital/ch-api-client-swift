@@ -121,7 +121,7 @@ Update deal.
 import CloudHospitalClient
 
 let dealId = 987 // UUID | 
-let updateDealCommand = UpdateDealCommand(photo: "photo_example", photoThumbnail: "photoThumbnail_example", id: 123, name: "name_example", normalizedName: "normalizedName_example", slug: "slug_example", description: "description_example", hospitalId: 123, hospitalName: "hospitalName_example", hospitalSlug: "hospitalSlug_example", marketingType: MarketingType(), dealPackages: [{...}], auditableEntity: {...}) // UpdateDealCommand |  (optional)
+let updateDealCommand = UpdateDealCommand(id: 123, name: "name_example", normalizedName: "normalizedName_example", slug: "slug_example", description: "description_example", hospitalId: 123, hospitalName: "hospitalName_example", hospitalSlug: "hospitalSlug_example", marketingType: MarketingType(), dealPackages: [{...}], auditableEntity: {...}, photo: "photo_example", photoThumbnail: "photoThumbnail_example") // UpdateDealCommand |  (optional)
 
 // Update deal.
 DealsAPI.apiV1DealsDealIdPut(dealId: dealId, updateDealCommand: updateDealCommand) { (response, error) in

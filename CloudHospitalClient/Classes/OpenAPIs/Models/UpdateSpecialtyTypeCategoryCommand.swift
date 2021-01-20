@@ -10,22 +10,22 @@ import Foundation
 
 public struct UpdateSpecialtyTypeCategoryCommand: Codable {
 
-    public var order: Int?
-    public var selectedSpecialtyTypes: [UUID]?
     public var id: UUID?
     public var name: String?
     public var description: String?
+    public var order: Int?
     public var specialtyTypeCount: Int?
     public var specialtyTypes: [SpecialtyTypeItemViewModel]?
+    public var selectedSpecialtyTypes: [UUID]?
 
-    public init(order: Int? = nil, selectedSpecialtyTypes: [UUID]? = nil, id: UUID? = nil, name: String? = nil, description: String? = nil, specialtyTypeCount: Int? = nil, specialtyTypes: [SpecialtyTypeItemViewModel]? = nil) {
-        self.order = order
-        self.selectedSpecialtyTypes = selectedSpecialtyTypes
+    public init(id: UUID? = nil, name: String? = nil, description: String? = nil, order: Int? = nil, specialtyTypeCount: Int? = nil, specialtyTypes: [SpecialtyTypeItemViewModel]? = nil, selectedSpecialtyTypes: [UUID]? = nil) {
         self.id = id
         self.name = name
         self.description = description
+        self.order = order
         self.specialtyTypeCount = specialtyTypeCount
         self.specialtyTypes = specialtyTypes
+        self.selectedSpecialtyTypes = selectedSpecialtyTypes
     }
 
 }

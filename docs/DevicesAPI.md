@@ -4,161 +4,13 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV1DevicesDeviceIdDelete**](DevicesAPI.md#apiv1devicesdeviceiddelete) | **DELETE** /api/v1/devices/{deviceId} | Delete device.
-[**apiV1DevicesDeviceIdLoginsPost**](DevicesAPI.md#apiv1devicesdeviceidloginspost) | **POST** /api/v1/devices/{deviceId}/logins | Create device login.
-[**apiV1DevicesDeviceIdPut**](DevicesAPI.md#apiv1devicesdeviceidput) | **PUT** /api/v1/devices/{deviceId} | Update device.
 [**apiV1DevicesGet**](DevicesAPI.md#apiv1devicesget) | **GET** /api/v1/devices | Get all devices.
+[**apiV1DevicesIdDelete**](DevicesAPI.md#apiv1devicesiddelete) | **DELETE** /api/v1/devices/{id} | Delete device.
+[**apiV1DevicesIdGet**](DevicesAPI.md#apiv1devicesidget) | **GET** /api/v1/devices/{id} | Get device.
+[**apiV1DevicesIdLoginsPost**](DevicesAPI.md#apiv1devicesidloginspost) | **POST** /api/v1/devices/{id}/logins | Create device login.
+[**apiV1DevicesIdPut**](DevicesAPI.md#apiv1devicesidput) | **PUT** /api/v1/devices/{id} | Update device.
 [**apiV1DevicesPost**](DevicesAPI.md#apiv1devicespost) | **POST** /api/v1/devices | Create device.
-[**apiV1DevicesTokenGet**](DevicesAPI.md#apiv1devicestokenget) | **GET** /api/v1/devices/{token} | Get device.
 
-
-# **apiV1DevicesDeviceIdDelete**
-```swift
-    open class func apiV1DevicesDeviceIdDelete(deviceId: UUID, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
-```
-
-Delete device.
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-let deviceId = 987 // UUID | 
-
-// Delete device.
-DevicesAPI.apiV1DevicesDeviceIdDelete(deviceId: deviceId) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **deviceId** | [**UUID**](.md) |  | 
-
-### Return type
-
-**Bool**
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apiV1DevicesDeviceIdLoginsPost**
-```swift
-    open class func apiV1DevicesDeviceIdLoginsPost(deviceId: UUID, createDeviceLoginCommand: CreateDeviceLoginCommand? = nil, completion: @escaping (_ data: UUID?, _ error: Error?) -> Void)
-```
-
-Create device login.
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-let deviceId = 987 // UUID | 
-let createDeviceLoginCommand = CreateDeviceLoginCommand(version: "version_example", location: {...}) // CreateDeviceLoginCommand |  (optional)
-
-// Create device login.
-DevicesAPI.apiV1DevicesDeviceIdLoginsPost(deviceId: deviceId, createDeviceLoginCommand: createDeviceLoginCommand) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **deviceId** | [**UUID**](.md) |  | 
- **createDeviceLoginCommand** | [**CreateDeviceLoginCommand**](CreateDeviceLoginCommand.md) |  | [optional] 
-
-### Return type
-
-**UUID**
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apiV1DevicesDeviceIdPut**
-```swift
-    open class func apiV1DevicesDeviceIdPut(deviceId: UUID, updateDeviceCommand: UpdateDeviceCommand? = nil, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
-```
-
-Update device.
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-let deviceId = 987 // UUID | 
-let updateDeviceCommand = UpdateDeviceCommand(appAlert: false, eventAlert: false, noticeAlert: false) // UpdateDeviceCommand |  (optional)
-
-// Update device.
-DevicesAPI.apiV1DevicesDeviceIdPut(deviceId: deviceId, updateDeviceCommand: updateDeviceCommand) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **deviceId** | [**UUID**](.md) |  | 
- **updateDeviceCommand** | [**UpdateDeviceCommand**](UpdateDeviceCommand.md) |  | [optional] 
-
-### Return type
-
-**Bool**
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **apiV1DevicesGet**
 ```swift
@@ -226,6 +78,202 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **apiV1DevicesIdDelete**
+```swift
+    open class func apiV1DevicesIdDelete(id: UUID, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
+```
+
+Delete device.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let id = 987 // UUID | 
+
+// Delete device.
+DevicesAPI.apiV1DevicesIdDelete(id: id) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | [**UUID**](.md) |  | 
+
+### Return type
+
+**Bool**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV1DevicesIdGet**
+```swift
+    open class func apiV1DevicesIdGet(id: UUID, completion: @escaping (_ data: DeviceViewModel?, _ error: Error?) -> Void)
+```
+
+Get device.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let id = 987 // UUID | 
+
+// Get device.
+DevicesAPI.apiV1DevicesIdGet(id: id) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | [**UUID**](.md) |  | 
+
+### Return type
+
+[**DeviceViewModel**](DeviceViewModel.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV1DevicesIdLoginsPost**
+```swift
+    open class func apiV1DevicesIdLoginsPost(id: UUID, createDeviceLoginCommand: CreateDeviceLoginCommand? = nil, completion: @escaping (_ data: UUID?, _ error: Error?) -> Void)
+```
+
+Create device login.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let id = 987 // UUID | 
+let createDeviceLoginCommand = CreateDeviceLoginCommand(version: "version_example", location: {...}) // CreateDeviceLoginCommand |  (optional)
+
+// Create device login.
+DevicesAPI.apiV1DevicesIdLoginsPost(id: id, createDeviceLoginCommand: createDeviceLoginCommand) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | [**UUID**](.md) |  | 
+ **createDeviceLoginCommand** | [**CreateDeviceLoginCommand**](CreateDeviceLoginCommand.md) |  | [optional] 
+
+### Return type
+
+**UUID**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/_*+json
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV1DevicesIdPut**
+```swift
+    open class func apiV1DevicesIdPut(id: UUID, updateDeviceCommand: UpdateDeviceCommand? = nil, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
+```
+
+Update device.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let id = 987 // UUID | 
+let updateDeviceCommand = UpdateDeviceCommand(token: "token_example", tags: ["tags_example"], appAlert: false, eventAlert: false, noticeAlert: false) // UpdateDeviceCommand |  (optional)
+
+// Update device.
+DevicesAPI.apiV1DevicesIdPut(id: id, updateDeviceCommand: updateDeviceCommand) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | [**UUID**](.md) |  | 
+ **updateDeviceCommand** | [**UpdateDeviceCommand**](UpdateDeviceCommand.md) |  | [optional] 
+
+### Return type
+
+**Bool**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/_*+json
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **apiV1DevicesPost**
 ```swift
     open class func apiV1DevicesPost(createDeviceCommand: CreateDeviceCommand? = nil, completion: @escaping (_ data: DeviceViewModel?, _ error: Error?) -> Void)
@@ -238,7 +286,7 @@ Create device.
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createDeviceCommand = CreateDeviceCommand(token: "token_example", platform: Platform(), appAlert: false, eventAlert: false, noticeAlert: false) // CreateDeviceCommand |  (optional)
+let createDeviceCommand = CreateDeviceCommand(id: 123, token: "token_example", platform: Platform(), tags: ["tags_example"], appAlert: false, eventAlert: false, noticeAlert: false) // CreateDeviceCommand |  (optional)
 
 // Create device.
 DevicesAPI.apiV1DevicesPost(createDeviceCommand: createDeviceCommand) { (response, error) in
@@ -270,54 +318,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apiV1DevicesTokenGet**
-```swift
-    open class func apiV1DevicesTokenGet(token: String, completion: @escaping (_ data: DeviceViewModel?, _ error: Error?) -> Void)
-```
-
-Get device.
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-let token = "token_example" // String | 
-
-// Get device.
-DevicesAPI.apiV1DevicesTokenGet(token: token) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **token** | **String** |  | 
-
-### Return type
-
-[**DeviceViewModel**](DeviceViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -10,15 +10,6 @@ import Foundation
 
 public struct UpdateDoctorCommand: Codable {
 
-    public var startPracticeDate: Date?
-    public var overview: String?
-    public var consultationEnabled: Bool?
-    public var consultationFee: Double?
-    public var doctorEducations: [DoctorEducationItemViewModel]?
-    public var doctorPortfolios: [DoctorPortfolioItemViewModel]?
-    public var doctorSpecialties: [DoctorSpecialtyItemViewModel]?
-    public var doctorCertificates: [DoctorCertificateItemViewModel]?
-    public var doctorAwards: [AwardViewModel]?
     public var firstName: String?
     public var lastName: String?
     public var phone: String?
@@ -28,17 +19,17 @@ public struct UpdateDoctorCommand: Codable {
     public var dateOfBirth: Date?
     public var languages: [UserLanguageViewModel]?
     public var locations: [UserLocationViewModel]?
+    public var startPracticeDate: Date?
+    public var overview: String?
+    public var consultationEnabled: Bool?
+    public var consultationFee: Double?
+    public var doctorEducations: [DoctorEducationItemViewModel]?
+    public var doctorPortfolios: [DoctorPortfolioItemViewModel]?
+    public var doctorSpecialties: [DoctorSpecialtyItemViewModel]?
+    public var doctorCertificates: [DoctorCertificateItemViewModel]?
+    public var doctorAwards: [AwardViewModel]?
 
-    public init(startPracticeDate: Date? = nil, overview: String? = nil, consultationEnabled: Bool? = nil, consultationFee: Double? = nil, doctorEducations: [DoctorEducationItemViewModel]? = nil, doctorPortfolios: [DoctorPortfolioItemViewModel]? = nil, doctorSpecialties: [DoctorSpecialtyItemViewModel]? = nil, doctorCertificates: [DoctorCertificateItemViewModel]? = nil, doctorAwards: [AwardViewModel]? = nil, firstName: String? = nil, lastName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil) {
-        self.startPracticeDate = startPracticeDate
-        self.overview = overview
-        self.consultationEnabled = consultationEnabled
-        self.consultationFee = consultationFee
-        self.doctorEducations = doctorEducations
-        self.doctorPortfolios = doctorPortfolios
-        self.doctorSpecialties = doctorSpecialties
-        self.doctorCertificates = doctorCertificates
-        self.doctorAwards = doctorAwards
+    public init(firstName: String? = nil, lastName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil, startPracticeDate: Date? = nil, overview: String? = nil, consultationEnabled: Bool? = nil, consultationFee: Double? = nil, doctorEducations: [DoctorEducationItemViewModel]? = nil, doctorPortfolios: [DoctorPortfolioItemViewModel]? = nil, doctorSpecialties: [DoctorSpecialtyItemViewModel]? = nil, doctorCertificates: [DoctorCertificateItemViewModel]? = nil, doctorAwards: [AwardViewModel]? = nil) {
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
@@ -48,6 +39,15 @@ public struct UpdateDoctorCommand: Codable {
         self.dateOfBirth = dateOfBirth
         self.languages = languages
         self.locations = locations
+        self.startPracticeDate = startPracticeDate
+        self.overview = overview
+        self.consultationEnabled = consultationEnabled
+        self.consultationFee = consultationFee
+        self.doctorEducations = doctorEducations
+        self.doctorPortfolios = doctorPortfolios
+        self.doctorSpecialties = doctorSpecialties
+        self.doctorCertificates = doctorCertificates
+        self.doctorAwards = doctorAwards
     }
 
 }

@@ -3,7 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**medias** | [MediaViewModel] |  | [optional] 
 **id** | **UUID** |  | [optional] 
 **userId** | **UUID** |  | [optional] 
 **userName** | **String** |  | [optional] 
@@ -12,6 +11,7 @@ Name | Type | Description | Notes
 **questionTitle** | **String** |  | [optional] 
 **body** | **String** |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
+**medias** | [MediaViewModel] |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

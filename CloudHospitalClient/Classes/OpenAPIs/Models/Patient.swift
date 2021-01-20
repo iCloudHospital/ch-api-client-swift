@@ -10,16 +10,6 @@ import Foundation
 
 public struct Patient: Codable {
 
-    public var contact: String?
-    public var contactNumber: String?
-    public var nationality: String?
-    public var questions: [Question]?
-    public var bookings: [Booking]?
-    public var consultations: [Consultation]?
-    public var payments: [Payment]?
-    public var customers: [Customer]?
-    public var doctorReviews: [DoctorReview]?
-    public var hospitalReviews: [HospitalReview]?
     public var id: UUID?
     public var userName: String?
     public var email: String?
@@ -39,18 +29,18 @@ public struct Patient: Codable {
     public var locations: [UserLocation]?
     public var languages: [UserLanguage]?
     public var auditableEntity: AuditableEntity?
+    public var contact: String?
+    public var contactNumber: String?
+    public var nationality: String?
+    public var questions: [Question]?
+    public var bookings: [Booking]?
+    public var consultations: [Consultation]?
+    public var payments: [Payment]?
+    public var customers: [Customer]?
+    public var doctorReviews: [DoctorReview]?
+    public var hospitalReviews: [HospitalReview]?
 
-    public init(contact: String? = nil, contactNumber: String? = nil, nationality: String? = nil, questions: [Question]? = nil, bookings: [Booking]? = nil, consultations: [Consultation]? = nil, payments: [Payment]? = nil, customers: [Customer]? = nil, doctorReviews: [DoctorReview]? = nil, hospitalReviews: [HospitalReview]? = nil, id: UUID? = nil, userName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, normalizedName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, devices: [Device]? = nil, articles: [Article]? = nil, questionComments: [QuestionComment]? = nil, locations: [UserLocation]? = nil, languages: [UserLanguage]? = nil, auditableEntity: AuditableEntity? = nil) {
-        self.contact = contact
-        self.contactNumber = contactNumber
-        self.nationality = nationality
-        self.questions = questions
-        self.bookings = bookings
-        self.consultations = consultations
-        self.payments = payments
-        self.customers = customers
-        self.doctorReviews = doctorReviews
-        self.hospitalReviews = hospitalReviews
+    public init(id: UUID? = nil, userName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, normalizedName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, devices: [Device]? = nil, articles: [Article]? = nil, questionComments: [QuestionComment]? = nil, locations: [UserLocation]? = nil, languages: [UserLanguage]? = nil, auditableEntity: AuditableEntity? = nil, contact: String? = nil, contactNumber: String? = nil, nationality: String? = nil, questions: [Question]? = nil, bookings: [Booking]? = nil, consultations: [Consultation]? = nil, payments: [Payment]? = nil, customers: [Customer]? = nil, doctorReviews: [DoctorReview]? = nil, hospitalReviews: [HospitalReview]? = nil) {
         self.id = id
         self.userName = userName
         self.email = email
@@ -70,6 +60,16 @@ public struct Patient: Codable {
         self.locations = locations
         self.languages = languages
         self.auditableEntity = auditableEntity
+        self.contact = contact
+        self.contactNumber = contactNumber
+        self.nationality = nationality
+        self.questions = questions
+        self.bookings = bookings
+        self.consultations = consultations
+        self.payments = payments
+        self.customers = customers
+        self.doctorReviews = doctorReviews
+        self.hospitalReviews = hospitalReviews
     }
 
 }

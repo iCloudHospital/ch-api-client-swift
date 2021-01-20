@@ -3,8 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**accounts** | [Account] |  | [optional] 
-**affiliations** | [ManagerAffiliation] |  | [optional] 
 **id** | **UUID** |  | [optional] 
 **userName** | **String** |  | [optional] 
 **email** | **String** |  | [optional] 
@@ -24,6 +22,8 @@ Name | Type | Description | Notes
 **locations** | [UserLocation] |  | [optional] 
 **languages** | [UserLanguage] |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
+**accounts** | [Account] |  | [optional] 
+**affiliations** | [ManagerAffiliation] |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -56,6 +56,11 @@ Class | Method | HTTP request | Description
 *CHManagersAPI* | [**apiV1ChmanagersChManagerIdPut**](docs/CHManagersAPI.md#apiv1chmanagerschmanageridput) | **PUT** /api/v1/chmanagers/{chManagerId} | Update cloud hospital manager.
 *CHManagersAPI* | [**apiV1ChmanagersGet**](docs/CHManagersAPI.md#apiv1chmanagersget) | **GET** /api/v1/chmanagers | Get cloud hospital managers.
 *CHManagersAPI* | [**apiV1ChmanagersPost**](docs/CHManagersAPI.md#apiv1chmanagerspost) | **POST** /api/v1/chmanagers | Create cloud hospital manager.
+*ChatUsersAPI* | [**apiV1ChatusersCurrentGet**](docs/ChatUsersAPI.md#apiv1chatuserscurrentget) | **GET** /api/v1/chatusers/current | 
+*ChatUsersAPI* | [**apiV1ChatusersCurrentPost**](docs/ChatUsersAPI.md#apiv1chatuserscurrentpost) | **POST** /api/v1/chatusers/current | 
+*ChatUsersAPI* | [**apiV1ChatusersDelete**](docs/ChatUsersAPI.md#apiv1chatusersdelete) | **DELETE** /api/v1/chatusers | 
+*ChatUsersAPI* | [**apiV1ChatusersPut**](docs/ChatUsersAPI.md#apiv1chatusersput) | **PUT** /api/v1/chatusers | 
+*ChatUsersAPI* | [**apiV1ChatusersUserIdGet**](docs/ChatUsersAPI.md#apiv1chatusersuseridget) | **GET** /api/v1/chatusers/{userId} | 
 *CommunicationsAPI* | [**apiV1CommunicationsDelete**](docs/CommunicationsAPI.md#apiv1communicationsdelete) | **DELETE** /api/v1/communications | 
 *CommunicationsAPI* | [**apiV1CommunicationsGet**](docs/CommunicationsAPI.md#apiv1communicationsget) | **GET** /api/v1/communications | 
 *CommunicationsAPI* | [**apiV1CommunicationsPut**](docs/CommunicationsAPI.md#apiv1communicationsput) | **PUT** /api/v1/communications | 
@@ -89,12 +94,12 @@ Class | Method | HTTP request | Description
 *DepartmentAPI* | [**apiV1HospitalsHospitalIdDepartmentsDepartmentIdGet**](docs/DepartmentAPI.md#apiv1hospitalshospitaliddepartmentsdepartmentidget) | **GET** /api/v1/hospitals/{hospitalId}/departments/{departmentId} | Get department.
 *DepartmentAPI* | [**apiV1HospitalsHospitalIdDepartmentsDepartmentIdPost**](docs/DepartmentAPI.md#apiv1hospitalshospitaliddepartmentsdepartmentidpost) | **POST** /api/v1/hospitals/{hospitalId}/departments/{departmentId} | Create department.
 *DepartmentAPI* | [**apiV1HospitalsHospitalIdDepartmentsDepartmentIdPut**](docs/DepartmentAPI.md#apiv1hospitalshospitaliddepartmentsdepartmentidput) | **PUT** /api/v1/hospitals/{hospitalId}/departments/{departmentId} | Update department.
-*DevicesAPI* | [**apiV1DevicesDeviceIdDelete**](docs/DevicesAPI.md#apiv1devicesdeviceiddelete) | **DELETE** /api/v1/devices/{deviceId} | Delete device.
-*DevicesAPI* | [**apiV1DevicesDeviceIdLoginsPost**](docs/DevicesAPI.md#apiv1devicesdeviceidloginspost) | **POST** /api/v1/devices/{deviceId}/logins | Create device login.
-*DevicesAPI* | [**apiV1DevicesDeviceIdPut**](docs/DevicesAPI.md#apiv1devicesdeviceidput) | **PUT** /api/v1/devices/{deviceId} | Update device.
 *DevicesAPI* | [**apiV1DevicesGet**](docs/DevicesAPI.md#apiv1devicesget) | **GET** /api/v1/devices | Get all devices.
+*DevicesAPI* | [**apiV1DevicesIdDelete**](docs/DevicesAPI.md#apiv1devicesiddelete) | **DELETE** /api/v1/devices/{id} | Delete device.
+*DevicesAPI* | [**apiV1DevicesIdGet**](docs/DevicesAPI.md#apiv1devicesidget) | **GET** /api/v1/devices/{id} | Get device.
+*DevicesAPI* | [**apiV1DevicesIdLoginsPost**](docs/DevicesAPI.md#apiv1devicesidloginspost) | **POST** /api/v1/devices/{id}/logins | Create device login.
+*DevicesAPI* | [**apiV1DevicesIdPut**](docs/DevicesAPI.md#apiv1devicesidput) | **PUT** /api/v1/devices/{id} | Update device.
 *DevicesAPI* | [**apiV1DevicesPost**](docs/DevicesAPI.md#apiv1devicespost) | **POST** /api/v1/devices | Create device.
-*DevicesAPI* | [**apiV1DevicesTokenGet**](docs/DevicesAPI.md#apiv1devicestokenget) | **GET** /api/v1/devices/{token} | Get device.
 *DoctorCertificatesAPI* | [**apiV1DoctorsCertificatesGet**](docs/DoctorCertificatesAPI.md#apiv1doctorscertificatesget) | **GET** /api/v1/doctors/certificates | Get all certificates.
 *DoctorCertificatesAPI* | [**apiV1DoctorsDoctorIdCertificatesCertificateIdDelete**](docs/DoctorCertificatesAPI.md#apiv1doctorsdoctoridcertificatescertificateiddelete) | **DELETE** /api/v1/doctors/{doctorId}/certificates/{certificateId} | Delete certificate.
 *DoctorCertificatesAPI* | [**apiV1DoctorsDoctorIdCertificatesCertificateIdGet**](docs/DoctorCertificatesAPI.md#apiv1doctorsdoctoridcertificatescertificateidget) | **GET** /api/v1/doctors/{doctorId}/certificates/{certificateId} | Get certificate.
@@ -118,6 +123,11 @@ Class | Method | HTTP request | Description
 *EquipmentsAPI* | [**apiV1HospitalsHospitalIdEquipmentsEquipmentIdGet**](docs/EquipmentsAPI.md#apiv1hospitalshospitalidequipmentsequipmentidget) | **GET** /api/v1/hospitals/{hospitalId}/equipments/{equipmentId} | Get equipment.
 *EquipmentsAPI* | [**apiV1HospitalsHospitalIdEquipmentsEquipmentIdPut**](docs/EquipmentsAPI.md#apiv1hospitalshospitalidequipmentsequipmentidput) | **PUT** /api/v1/hospitals/{hospitalId}/equipments/{equipmentId} | Update equipment.
 *EquipmentsAPI* | [**apiV1HospitalsHospitalIdEquipmentsPost**](docs/EquipmentsAPI.md#apiv1hospitalshospitalidequipmentspost) | **POST** /api/v1/hospitals/{hospitalId}/equipments | Create an equipment and add to a hospital.
+*GroupChannelsAPI* | [**apiV1GroupchannelsChannelUrlInvitePost**](docs/GroupChannelsAPI.md#apiv1groupchannelschannelurlinvitepost) | **POST** /api/v1/groupchannels/{channelUrl}/invite | 
+*GroupChannelsAPI* | [**apiV1GroupchannelsDealDealIdPost**](docs/GroupChannelsAPI.md#apiv1groupchannelsdealdealidpost) | **POST** /api/v1/groupchannels/deal/{dealId} | 
+*GroupChannelsAPI* | [**apiV1GroupchannelsDealIdGet**](docs/GroupChannelsAPI.md#apiv1groupchannelsdealidget) | **GET** /api/v1/groupchannels/{dealId} | 
+*GroupChannelsAPI* | [**apiV1GroupchannelsDoctorDoctorIdPost**](docs/GroupChannelsAPI.md#apiv1groupchannelsdoctordoctoridpost) | **POST** /api/v1/groupchannels/doctor/{doctorId} | 
+*GroupChannelsAPI* | [**apiV1GroupchannelsHospitalHospitalIdPost**](docs/GroupChannelsAPI.md#apiv1groupchannelshospitalhospitalidpost) | **POST** /api/v1/groupchannels/hospital/{hospitalId} | 
 *HospitalReviewsAPI* | [**apiV1HospitalsHospitalIdReviewsPatientIdDelete**](docs/HospitalReviewsAPI.md#apiv1hospitalshospitalidreviewspatientiddelete) | **DELETE** /api/v1/hospitals/{hospitalId}/reviews/{patientId} | Delete review.
 *HospitalReviewsAPI* | [**apiV1HospitalsHospitalIdReviewsPatientIdGet**](docs/HospitalReviewsAPI.md#apiv1hospitalshospitalidreviewspatientidget) | **GET** /api/v1/hospitals/{hospitalId}/reviews/{patientId} | Get review.
 *HospitalReviewsAPI* | [**apiV1HospitalsHospitalIdReviewsPatientIdPut**](docs/HospitalReviewsAPI.md#apiv1hospitalshospitalidreviewspatientidput) | **PUT** /api/v1/hospitals/{hospitalId}/reviews/{patientId} | Update review.
@@ -215,6 +225,7 @@ Class | Method | HTTP request | Description
  - [Account](docs/Account.md)
  - [Accreditation](docs/Accreditation.md)
  - [AccreditationViewModel](docs/AccreditationViewModel.md)
+ - [AdminMessageViewModel](docs/AdminMessageViewModel.md)
  - [ApproveBookingCommand](docs/ApproveBookingCommand.md)
  - [ApproveConsultationCommand](docs/ApproveConsultationCommand.md)
  - [Article](docs/Article.md)
@@ -277,6 +288,7 @@ Class | Method | HTTP request | Description
  - [CreatePatientCommand](docs/CreatePatientCommand.md)
  - [CreateQuestionCommand](docs/CreateQuestionCommand.md)
  - [CreateQuestionCommentCommand](docs/CreateQuestionCommentCommand.md)
+ - [CreateSendBirdCurrentUserCommand](docs/CreateSendBirdCurrentUserCommand.md)
  - [CreateServiceCategoryCommand](docs/CreateServiceCategoryCommand.md)
  - [CreateServiceCommand](docs/CreateServiceCommand.md)
  - [CreateSpecialtyCommand](docs/CreateSpecialtyCommand.md)
@@ -352,6 +364,7 @@ Class | Method | HTTP request | Description
  - [HospitalSpecialtyViewModel](docs/HospitalSpecialtyViewModel.md)
  - [HospitalViewModel](docs/HospitalViewModel.md)
  - [HospitalsViewModel](docs/HospitalsViewModel.md)
+ - [InviteSendBirdGroupChannelCommand](docs/InviteSendBirdGroupChannelCommand.md)
  - [Location](docs/Location.md)
  - [LocationViewModel](docs/LocationViewModel.md)
  - [Manager](docs/Manager.md)
@@ -364,6 +377,7 @@ Class | Method | HTTP request | Description
  - [MediaSearchViewModel](docs/MediaSearchViewModel.md)
  - [MediaType](docs/MediaType.md)
  - [MediaViewModel](docs/MediaViewModel.md)
+ - [Metadata](docs/Metadata.md)
  - [NotificationCode](docs/NotificationCode.md)
  - [NotificationViewModel](docs/NotificationViewModel.md)
  - [NotificationsViewModel](docs/NotificationsViewModel.md)
@@ -397,6 +411,10 @@ Class | Method | HTTP request | Description
  - [RejectReason](docs/RejectReason.md)
  - [ReviewCategory](docs/ReviewCategory.md)
  - [SearchMetaData](docs/SearchMetaData.md)
+ - [SendBirdGroupChannelMember](docs/SendBirdGroupChannelMember.md)
+ - [SendBirdGroupChannelViewModel](docs/SendBirdGroupChannelViewModel.md)
+ - [SendBirdGroupChannelrOperator](docs/SendBirdGroupChannelrOperator.md)
+ - [SendBirdUserViewModel](docs/SendBirdUserViewModel.md)
  - [Service](docs/Service.md)
  - [ServiceCategoriesViewModel](docs/ServiceCategoriesViewModel.md)
  - [ServiceCategoryItemViewModel](docs/ServiceCategoryItemViewModel.md)
@@ -443,6 +461,7 @@ Class | Method | HTTP request | Description
  - [UpdatePatientCommand](docs/UpdatePatientCommand.md)
  - [UpdateQuestionCommand](docs/UpdateQuestionCommand.md)
  - [UpdateQuestionCommentCommand](docs/UpdateQuestionCommentCommand.md)
+ - [UpdateSendBirdUserCommand](docs/UpdateSendBirdUserCommand.md)
  - [UpdateServiceCategoryCommand](docs/UpdateServiceCategoryCommand.md)
  - [UpdateServiceCommand](docs/UpdateServiceCommand.md)
  - [UpdateServiceSequenceCommand](docs/UpdateServiceSequenceCommand.md)

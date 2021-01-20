@@ -10,8 +10,6 @@ import Foundation
 
 public struct Manager: Codable {
 
-    public var accounts: [Account]?
-    public var affiliations: [ManagerAffiliation]?
     public var id: UUID?
     public var userName: String?
     public var email: String?
@@ -31,10 +29,10 @@ public struct Manager: Codable {
     public var locations: [UserLocation]?
     public var languages: [UserLanguage]?
     public var auditableEntity: AuditableEntity?
+    public var accounts: [Account]?
+    public var affiliations: [ManagerAffiliation]?
 
-    public init(accounts: [Account]? = nil, affiliations: [ManagerAffiliation]? = nil, id: UUID? = nil, userName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, normalizedName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, devices: [Device]? = nil, articles: [Article]? = nil, questionComments: [QuestionComment]? = nil, locations: [UserLocation]? = nil, languages: [UserLanguage]? = nil, auditableEntity: AuditableEntity? = nil) {
-        self.accounts = accounts
-        self.affiliations = affiliations
+    public init(id: UUID? = nil, userName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, normalizedName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, devices: [Device]? = nil, articles: [Article]? = nil, questionComments: [QuestionComment]? = nil, locations: [UserLocation]? = nil, languages: [UserLanguage]? = nil, auditableEntity: AuditableEntity? = nil, accounts: [Account]? = nil, affiliations: [ManagerAffiliation]? = nil) {
         self.id = id
         self.userName = userName
         self.email = email
@@ -54,6 +52,8 @@ public struct Manager: Codable {
         self.locations = locations
         self.languages = languages
         self.auditableEntity = auditableEntity
+        self.accounts = accounts
+        self.affiliations = affiliations
     }
 
 }

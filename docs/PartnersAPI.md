@@ -245,7 +245,7 @@ Sample request:        POST /api/v1/partners      {          \"userName\": \"str
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createPartnerCommand = CreatePartnerCommand(userName: "userName_example", email: "email_example", firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [{...}], languages: [{...}], locations: [{...}]) // CreatePartnerCommand |  (optional)
+let createPartnerCommand = CreatePartnerCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [{...}], languages: [{...}], locations: [{...}], userName: "userName_example", email: "email_example") // CreatePartnerCommand |  (optional)
 
 // Create partner.
 PartnersAPI.apiV1PartnersPost(createPartnerCommand: createPartnerCommand) { (response, error) in

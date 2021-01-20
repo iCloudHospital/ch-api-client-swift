@@ -10,9 +10,6 @@ import Foundation
 
 public struct CreatePatientCommand: Codable {
 
-    public var userName: String?
-    public var email: String?
-    public var isAdmin: Bool?
     public var firstName: String?
     public var lastName: String?
     public var phone: String?
@@ -23,11 +20,11 @@ public struct CreatePatientCommand: Codable {
     public var medias: [MediaViewModel]?
     public var languages: [UserLanguageViewModel]?
     public var locations: [UserLocationViewModel]?
+    public var userName: String?
+    public var email: String?
+    public var isAdmin: Bool?
 
-    public init(userName: String? = nil, email: String? = nil, isAdmin: Bool? = nil, firstName: String? = nil, lastName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, medias: [MediaViewModel]? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil) {
-        self.userName = userName
-        self.email = email
-        self.isAdmin = isAdmin
+    public init(firstName: String? = nil, lastName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, medias: [MediaViewModel]? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil, userName: String? = nil, email: String? = nil, isAdmin: Bool? = nil) {
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
@@ -38,6 +35,9 @@ public struct CreatePatientCommand: Codable {
         self.medias = medias
         self.languages = languages
         self.locations = locations
+        self.userName = userName
+        self.email = email
+        self.isAdmin = isAdmin
     }
 
 }

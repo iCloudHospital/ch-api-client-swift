@@ -8,6 +8,7 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/ArticlesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/BookingsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CHAdminsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CHManagersAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/ChatUsersAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CommunicationsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ConsultationsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CountriesAPI.swift
@@ -20,6 +21,7 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorReviewsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorSpecialtiesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/EquipmentsAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/GroupChannelsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/HospitalReviewsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/HospitalSpecialtiesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/HospitalsAPI.swift
@@ -50,6 +52,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Account.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Accreditation.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/AccreditationViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/AdminMessageViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ApproveBookingCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ApproveConsultationCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Article.swift
@@ -112,6 +115,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/CreatePartnerCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreatePatientCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateQuestionCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateQuestionCommentCommand.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/CreateSendBirdCurrentUserCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateServiceCategoryCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateServiceCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateSpecialtyCommand.swift
@@ -187,6 +191,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/HospitalSpecialtyItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalSpecialtyViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalsViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/InviteSendBirdGroupChannelCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Location.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/LocationViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Manager.swift
@@ -199,6 +204,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/Media.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/MediaSearchViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/MediaType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/MediaViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/Metadata.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/NotificationCode.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/NotificationViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/NotificationsViewModel.swift
@@ -232,6 +238,10 @@ CloudHospitalClient/Classes/OpenAPIs/Models/RejectConsultationCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/RejectReason.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ReviewCategory.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SearchMetaData.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelMember.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelrOperator.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdUserViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Service.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceCategoriesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceCategoryItemViewModel.swift
@@ -278,6 +288,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/UpdatePartnerCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdatePatientCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateQuestionCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateQuestionCommentCommand.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/UpdateSendBirdUserCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateServiceCategoryCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateServiceCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateServiceSequenceCommand.swift
@@ -307,6 +318,7 @@ README.md
 docs/Account.md
 docs/Accreditation.md
 docs/AccreditationViewModel.md
+docs/AdminMessageViewModel.md
 docs/AffiliationsAPI.md
 docs/ApproveBookingCommand.md
 docs/ApproveConsultationCommand.md
@@ -339,6 +351,7 @@ docs/CHManagersViewModel.md
 docs/ChangeEmailCommand.md
 docs/ChangeLog.md
 docs/ChargeStatus.md
+docs/ChatUsersAPI.md
 docs/CheckNotificationsCommand.md
 docs/CommunicationUserTokenModel.md
 docs/CommunicationsAPI.md
@@ -377,6 +390,7 @@ docs/CreatePartnerCommand.md
 docs/CreatePatientCommand.md
 docs/CreateQuestionCommand.md
 docs/CreateQuestionCommentCommand.md
+docs/CreateSendBirdCurrentUserCommand.md
 docs/CreateServiceCategoryCommand.md
 docs/CreateServiceCommand.md
 docs/CreateSpecialtyCommand.md
@@ -443,6 +457,7 @@ docs/EquipmentViewModel.md
 docs/EquipmentsAPI.md
 docs/EquipmentsViewModel.md
 docs/Gender.md
+docs/GroupChannelsAPI.md
 docs/Hospital.md
 docs/HospitalAccreditation.md
 docs/HospitalAffiliationViewModel.md
@@ -466,6 +481,7 @@ docs/HospitalsAPI.md
 docs/HospitalsViewModel.md
 docs/IdentityAPI.md
 docs/ImagesAPI.md
+docs/InviteSendBirdGroupChannelCommand.md
 docs/Location.md
 docs/LocationViewModel.md
 docs/Manager.md
@@ -479,6 +495,7 @@ docs/Media.md
 docs/MediaSearchViewModel.md
 docs/MediaType.md
 docs/MediaViewModel.md
+docs/Metadata.md
 docs/MoviesAPI.md
 docs/NotificationCode.md
 docs/NotificationViewModel.md
@@ -520,6 +537,10 @@ docs/RejectReason.md
 docs/ReviewCategory.md
 docs/SearchAPI.md
 docs/SearchMetaData.md
+docs/SendBirdGroupChannelMember.md
+docs/SendBirdGroupChannelViewModel.md
+docs/SendBirdGroupChannelrOperator.md
+docs/SendBirdUserViewModel.md
 docs/Service.md
 docs/ServiceCategoriesAPI.md
 docs/ServiceCategoriesViewModel.md
@@ -571,6 +592,7 @@ docs/UpdatePartnerCommand.md
 docs/UpdatePatientCommand.md
 docs/UpdateQuestionCommand.md
 docs/UpdateQuestionCommentCommand.md
+docs/UpdateSendBirdUserCommand.md
 docs/UpdateServiceCategoryCommand.md
 docs/UpdateServiceCommand.md
 docs/UpdateServiceSequenceCommand.md

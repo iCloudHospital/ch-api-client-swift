@@ -10,11 +10,6 @@ import Foundation
 
 public struct ManagerViewModel: Codable {
 
-    public var hospitalId: UUID?
-    public var managerAffiliations: [ManagerAffiliationViewModel]?
-    public var userType: String?
-    public var languages: [UserLanguageViewModel]?
-    public var locations: [UserLocationViewModel]?
     public var id: UUID?
     public var userName: String?
     public var firstName: String?
@@ -29,13 +24,13 @@ public struct ManagerViewModel: Codable {
     public var timeZone: String?
     public var communicationUserId: String?
     public var auditableEntity: AuditableEntity?
+    public var userType: String?
+    public var languages: [UserLanguageViewModel]?
+    public var locations: [UserLocationViewModel]?
+    public var hospitalId: UUID?
+    public var managerAffiliations: [ManagerAffiliationViewModel]?
 
-    public init(hospitalId: UUID? = nil, managerAffiliations: [ManagerAffiliationViewModel]? = nil, userType: String? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil, id: UUID? = nil, userName: String? = nil, firstName: String? = nil, lastName: String? = nil, fullname: String? = nil, phone: String? = nil, email: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, auditableEntity: AuditableEntity? = nil) {
-        self.hospitalId = hospitalId
-        self.managerAffiliations = managerAffiliations
-        self.userType = userType
-        self.languages = languages
-        self.locations = locations
+    public init(id: UUID? = nil, userName: String? = nil, firstName: String? = nil, lastName: String? = nil, fullname: String? = nil, phone: String? = nil, email: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, auditableEntity: AuditableEntity? = nil, userType: String? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil, hospitalId: UUID? = nil, managerAffiliations: [ManagerAffiliationViewModel]? = nil) {
         self.id = id
         self.userName = userName
         self.firstName = firstName
@@ -50,6 +45,11 @@ public struct ManagerViewModel: Codable {
         self.timeZone = timeZone
         self.communicationUserId = communicationUserId
         self.auditableEntity = auditableEntity
+        self.userType = userType
+        self.languages = languages
+        self.locations = locations
+        self.hospitalId = hospitalId
+        self.managerAffiliations = managerAffiliations
     }
 
 }

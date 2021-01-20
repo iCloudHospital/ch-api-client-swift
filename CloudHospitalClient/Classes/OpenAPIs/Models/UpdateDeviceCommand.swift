@@ -10,11 +10,15 @@ import Foundation
 
 public struct UpdateDeviceCommand: Codable {
 
+    public var token: String?
+    public var tags: [String]?
     public var appAlert: Bool?
     public var eventAlert: Bool?
     public var noticeAlert: Bool?
 
-    public init(appAlert: Bool? = nil, eventAlert: Bool? = nil, noticeAlert: Bool? = nil) {
+    public init(token: String? = nil, tags: [String]? = nil, appAlert: Bool? = nil, eventAlert: Bool? = nil, noticeAlert: Bool? = nil) {
+        self.token = token
+        self.tags = tags
         self.appAlert = appAlert
         self.eventAlert = eventAlert
         self.noticeAlert = noticeAlert

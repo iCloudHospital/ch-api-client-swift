@@ -245,7 +245,7 @@ Sample request:        POST /api/v1/patients      {          \"referralCode\": \
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createPatientCommand = CreatePatientCommand(userName: "userName_example", email: "email_example", isAdmin: false, firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [{...}], languages: [{...}], locations: [{...}]) // CreatePatientCommand |  (optional)
+let createPatientCommand = CreatePatientCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [{...}], languages: [{...}], locations: [{...}], userName: "userName_example", email: "email_example", isAdmin: false) // CreatePatientCommand |  (optional)
 
 // Create patient.
 PatientsAPI.apiV1PatientsPost(createPatientCommand: createPatientCommand) { (response, error) in

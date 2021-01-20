@@ -10,7 +10,6 @@ import Foundation
 
 public struct UpdateSpecialtyTypeCommand: Codable {
 
-    public var content: String?
     public var name: String?
     public var slug: String?
     public var description: String?
@@ -19,9 +18,9 @@ public struct UpdateSpecialtyTypeCommand: Codable {
     public var hospitalSpecialtyCount: Int?
     public var serviceCount: Int?
     public var created: Date?
+    public var content: String?
 
-    public init(content: String? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, specialtyCount: Int? = nil, hospitalSpecialtyCount: Int? = nil, serviceCount: Int? = nil, created: Date? = nil) {
-        self.content = content
+    public init(name: String? = nil, slug: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, specialtyCount: Int? = nil, hospitalSpecialtyCount: Int? = nil, serviceCount: Int? = nil, created: Date? = nil, content: String? = nil) {
         self.name = name
         self.slug = slug
         self.description = description
@@ -30,6 +29,7 @@ public struct UpdateSpecialtyTypeCommand: Codable {
         self.hospitalSpecialtyCount = hospitalSpecialtyCount
         self.serviceCount = serviceCount
         self.created = created
+        self.content = content
     }
 
 }

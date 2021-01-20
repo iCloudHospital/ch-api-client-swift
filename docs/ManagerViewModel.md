@@ -3,11 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**hospitalId** | **UUID** |  | [optional] 
-**managerAffiliations** | [ManagerAffiliationViewModel] |  | [optional] 
-**userType** | **String** |  | [optional] 
-**languages** | [UserLanguageViewModel] |  | [optional] 
-**locations** | [UserLocationViewModel] |  | [optional] 
 **id** | **UUID** |  | [optional] 
 **userName** | **String** |  | [optional] 
 **firstName** | **String** |  | [optional] 
@@ -22,6 +17,11 @@ Name | Type | Description | Notes
 **timeZone** | **String** |  | [optional] 
 **communicationUserId** | **String** |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
+**userType** | **String** |  | [optional] 
+**languages** | [UserLanguageViewModel] |  | [optional] 
+**locations** | [UserLocationViewModel] |  | [optional] 
+**hospitalId** | **UUID** |  | [optional] 
+**managerAffiliations** | [ManagerAffiliationViewModel] |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -10,22 +10,22 @@ import Foundation
 
 public struct UpdateSpecialtyCommand: Codable {
 
-    public var content: String?
     public var name: String?
     public var slug: String?
     public var description: String?
     public var specialtyTypeId: UUID?
     public var specialtyTypeName: String?
     public var auditableEntity: AuditableEntity?
+    public var content: String?
 
-    public init(content: String? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, auditableEntity: AuditableEntity? = nil) {
-        self.content = content
+    public init(name: String? = nil, slug: String? = nil, description: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, auditableEntity: AuditableEntity? = nil, content: String? = nil) {
         self.name = name
         self.slug = slug
         self.description = description
         self.specialtyTypeId = specialtyTypeId
         self.specialtyTypeName = specialtyTypeName
         self.auditableEntity = auditableEntity
+        self.content = content
     }
 
 }

@@ -10,7 +10,6 @@ import Foundation
 
 public struct QuestionCommentViewModel: Codable {
 
-    public var medias: [MediaViewModel]?
     public var id: UUID?
     public var userId: UUID?
     public var userName: String?
@@ -19,9 +18,9 @@ public struct QuestionCommentViewModel: Codable {
     public var questionTitle: String?
     public var body: String?
     public var auditableEntity: AuditableEntity?
+    public var medias: [MediaViewModel]?
 
-    public init(medias: [MediaViewModel]? = nil, id: UUID? = nil, userId: UUID? = nil, userName: String? = nil, fullName: String? = nil, questionId: UUID? = nil, questionTitle: String? = nil, body: String? = nil, auditableEntity: AuditableEntity? = nil) {
-        self.medias = medias
+    public init(id: UUID? = nil, userId: UUID? = nil, userName: String? = nil, fullName: String? = nil, questionId: UUID? = nil, questionTitle: String? = nil, body: String? = nil, auditableEntity: AuditableEntity? = nil, medias: [MediaViewModel]? = nil) {
         self.id = id
         self.userId = userId
         self.userName = userName
@@ -30,6 +29,7 @@ public struct QuestionCommentViewModel: Codable {
         self.questionTitle = questionTitle
         self.body = body
         self.auditableEntity = auditableEntity
+        self.medias = medias
     }
 
 }

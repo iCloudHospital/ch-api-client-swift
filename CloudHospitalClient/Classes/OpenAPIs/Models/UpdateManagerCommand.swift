@@ -10,7 +10,6 @@ import Foundation
 
 public struct UpdateManagerCommand: Codable {
 
-    public var hospitalId: UUID?
     public var firstName: String?
     public var lastName: String?
     public var phone: String?
@@ -20,9 +19,9 @@ public struct UpdateManagerCommand: Codable {
     public var dateOfBirth: Date?
     public var languages: [UserLanguageViewModel]?
     public var locations: [UserLocationViewModel]?
+    public var hospitalId: UUID?
 
-    public init(hospitalId: UUID? = nil, firstName: String? = nil, lastName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil) {
-        self.hospitalId = hospitalId
+    public init(firstName: String? = nil, lastName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil, hospitalId: UUID? = nil) {
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
@@ -32,6 +31,7 @@ public struct UpdateManagerCommand: Codable {
         self.dateOfBirth = dateOfBirth
         self.languages = languages
         self.locations = locations
+        self.hospitalId = hospitalId
     }
 
 }

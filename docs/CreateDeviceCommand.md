@@ -3,8 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **UUID** |  | [optional] 
 **token** | **String** |  | [optional] 
 **platform** | [**Platform**](Platform.md) |  | [optional] 
+**tags** | **[String]** |  | [optional] 
 **appAlert** | **Bool** |  | [optional] 
 **eventAlert** | **Bool** |  | [optional] 
 **noticeAlert** | **Bool** |  | [optional] 

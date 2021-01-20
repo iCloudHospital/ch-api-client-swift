@@ -3,19 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**slug** | **String** |  | [optional] 
-**startPracticeDate** | **Date** |  | [optional] 
-**overview** | **String** |  | [optional] 
-**consultationEnabled** | **Bool** |  | [optional] 
-**consultationFee** | **Double** |  | [optional] 
-**doctorReviews** | [DoctorReview] |  | [optional] 
-**doctorEducations** | [DoctorEducation] |  | [optional] 
-**doctorPortfolios** | [DoctorPortfolio] |  | [optional] 
-**doctorSpecialties** | [DoctorSpecialty] |  | [optional] 
-**doctorCertificates** | [DoctorCertificate] |  | [optional] 
-**doctorAffiliations** | [DoctorAffiliation] |  | [optional] 
-**awards** | [Award] |  | [optional] 
-**medias** | [Media] |  | [optional] 
 **id** | **UUID** |  | [optional] 
 **userName** | **String** |  | [optional] 
 **email** | **String** |  | [optional] 
@@ -35,6 +22,19 @@ Name | Type | Description | Notes
 **locations** | [UserLocation] |  | [optional] 
 **languages** | [UserLanguage] |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
+**slug** | **String** |  | [optional] 
+**startPracticeDate** | **Date** |  | [optional] 
+**overview** | **String** |  | [optional] 
+**consultationEnabled** | **Bool** |  | [optional] 
+**consultationFee** | **Double** |  | [optional] 
+**doctorReviews** | [DoctorReview] |  | [optional] 
+**doctorEducations** | [DoctorEducation] |  | [optional] 
+**doctorPortfolios** | [DoctorPortfolio] |  | [optional] 
+**doctorSpecialties** | [DoctorSpecialty] |  | [optional] 
+**doctorCertificates** | [DoctorCertificate] |  | [optional] 
+**doctorAffiliations** | [DoctorAffiliation] |  | [optional] 
+**awards** | [Award] |  | [optional] 
+**medias** | [Media] |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -10,7 +10,6 @@ import Foundation
 
 public struct UserLocationViewModel: Codable {
 
-    public var locationType: UserLocationType?
     public var latitude: Double?
     public var longitude: Double?
     public var country: String?
@@ -19,9 +18,9 @@ public struct UserLocationViewModel: Codable {
     public var city: String?
     public var zipCode: String?
     public var address: String?
+    public var locationType: UserLocationType?
 
-    public init(locationType: UserLocationType? = nil, latitude: Double? = nil, longitude: Double? = nil, country: String? = nil, state: String? = nil, county: String? = nil, city: String? = nil, zipCode: String? = nil, address: String? = nil) {
-        self.locationType = locationType
+    public init(latitude: Double? = nil, longitude: Double? = nil, country: String? = nil, state: String? = nil, county: String? = nil, city: String? = nil, zipCode: String? = nil, address: String? = nil, locationType: UserLocationType? = nil) {
         self.latitude = latitude
         self.longitude = longitude
         self.country = country
@@ -30,6 +29,7 @@ public struct UserLocationViewModel: Codable {
         self.city = city
         self.zipCode = zipCode
         self.address = address
+        self.locationType = locationType
     }
 
 }

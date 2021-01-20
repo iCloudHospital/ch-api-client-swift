@@ -10,8 +10,6 @@ import Foundation
 
 public struct CreatePartnerCommand: Codable {
 
-    public var userName: String?
-    public var email: String?
     public var firstName: String?
     public var lastName: String?
     public var phone: String?
@@ -22,10 +20,10 @@ public struct CreatePartnerCommand: Codable {
     public var medias: [MediaViewModel]?
     public var languages: [UserLanguageViewModel]?
     public var locations: [UserLocationViewModel]?
+    public var userName: String?
+    public var email: String?
 
-    public init(userName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, medias: [MediaViewModel]? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil) {
-        self.userName = userName
-        self.email = email
+    public init(firstName: String? = nil, lastName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, medias: [MediaViewModel]? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil, userName: String? = nil, email: String? = nil) {
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
@@ -36,6 +34,8 @@ public struct CreatePartnerCommand: Codable {
         self.medias = medias
         self.languages = languages
         self.locations = locations
+        self.userName = userName
+        self.email = email
     }
 
 }

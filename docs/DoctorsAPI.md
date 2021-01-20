@@ -127,7 +127,7 @@ Sample request:        PUT /api/v1/doctors/1      {          \"firstName\": \"st
 import CloudHospitalClient
 
 let doctorId = 987 // UUID | 
-let updateDoctorCommand = UpdateDoctorCommand(startPracticeDate: Date(), overview: "overview_example", consultationEnabled: false, consultationFee: 123, doctorEducations: [{...}], doctorPortfolios: [{...}], doctorSpecialties: [{...}], doctorCertificates: [{...}], doctorAwards: [{...}], firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), languages: [{...}], locations: [{...}]) // UpdateDoctorCommand |  (optional)
+let updateDoctorCommand = UpdateDoctorCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), languages: [{...}], locations: [{...}], startPracticeDate: Date(), overview: "overview_example", consultationEnabled: false, consultationFee: 123, doctorEducations: [{...}], doctorPortfolios: [{...}], doctorSpecialties: [{...}], doctorCertificates: [{...}], doctorAwards: [{...}]) // UpdateDoctorCommand |  (optional)
 
 // Update hospital doctor.
 DoctorsAPI.apiV1DoctorsDoctorIdPut(doctorId: doctorId, updateDoctorCommand: updateDoctorCommand) { (response, error) in
@@ -260,7 +260,7 @@ Sample request:        POST /api/v1/doctors      {          \"userName\": \"clou
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createDoctorCommand = CreateDoctorCommand(userName: "userName_example", email: "email_example", hospitalId: 123, consultationEnabled: false, consultationFee: 123, educations: [{...}], portfolios: [{...}], specialties: [{...}], certificates: [{...}], awards: [{...}], firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [{...}], languages: [{...}], locations: [{...}]) // CreateDoctorCommand |  (optional)
+let createDoctorCommand = CreateDoctorCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [{...}], languages: [{...}], locations: [{...}], userName: "userName_example", email: "email_example", hospitalId: 123, consultationEnabled: false, consultationFee: 123, educations: [{...}], portfolios: [{...}], specialties: [{...}], certificates: [{...}], awards: [{...}]) // CreateDoctorCommand |  (optional)
 
 // Create hospital doctor.
 DoctorsAPI.apiV1DoctorsPost(createDoctorCommand: createDoctorCommand) { (response, error) in

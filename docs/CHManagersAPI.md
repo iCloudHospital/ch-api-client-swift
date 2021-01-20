@@ -247,7 +247,7 @@ Sample request:        POST /api/v1/chmanagers      {          \"userName\": \"c
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createCHManagerCommand = CreateCHManagerCommand(userName: "userName_example", email: "email_example", firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [{...}], languages: [{...}], locations: [{...}]) // CreateCHManagerCommand |  (optional)
+let createCHManagerCommand = CreateCHManagerCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [{...}], languages: [{...}], locations: [{...}], userName: "userName_example", email: "email_example") // CreateCHManagerCommand |  (optional)
 
 // Create cloud hospital manager.
 CHManagersAPI.apiV1ChmanagersPost(createCHManagerCommand: createCHManagerCommand) { (response, error) in

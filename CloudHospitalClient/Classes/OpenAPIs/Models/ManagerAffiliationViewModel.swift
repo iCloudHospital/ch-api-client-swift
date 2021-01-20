@@ -10,8 +10,6 @@ import Foundation
 
 public struct ManagerAffiliationViewModel: Codable {
 
-    public var managerId: UUID?
-    public var managerName: String?
     public var hospitalId: UUID?
     public var hospitalName: String?
     public var hospitalSlug: String?
@@ -19,10 +17,10 @@ public struct ManagerAffiliationViewModel: Codable {
     public var countryName: String?
     public var stateName: String?
     public var cityName: String?
+    public var managerId: UUID?
+    public var managerName: String?
 
-    public init(managerId: UUID? = nil, managerName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, countryId: UUID? = nil, countryName: String? = nil, stateName: String? = nil, cityName: String? = nil) {
-        self.managerId = managerId
-        self.managerName = managerName
+    public init(hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, countryId: UUID? = nil, countryName: String? = nil, stateName: String? = nil, cityName: String? = nil, managerId: UUID? = nil, managerName: String? = nil) {
         self.hospitalId = hospitalId
         self.hospitalName = hospitalName
         self.hospitalSlug = hospitalSlug
@@ -30,6 +28,8 @@ public struct ManagerAffiliationViewModel: Codable {
         self.countryName = countryName
         self.stateName = stateName
         self.cityName = cityName
+        self.managerId = managerId
+        self.managerName = managerName
     }
 
 }

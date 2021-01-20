@@ -3,8 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**managerId** | **UUID** |  | [optional] 
-**managerName** | **String** |  | [optional] 
 **hospitalId** | **UUID** |  | [optional] 
 **hospitalName** | **String** |  | [optional] 
 **hospitalSlug** | **String** |  | [optional] 
@@ -12,6 +10,8 @@ Name | Type | Description | Notes
 **countryName** | **String** |  | [optional] 
 **stateName** | **String** |  | [optional] 
 **cityName** | **String** |  | [optional] 
+**managerId** | **UUID** |  | [optional] 
+**managerName** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

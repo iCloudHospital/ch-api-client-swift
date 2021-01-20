@@ -3,12 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**contact** | **String** |  | [optional] 
-**contactNumber** | **String** |  | [optional] 
-**nationality** | **String** |  | [optional] 
-**userType** | **String** |  | [optional] 
-**languages** | [UserLanguageViewModel] |  | [optional] 
-**locations** | [UserLocationViewModel] |  | [optional] 
 **id** | **UUID** |  | [optional] 
 **userName** | **String** |  | [optional] 
 **firstName** | **String** |  | [optional] 
@@ -23,6 +17,12 @@ Name | Type | Description | Notes
 **timeZone** | **String** |  | [optional] 
 **communicationUserId** | **String** |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
+**userType** | **String** |  | [optional] 
+**languages** | [UserLanguageViewModel] |  | [optional] 
+**locations** | [UserLocationViewModel] |  | [optional] 
+**contact** | **String** |  | [optional] 
+**contactNumber** | **String** |  | [optional] 
+**nationality** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

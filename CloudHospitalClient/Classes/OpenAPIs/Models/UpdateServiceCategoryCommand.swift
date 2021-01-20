@@ -10,24 +10,24 @@ import Foundation
 
 public struct UpdateServiceCategoryCommand: Codable {
 
-    public var order: Int?
-    public var selectedServices: [UUID]?
     public var id: UUID?
     public var name: String?
     public var normalizedName: String?
     public var description: String?
+    public var order: Int?
     public var serviceCount: Int?
     public var services: [ServiceItemViewModel]?
+    public var selectedServices: [UUID]?
 
-    public init(order: Int? = nil, selectedServices: [UUID]? = nil, id: UUID? = nil, name: String? = nil, normalizedName: String? = nil, description: String? = nil, serviceCount: Int? = nil, services: [ServiceItemViewModel]? = nil) {
-        self.order = order
-        self.selectedServices = selectedServices
+    public init(id: UUID? = nil, name: String? = nil, normalizedName: String? = nil, description: String? = nil, order: Int? = nil, serviceCount: Int? = nil, services: [ServiceItemViewModel]? = nil, selectedServices: [UUID]? = nil) {
         self.id = id
         self.name = name
         self.normalizedName = normalizedName
         self.description = description
+        self.order = order
         self.serviceCount = serviceCount
         self.services = services
+        self.selectedServices = selectedServices
     }
 
 }

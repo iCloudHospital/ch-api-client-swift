@@ -10,7 +10,6 @@ import Foundation
 
 public struct SpecialtySearchViewModel: Codable {
 
-    public var hospitals: [HospitalSearchItemViewModel]?
     public var specialtyId: String?
     public var specialtyName: String?
     public var slug: String?
@@ -22,9 +21,9 @@ public struct SpecialtySearchViewModel: Codable {
     public var specialtyTypeCategoryName: String?
     public var marketingType: Int?
     public var order: Int?
+    public var hospitals: [HospitalSearchItemViewModel]?
 
-    public init(hospitals: [HospitalSearchItemViewModel]? = nil, specialtyId: String? = nil, specialtyName: String? = nil, slug: String? = nil, description: String? = nil, content: String? = nil, specialtyTypeId: String? = nil, specialtyTypeName: String? = nil, specialtyTypeCategoryId: String? = nil, specialtyTypeCategoryName: String? = nil, marketingType: Int? = nil, order: Int? = nil) {
-        self.hospitals = hospitals
+    public init(specialtyId: String? = nil, specialtyName: String? = nil, slug: String? = nil, description: String? = nil, content: String? = nil, specialtyTypeId: String? = nil, specialtyTypeName: String? = nil, specialtyTypeCategoryId: String? = nil, specialtyTypeCategoryName: String? = nil, marketingType: Int? = nil, order: Int? = nil, hospitals: [HospitalSearchItemViewModel]? = nil) {
         self.specialtyId = specialtyId
         self.specialtyName = specialtyName
         self.slug = slug
@@ -36,6 +35,7 @@ public struct SpecialtySearchViewModel: Codable {
         self.specialtyTypeCategoryName = specialtyTypeCategoryName
         self.marketingType = marketingType
         self.order = order
+        self.hospitals = hospitals
     }
 
 }

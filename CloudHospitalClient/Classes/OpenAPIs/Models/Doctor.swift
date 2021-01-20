@@ -10,19 +10,6 @@ import Foundation
 
 public struct Doctor: Codable {
 
-    public var slug: String?
-    public var startPracticeDate: Date?
-    public var overview: String?
-    public var consultationEnabled: Bool?
-    public var consultationFee: Double?
-    public var doctorReviews: [DoctorReview]?
-    public var doctorEducations: [DoctorEducation]?
-    public var doctorPortfolios: [DoctorPortfolio]?
-    public var doctorSpecialties: [DoctorSpecialty]?
-    public var doctorCertificates: [DoctorCertificate]?
-    public var doctorAffiliations: [DoctorAffiliation]?
-    public var awards: [Award]?
-    public var medias: [Media]?
     public var id: UUID?
     public var userName: String?
     public var email: String?
@@ -42,21 +29,21 @@ public struct Doctor: Codable {
     public var locations: [UserLocation]?
     public var languages: [UserLanguage]?
     public var auditableEntity: AuditableEntity?
+    public var slug: String?
+    public var startPracticeDate: Date?
+    public var overview: String?
+    public var consultationEnabled: Bool?
+    public var consultationFee: Double?
+    public var doctorReviews: [DoctorReview]?
+    public var doctorEducations: [DoctorEducation]?
+    public var doctorPortfolios: [DoctorPortfolio]?
+    public var doctorSpecialties: [DoctorSpecialty]?
+    public var doctorCertificates: [DoctorCertificate]?
+    public var doctorAffiliations: [DoctorAffiliation]?
+    public var awards: [Award]?
+    public var medias: [Media]?
 
-    public init(slug: String? = nil, startPracticeDate: Date? = nil, overview: String? = nil, consultationEnabled: Bool? = nil, consultationFee: Double? = nil, doctorReviews: [DoctorReview]? = nil, doctorEducations: [DoctorEducation]? = nil, doctorPortfolios: [DoctorPortfolio]? = nil, doctorSpecialties: [DoctorSpecialty]? = nil, doctorCertificates: [DoctorCertificate]? = nil, doctorAffiliations: [DoctorAffiliation]? = nil, awards: [Award]? = nil, medias: [Media]? = nil, id: UUID? = nil, userName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, normalizedName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, devices: [Device]? = nil, articles: [Article]? = nil, questionComments: [QuestionComment]? = nil, locations: [UserLocation]? = nil, languages: [UserLanguage]? = nil, auditableEntity: AuditableEntity? = nil) {
-        self.slug = slug
-        self.startPracticeDate = startPracticeDate
-        self.overview = overview
-        self.consultationEnabled = consultationEnabled
-        self.consultationFee = consultationFee
-        self.doctorReviews = doctorReviews
-        self.doctorEducations = doctorEducations
-        self.doctorPortfolios = doctorPortfolios
-        self.doctorSpecialties = doctorSpecialties
-        self.doctorCertificates = doctorCertificates
-        self.doctorAffiliations = doctorAffiliations
-        self.awards = awards
-        self.medias = medias
+    public init(id: UUID? = nil, userName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, normalizedName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, devices: [Device]? = nil, articles: [Article]? = nil, questionComments: [QuestionComment]? = nil, locations: [UserLocation]? = nil, languages: [UserLanguage]? = nil, auditableEntity: AuditableEntity? = nil, slug: String? = nil, startPracticeDate: Date? = nil, overview: String? = nil, consultationEnabled: Bool? = nil, consultationFee: Double? = nil, doctorReviews: [DoctorReview]? = nil, doctorEducations: [DoctorEducation]? = nil, doctorPortfolios: [DoctorPortfolio]? = nil, doctorSpecialties: [DoctorSpecialty]? = nil, doctorCertificates: [DoctorCertificate]? = nil, doctorAffiliations: [DoctorAffiliation]? = nil, awards: [Award]? = nil, medias: [Media]? = nil) {
         self.id = id
         self.userName = userName
         self.email = email
@@ -76,6 +63,19 @@ public struct Doctor: Codable {
         self.locations = locations
         self.languages = languages
         self.auditableEntity = auditableEntity
+        self.slug = slug
+        self.startPracticeDate = startPracticeDate
+        self.overview = overview
+        self.consultationEnabled = consultationEnabled
+        self.consultationFee = consultationFee
+        self.doctorReviews = doctorReviews
+        self.doctorEducations = doctorEducations
+        self.doctorPortfolios = doctorPortfolios
+        self.doctorSpecialties = doctorSpecialties
+        self.doctorCertificates = doctorCertificates
+        self.doctorAffiliations = doctorAffiliations
+        self.awards = awards
+        self.medias = medias
     }
 
 }

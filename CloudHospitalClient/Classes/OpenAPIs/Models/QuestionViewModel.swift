@@ -10,8 +10,6 @@ import Foundation
 
 public struct QuestionViewModel: Codable {
 
-    public var body: String?
-    public var medias: [MediaViewModel]?
     public var id: UUID?
     public var title: String?
     public var userId: UUID?
@@ -28,10 +26,10 @@ public struct QuestionViewModel: Codable {
     public var refundPolicy: RefundPolicy?
     public var quantity: Int?
     public var auditableEntity: AuditableEntity?
+    public var body: String?
+    public var medias: [MediaViewModel]?
 
-    public init(body: String? = nil, medias: [MediaViewModel]? = nil, id: UUID? = nil, title: String? = nil, userId: UUID? = nil, userName: String? = nil, fullName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, questionType: QuestionType? = nil, questionStatus: QuestionStatus? = nil, questionCommentsCount: Int? = nil, dealId: UUID? = nil, dealName: String? = nil, dealPackageId: UUID? = nil, refundPolicy: RefundPolicy? = nil, quantity: Int? = nil, auditableEntity: AuditableEntity? = nil) {
-        self.body = body
-        self.medias = medias
+    public init(id: UUID? = nil, title: String? = nil, userId: UUID? = nil, userName: String? = nil, fullName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, questionType: QuestionType? = nil, questionStatus: QuestionStatus? = nil, questionCommentsCount: Int? = nil, dealId: UUID? = nil, dealName: String? = nil, dealPackageId: UUID? = nil, refundPolicy: RefundPolicy? = nil, quantity: Int? = nil, auditableEntity: AuditableEntity? = nil, body: String? = nil, medias: [MediaViewModel]? = nil) {
         self.id = id
         self.title = title
         self.userId = userId
@@ -48,6 +46,8 @@ public struct QuestionViewModel: Codable {
         self.refundPolicy = refundPolicy
         self.quantity = quantity
         self.auditableEntity = auditableEntity
+        self.body = body
+        self.medias = medias
     }
 
 }

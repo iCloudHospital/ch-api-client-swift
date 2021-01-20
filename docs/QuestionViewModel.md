@@ -3,8 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**body** | **String** |  | [optional] 
-**medias** | [MediaViewModel] |  | [optional] 
 **id** | **UUID** |  | [optional] 
 **title** | **String** |  | [optional] 
 **userId** | **UUID** |  | [optional] 
@@ -21,6 +19,8 @@ Name | Type | Description | Notes
 **refundPolicy** | [**RefundPolicy**](RefundPolicy.md) |  | [optional] 
 **quantity** | **Int** |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
+**body** | **String** |  | [optional] 
+**medias** | [MediaViewModel] |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

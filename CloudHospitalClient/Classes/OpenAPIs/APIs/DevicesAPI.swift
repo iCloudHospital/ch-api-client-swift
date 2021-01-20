@@ -12,145 +12,6 @@ import Combine
 
 open class DevicesAPI {
     /**
-     Delete device.
-     
-     - parameter deviceId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<Bool, Error>
-     */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1DevicesDeviceIdDelete(deviceId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error>.init { promise in
-            apiV1DevicesDeviceIdDeleteWithRequestBuilder(deviceId: deviceId).execute(apiResponseQueue) { result -> Void in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body!))
-                case let .failure(error):
-                    promise(.failure(error))
-                }
-            }
-        }.eraseToAnyPublisher()
-    }
-
-    /**
-     Delete device.
-     - DELETE /api/v1/devices/{deviceId}
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter deviceId: (path)  
-     - returns: RequestBuilder<Bool> 
-     */
-    open class func apiV1DevicesDeviceIdDeleteWithRequestBuilder(deviceId: UUID) -> RequestBuilder<Bool> {
-        var path = "/api/v1/devices/{deviceId}"
-        let deviceIdPreEscape = "\(APIHelper.mapValueToPathItem(deviceId))"
-        let deviceIdPostEscape = deviceIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{deviceId}", with: deviceIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
-    }
-
-    /**
-     Create device login.
-     
-     - parameter deviceId: (path)  
-     - parameter createDeviceLoginCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<UUID, Error>
-     */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1DevicesDeviceIdLoginsPost(deviceId: UUID, createDeviceLoginCommand: CreateDeviceLoginCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<UUID, Error> {
-        return Future<UUID, Error>.init { promise in
-            apiV1DevicesDeviceIdLoginsPostWithRequestBuilder(deviceId: deviceId, createDeviceLoginCommand: createDeviceLoginCommand).execute(apiResponseQueue) { result -> Void in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body!))
-                case let .failure(error):
-                    promise(.failure(error))
-                }
-            }
-        }.eraseToAnyPublisher()
-    }
-
-    /**
-     Create device login.
-     - POST /api/v1/devices/{deviceId}/logins
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter deviceId: (path)  
-     - parameter createDeviceLoginCommand: (body)  (optional)
-     - returns: RequestBuilder<UUID> 
-     */
-    open class func apiV1DevicesDeviceIdLoginsPostWithRequestBuilder(deviceId: UUID, createDeviceLoginCommand: CreateDeviceLoginCommand? = nil) -> RequestBuilder<UUID> {
-        var path = "/api/v1/devices/{deviceId}/logins"
-        let deviceIdPreEscape = "\(APIHelper.mapValueToPathItem(deviceId))"
-        let deviceIdPostEscape = deviceIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{deviceId}", with: deviceIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createDeviceLoginCommand)
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<UUID>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    /**
-     Update device.
-     
-     - parameter deviceId: (path)  
-     - parameter updateDeviceCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<Bool, Error>
-     */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1DevicesDeviceIdPut(deviceId: UUID, updateDeviceCommand: UpdateDeviceCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error>.init { promise in
-            apiV1DevicesDeviceIdPutWithRequestBuilder(deviceId: deviceId, updateDeviceCommand: updateDeviceCommand).execute(apiResponseQueue) { result -> Void in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body!))
-                case let .failure(error):
-                    promise(.failure(error))
-                }
-            }
-        }.eraseToAnyPublisher()
-    }
-
-    /**
-     Update device.
-     - PUT /api/v1/devices/{deviceId}
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter deviceId: (path)  
-     - parameter updateDeviceCommand: (body)  (optional)
-     - returns: RequestBuilder<Bool> 
-     */
-    open class func apiV1DevicesDeviceIdPutWithRequestBuilder(deviceId: UUID, updateDeviceCommand: UpdateDeviceCommand? = nil) -> RequestBuilder<Bool> {
-        var path = "/api/v1/devices/{deviceId}"
-        let deviceIdPreEscape = "\(APIHelper.mapValueToPathItem(deviceId))"
-        let deviceIdPostEscape = deviceIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{deviceId}", with: deviceIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateDeviceCommand)
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    /**
      Get all devices.
      
      - parameter id: (query)  (optional)
@@ -223,6 +84,190 @@ open class DevicesAPI {
     }
 
     /**
+     Delete device.
+     
+     - parameter id: (path)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<Bool, Error>
+     */
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DevicesIdDelete(id: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error>.init { promise in
+            apiV1DevicesIdDeleteWithRequestBuilder(id: id).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    /**
+     Delete device.
+     - DELETE /api/v1/devices/{id}
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter id: (path)  
+     - returns: RequestBuilder<Bool> 
+     */
+    open class func apiV1DevicesIdDeleteWithRequestBuilder(id: UUID) -> RequestBuilder<Bool> {
+        var path = "/api/v1/devices/{id}"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let URLString = CloudHospitalClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Get device.
+     
+     - parameter id: (path)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<DeviceViewModel, Error>
+     */
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DevicesIdGet(id: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DeviceViewModel, Error> {
+        return Future<DeviceViewModel, Error>.init { promise in
+            apiV1DevicesIdGetWithRequestBuilder(id: id).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    /**
+     Get device.
+     - GET /api/v1/devices/{id}
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter id: (path)  
+     - returns: RequestBuilder<DeviceViewModel> 
+     */
+    open class func apiV1DevicesIdGetWithRequestBuilder(id: UUID) -> RequestBuilder<DeviceViewModel> {
+        var path = "/api/v1/devices/{id}"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let URLString = CloudHospitalClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<DeviceViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Create device login.
+     
+     - parameter id: (path)  
+     - parameter createDeviceLoginCommand: (body)  (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<UUID, Error>
+     */
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DevicesIdLoginsPost(id: UUID, createDeviceLoginCommand: CreateDeviceLoginCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<UUID, Error> {
+        return Future<UUID, Error>.init { promise in
+            apiV1DevicesIdLoginsPostWithRequestBuilder(id: id, createDeviceLoginCommand: createDeviceLoginCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    /**
+     Create device login.
+     - POST /api/v1/devices/{id}/logins
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter id: (path)  
+     - parameter createDeviceLoginCommand: (body)  (optional)
+     - returns: RequestBuilder<UUID> 
+     */
+    open class func apiV1DevicesIdLoginsPostWithRequestBuilder(id: UUID, createDeviceLoginCommand: CreateDeviceLoginCommand? = nil) -> RequestBuilder<UUID> {
+        var path = "/api/v1/devices/{id}/logins"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let URLString = CloudHospitalClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createDeviceLoginCommand)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<UUID>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Update device.
+     
+     - parameter id: (path)  
+     - parameter updateDeviceCommand: (body)  (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<Bool, Error>
+     */
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1DevicesIdPut(id: UUID, updateDeviceCommand: UpdateDeviceCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error>.init { promise in
+            apiV1DevicesIdPutWithRequestBuilder(id: id, updateDeviceCommand: updateDeviceCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    /**
+     Update device.
+     - PUT /api/v1/devices/{id}
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter id: (path)  
+     - parameter updateDeviceCommand: (body)  (optional)
+     - returns: RequestBuilder<Bool> 
+     */
+    open class func apiV1DevicesIdPutWithRequestBuilder(id: UUID, updateDeviceCommand: UpdateDeviceCommand? = nil) -> RequestBuilder<Bool> {
+        var path = "/api/v1/devices/{id}"
+        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
+        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
+        let URLString = CloudHospitalClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateDeviceCommand)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
      Create device.
      
      - parameter createDeviceCommand: (body)  (optional)
@@ -262,51 +307,6 @@ open class DevicesAPI {
         let requestBuilder: RequestBuilder<DeviceViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    /**
-     Get device.
-     
-     - parameter token: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<DeviceViewModel, Error>
-     */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1DevicesTokenGet(token: String, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DeviceViewModel, Error> {
-        return Future<DeviceViewModel, Error>.init { promise in
-            apiV1DevicesTokenGetWithRequestBuilder(token: token).execute(apiResponseQueue) { result -> Void in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body!))
-                case let .failure(error):
-                    promise(.failure(error))
-                }
-            }
-        }.eraseToAnyPublisher()
-    }
-
-    /**
-     Get device.
-     - GET /api/v1/devices/{token}
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter token: (path)  
-     - returns: RequestBuilder<DeviceViewModel> 
-     */
-    open class func apiV1DevicesTokenGetWithRequestBuilder(token: String) -> RequestBuilder<DeviceViewModel> {
-        var path = "/api/v1/devices/{token}"
-        let tokenPreEscape = "\(APIHelper.mapValueToPathItem(token))"
-        let tokenPostEscape = tokenPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{token}", with: tokenPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<DeviceViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
 }

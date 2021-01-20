@@ -10,12 +10,6 @@ import Foundation
 
 public struct PatientViewModel: Codable {
 
-    public var contact: String?
-    public var contactNumber: String?
-    public var nationality: String?
-    public var userType: String?
-    public var languages: [UserLanguageViewModel]?
-    public var locations: [UserLocationViewModel]?
     public var id: UUID?
     public var userName: String?
     public var firstName: String?
@@ -30,14 +24,14 @@ public struct PatientViewModel: Codable {
     public var timeZone: String?
     public var communicationUserId: String?
     public var auditableEntity: AuditableEntity?
+    public var userType: String?
+    public var languages: [UserLanguageViewModel]?
+    public var locations: [UserLocationViewModel]?
+    public var contact: String?
+    public var contactNumber: String?
+    public var nationality: String?
 
-    public init(contact: String? = nil, contactNumber: String? = nil, nationality: String? = nil, userType: String? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil, id: UUID? = nil, userName: String? = nil, firstName: String? = nil, lastName: String? = nil, fullname: String? = nil, phone: String? = nil, email: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, auditableEntity: AuditableEntity? = nil) {
-        self.contact = contact
-        self.contactNumber = contactNumber
-        self.nationality = nationality
-        self.userType = userType
-        self.languages = languages
-        self.locations = locations
+    public init(id: UUID? = nil, userName: String? = nil, firstName: String? = nil, lastName: String? = nil, fullname: String? = nil, phone: String? = nil, email: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil, communicationUserId: String? = nil, auditableEntity: AuditableEntity? = nil, userType: String? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil, contact: String? = nil, contactNumber: String? = nil, nationality: String? = nil) {
         self.id = id
         self.userName = userName
         self.firstName = firstName
@@ -52,6 +46,12 @@ public struct PatientViewModel: Codable {
         self.timeZone = timeZone
         self.communicationUserId = communicationUserId
         self.auditableEntity = auditableEntity
+        self.userType = userType
+        self.languages = languages
+        self.locations = locations
+        self.contact = contact
+        self.contactNumber = contactNumber
+        self.nationality = nationality
     }
 
 }
