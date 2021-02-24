@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **name** | **String** |  | [optional] 
 **slug** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
+**content** | **String** |  | [optional] 
 **hospitalName** | **String** |  | [optional] 
 **specialtyTypeId** | **UUID** |  | [optional] 
 **specialtyTypeName** | **String** |  | [optional] 

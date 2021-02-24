@@ -14,6 +14,7 @@ public struct ServiceViewModel: Codable {
     public var name: String?
     public var slug: String?
     public var description: String?
+    public var content: String?
     public var hospitalId: UUID?
     public var hospitalName: String?
     public var specialtyTypeId: UUID?
@@ -28,11 +29,12 @@ public struct ServiceViewModel: Codable {
     public var order: Int?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, minPrice: Double? = nil, maxPrice: Double? = nil, priceReuqest: Bool? = nil, order: Int? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, content: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, minPrice: Double? = nil, maxPrice: Double? = nil, priceReuqest: Bool? = nil, order: Int? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.name = name
         self.slug = slug
         self.description = description
+        self.content = content
         self.hospitalId = hospitalId
         self.hospitalName = hospitalName
         self.specialtyTypeId = specialtyTypeId

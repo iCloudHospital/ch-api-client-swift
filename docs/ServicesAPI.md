@@ -192,7 +192,7 @@ import CloudHospitalClient
 let hospitalId = 987 // UUID | 
 let specialtyId = 987 // UUID | 
 let serviceId = 987 // UUID | 
-let updateServiceCommand = UpdateServiceCommand(name: "name_example", slug: "slug_example", description: "description_example", hospitalName: "hospitalName_example", specialtyTypeId: 123, specialtyTypeName: "specialtyTypeName_example", specialtyName: "specialtyName_example", marketingType: MarketingType(), procedure: MarketingType(), minPrice: 123, maxPrice: 123, priceReuqest: false, order: 123, auditableEntity: {...}) // UpdateServiceCommand |  (optional)
+let updateServiceCommand = UpdateServiceCommand(name: "name_example", slug: "slug_example", description: "description_example", content: "content_example", hospitalName: "hospitalName_example", specialtyTypeId: 123, specialtyTypeName: "specialtyTypeName_example", specialtyName: "specialtyName_example", marketingType: MarketingType(), procedure: MarketingType(), minPrice: 123, maxPrice: 123, priceReuqest: false, order: 123, auditableEntity: {...}) // UpdateServiceCommand |  (optional)
 
 // Update service.
 ServicesAPI.apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdPut(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId, updateServiceCommand: updateServiceCommand) { (response, error) in

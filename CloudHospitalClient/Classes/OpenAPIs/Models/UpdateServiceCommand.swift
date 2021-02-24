@@ -13,6 +13,7 @@ public struct UpdateServiceCommand: Codable {
     public var name: String?
     public var slug: String?
     public var description: String?
+    public var content: String?
     public var hospitalName: String?
     public var specialtyTypeId: UUID?
     public var specialtyTypeName: String?
@@ -25,10 +26,11 @@ public struct UpdateServiceCommand: Codable {
     public var order: Int?
     public var auditableEntity: AuditableEntity?
 
-    public init(name: String? = nil, slug: String? = nil, description: String? = nil, hospitalName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, specialtyName: String? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, minPrice: Double? = nil, maxPrice: Double? = nil, priceReuqest: Bool? = nil, order: Int? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(name: String? = nil, slug: String? = nil, description: String? = nil, content: String? = nil, hospitalName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, specialtyName: String? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, minPrice: Double? = nil, maxPrice: Double? = nil, priceReuqest: Bool? = nil, order: Int? = nil, auditableEntity: AuditableEntity? = nil) {
         self.name = name
         self.slug = slug
         self.description = description
+        self.content = content
         self.hospitalName = hospitalName
         self.specialtyTypeId = specialtyTypeId
         self.specialtyTypeName = specialtyTypeName
