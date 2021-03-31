@@ -15,8 +15,10 @@ public struct BookingViewModel: Codable {
     public var patientName: String?
     public var hospitalId: UUID?
     public var hospitalName: String?
+    public var hospitalSlug: String?
     public var dealId: UUID?
     public var dealName: String?
+    public var dealSlug: String?
     public var dealPackageId: UUID?
     public var refundPolicy: RefundPolicy?
     public var quantity: Int?
@@ -39,14 +41,16 @@ public struct BookingViewModel: Codable {
     public var rejectComment: String?
     public var isOpen: Bool?
 
-    public init(id: UUID? = nil, patientId: UUID? = nil, patientName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, dealId: UUID? = nil, dealName: String? = nil, dealPackageId: UUID? = nil, refundPolicy: RefundPolicy? = nil, quantity: Int? = nil, firstName: String? = nil, lastName: String? = nil, email: String? = nil, phone: String? = nil, dateOfBirth: Date? = nil, gender: Gender? = nil, comment: String? = nil, approximateDateStart: Date? = nil, approximateDateEnd: Date? = nil, confirmedDateStart: Date? = nil, confirmedDateEnd: Date? = nil, fee: Double? = nil, applicationFee: Double? = nil, timeZone: String? = nil, status: BookingStatus? = nil, rejectReason: RejectReason? = nil, rejectComment: String? = nil, isOpen: Bool? = nil) {
+    public init(id: UUID? = nil, patientId: UUID? = nil, patientName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, dealId: UUID? = nil, dealName: String? = nil, dealSlug: String? = nil, dealPackageId: UUID? = nil, refundPolicy: RefundPolicy? = nil, quantity: Int? = nil, firstName: String? = nil, lastName: String? = nil, email: String? = nil, phone: String? = nil, dateOfBirth: Date? = nil, gender: Gender? = nil, comment: String? = nil, approximateDateStart: Date? = nil, approximateDateEnd: Date? = nil, confirmedDateStart: Date? = nil, confirmedDateEnd: Date? = nil, fee: Double? = nil, applicationFee: Double? = nil, timeZone: String? = nil, status: BookingStatus? = nil, rejectReason: RejectReason? = nil, rejectComment: String? = nil, isOpen: Bool? = nil) {
         self.id = id
         self.patientId = patientId
         self.patientName = patientName
         self.hospitalId = hospitalId
         self.hospitalName = hospitalName
+        self.hospitalSlug = hospitalSlug
         self.dealId = dealId
         self.dealName = dealName
+        self.dealSlug = dealSlug
         self.dealPackageId = dealPackageId
         self.refundPolicy = refundPolicy
         self.quantity = quantity

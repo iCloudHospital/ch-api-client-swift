@@ -123,11 +123,19 @@ Class | Method | HTTP request | Description
 *EquipmentsAPI* | [**apiV1HospitalsHospitalIdEquipmentsEquipmentIdGet**](docs/EquipmentsAPI.md#apiv1hospitalshospitalidequipmentsequipmentidget) | **GET** /api/v1/hospitals/{hospitalId}/equipments/{equipmentId} | Get equipment.
 *EquipmentsAPI* | [**apiV1HospitalsHospitalIdEquipmentsEquipmentIdPut**](docs/EquipmentsAPI.md#apiv1hospitalshospitalidequipmentsequipmentidput) | **PUT** /api/v1/hospitals/{hospitalId}/equipments/{equipmentId} | Update equipment.
 *EquipmentsAPI* | [**apiV1HospitalsHospitalIdEquipmentsPost**](docs/EquipmentsAPI.md#apiv1hospitalshospitalidequipmentspost) | **POST** /api/v1/hospitals/{hospitalId}/equipments | Create an equipment and add to a hospital.
+*FaqCategoriesAPI* | [**apiV1FaqcategoriesFaqCategoryIdGet**](docs/FaqCategoriesAPI.md#apiv1faqcategoriesfaqcategoryidget) | **GET** /api/v1/faqcategories/{faqCategoryId} | Get faqCategory.
+*FaqCategoriesAPI* | [**apiV1FaqcategoriesGet**](docs/FaqCategoriesAPI.md#apiv1faqcategoriesget) | **GET** /api/v1/faqcategories | Get all faqCategory.
+*FaqsAPI* | [**apiV1FaqsFaqIdGet**](docs/FaqsAPI.md#apiv1faqsfaqidget) | **GET** /api/v1/faqs/{faqId} | Get faq.
+*FaqsAPI* | [**apiV1FaqsGet**](docs/FaqsAPI.md#apiv1faqsget) | **GET** /api/v1/faqs | Get all faq.
+*FaqsAPI* | [**apiV1FaqsSlugsSlugGet**](docs/FaqsAPI.md#apiv1faqsslugsslugget) | **GET** /api/v1/faqs/slugs/{slug} | Get faq by slug.
 *GroupChannelsAPI* | [**apiV1GroupchannelsChannelUrlInvitePost**](docs/GroupChannelsAPI.md#apiv1groupchannelschannelurlinvitepost) | **POST** /api/v1/groupchannels/{channelUrl}/invite | 
+*GroupChannelsAPI* | [**apiV1GroupchannelsDealDealIdGet**](docs/GroupChannelsAPI.md#apiv1groupchannelsdealdealidget) | **GET** /api/v1/groupchannels/deal/{dealId} | 
 *GroupChannelsAPI* | [**apiV1GroupchannelsDealDealIdPost**](docs/GroupChannelsAPI.md#apiv1groupchannelsdealdealidpost) | **POST** /api/v1/groupchannels/deal/{dealId} | 
-*GroupChannelsAPI* | [**apiV1GroupchannelsDealIdGet**](docs/GroupChannelsAPI.md#apiv1groupchannelsdealidget) | **GET** /api/v1/groupchannels/{dealId} | 
+*GroupChannelsAPI* | [**apiV1GroupchannelsDoctorDoctorIdGet**](docs/GroupChannelsAPI.md#apiv1groupchannelsdoctordoctoridget) | **GET** /api/v1/groupchannels/doctor/{doctorId} | 
 *GroupChannelsAPI* | [**apiV1GroupchannelsDoctorDoctorIdPost**](docs/GroupChannelsAPI.md#apiv1groupchannelsdoctordoctoridpost) | **POST** /api/v1/groupchannels/doctor/{doctorId} | 
+*GroupChannelsAPI* | [**apiV1GroupchannelsHospitalHospitalIdGet**](docs/GroupChannelsAPI.md#apiv1groupchannelshospitalhospitalidget) | **GET** /api/v1/groupchannels/hospital/{hospitalId} | 
 *GroupChannelsAPI* | [**apiV1GroupchannelsHospitalHospitalIdPost**](docs/GroupChannelsAPI.md#apiv1groupchannelshospitalhospitalidpost) | **POST** /api/v1/groupchannels/hospital/{hospitalId} | 
+*GroupChannelsAPI* | [**apiV1GroupchannelsIdGet**](docs/GroupChannelsAPI.md#apiv1groupchannelsidget) | **GET** /api/v1/groupchannels/{id} | 
 *HospitalReviewsAPI* | [**apiV1HospitalsHospitalIdReviewsPatientIdDelete**](docs/HospitalReviewsAPI.md#apiv1hospitalshospitalidreviewspatientiddelete) | **DELETE** /api/v1/hospitals/{hospitalId}/reviews/{patientId} | Delete review.
 *HospitalReviewsAPI* | [**apiV1HospitalsHospitalIdReviewsPatientIdGet**](docs/HospitalReviewsAPI.md#apiv1hospitalshospitalidreviewspatientidget) | **GET** /api/v1/hospitals/{hospitalId}/reviews/{patientId} | Get review.
 *HospitalReviewsAPI* | [**apiV1HospitalsHospitalIdReviewsPatientIdPut**](docs/HospitalReviewsAPI.md#apiv1hospitalshospitalidreviewspatientidput) | **PUT** /api/v1/hospitals/{hospitalId}/reviews/{patientId} | Update review.
@@ -345,6 +353,12 @@ Class | Method | HTTP request | Description
  - [EquipmentItemViewModel](docs/EquipmentItemViewModel.md)
  - [EquipmentViewModel](docs/EquipmentViewModel.md)
  - [EquipmentsViewModel](docs/EquipmentsViewModel.md)
+ - [FaqCategoriesViewModel](docs/FaqCategoriesViewModel.md)
+ - [FaqCategoryItemViewModel](docs/FaqCategoryItemViewModel.md)
+ - [FaqCategoryViewModel](docs/FaqCategoryViewModel.md)
+ - [FaqItemViewModel](docs/FaqItemViewModel.md)
+ - [FaqViewModel](docs/FaqViewModel.md)
+ - [FaqsViewModel](docs/FaqsViewModel.md)
  - [Gender](docs/Gender.md)
  - [Hospital](docs/Hospital.md)
  - [HospitalAccreditation](docs/HospitalAccreditation.md)

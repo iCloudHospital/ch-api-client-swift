@@ -21,6 +21,8 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorReviewsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorSpecialtiesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/EquipmentsAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/FaqCategoriesAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/FaqsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/GroupChannelsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/HospitalReviewsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/HospitalSpecialtiesAPI.swift
@@ -172,6 +174,12 @@ CloudHospitalClient/Classes/OpenAPIs/Models/Equipment.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/EquipmentItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/EquipmentViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/EquipmentsViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoriesViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoryItemViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoryViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/FaqItemViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/FaqViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/FaqsViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Gender.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Hospital.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalAccreditation.swift
@@ -456,6 +464,14 @@ docs/EquipmentItemViewModel.md
 docs/EquipmentViewModel.md
 docs/EquipmentsAPI.md
 docs/EquipmentsViewModel.md
+docs/FaqCategoriesAPI.md
+docs/FaqCategoriesViewModel.md
+docs/FaqCategoryItemViewModel.md
+docs/FaqCategoryViewModel.md
+docs/FaqItemViewModel.md
+docs/FaqViewModel.md
+docs/FaqsAPI.md
+docs/FaqsViewModel.md
 docs/Gender.md
 docs/GroupChannelsAPI.md
 docs/Hospital.md

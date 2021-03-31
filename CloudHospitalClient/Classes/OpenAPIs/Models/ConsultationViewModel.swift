@@ -17,12 +17,16 @@ public struct ConsultationViewModel: Codable {
     public var communicationUserId: String?
     public var hospitalId: UUID?
     public var hospitalName: String?
+    public var hospitalSlug: String?
     public var specialtyId: UUID?
     public var specialtyName: String?
+    public var specialtySlug: String?
     public var doctorId: UUID?
     public var doctorName: String?
+    public var doctorSlug: String?
     public var dealId: UUID?
     public var dealName: String?
+    public var dealSlug: String?
     public var language: String?
     public var isAccountHolder: Bool?
     public var firstName: String?
@@ -47,7 +51,7 @@ public struct ConsultationViewModel: Codable {
     public var isOpen: Bool?
     public var paymentId: UUID?
 
-    public init(id: UUID? = nil, consultationType: ConsultationType? = nil, patientId: UUID? = nil, patientName: String? = nil, communicationUserId: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, dealId: UUID? = nil, dealName: String? = nil, language: String? = nil, isAccountHolder: Bool? = nil, firstName: String? = nil, lastName: String? = nil, email: String? = nil, phone: String? = nil, dateOfBirth: Date? = nil, gender: Gender? = nil, comment: String? = nil, timeRange: String? = nil, approximateDateStart: Date? = nil, approximateDateEnd: Date? = nil, confirmedDateStart: Date? = nil, confirmedDateEnd: Date? = nil, callerName: String? = nil, callerId: UUID? = nil, fee: Double? = nil, applicationFee: Double? = nil, timeZone: String? = nil, status: ConsultationStatus? = nil, rejectReason: RejectReason? = nil, isOpen: Bool? = nil, paymentId: UUID? = nil) {
+    public init(id: UUID? = nil, consultationType: ConsultationType? = nil, patientId: UUID? = nil, patientName: String? = nil, communicationUserId: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtySlug: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, doctorSlug: String? = nil, dealId: UUID? = nil, dealName: String? = nil, dealSlug: String? = nil, language: String? = nil, isAccountHolder: Bool? = nil, firstName: String? = nil, lastName: String? = nil, email: String? = nil, phone: String? = nil, dateOfBirth: Date? = nil, gender: Gender? = nil, comment: String? = nil, timeRange: String? = nil, approximateDateStart: Date? = nil, approximateDateEnd: Date? = nil, confirmedDateStart: Date? = nil, confirmedDateEnd: Date? = nil, callerName: String? = nil, callerId: UUID? = nil, fee: Double? = nil, applicationFee: Double? = nil, timeZone: String? = nil, status: ConsultationStatus? = nil, rejectReason: RejectReason? = nil, isOpen: Bool? = nil, paymentId: UUID? = nil) {
         self.id = id
         self.consultationType = consultationType
         self.patientId = patientId
@@ -55,12 +59,16 @@ public struct ConsultationViewModel: Codable {
         self.communicationUserId = communicationUserId
         self.hospitalId = hospitalId
         self.hospitalName = hospitalName
+        self.hospitalSlug = hospitalSlug
         self.specialtyId = specialtyId
         self.specialtyName = specialtyName
+        self.specialtySlug = specialtySlug
         self.doctorId = doctorId
         self.doctorName = doctorName
+        self.doctorSlug = doctorSlug
         self.dealId = dealId
         self.dealName = dealName
+        self.dealSlug = dealSlug
         self.language = language
         self.isAccountHolder = isAccountHolder
         self.firstName = firstName
