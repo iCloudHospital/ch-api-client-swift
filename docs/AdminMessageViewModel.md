@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **message** | **String** |  | [optional] 
 **data** | **String** |  | [optional] 
 **createdAt** | **Int64** |  | [optional] 
-**updatedAt** | **Int** |  | [optional] 
+**updatedAt** | **Int64** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

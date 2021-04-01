@@ -19,9 +19,9 @@ public struct AdminMessageViewModel: Codable {
     public var message: String?
     public var data: String?
     public var createdAt: Int64?
-    public var updatedAt: Int?
+    public var updatedAt: Int64?
 
-    public init(messageId: Int? = nil, type: String? = nil, customType: String? = nil, channelUrl: String? = nil, mentionType: String? = nil, isRemoved: Bool? = nil, message: String? = nil, data: String? = nil, createdAt: Int64? = nil, updatedAt: Int? = nil) {
+    public init(messageId: Int? = nil, type: String? = nil, customType: String? = nil, channelUrl: String? = nil, mentionType: String? = nil, isRemoved: Bool? = nil, message: String? = nil, data: String? = nil, createdAt: Int64? = nil, updatedAt: Int64? = nil) {
         self.messageId = messageId
         self.type = type
         self.customType = customType
