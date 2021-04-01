@@ -58,15 +58,14 @@ open class GroupChannelsAPI {
 
     /**
 
-     - parameter hospitalId: (path)  
      - parameter dealId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SendBirdGroupChannelViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1GroupchannelsDealDealIdGet(hospitalId: UUID, dealId: String, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SendBirdGroupChannelViewModel, Error> {
+    open class func apiV1GroupchannelsDealDealIdGet(dealId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SendBirdGroupChannelViewModel, Error> {
         return Future<SendBirdGroupChannelViewModel, Error>.init { promise in
-            apiV1GroupchannelsDealDealIdGetWithRequestBuilder(hospitalId: hospitalId, dealId: dealId).execute(apiResponseQueue) { result -> Void in
+            apiV1GroupchannelsDealDealIdGetWithRequestBuilder(dealId: dealId).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -82,15 +81,11 @@ open class GroupChannelsAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter hospitalId: (path)  
      - parameter dealId: (path)  
      - returns: RequestBuilder<SendBirdGroupChannelViewModel> 
      */
-    open class func apiV1GroupchannelsDealDealIdGetWithRequestBuilder(hospitalId: UUID, dealId: String) -> RequestBuilder<SendBirdGroupChannelViewModel> {
+    open class func apiV1GroupchannelsDealDealIdGetWithRequestBuilder(dealId: UUID) -> RequestBuilder<SendBirdGroupChannelViewModel> {
         var path = "/api/v1/groupchannels/deal/{dealId}"
-        let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
-        let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let dealIdPreEscape = "\(APIHelper.mapValueToPathItem(dealId))"
         let dealIdPostEscape = dealIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         path = path.replacingOccurrences(of: "{dealId}", with: dealIdPostEscape, options: .literal, range: nil)
@@ -151,15 +146,14 @@ open class GroupChannelsAPI {
 
     /**
 
-     - parameter hospitalId: (path)  
      - parameter doctorId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SendBirdGroupChannelViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1GroupchannelsDoctorDoctorIdGet(hospitalId: UUID, doctorId: String, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SendBirdGroupChannelViewModel, Error> {
+    open class func apiV1GroupchannelsDoctorDoctorIdGet(doctorId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SendBirdGroupChannelViewModel, Error> {
         return Future<SendBirdGroupChannelViewModel, Error>.init { promise in
-            apiV1GroupchannelsDoctorDoctorIdGetWithRequestBuilder(hospitalId: hospitalId, doctorId: doctorId).execute(apiResponseQueue) { result -> Void in
+            apiV1GroupchannelsDoctorDoctorIdGetWithRequestBuilder(doctorId: doctorId).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -175,15 +169,11 @@ open class GroupChannelsAPI {
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter hospitalId: (path)  
      - parameter doctorId: (path)  
      - returns: RequestBuilder<SendBirdGroupChannelViewModel> 
      */
-    open class func apiV1GroupchannelsDoctorDoctorIdGetWithRequestBuilder(hospitalId: UUID, doctorId: String) -> RequestBuilder<SendBirdGroupChannelViewModel> {
+    open class func apiV1GroupchannelsDoctorDoctorIdGetWithRequestBuilder(doctorId: UUID) -> RequestBuilder<SendBirdGroupChannelViewModel> {
         var path = "/api/v1/groupchannels/doctor/{doctorId}"
-        let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
-        let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let doctorIdPreEscape = "\(APIHelper.mapValueToPathItem(doctorId))"
         let doctorIdPostEscape = doctorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         path = path.replacingOccurrences(of: "{doctorId}", with: doctorIdPostEscape, options: .literal, range: nil)

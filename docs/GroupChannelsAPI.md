@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 
 # **apiV1GroupchannelsDealDealIdGet**
 ```swift
-    open class func apiV1GroupchannelsDealDealIdGet(hospitalId: UUID, dealId: String, completion: @escaping (_ data: SendBirdGroupChannelViewModel?, _ error: Error?) -> Void)
+    open class func apiV1GroupchannelsDealDealIdGet(dealId: UUID, completion: @escaping (_ data: SendBirdGroupChannelViewModel?, _ error: Error?) -> Void)
 ```
 
 
@@ -75,10 +75,9 @@ Name | Type | Description  | Notes
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let hospitalId = 987 // UUID | 
-let dealId = "dealId_example" // String | 
+let dealId = 987 // UUID | 
 
-GroupChannelsAPI.apiV1GroupchannelsDealDealIdGet(hospitalId: hospitalId, dealId: dealId) { (response, error) in
+GroupChannelsAPI.apiV1GroupchannelsDealDealIdGet(dealId: dealId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -94,8 +93,7 @@ GroupChannelsAPI.apiV1GroupchannelsDealDealIdGet(hospitalId: hospitalId, dealId:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **dealId** | **String** |  | 
+ **dealId** | [**UUID**](.md) |  | 
 
 ### Return type
 
@@ -161,7 +159,7 @@ Name | Type | Description  | Notes
 
 # **apiV1GroupchannelsDoctorDoctorIdGet**
 ```swift
-    open class func apiV1GroupchannelsDoctorDoctorIdGet(hospitalId: UUID, doctorId: String, completion: @escaping (_ data: SendBirdGroupChannelViewModel?, _ error: Error?) -> Void)
+    open class func apiV1GroupchannelsDoctorDoctorIdGet(doctorId: UUID, completion: @escaping (_ data: SendBirdGroupChannelViewModel?, _ error: Error?) -> Void)
 ```
 
 
@@ -171,10 +169,9 @@ Name | Type | Description  | Notes
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let hospitalId = 987 // UUID | 
-let doctorId = "doctorId_example" // String | 
+let doctorId = 987 // UUID | 
 
-GroupChannelsAPI.apiV1GroupchannelsDoctorDoctorIdGet(hospitalId: hospitalId, doctorId: doctorId) { (response, error) in
+GroupChannelsAPI.apiV1GroupchannelsDoctorDoctorIdGet(doctorId: doctorId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -190,8 +187,7 @@ GroupChannelsAPI.apiV1GroupchannelsDoctorDoctorIdGet(hospitalId: hospitalId, doc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **doctorId** | **String** |  | 
+ **doctorId** | [**UUID**](.md) |  | 
 
 ### Return type
 
