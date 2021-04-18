@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 # **apiV1DealsGet**
 ```swift
-    open class func apiV1DealsGet(id: UUID? = nil, name: String? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: DealsViewModel?, _ error: Error?) -> Void)
+    open class func apiV1DealsGet(id: UUID? = nil, name: String? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, exceptHospitalId: UUID? = nil, exceptDealId: UUID? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: DealsViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all deals.
@@ -178,13 +178,15 @@ let hospitalId = 987 // UUID |  (optional)
 let hospitalName = "hospitalName_example" // String |  (optional)
 let specialtyId = 987 // UUID |  (optional)
 let specialtyTypeId = 987 // UUID |  (optional)
+let exceptHospitalId = 987 // UUID |  (optional)
+let exceptDealId = 987 // UUID |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all deals.
-DealsAPI.apiV1DealsGet(id: id, name: name, marketingType: marketingType, countryId: countryId, hospitalId: hospitalId, hospitalName: hospitalName, specialtyId: specialtyId, specialtyTypeId: specialtyTypeId, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+DealsAPI.apiV1DealsGet(id: id, name: name, marketingType: marketingType, countryId: countryId, hospitalId: hospitalId, hospitalName: hospitalName, specialtyId: specialtyId, specialtyTypeId: specialtyTypeId, exceptHospitalId: exceptHospitalId, exceptDealId: exceptDealId, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -208,6 +210,8 @@ Name | Type | Description  | Notes
  **hospitalName** | **String** |  | [optional] 
  **specialtyId** | [**UUID**](.md) |  | [optional] 
  **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
+ **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
+ **exceptDealId** | [**UUID**](.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 

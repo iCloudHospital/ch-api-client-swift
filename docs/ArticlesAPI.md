@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 # **apiV1HospitalsArticlesGet**
 ```swift
-    open class func apiV1HospitalsArticlesGet(id: UUID? = nil, title: String? = nil, description: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, userName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, countryId: UUID? = nil, tag: String? = nil, exceptHospitalId: UUID? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: ArticlesViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsArticlesGet(id: UUID? = nil, title: String? = nil, description: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, userName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, countryId: UUID? = nil, tag: String? = nil, exceptHospitalId: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: ArticlesViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all articles.
@@ -38,13 +38,14 @@ let hospitalName = "hospitalName_example" // String |  (optional)
 let countryId = 987 // UUID |  (optional)
 let tag = "tag_example" // String |  (optional)
 let exceptHospitalId = 987 // UUID |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all articles.
-ArticlesAPI.apiV1HospitalsArticlesGet(id: id, title: title, description: description, status: status, marketingType: marketingType, userId: userId, userName: userName, hospitalId: hospitalId, hospitalName: hospitalName, countryId: countryId, tag: tag, exceptHospitalId: exceptHospitalId, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+ArticlesAPI.apiV1HospitalsArticlesGet(id: id, title: title, description: description, status: status, marketingType: marketingType, userId: userId, userName: userName, hospitalId: hospitalId, hospitalName: hospitalName, countryId: countryId, tag: tag, exceptHospitalId: exceptHospitalId, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -72,6 +73,7 @@ Name | Type | Description  | Notes
  **countryId** | [**UUID**](.md) |  | [optional] 
  **tag** | **String** |  | [optional] 
  **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
@@ -94,7 +96,7 @@ No authorization required
 
 # **apiV1HospitalsArticlesSlugsSlugGet**
 ```swift
-    open class func apiV1HospitalsArticlesSlugsSlugGet(slug: String, completion: @escaping (_ data: ArticleViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsArticlesSlugsSlugGet(slug: String, languageCode: String? = nil, completion: @escaping (_ data: ArticleViewModel?, _ error: Error?) -> Void)
 ```
 
 Get article by slug.
@@ -105,9 +107,10 @@ Get article by slug.
 import CloudHospitalClient
 
 let slug = "slug_example" // String | 
+let languageCode = "languageCode_example" // String |  (optional) (default to "")
 
 // Get article by slug.
-ArticlesAPI.apiV1HospitalsArticlesSlugsSlugGet(slug: slug) { (response, error) in
+ArticlesAPI.apiV1HospitalsArticlesSlugsSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -124,6 +127,7 @@ ArticlesAPI.apiV1HospitalsArticlesSlugsSlugGet(slug: slug) { (response, error) i
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String** |  | 
+ **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
 
 ### Return type
 
@@ -194,7 +198,7 @@ Name | Type | Description  | Notes
 
 # **apiV1HospitalsHospitalIdArticlesArticleIdGet**
 ```swift
-    open class func apiV1HospitalsHospitalIdArticlesArticleIdGet(hospitalId: UUID, articleId: UUID, completion: @escaping (_ data: ArticleViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsHospitalIdArticlesArticleIdGet(hospitalId: UUID, articleId: UUID, languageCode: String? = nil, completion: @escaping (_ data: ArticleViewModel?, _ error: Error?) -> Void)
 ```
 
 Get article.
@@ -208,9 +212,10 @@ import CloudHospitalClient
 
 let hospitalId = 987 // UUID | 
 let articleId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional) (default to "")
 
 // Get article.
-ArticlesAPI.apiV1HospitalsHospitalIdArticlesArticleIdGet(hospitalId: hospitalId, articleId: articleId) { (response, error) in
+ArticlesAPI.apiV1HospitalsHospitalIdArticlesArticleIdGet(hospitalId: hospitalId, articleId: articleId, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -228,6 +233,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **hospitalId** | [**UUID**](.md) |  | 
  **articleId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
 
 ### Return type
 

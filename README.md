@@ -56,6 +56,7 @@ Class | Method | HTTP request | Description
 *CHManagersAPI* | [**apiV1ChmanagersChManagerIdPut**](docs/CHManagersAPI.md#apiv1chmanagerschmanageridput) | **PUT** /api/v1/chmanagers/{chManagerId} | Update cloud hospital manager.
 *CHManagersAPI* | [**apiV1ChmanagersGet**](docs/CHManagersAPI.md#apiv1chmanagersget) | **GET** /api/v1/chmanagers | Get cloud hospital managers.
 *CHManagersAPI* | [**apiV1ChmanagersPost**](docs/CHManagersAPI.md#apiv1chmanagerspost) | **POST** /api/v1/chmanagers | Create cloud hospital manager.
+*CacheAPI* | [**apiV1CacheKeyDelete**](docs/CacheAPI.md#apiv1cachekeydelete) | **DELETE** /api/v1/cache/{key} | Remove cache with specified key
 *ChatUsersAPI* | [**apiV1ChatusersCurrentGet**](docs/ChatUsersAPI.md#apiv1chatuserscurrentget) | **GET** /api/v1/chatusers/current | 
 *ChatUsersAPI* | [**apiV1ChatusersCurrentPost**](docs/ChatUsersAPI.md#apiv1chatuserscurrentpost) | **POST** /api/v1/chatusers/current | 
 *ChatUsersAPI* | [**apiV1ChatusersDelete**](docs/ChatUsersAPI.md#apiv1chatusersdelete) | **DELETE** /api/v1/chatusers | 

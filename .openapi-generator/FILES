@@ -8,6 +8,7 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/ArticlesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/BookingsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CHAdminsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CHManagersAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/CacheAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ChatUsersAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CommunicationsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ConsultationsAPI.swift
@@ -356,6 +357,7 @@ docs/CHManagerItemViewModel.md
 docs/CHManagerViewModel.md
 docs/CHManagersAPI.md
 docs/CHManagersViewModel.md
+docs/CacheAPI.md
 docs/ChangeEmailCommand.md
 docs/ChangeLog.md
 docs/ChargeStatus.md
