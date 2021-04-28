@@ -19,6 +19,7 @@ open class SpecialtyTypesAPI {
      - parameter description: (query)  (optional)
      - parameter marketingType: (query)  (optional)
      - parameter created: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -27,9 +28,9 @@ open class SpecialtyTypesAPI {
      - returns: AnyPublisher<SpecialtyTypesViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1SpecialtytypesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypesViewModel, Error> {
+    open class func apiV1SpecialtytypesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, created: Date? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypesViewModel, Error> {
         return Future<SpecialtyTypesViewModel, Error>.init { promise in
-            apiV1SpecialtytypesGetWithRequestBuilder(id: id, name: name, description: description, marketingType: marketingType, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1SpecialtytypesGetWithRequestBuilder(id: id, name: name, description: description, marketingType: marketingType, created: created, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -49,13 +50,14 @@ open class SpecialtyTypesAPI {
      - parameter description: (query)  (optional)
      - parameter marketingType: (query)  (optional)
      - parameter created: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<SpecialtyTypesViewModel> 
      */
-    open class func apiV1SpecialtytypesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<SpecialtyTypesViewModel> {
+    open class func apiV1SpecialtytypesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, created: Date? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<SpecialtyTypesViewModel> {
         let path = "/api/v1/specialtytypes"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -67,6 +69,7 @@ open class SpecialtyTypesAPI {
             "Description": description?.encodeToJSON(), 
             "MarketingType": marketingType?.encodeToJSON(), 
             "Created": created?.encodeToJSON(), 
+            "LanguageCode": languageCode?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 
@@ -130,13 +133,14 @@ open class SpecialtyTypesAPI {
      Get specialtyType by slug.
      
      - parameter slug: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SpecialtyTypeViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1SpecialtytypesSlugsSlugGet(slug: String, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypeViewModel, Error> {
+    open class func apiV1SpecialtytypesSlugsSlugGet(slug: String, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypeViewModel, Error> {
         return Future<SpecialtyTypeViewModel, Error>.init { promise in
-            apiV1SpecialtytypesSlugsSlugGetWithRequestBuilder(slug: slug).execute(apiResponseQueue) { result -> Void in
+            apiV1SpecialtytypesSlugsSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -151,9 +155,10 @@ open class SpecialtyTypesAPI {
      Get specialtyType by slug.
      - GET /api/v1/specialtytypes/slugs/{slug}
      - parameter slug: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - returns: RequestBuilder<SpecialtyTypeViewModel> 
      */
-    open class func apiV1SpecialtytypesSlugsSlugGetWithRequestBuilder(slug: String) -> RequestBuilder<SpecialtyTypeViewModel> {
+    open class func apiV1SpecialtytypesSlugsSlugGetWithRequestBuilder(slug: String, languageCode: String? = nil) -> RequestBuilder<SpecialtyTypeViewModel> {
         var path = "/api/v1/specialtytypes/slugs/{slug}"
         let slugPreEscape = "\(APIHelper.mapValueToPathItem(slug))"
         let slugPostEscape = slugPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -161,7 +166,10 @@ open class SpecialtyTypesAPI {
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON()
+        ])
 
         let requestBuilder: RequestBuilder<SpecialtyTypeViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
@@ -218,13 +226,14 @@ open class SpecialtyTypesAPI {
      Get specialtyType.
      
      - parameter specialtyTypeId: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SpecialtyTypeViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1SpecialtytypesSpecialtyTypeIdGet(specialtyTypeId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypeViewModel, Error> {
+    open class func apiV1SpecialtytypesSpecialtyTypeIdGet(specialtyTypeId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypeViewModel, Error> {
         return Future<SpecialtyTypeViewModel, Error>.init { promise in
-            apiV1SpecialtytypesSpecialtyTypeIdGetWithRequestBuilder(specialtyTypeId: specialtyTypeId).execute(apiResponseQueue) { result -> Void in
+            apiV1SpecialtytypesSpecialtyTypeIdGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -240,9 +249,10 @@ open class SpecialtyTypesAPI {
      - GET /api/v1/specialtytypes/{specialtyTypeId}
      - Sample request:        GET /api/v1/SpecialtyTypes/1
      - parameter specialtyTypeId: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - returns: RequestBuilder<SpecialtyTypeViewModel> 
      */
-    open class func apiV1SpecialtytypesSpecialtyTypeIdGetWithRequestBuilder(specialtyTypeId: UUID) -> RequestBuilder<SpecialtyTypeViewModel> {
+    open class func apiV1SpecialtytypesSpecialtyTypeIdGetWithRequestBuilder(specialtyTypeId: UUID, languageCode: String? = nil) -> RequestBuilder<SpecialtyTypeViewModel> {
         var path = "/api/v1/specialtytypes/{specialtyTypeId}"
         let specialtyTypeIdPreEscape = "\(APIHelper.mapValueToPathItem(specialtyTypeId))"
         let specialtyTypeIdPostEscape = specialtyTypeIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -250,7 +260,10 @@ open class SpecialtyTypesAPI {
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON()
+        ])
 
         let requestBuilder: RequestBuilder<SpecialtyTypeViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 

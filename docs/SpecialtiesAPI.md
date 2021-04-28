@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 # **apiV1SpecialtiesGet**
 ```swift
-    open class func apiV1SpecialtiesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, specialtyTypeId: UUID? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: SpecialtiesViewModel?, _ error: Error?) -> Void)
+    open class func apiV1SpecialtiesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, specialtyTypeId: UUID? = nil, created: Date? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: SpecialtiesViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all specialties.
@@ -31,13 +31,14 @@ let name = "name_example" // String |  (optional)
 let description = "description_example" // String |  (optional)
 let specialtyTypeId = 987 // UUID |  (optional)
 let created = Date() // Date |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all specialties.
-SpecialtiesAPI.apiV1SpecialtiesGet(id: id, name: name, description: description, specialtyTypeId: specialtyTypeId, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+SpecialtiesAPI.apiV1SpecialtiesGet(id: id, name: name, description: description, specialtyTypeId: specialtyTypeId, created: created, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -58,6 +59,7 @@ Name | Type | Description  | Notes
  **description** | **String** |  | [optional] 
  **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
  **created** | **Date** |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
@@ -132,7 +134,7 @@ Name | Type | Description  | Notes
 
 # **apiV1SpecialtiesSlugsSlugGet**
 ```swift
-    open class func apiV1SpecialtiesSlugsSlugGet(slug: String, completion: @escaping (_ data: SpecialtyViewModel?, _ error: Error?) -> Void)
+    open class func apiV1SpecialtiesSlugsSlugGet(slug: String, languageCode: String? = nil, completion: @escaping (_ data: SpecialtyViewModel?, _ error: Error?) -> Void)
 ```
 
 Get specialty by slug.
@@ -143,9 +145,10 @@ Get specialty by slug.
 import CloudHospitalClient
 
 let slug = "slug_example" // String | 
+let languageCode = "languageCode_example" // String |  (optional) (default to "")
 
 // Get specialty by slug.
-SpecialtiesAPI.apiV1SpecialtiesSlugsSlugGet(slug: slug) { (response, error) in
+SpecialtiesAPI.apiV1SpecialtiesSlugsSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -162,6 +165,7 @@ SpecialtiesAPI.apiV1SpecialtiesSlugsSlugGet(slug: slug) { (response, error) in
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String** |  | 
+ **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
 
 ### Return type
 
@@ -230,7 +234,7 @@ Name | Type | Description  | Notes
 
 # **apiV1SpecialtiesSpecialtyIdGet**
 ```swift
-    open class func apiV1SpecialtiesSpecialtyIdGet(specialtyId: UUID, completion: @escaping (_ data: SpecialtyViewModel?, _ error: Error?) -> Void)
+    open class func apiV1SpecialtiesSpecialtyIdGet(specialtyId: UUID, languageCode: String? = nil, completion: @escaping (_ data: SpecialtyViewModel?, _ error: Error?) -> Void)
 ```
 
 Get specialty.
@@ -243,9 +247,10 @@ Sample request:        GET /api/v1/specialties/1
 import CloudHospitalClient
 
 let specialtyId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional) (default to "")
 
 // Get specialty.
-SpecialtiesAPI.apiV1SpecialtiesSpecialtyIdGet(specialtyId: specialtyId) { (response, error) in
+SpecialtiesAPI.apiV1SpecialtiesSpecialtyIdGet(specialtyId: specialtyId, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -262,6 +267,7 @@ SpecialtiesAPI.apiV1SpecialtiesSpecialtyIdGet(specialtyId: specialtyId) { (respo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **specialtyId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
 
 ### Return type
 

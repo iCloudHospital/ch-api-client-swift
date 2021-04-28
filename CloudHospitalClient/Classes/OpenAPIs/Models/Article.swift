@@ -22,11 +22,15 @@ public struct Article: Codable {
     public var user: User?
     public var hospitalId: UUID?
     public var hospital: Hospital?
+    public var reviewerId: UUID?
+    public var reviewer: Reviewer?
+    public var youtubeUrl: String?
     public var articleTags: [ArticleTag]?
+    public var articleSources: [ArticleSource]?
     public var medias: [Media]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, title: String? = nil, normalizedTitle: String? = nil, slug: String? = nil, description: String? = nil, body: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, user: User? = nil, hospitalId: UUID? = nil, hospital: Hospital? = nil, articleTags: [ArticleTag]? = nil, medias: [Media]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, title: String? = nil, normalizedTitle: String? = nil, slug: String? = nil, description: String? = nil, body: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, user: User? = nil, hospitalId: UUID? = nil, hospital: Hospital? = nil, reviewerId: UUID? = nil, reviewer: Reviewer? = nil, youtubeUrl: String? = nil, articleTags: [ArticleTag]? = nil, articleSources: [ArticleSource]? = nil, medias: [Media]? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.title = title
         self.normalizedTitle = normalizedTitle
@@ -39,7 +43,11 @@ public struct Article: Codable {
         self.user = user
         self.hospitalId = hospitalId
         self.hospital = hospital
+        self.reviewerId = reviewerId
+        self.reviewer = reviewer
+        self.youtubeUrl = youtubeUrl
         self.articleTags = articleTags
+        self.articleSources = articleSources
         self.medias = medias
         self.auditableEntity = auditableEntity
     }

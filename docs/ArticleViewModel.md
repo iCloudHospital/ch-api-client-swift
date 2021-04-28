@@ -15,7 +15,13 @@ Name | Type | Description | Notes
 **hospitalId** | **UUID** |  | [optional] 
 **hospitalName** | **String** |  | [optional] 
 **hospitalSlug** | **String** |  | [optional] 
+**reviewerId** | **UUID** |  | [optional] 
+**reviewerName** | **String** |  | [optional] 
+**reviewerSlug** | **String** |  | [optional] 
+**reviewerPhoto** | **String** |  | [optional] 
+**youtubeUrl** | **String** |  | [optional] 
 **articleTags** | [ArticleTagItemViewModel] |  | [optional] 
+**articleSources** | [ArticleSourceItemViewModel] |  | [optional] 
 **medias** | [MediaViewModel] |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
 

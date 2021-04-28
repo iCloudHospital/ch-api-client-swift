@@ -22,11 +22,17 @@ public struct ArticleViewModel: Codable {
     public var hospitalId: UUID?
     public var hospitalName: String?
     public var hospitalSlug: String?
+    public var reviewerId: UUID?
+    public var reviewerName: String?
+    public var reviewerSlug: String?
+    public var reviewerPhoto: String?
+    public var youtubeUrl: String?
     public var articleTags: [ArticleTagItemViewModel]?
+    public var articleSources: [ArticleSourceItemViewModel]?
     public var medias: [MediaViewModel]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, title: String? = nil, slug: String? = nil, description: String? = nil, body: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, userName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, articleTags: [ArticleTagItemViewModel]? = nil, medias: [MediaViewModel]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, title: String? = nil, slug: String? = nil, description: String? = nil, body: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, userName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, reviewerId: UUID? = nil, reviewerName: String? = nil, reviewerSlug: String? = nil, reviewerPhoto: String? = nil, youtubeUrl: String? = nil, articleTags: [ArticleTagItemViewModel]? = nil, articleSources: [ArticleSourceItemViewModel]? = nil, medias: [MediaViewModel]? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.title = title
         self.slug = slug
@@ -39,7 +45,13 @@ public struct ArticleViewModel: Codable {
         self.hospitalId = hospitalId
         self.hospitalName = hospitalName
         self.hospitalSlug = hospitalSlug
+        self.reviewerId = reviewerId
+        self.reviewerName = reviewerName
+        self.reviewerSlug = reviewerSlug
+        self.reviewerPhoto = reviewerPhoto
+        self.youtubeUrl = youtubeUrl
         self.articleTags = articleTags
+        self.articleSources = articleSources
         self.medias = medias
         self.auditableEntity = auditableEntity
     }

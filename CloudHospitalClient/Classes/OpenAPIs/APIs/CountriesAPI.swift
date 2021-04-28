@@ -61,13 +61,14 @@ open class CountriesAPI {
      Get country.
      
      - parameter countryId: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<CountryViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1CountriesCountryIdGet(countryId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<CountryViewModel, Error> {
+    open class func apiV1CountriesCountryIdGet(countryId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<CountryViewModel, Error> {
         return Future<CountryViewModel, Error>.init { promise in
-            apiV1CountriesCountryIdGetWithRequestBuilder(countryId: countryId).execute(apiResponseQueue) { result -> Void in
+            apiV1CountriesCountryIdGetWithRequestBuilder(countryId: countryId, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -83,9 +84,10 @@ open class CountriesAPI {
      - GET /api/v1/countries/{countryId}
      - Sample request:        GET /api/v1/countries/1
      - parameter countryId: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - returns: RequestBuilder<CountryViewModel> 
      */
-    open class func apiV1CountriesCountryIdGetWithRequestBuilder(countryId: UUID) -> RequestBuilder<CountryViewModel> {
+    open class func apiV1CountriesCountryIdGetWithRequestBuilder(countryId: UUID, languageCode: String? = nil) -> RequestBuilder<CountryViewModel> {
         var path = "/api/v1/countries/{countryId}"
         let countryIdPreEscape = "\(APIHelper.mapValueToPathItem(countryId))"
         let countryIdPostEscape = countryIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -93,7 +95,10 @@ open class CountriesAPI {
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON()
+        ])
 
         let requestBuilder: RequestBuilder<CountryViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
@@ -155,6 +160,7 @@ open class CountriesAPI {
      - parameter name: (query)  (optional)
      - parameter description: (query)  (optional)
      - parameter createdDate: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -163,9 +169,9 @@ open class CountriesAPI {
      - returns: AnyPublisher<CountriesViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1CountriesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, createdDate: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<CountriesViewModel, Error> {
+    open class func apiV1CountriesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, createdDate: Date? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<CountriesViewModel, Error> {
         return Future<CountriesViewModel, Error>.init { promise in
-            apiV1CountriesGetWithRequestBuilder(id: id, name: name, description: description, createdDate: createdDate, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1CountriesGetWithRequestBuilder(id: id, name: name, description: description, createdDate: createdDate, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -179,18 +185,19 @@ open class CountriesAPI {
     /**
      Get all countries.
      - GET /api/v1/countries
-     - Sample request:        GET /api/v1/countries      {          \"countryPageQueryFilter\": {              \"page\": 1,              \"limit\": 20,              \"lastRetrived\": \"2020-02-05T08:40\"          }      }
+     - Sample request:        GET /api/v1/countries      {          \"countryPageQueryFilter\": {              \"page\": 1,              \"limit\": 20,              \"lastRetrived\": \"2020-02-05T08:40\",              \"languageCode\": \"en\"          }      }
      - parameter id: (query)  (optional)
      - parameter name: (query)  (optional)
      - parameter description: (query)  (optional)
      - parameter createdDate: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<CountriesViewModel> 
      */
-    open class func apiV1CountriesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, description: String? = nil, createdDate: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<CountriesViewModel> {
+    open class func apiV1CountriesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, description: String? = nil, createdDate: Date? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<CountriesViewModel> {
         let path = "/api/v1/countries"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -201,6 +208,7 @@ open class CountriesAPI {
             "Name": name?.encodeToJSON(), 
             "Description": description?.encodeToJSON(), 
             "CreatedDate": createdDate?.encodeToJSON(), 
+            "LanguageCode": languageCode?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 
@@ -259,13 +267,14 @@ open class CountriesAPI {
      Get country by slug.
      
      - parameter slug: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<CountryViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1CountriesSlugsSlugGet(slug: String, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<CountryViewModel, Error> {
+    open class func apiV1CountriesSlugsSlugGet(slug: String, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<CountryViewModel, Error> {
         return Future<CountryViewModel, Error>.init { promise in
-            apiV1CountriesSlugsSlugGetWithRequestBuilder(slug: slug).execute(apiResponseQueue) { result -> Void in
+            apiV1CountriesSlugsSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -280,9 +289,10 @@ open class CountriesAPI {
      Get country by slug.
      - GET /api/v1/countries/slugs/{slug}
      - parameter slug: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - returns: RequestBuilder<CountryViewModel> 
      */
-    open class func apiV1CountriesSlugsSlugGetWithRequestBuilder(slug: String) -> RequestBuilder<CountryViewModel> {
+    open class func apiV1CountriesSlugsSlugGetWithRequestBuilder(slug: String, languageCode: String? = nil) -> RequestBuilder<CountryViewModel> {
         var path = "/api/v1/countries/slugs/{slug}"
         let slugPreEscape = "\(APIHelper.mapValueToPathItem(slug))"
         let slugPostEscape = slugPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -290,7 +300,10 @@ open class CountriesAPI {
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON()
+        ])
 
         let requestBuilder: RequestBuilder<CountryViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 

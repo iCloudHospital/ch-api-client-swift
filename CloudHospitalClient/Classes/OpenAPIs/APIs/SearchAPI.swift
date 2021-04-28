@@ -18,6 +18,7 @@ open class SearchAPI {
      - parameter countryId: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
      - parameter marketingType: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -26,9 +27,9 @@ open class SearchAPI {
      - returns: AnyPublisher<DealSearchResultViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1SearchDealsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DealSearchResultViewModel, Error> {
+    open class func apiV1SearchDealsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DealSearchResultViewModel, Error> {
         return Future<DealSearchResultViewModel, Error>.init { promise in
-            apiV1SearchDealsGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1SearchDealsGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -46,13 +47,14 @@ open class SearchAPI {
      - parameter countryId: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
      - parameter marketingType: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<DealSearchResultViewModel> 
      */
-    open class func apiV1SearchDealsGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<DealSearchResultViewModel> {
+    open class func apiV1SearchDealsGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<DealSearchResultViewModel> {
         let path = "/api/v1/search/deals"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -64,6 +66,7 @@ open class SearchAPI {
             "CountryId": countryId?.encodeToJSON(), 
             "HospitalId": hospitalId?.encodeToJSON(), 
             "MarketingType": marketingType?.encodeToJSON(), 
+            "LanguageCode": languageCode?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 
@@ -82,6 +85,7 @@ open class SearchAPI {
      - parameter countryId: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
      - parameter marketingType: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -90,9 +94,9 @@ open class SearchAPI {
      - returns: AnyPublisher<DoctorSearchResultViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1SearchDoctorsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DoctorSearchResultViewModel, Error> {
+    open class func apiV1SearchDoctorsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DoctorSearchResultViewModel, Error> {
         return Future<DoctorSearchResultViewModel, Error>.init { promise in
-            apiV1SearchDoctorsGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1SearchDoctorsGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -110,13 +114,14 @@ open class SearchAPI {
      - parameter countryId: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
      - parameter marketingType: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<DoctorSearchResultViewModel> 
      */
-    open class func apiV1SearchDoctorsGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<DoctorSearchResultViewModel> {
+    open class func apiV1SearchDoctorsGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<DoctorSearchResultViewModel> {
         let path = "/api/v1/search/doctors"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -128,6 +133,7 @@ open class SearchAPI {
             "CountryId": countryId?.encodeToJSON(), 
             "HospitalId": hospitalId?.encodeToJSON(), 
             "MarketingType": marketingType?.encodeToJSON(), 
+            "LanguageCode": languageCode?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 
@@ -146,6 +152,7 @@ open class SearchAPI {
      - parameter countryId: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
      - parameter marketingType: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -154,9 +161,9 @@ open class SearchAPI {
      - returns: AnyPublisher<AzureSearchViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1SearchGetcountGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<AzureSearchViewModel, Error> {
+    open class func apiV1SearchGetcountGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<AzureSearchViewModel, Error> {
         return Future<AzureSearchViewModel, Error>.init { promise in
-            apiV1SearchGetcountGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1SearchGetcountGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -174,13 +181,14 @@ open class SearchAPI {
      - parameter countryId: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
      - parameter marketingType: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<AzureSearchViewModel> 
      */
-    open class func apiV1SearchGetcountGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<AzureSearchViewModel> {
+    open class func apiV1SearchGetcountGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<AzureSearchViewModel> {
         let path = "/api/v1/search/getcount"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -192,6 +200,7 @@ open class SearchAPI {
             "CountryId": countryId?.encodeToJSON(), 
             "HospitalId": hospitalId?.encodeToJSON(), 
             "MarketingType": marketingType?.encodeToJSON(), 
+            "LanguageCode": languageCode?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 
@@ -210,6 +219,7 @@ open class SearchAPI {
      - parameter countryId: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
      - parameter marketingType: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -218,9 +228,9 @@ open class SearchAPI {
      - returns: AnyPublisher<HospitalSearchResultViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1SearchHospitalsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalSearchResultViewModel, Error> {
+    open class func apiV1SearchHospitalsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalSearchResultViewModel, Error> {
         return Future<HospitalSearchResultViewModel, Error>.init { promise in
-            apiV1SearchHospitalsGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1SearchHospitalsGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -238,13 +248,14 @@ open class SearchAPI {
      - parameter countryId: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
      - parameter marketingType: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<HospitalSearchResultViewModel> 
      */
-    open class func apiV1SearchHospitalsGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<HospitalSearchResultViewModel> {
+    open class func apiV1SearchHospitalsGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<HospitalSearchResultViewModel> {
         let path = "/api/v1/search/hospitals"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -256,6 +267,7 @@ open class SearchAPI {
             "CountryId": countryId?.encodeToJSON(), 
             "HospitalId": hospitalId?.encodeToJSON(), 
             "MarketingType": marketingType?.encodeToJSON(), 
+            "LanguageCode": languageCode?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 
@@ -274,6 +286,7 @@ open class SearchAPI {
      - parameter countryId: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
      - parameter marketingType: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -282,9 +295,9 @@ open class SearchAPI {
      - returns: AnyPublisher<SpecialtySearchResultViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1SearchSpecialtiesGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtySearchResultViewModel, Error> {
+    open class func apiV1SearchSpecialtiesGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtySearchResultViewModel, Error> {
         return Future<SpecialtySearchResultViewModel, Error>.init { promise in
-            apiV1SearchSpecialtiesGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1SearchSpecialtiesGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -302,13 +315,14 @@ open class SearchAPI {
      - parameter countryId: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
      - parameter marketingType: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<SpecialtySearchResultViewModel> 
      */
-    open class func apiV1SearchSpecialtiesGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<SpecialtySearchResultViewModel> {
+    open class func apiV1SearchSpecialtiesGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<SpecialtySearchResultViewModel> {
         let path = "/api/v1/search/specialties"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -320,6 +334,7 @@ open class SearchAPI {
             "CountryId": countryId?.encodeToJSON(), 
             "HospitalId": hospitalId?.encodeToJSON(), 
             "MarketingType": marketingType?.encodeToJSON(), 
+            "LanguageCode": languageCode?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 
@@ -338,6 +353,7 @@ open class SearchAPI {
      - parameter countryId: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
      - parameter marketingType: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -346,9 +362,9 @@ open class SearchAPI {
      - returns: AnyPublisher<SpecialtyTypeSearchResultViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1SearchSpecialtytypesGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypeSearchResultViewModel, Error> {
+    open class func apiV1SearchSpecialtytypesGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypeSearchResultViewModel, Error> {
         return Future<SpecialtyTypeSearchResultViewModel, Error>.init { promise in
-            apiV1SearchSpecialtytypesGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1SearchSpecialtytypesGetWithRequestBuilder(searchTerm: searchTerm, countOnly: countOnly, countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -366,13 +382,14 @@ open class SearchAPI {
      - parameter countryId: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
      - parameter marketingType: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<SpecialtyTypeSearchResultViewModel> 
      */
-    open class func apiV1SearchSpecialtytypesGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<SpecialtyTypeSearchResultViewModel> {
+    open class func apiV1SearchSpecialtytypesGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<SpecialtyTypeSearchResultViewModel> {
         let path = "/api/v1/search/specialtytypes"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -384,6 +401,7 @@ open class SearchAPI {
             "CountryId": countryId?.encodeToJSON(), 
             "HospitalId": hospitalId?.encodeToJSON(), 
             "MarketingType": marketingType?.encodeToJSON(), 
+            "LanguageCode": languageCode?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 

@@ -126,13 +126,14 @@ open class ServicesAPI {
      - parameter hospitalId: (path)  
      - parameter specialtyId: (path)  
      - parameter serviceId: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ServiceViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceViewModel, Error> {
+    open class func apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceViewModel, Error> {
         return Future<ServiceViewModel, Error>.init { promise in
-            apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId).execute(apiResponseQueue) { result -> Void in
+            apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -150,9 +151,10 @@ open class ServicesAPI {
      - parameter hospitalId: (path)  
      - parameter specialtyId: (path)  
      - parameter serviceId: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - returns: RequestBuilder<ServiceViewModel> 
      */
-    open class func apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGetWithRequestBuilder(hospitalId: UUID, specialtyId: UUID, serviceId: UUID) -> RequestBuilder<ServiceViewModel> {
+    open class func apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGetWithRequestBuilder(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, languageCode: String? = nil) -> RequestBuilder<ServiceViewModel> {
         var path = "/api/v1/hospitals/{hospitalId}/specialties/{specialtyId}/services/{serviceId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -166,7 +168,10 @@ open class ServicesAPI {
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON()
+        ])
 
         let requestBuilder: RequestBuilder<ServiceViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
@@ -299,6 +304,7 @@ open class ServicesAPI {
      - parameter marketingType: (query)  (optional)
      - parameter procedure: (query)  (optional)
      - parameter created: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -307,9 +313,9 @@ open class ServicesAPI {
      - returns: AnyPublisher<ServicesViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1HospitalsServicesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServicesViewModel, Error> {
+    open class func apiV1HospitalsServicesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, created: Date? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServicesViewModel, Error> {
         return Future<ServicesViewModel, Error>.init { promise in
-            apiV1HospitalsServicesGetWithRequestBuilder(id: id, name: name, description: description, hospitalId: hospitalId, hospitalName: hospitalName, hospitalSlug: hospitalSlug, specialtyId: specialtyId, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, marketingType: marketingType, procedure: procedure, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1HospitalsServicesGetWithRequestBuilder(id: id, name: name, description: description, hospitalId: hospitalId, hospitalName: hospitalName, hospitalSlug: hospitalSlug, specialtyId: specialtyId, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, marketingType: marketingType, procedure: procedure, created: created, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -336,13 +342,14 @@ open class ServicesAPI {
      - parameter marketingType: (query)  (optional)
      - parameter procedure: (query)  (optional)
      - parameter created: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<ServicesViewModel> 
      */
-    open class func apiV1HospitalsServicesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, description: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<ServicesViewModel> {
+    open class func apiV1HospitalsServicesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, description: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, created: Date? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<ServicesViewModel> {
         let path = "/api/v1/hospitals/services"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -361,6 +368,7 @@ open class ServicesAPI {
             "MarketingType": marketingType?.encodeToJSON(), 
             "Procedure": procedure?.encodeToJSON(), 
             "Created": created?.encodeToJSON(), 
+            "LanguageCode": languageCode?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 
@@ -376,13 +384,14 @@ open class ServicesAPI {
      Get service by slug.
      
      - parameter slug: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ServiceViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1HospitalsServicesSlugsSlugGet(slug: String, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceViewModel, Error> {
+    open class func apiV1HospitalsServicesSlugsSlugGet(slug: String, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceViewModel, Error> {
         return Future<ServiceViewModel, Error>.init { promise in
-            apiV1HospitalsServicesSlugsSlugGetWithRequestBuilder(slug: slug).execute(apiResponseQueue) { result -> Void in
+            apiV1HospitalsServicesSlugsSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -397,9 +406,10 @@ open class ServicesAPI {
      Get service by slug.
      - GET /api/v1/hospitals/services/slugs/{slug}
      - parameter slug: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - returns: RequestBuilder<ServiceViewModel> 
      */
-    open class func apiV1HospitalsServicesSlugsSlugGetWithRequestBuilder(slug: String) -> RequestBuilder<ServiceViewModel> {
+    open class func apiV1HospitalsServicesSlugsSlugGetWithRequestBuilder(slug: String, languageCode: String? = nil) -> RequestBuilder<ServiceViewModel> {
         var path = "/api/v1/hospitals/services/slugs/{slug}"
         let slugPreEscape = "\(APIHelper.mapValueToPathItem(slug))"
         let slugPostEscape = slugPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -407,7 +417,10 @@ open class ServicesAPI {
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON()
+        ])
 
         let requestBuilder: RequestBuilder<ServiceViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 

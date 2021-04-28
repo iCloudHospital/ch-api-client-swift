@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 # **apiV1HospitalsCurrentGet**
 ```swift
-    open class func apiV1HospitalsCurrentGet(id: UUID? = nil, name: String? = nil, description: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, serviceId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: HospitalsViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsCurrentGet(id: UUID? = nil, name: String? = nil, description: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, serviceId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: HospitalsViewModel?, _ error: Error?) -> Void)
 ```
 
 
@@ -36,12 +36,13 @@ let specialtyId = 987 // UUID |  (optional)
 let serviceId = 987 // UUID |  (optional)
 let exceptHospitalId = 987 // UUID |  (optional)
 let showHidden = true // Bool |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
-HospitalsAPI.apiV1HospitalsCurrentGet(id: id, name: name, description: description, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, serviceId: serviceId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+HospitalsAPI.apiV1HospitalsCurrentGet(id: id, name: name, description: description, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, serviceId: serviceId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -68,6 +69,7 @@ Name | Type | Description  | Notes
  **serviceId** | [**UUID**](.md) |  | [optional] 
  **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
@@ -90,7 +92,7 @@ Name | Type | Description  | Notes
 
 # **apiV1HospitalsGet**
 ```swift
-    open class func apiV1HospitalsGet(id: UUID? = nil, name: String? = nil, description: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, serviceId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: HospitalsViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsGet(id: UUID? = nil, name: String? = nil, description: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, serviceId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: HospitalsViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all hospitals.
@@ -113,13 +115,14 @@ let specialtyId = 987 // UUID |  (optional)
 let serviceId = 987 // UUID |  (optional)
 let exceptHospitalId = 987 // UUID |  (optional)
 let showHidden = true // Bool |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all hospitals.
-HospitalsAPI.apiV1HospitalsGet(id: id, name: name, description: description, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, serviceId: serviceId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+HospitalsAPI.apiV1HospitalsGet(id: id, name: name, description: description, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, serviceId: serviceId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -146,6 +149,7 @@ Name | Type | Description  | Notes
  **serviceId** | [**UUID**](.md) |  | [optional] 
  **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
@@ -218,7 +222,7 @@ Name | Type | Description  | Notes
 
 # **apiV1HospitalsHospitalIdGet**
 ```swift
-    open class func apiV1HospitalsHospitalIdGet(hospitalId: UUID, completion: @escaping (_ data: HospitalViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsHospitalIdGet(hospitalId: UUID, languageCode: String? = nil, completion: @escaping (_ data: HospitalViewModel?, _ error: Error?) -> Void)
 ```
 
 Get hospita.
@@ -231,9 +235,10 @@ Sample request:        GET /api/v1/hospitals/1
 import CloudHospitalClient
 
 let hospitalId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional) (default to "")
 
 // Get hospita.
-HospitalsAPI.apiV1HospitalsHospitalIdGet(hospitalId: hospitalId) { (response, error) in
+HospitalsAPI.apiV1HospitalsHospitalIdGet(hospitalId: hospitalId, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -250,6 +255,7 @@ HospitalsAPI.apiV1HospitalsHospitalIdGet(hospitalId: hospitalId) { (response, er
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **hospitalId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
 
 ### Return type
 
@@ -370,7 +376,7 @@ Name | Type | Description  | Notes
 
 # **apiV1HospitalsSlugsSlugGet**
 ```swift
-    open class func apiV1HospitalsSlugsSlugGet(slug: String, completion: @escaping (_ data: HospitalViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsSlugsSlugGet(slug: String, languageCode: String? = nil, completion: @escaping (_ data: HospitalViewModel?, _ error: Error?) -> Void)
 ```
 
 Get hospital by slug.
@@ -381,9 +387,10 @@ Get hospital by slug.
 import CloudHospitalClient
 
 let slug = "slug_example" // String | 
+let languageCode = "languageCode_example" // String |  (optional) (default to "")
 
 // Get hospital by slug.
-HospitalsAPI.apiV1HospitalsSlugsSlugGet(slug: slug) { (response, error) in
+HospitalsAPI.apiV1HospitalsSlugsSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -400,6 +407,7 @@ HospitalsAPI.apiV1HospitalsSlugsSlugGet(slug: slug) { (response, error) in
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String** |  | 
+ **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
 
 ### Return type
 

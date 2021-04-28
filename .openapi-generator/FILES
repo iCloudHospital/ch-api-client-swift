@@ -38,6 +38,7 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/PatientsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ProfilesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/QuestionCommentsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/QuestionsAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/ReviewersAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/SearchAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ServiceCategoriesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ServicesAPI.swift
@@ -60,6 +61,8 @@ CloudHospitalClient/Classes/OpenAPIs/Models/ApproveBookingCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ApproveConsultationCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Article.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ArticleItemViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ArticleSource.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ArticleSourceItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ArticleStatus.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ArticleTag.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ArticleTagItemViewModel.swift
@@ -246,6 +249,10 @@ CloudHospitalClient/Classes/OpenAPIs/Models/RejectBookingCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/RejectConsultationCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/RejectReason.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ReviewCategory.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/Reviewer.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ReviewerItemViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ReviewerViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ReviewersViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SearchMetaData.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelMember.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelViewModel.swift
@@ -259,6 +266,9 @@ CloudHospitalClient/Classes/OpenAPIs/Models/ServiceItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceSearchViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServicesViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/SnsHandle.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/SnsHandleViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/SnsType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtiesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Specialty.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyItemViewModel.swift
@@ -333,6 +343,8 @@ docs/ApproveBookingCommand.md
 docs/ApproveConsultationCommand.md
 docs/Article.md
 docs/ArticleItemViewModel.md
+docs/ArticleSource.md
+docs/ArticleSourceItemViewModel.md
 docs/ArticleStatus.md
 docs/ArticleTag.md
 docs/ArticleTagItemViewModel.md
@@ -553,6 +565,11 @@ docs/RejectBookingCommand.md
 docs/RejectConsultationCommand.md
 docs/RejectReason.md
 docs/ReviewCategory.md
+docs/Reviewer.md
+docs/ReviewerItemViewModel.md
+docs/ReviewerViewModel.md
+docs/ReviewersAPI.md
+docs/ReviewersViewModel.md
 docs/SearchAPI.md
 docs/SearchMetaData.md
 docs/SendBirdGroupChannelMember.md
@@ -569,6 +586,9 @@ docs/ServiceSearchViewModel.md
 docs/ServiceViewModel.md
 docs/ServicesAPI.md
 docs/ServicesViewModel.md
+docs/SnsHandle.md
+docs/SnsHandleViewModel.md
+docs/SnsType.md
 docs/SpecialtiesAPI.md
 docs/SpecialtiesViewModel.md
 docs/Specialty.md

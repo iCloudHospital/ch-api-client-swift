@@ -123,7 +123,7 @@ Name | Type | Description  | Notes
 
 # **apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet**
 ```swift
-    open class func apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, completion: @escaping (_ data: ServiceViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, languageCode: String? = nil, completion: @escaping (_ data: ServiceViewModel?, _ error: Error?) -> Void)
 ```
 
 Get service.
@@ -138,9 +138,10 @@ import CloudHospitalClient
 let hospitalId = 987 // UUID | 
 let specialtyId = 987 // UUID | 
 let serviceId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional) (default to "")
 
 // Get service.
-ServicesAPI.apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId) { (response, error) in
+ServicesAPI.apiV1HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -159,6 +160,7 @@ Name | Type | Description  | Notes
  **hospitalId** | [**UUID**](.md) |  | 
  **specialtyId** | [**UUID**](.md) |  | 
  **serviceId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
 
 ### Return type
 
@@ -287,7 +289,7 @@ Name | Type | Description  | Notes
 
 # **apiV1HospitalsServicesGet**
 ```swift
-    open class func apiV1HospitalsServicesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: ServicesViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsServicesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, created: Date? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: ServicesViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all services.
@@ -311,13 +313,14 @@ let specialtyTypeName = "specialtyTypeName_example" // String |  (optional)
 let marketingType = MarketingType() // MarketingType |  (optional)
 let procedure = Procedure() // Procedure |  (optional)
 let created = Date() // Date |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all services.
-ServicesAPI.apiV1HospitalsServicesGet(id: id, name: name, description: description, hospitalId: hospitalId, hospitalName: hospitalName, hospitalSlug: hospitalSlug, specialtyId: specialtyId, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, marketingType: marketingType, procedure: procedure, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+ServicesAPI.apiV1HospitalsServicesGet(id: id, name: name, description: description, hospitalId: hospitalId, hospitalName: hospitalName, hospitalSlug: hospitalSlug, specialtyId: specialtyId, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, marketingType: marketingType, procedure: procedure, created: created, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -345,6 +348,7 @@ Name | Type | Description  | Notes
  **marketingType** | [**MarketingType**](.md) |  | [optional] 
  **procedure** | [**Procedure**](.md) |  | [optional] 
  **created** | **Date** |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
@@ -367,7 +371,7 @@ No authorization required
 
 # **apiV1HospitalsServicesSlugsSlugGet**
 ```swift
-    open class func apiV1HospitalsServicesSlugsSlugGet(slug: String, completion: @escaping (_ data: ServiceViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsServicesSlugsSlugGet(slug: String, languageCode: String? = nil, completion: @escaping (_ data: ServiceViewModel?, _ error: Error?) -> Void)
 ```
 
 Get service by slug.
@@ -378,9 +382,10 @@ Get service by slug.
 import CloudHospitalClient
 
 let slug = "slug_example" // String | 
+let languageCode = "languageCode_example" // String |  (optional) (default to "")
 
 // Get service by slug.
-ServicesAPI.apiV1HospitalsServicesSlugsSlugGet(slug: slug) { (response, error) in
+ServicesAPI.apiV1HospitalsServicesSlugsSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -397,6 +402,7 @@ ServicesAPI.apiV1HospitalsServicesSlugsSlugGet(slug: slug) { (response, error) i
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String** |  | 
+ **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
 
 ### Return type
 

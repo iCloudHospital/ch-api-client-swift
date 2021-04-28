@@ -186,6 +186,9 @@ Class | Method | HTTP request | Description
 *QuestionsAPI* | [**apiV1HospitalsHospitalIdQuestionsQuestionIdGet**](docs/QuestionsAPI.md#apiv1hospitalshospitalidquestionsquestionidget) | **GET** /api/v1/hospitals/{hospitalId}/questions/{questionId} | Get question.
 *QuestionsAPI* | [**apiV1HospitalsHospitalIdQuestionsQuestionIdPut**](docs/QuestionsAPI.md#apiv1hospitalshospitalidquestionsquestionidput) | **PUT** /api/v1/hospitals/{hospitalId}/questions/{questionId} | Update question.
 *QuestionsAPI* | [**apiV1HospitalsQuestionsGet**](docs/QuestionsAPI.md#apiv1hospitalsquestionsget) | **GET** /api/v1/hospitals/questions | Get all questions.
+*ReviewersAPI* | [**apiV1ReviewersGet**](docs/ReviewersAPI.md#apiv1reviewersget) | **GET** /api/v1/reviewers | Get all reviewers.
+*ReviewersAPI* | [**apiV1ReviewersReviewerIdGet**](docs/ReviewersAPI.md#apiv1reviewersrevieweridget) | **GET** /api/v1/reviewers/{reviewerId} | Get reviewer.
+*ReviewersAPI* | [**apiV1ReviewersSlugsSlugGet**](docs/ReviewersAPI.md#apiv1reviewersslugsslugget) | **GET** /api/v1/reviewers/slugs/{slug} | Get reviewer by slug.
 *SearchAPI* | [**apiV1SearchDealsGet**](docs/SearchAPI.md#apiv1searchdealsget) | **GET** /api/v1/search/deals | 
 *SearchAPI* | [**apiV1SearchDoctorsGet**](docs/SearchAPI.md#apiv1searchdoctorsget) | **GET** /api/v1/search/doctors | 
 *SearchAPI* | [**apiV1SearchGetcountGet**](docs/SearchAPI.md#apiv1searchgetcountget) | **GET** /api/v1/search/getcount | 
@@ -239,6 +242,8 @@ Class | Method | HTTP request | Description
  - [ApproveConsultationCommand](docs/ApproveConsultationCommand.md)
  - [Article](docs/Article.md)
  - [ArticleItemViewModel](docs/ArticleItemViewModel.md)
+ - [ArticleSource](docs/ArticleSource.md)
+ - [ArticleSourceItemViewModel](docs/ArticleSourceItemViewModel.md)
  - [ArticleStatus](docs/ArticleStatus.md)
  - [ArticleTag](docs/ArticleTag.md)
  - [ArticleTagItemViewModel](docs/ArticleTagItemViewModel.md)
@@ -425,6 +430,10 @@ Class | Method | HTTP request | Description
  - [RejectConsultationCommand](docs/RejectConsultationCommand.md)
  - [RejectReason](docs/RejectReason.md)
  - [ReviewCategory](docs/ReviewCategory.md)
+ - [Reviewer](docs/Reviewer.md)
+ - [ReviewerItemViewModel](docs/ReviewerItemViewModel.md)
+ - [ReviewerViewModel](docs/ReviewerViewModel.md)
+ - [ReviewersViewModel](docs/ReviewersViewModel.md)
  - [SearchMetaData](docs/SearchMetaData.md)
  - [SendBirdGroupChannelMember](docs/SendBirdGroupChannelMember.md)
  - [SendBirdGroupChannelViewModel](docs/SendBirdGroupChannelViewModel.md)
@@ -438,6 +447,9 @@ Class | Method | HTTP request | Description
  - [ServiceSearchViewModel](docs/ServiceSearchViewModel.md)
  - [ServiceViewModel](docs/ServiceViewModel.md)
  - [ServicesViewModel](docs/ServicesViewModel.md)
+ - [SnsHandle](docs/SnsHandle.md)
+ - [SnsHandleViewModel](docs/SnsHandleViewModel.md)
+ - [SnsType](docs/SnsType.md)
  - [SpecialtiesViewModel](docs/SpecialtiesViewModel.md)
  - [Specialty](docs/Specialty.md)
  - [SpecialtyItemViewModel](docs/SpecialtyItemViewModel.md)

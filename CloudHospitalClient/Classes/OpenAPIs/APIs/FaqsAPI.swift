@@ -15,13 +15,14 @@ open class FaqsAPI {
      Get faq.
      
      - parameter faqId: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<FaqViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1FaqsFaqIdGet(faqId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<FaqViewModel, Error> {
+    open class func apiV1FaqsFaqIdGet(faqId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<FaqViewModel, Error> {
         return Future<FaqViewModel, Error>.init { promise in
-            apiV1FaqsFaqIdGetWithRequestBuilder(faqId: faqId).execute(apiResponseQueue) { result -> Void in
+            apiV1FaqsFaqIdGetWithRequestBuilder(faqId: faqId, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -36,9 +37,10 @@ open class FaqsAPI {
      Get faq.
      - GET /api/v1/faqs/{faqId}
      - parameter faqId: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - returns: RequestBuilder<FaqViewModel> 
      */
-    open class func apiV1FaqsFaqIdGetWithRequestBuilder(faqId: UUID) -> RequestBuilder<FaqViewModel> {
+    open class func apiV1FaqsFaqIdGetWithRequestBuilder(faqId: UUID, languageCode: String? = nil) -> RequestBuilder<FaqViewModel> {
         var path = "/api/v1/faqs/{faqId}"
         let faqIdPreEscape = "\(APIHelper.mapValueToPathItem(faqId))"
         let faqIdPostEscape = faqIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -46,7 +48,10 @@ open class FaqsAPI {
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON()
+        ])
 
         let requestBuilder: RequestBuilder<FaqViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
@@ -60,6 +65,7 @@ open class FaqsAPI {
      - parameter title: (query)  (optional)
      - parameter content: (query)  (optional)
      - parameter categoryId: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -68,9 +74,9 @@ open class FaqsAPI {
      - returns: AnyPublisher<FaqsViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1FaqsGet(id: UUID? = nil, title: String? = nil, content: String? = nil, categoryId: UUID? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<FaqsViewModel, Error> {
+    open class func apiV1FaqsGet(id: UUID? = nil, title: String? = nil, content: String? = nil, categoryId: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<FaqsViewModel, Error> {
         return Future<FaqsViewModel, Error>.init { promise in
-            apiV1FaqsGetWithRequestBuilder(id: id, title: title, content: content, categoryId: categoryId, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1FaqsGetWithRequestBuilder(id: id, title: title, content: content, categoryId: categoryId, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -88,13 +94,14 @@ open class FaqsAPI {
      - parameter title: (query)  (optional)
      - parameter content: (query)  (optional)
      - parameter categoryId: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<FaqsViewModel> 
      */
-    open class func apiV1FaqsGetWithRequestBuilder(id: UUID? = nil, title: String? = nil, content: String? = nil, categoryId: UUID? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<FaqsViewModel> {
+    open class func apiV1FaqsGetWithRequestBuilder(id: UUID? = nil, title: String? = nil, content: String? = nil, categoryId: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<FaqsViewModel> {
         let path = "/api/v1/faqs"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -105,6 +112,7 @@ open class FaqsAPI {
             "Title": title?.encodeToJSON(), 
             "Content": content?.encodeToJSON(), 
             "CategoryId": categoryId?.encodeToJSON(), 
+            "LanguageCode": languageCode?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 
@@ -120,13 +128,14 @@ open class FaqsAPI {
      Get faq by slug.
      
      - parameter slug: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<FaqViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1FaqsSlugsSlugGet(slug: String, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<FaqViewModel, Error> {
+    open class func apiV1FaqsSlugsSlugGet(slug: String, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<FaqViewModel, Error> {
         return Future<FaqViewModel, Error>.init { promise in
-            apiV1FaqsSlugsSlugGetWithRequestBuilder(slug: slug).execute(apiResponseQueue) { result -> Void in
+            apiV1FaqsSlugsSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -141,9 +150,10 @@ open class FaqsAPI {
      Get faq by slug.
      - GET /api/v1/faqs/slugs/{slug}
      - parameter slug: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - returns: RequestBuilder<FaqViewModel> 
      */
-    open class func apiV1FaqsSlugsSlugGetWithRequestBuilder(slug: String) -> RequestBuilder<FaqViewModel> {
+    open class func apiV1FaqsSlugsSlugGetWithRequestBuilder(slug: String, languageCode: String? = nil) -> RequestBuilder<FaqViewModel> {
         var path = "/api/v1/faqs/slugs/{slug}"
         let slugPreEscape = "\(APIHelper.mapValueToPathItem(slug))"
         let slugPostEscape = slugPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -151,7 +161,10 @@ open class FaqsAPI {
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON()
+        ])
 
         let requestBuilder: RequestBuilder<FaqViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 

@@ -17,10 +17,16 @@ public struct UpdateArticleCommand: Codable {
     public var status: ArticleStatus?
     public var marketingType: MarketingType?
     public var hospitalSlug: String?
+    public var reviewerId: UUID?
+    public var reviewerName: String?
+    public var reviewerSlug: String?
+    public var reviewerPhoto: String?
+    public var youtubeUrl: String?
     public var articleTags: [ArticleTagItemViewModel]?
+    public var articleSources: [ArticleSourceItemViewModel]?
     public var medias: [MediaViewModel]?
 
-    public init(title: String? = nil, slug: String? = nil, description: String? = nil, body: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, hospitalSlug: String? = nil, articleTags: [ArticleTagItemViewModel]? = nil, medias: [MediaViewModel]? = nil) {
+    public init(title: String? = nil, slug: String? = nil, description: String? = nil, body: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, hospitalSlug: String? = nil, reviewerId: UUID? = nil, reviewerName: String? = nil, reviewerSlug: String? = nil, reviewerPhoto: String? = nil, youtubeUrl: String? = nil, articleTags: [ArticleTagItemViewModel]? = nil, articleSources: [ArticleSourceItemViewModel]? = nil, medias: [MediaViewModel]? = nil) {
         self.title = title
         self.slug = slug
         self.description = description
@@ -28,7 +34,13 @@ public struct UpdateArticleCommand: Codable {
         self.status = status
         self.marketingType = marketingType
         self.hospitalSlug = hospitalSlug
+        self.reviewerId = reviewerId
+        self.reviewerName = reviewerName
+        self.reviewerSlug = reviewerSlug
+        self.reviewerPhoto = reviewerPhoto
+        self.youtubeUrl = youtubeUrl
         self.articleTags = articleTags
+        self.articleSources = articleSources
         self.medias = medias
     }
 

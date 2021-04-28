@@ -1,70 +1,20 @@
-# FaqsAPI
+# ReviewersAPI
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV1FaqsFaqIdGet**](FaqsAPI.md#apiv1faqsfaqidget) | **GET** /api/v1/faqs/{faqId} | Get faq.
-[**apiV1FaqsGet**](FaqsAPI.md#apiv1faqsget) | **GET** /api/v1/faqs | Get all faq.
-[**apiV1FaqsSlugsSlugGet**](FaqsAPI.md#apiv1faqsslugsslugget) | **GET** /api/v1/faqs/slugs/{slug} | Get faq by slug.
+[**apiV1ReviewersGet**](ReviewersAPI.md#apiv1reviewersget) | **GET** /api/v1/reviewers | Get all reviewers.
+[**apiV1ReviewersReviewerIdGet**](ReviewersAPI.md#apiv1reviewersrevieweridget) | **GET** /api/v1/reviewers/{reviewerId} | Get reviewer.
+[**apiV1ReviewersSlugsSlugGet**](ReviewersAPI.md#apiv1reviewersslugsslugget) | **GET** /api/v1/reviewers/slugs/{slug} | Get reviewer by slug.
 
 
-# **apiV1FaqsFaqIdGet**
+# **apiV1ReviewersGet**
 ```swift
-    open class func apiV1FaqsFaqIdGet(faqId: UUID, languageCode: String? = nil, completion: @escaping (_ data: FaqViewModel?, _ error: Error?) -> Void)
+    open class func apiV1ReviewersGet(id: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: ReviewersViewModel?, _ error: Error?) -> Void)
 ```
 
-Get faq.
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-let faqId = 987 // UUID | 
-let languageCode = "languageCode_example" // String |  (optional) (default to "")
-
-// Get faq.
-FaqsAPI.apiV1FaqsFaqIdGet(faqId: faqId, languageCode: languageCode) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **faqId** | [**UUID**](.md) |  | 
- **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
-
-### Return type
-
-[**FaqViewModel**](FaqViewModel.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apiV1FaqsGet**
-```swift
-    open class func apiV1FaqsGet(id: UUID? = nil, title: String? = nil, content: String? = nil, categoryId: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: FaqsViewModel?, _ error: Error?) -> Void)
-```
-
-Get all faq.
+Get all reviewers.
 
 ### Example 
 ```swift
@@ -72,17 +22,14 @@ Get all faq.
 import CloudHospitalClient
 
 let id = 987 // UUID |  (optional)
-let title = "title_example" // String |  (optional)
-let content = "content_example" // String |  (optional)
-let categoryId = 987 // UUID |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
-// Get all faq.
-FaqsAPI.apiV1FaqsGet(id: id, title: title, content: content, categoryId: categoryId, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+// Get all reviewers.
+ReviewersAPI.apiV1ReviewersGet(id: id, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -99,9 +46,6 @@ FaqsAPI.apiV1FaqsGet(id: id, title: title, content: content, categoryId: categor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | [**UUID**](.md) |  | [optional] 
- **title** | **String** |  | [optional] 
- **content** | **String** |  | [optional] 
- **categoryId** | [**UUID**](.md) |  | [optional] 
  **languageCode** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -110,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FaqsViewModel**](FaqsViewModel.md)
+[**ReviewersViewModel**](ReviewersViewModel.md)
 
 ### Authorization
 
@@ -123,12 +67,62 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1FaqsSlugsSlugGet**
+# **apiV1ReviewersReviewerIdGet**
 ```swift
-    open class func apiV1FaqsSlugsSlugGet(slug: String, languageCode: String? = nil, completion: @escaping (_ data: FaqViewModel?, _ error: Error?) -> Void)
+    open class func apiV1ReviewersReviewerIdGet(reviewerId: UUID, languageCode: String? = nil, completion: @escaping (_ data: ReviewerViewModel?, _ error: Error?) -> Void)
 ```
 
-Get faq by slug.
+Get reviewer.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let reviewerId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional) (default to "")
+
+// Get reviewer.
+ReviewersAPI.apiV1ReviewersReviewerIdGet(reviewerId: reviewerId, languageCode: languageCode) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reviewerId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
+
+### Return type
+
+[**ReviewerViewModel**](ReviewerViewModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV1ReviewersSlugsSlugGet**
+```swift
+    open class func apiV1ReviewersSlugsSlugGet(slug: String, languageCode: String? = nil, completion: @escaping (_ data: ReviewerViewModel?, _ error: Error?) -> Void)
+```
+
+Get reviewer by slug.
 
 ### Example 
 ```swift
@@ -138,8 +132,8 @@ import CloudHospitalClient
 let slug = "slug_example" // String | 
 let languageCode = "languageCode_example" // String |  (optional) (default to "")
 
-// Get faq by slug.
-FaqsAPI.apiV1FaqsSlugsSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
+// Get reviewer by slug.
+ReviewersAPI.apiV1ReviewersSlugsSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -160,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**FaqViewModel**](FaqViewModel.md)
+[**ReviewerViewModel**](ReviewerViewModel.md)
 
 ### Authorization
 

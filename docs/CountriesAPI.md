@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 
 # **apiV1CountriesCountryIdGet**
 ```swift
-    open class func apiV1CountriesCountryIdGet(countryId: UUID, completion: @escaping (_ data: CountryViewModel?, _ error: Error?) -> Void)
+    open class func apiV1CountriesCountryIdGet(countryId: UUID, languageCode: String? = nil, completion: @escaping (_ data: CountryViewModel?, _ error: Error?) -> Void)
 ```
 
 Get country.
@@ -77,9 +77,10 @@ Sample request:        GET /api/v1/countries/1
 import CloudHospitalClient
 
 let countryId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional) (default to "")
 
 // Get country.
-CountriesAPI.apiV1CountriesCountryIdGet(countryId: countryId) { (response, error) in
+CountriesAPI.apiV1CountriesCountryIdGet(countryId: countryId, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -96,6 +97,7 @@ CountriesAPI.apiV1CountriesCountryIdGet(countryId: countryId) { (response, error
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **countryId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
 
 ### Return type
 
@@ -166,12 +168,12 @@ Name | Type | Description  | Notes
 
 # **apiV1CountriesGet**
 ```swift
-    open class func apiV1CountriesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, createdDate: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: CountriesViewModel?, _ error: Error?) -> Void)
+    open class func apiV1CountriesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, createdDate: Date? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: CountriesViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all countries.
 
-Sample request:        GET /api/v1/countries      {          \"countryPageQueryFilter\": {              \"page\": 1,              \"limit\": 20,              \"lastRetrived\": \"2020-02-05T08:40\"          }      }
+Sample request:        GET /api/v1/countries      {          \"countryPageQueryFilter\": {              \"page\": 1,              \"limit\": 20,              \"lastRetrived\": \"2020-02-05T08:40\",              \"languageCode\": \"en\"          }      }
 
 ### Example 
 ```swift
@@ -182,13 +184,14 @@ let id = 987 // UUID |  (optional)
 let name = "name_example" // String |  (optional)
 let description = "description_example" // String |  (optional)
 let createdDate = Date() // Date |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all countries.
-CountriesAPI.apiV1CountriesGet(id: id, name: name, description: description, createdDate: createdDate, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+CountriesAPI.apiV1CountriesGet(id: id, name: name, description: description, createdDate: createdDate, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -208,6 +211,7 @@ Name | Type | Description  | Notes
  **name** | **String** |  | [optional] 
  **description** | **String** |  | [optional] 
  **createdDate** | **Date** |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
@@ -280,7 +284,7 @@ Name | Type | Description  | Notes
 
 # **apiV1CountriesSlugsSlugGet**
 ```swift
-    open class func apiV1CountriesSlugsSlugGet(slug: String, completion: @escaping (_ data: CountryViewModel?, _ error: Error?) -> Void)
+    open class func apiV1CountriesSlugsSlugGet(slug: String, languageCode: String? = nil, completion: @escaping (_ data: CountryViewModel?, _ error: Error?) -> Void)
 ```
 
 Get country by slug.
@@ -291,9 +295,10 @@ Get country by slug.
 import CloudHospitalClient
 
 let slug = "slug_example" // String | 
+let languageCode = "languageCode_example" // String |  (optional) (default to "")
 
 // Get country by slug.
-CountriesAPI.apiV1CountriesSlugsSlugGet(slug: slug) { (response, error) in
+CountriesAPI.apiV1CountriesSlugsSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -310,6 +315,7 @@ CountriesAPI.apiV1CountriesSlugsSlugGet(slug: slug) { (response, error) in
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String** |  | 
+ **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
 
 ### Return type
 
