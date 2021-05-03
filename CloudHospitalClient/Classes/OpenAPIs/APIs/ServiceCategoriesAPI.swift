@@ -17,6 +17,7 @@ open class ServiceCategoriesAPI {
      - parameter id: (query)  (optional)
      - parameter name: (query)  (optional)
      - parameter description: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -25,9 +26,9 @@ open class ServiceCategoriesAPI {
      - returns: AnyPublisher<ServiceCategoriesViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ServicecategoriesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceCategoriesViewModel, Error> {
+    open class func apiV1ServicecategoriesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceCategoriesViewModel, Error> {
         return Future<ServiceCategoriesViewModel, Error>.init { promise in
-            apiV1ServicecategoriesGetWithRequestBuilder(id: id, name: name, description: description, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1ServicecategoriesGetWithRequestBuilder(id: id, name: name, description: description, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -45,13 +46,14 @@ open class ServiceCategoriesAPI {
      - parameter id: (query)  (optional)
      - parameter name: (query)  (optional)
      - parameter description: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<ServiceCategoriesViewModel> 
      */
-    open class func apiV1ServicecategoriesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, description: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<ServiceCategoriesViewModel> {
+    open class func apiV1ServicecategoriesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, description: String? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<ServiceCategoriesViewModel> {
         let path = "/api/v1/servicecategories"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -61,6 +63,7 @@ open class ServiceCategoriesAPI {
             "Id": id?.encodeToJSON(), 
             "Name": name?.encodeToJSON(), 
             "Description": description?.encodeToJSON(), 
+            "LanguageCode": languageCode?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 
@@ -165,13 +168,14 @@ open class ServiceCategoriesAPI {
      Get ServiceCategory.
      
      - parameter serviceCategoryId: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ServiceCategoryViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ServicecategoriesServiceCategoryIdGet(serviceCategoryId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceCategoryViewModel, Error> {
+    open class func apiV1ServicecategoriesServiceCategoryIdGet(serviceCategoryId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceCategoryViewModel, Error> {
         return Future<ServiceCategoryViewModel, Error>.init { promise in
-            apiV1ServicecategoriesServiceCategoryIdGetWithRequestBuilder(serviceCategoryId: serviceCategoryId).execute(apiResponseQueue) { result -> Void in
+            apiV1ServicecategoriesServiceCategoryIdGetWithRequestBuilder(serviceCategoryId: serviceCategoryId, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -187,9 +191,10 @@ open class ServiceCategoriesAPI {
      - GET /api/v1/servicecategories/{serviceCategoryId}
      - Sample request:        GET /api/v1/ServiceCategories/1
      - parameter serviceCategoryId: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
      - returns: RequestBuilder<ServiceCategoryViewModel> 
      */
-    open class func apiV1ServicecategoriesServiceCategoryIdGetWithRequestBuilder(serviceCategoryId: UUID) -> RequestBuilder<ServiceCategoryViewModel> {
+    open class func apiV1ServicecategoriesServiceCategoryIdGetWithRequestBuilder(serviceCategoryId: UUID, languageCode: String? = nil) -> RequestBuilder<ServiceCategoryViewModel> {
         var path = "/api/v1/servicecategories/{serviceCategoryId}"
         let serviceCategoryIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceCategoryId))"
         let serviceCategoryIdPostEscape = serviceCategoryIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
@@ -197,7 +202,10 @@ open class ServiceCategoriesAPI {
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
-        let url = URLComponents(string: URLString)
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON()
+        ])
 
         let requestBuilder: RequestBuilder<ServiceCategoryViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 

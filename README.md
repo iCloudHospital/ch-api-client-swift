@@ -155,6 +155,9 @@ Class | Method | HTTP request | Description
 *HospitalsAPI* | [**apiV1HospitalsSlugsSlugGet**](docs/HospitalsAPI.md#apiv1hospitalsslugsslugget) | **GET** /api/v1/hospitals/slugs/{slug} | Get hospital by slug.
 *IdentityAPI* | [**apiV1IdentityGet**](docs/IdentityAPI.md#apiv1identityget) | **GET** /api/v1/identity | Get current user&#39;s Identity claims.
 *ImagesAPI* | [**apiV1ImagesPost**](docs/ImagesAPI.md#apiv1imagespost) | **POST** /api/v1/images | 
+*LanguagesAPI* | [**apiV1LanguagesCodeGet**](docs/LanguagesAPI.md#apiv1languagescodeget) | **GET** /api/v1/languages/{code} | Get a language by code
+*LanguagesAPI* | [**apiV1LanguagesGet**](docs/LanguagesAPI.md#apiv1languagesget) | **GET** /api/v1/languages | Get all languages.
+*LanguagesAPI* | [**apiV1LanguagesIdGet**](docs/LanguagesAPI.md#apiv1languagesidget) | **GET** /api/v1/languages/{id} | Get a language by id
 *ManagersAPI* | [**apiV1ManagersGet**](docs/ManagersAPI.md#apiv1managersget) | **GET** /api/v1/managers | Get all hospital managers.
 *ManagersAPI* | [**apiV1ManagersManagerIdDelete**](docs/ManagersAPI.md#apiv1managersmanageriddelete) | **DELETE** /api/v1/managers/{managerId} | Delete hospital manager.
 *ManagersAPI* | [**apiV1ManagersManagerIdGet**](docs/ManagersAPI.md#apiv1managersmanageridget) | **GET** /api/v1/managers/{managerId} | Get hospital manager.
@@ -385,6 +388,9 @@ Class | Method | HTTP request | Description
  - [HospitalViewModel](docs/HospitalViewModel.md)
  - [HospitalsViewModel](docs/HospitalsViewModel.md)
  - [InviteSendBirdGroupChannelCommand](docs/InviteSendBirdGroupChannelCommand.md)
+ - [LanguageItemViewModel](docs/LanguageItemViewModel.md)
+ - [LanguageViewModel](docs/LanguageViewModel.md)
+ - [LanguagesViewModel](docs/LanguagesViewModel.md)
  - [Location](docs/Location.md)
  - [LocationViewModel](docs/LocationViewModel.md)
  - [Manager](docs/Manager.md)

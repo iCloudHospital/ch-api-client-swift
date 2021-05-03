@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 # **apiV1ServicecategoriesGet**
 ```swift
-    open class func apiV1ServicecategoriesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: ServiceCategoriesViewModel?, _ error: Error?) -> Void)
+    open class func apiV1ServicecategoriesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: ServiceCategoriesViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all ServiceCategories.
@@ -28,13 +28,14 @@ import CloudHospitalClient
 let id = 987 // UUID |  (optional)
 let name = "name_example" // String |  (optional)
 let description = "description_example" // String |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all ServiceCategories.
-ServiceCategoriesAPI.apiV1ServicecategoriesGet(id: id, name: name, description: description, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+ServiceCategoriesAPI.apiV1ServicecategoriesGet(id: id, name: name, description: description, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -53,6 +54,7 @@ Name | Type | Description  | Notes
  **id** | [**UUID**](.md) |  | [optional] 
  **name** | **String** |  | [optional] 
  **description** | **String** |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
@@ -175,7 +177,7 @@ Name | Type | Description  | Notes
 
 # **apiV1ServicecategoriesServiceCategoryIdGet**
 ```swift
-    open class func apiV1ServicecategoriesServiceCategoryIdGet(serviceCategoryId: UUID, completion: @escaping (_ data: ServiceCategoryViewModel?, _ error: Error?) -> Void)
+    open class func apiV1ServicecategoriesServiceCategoryIdGet(serviceCategoryId: UUID, languageCode: String? = nil, completion: @escaping (_ data: ServiceCategoryViewModel?, _ error: Error?) -> Void)
 ```
 
 Get ServiceCategory.
@@ -188,9 +190,10 @@ Sample request:        GET /api/v1/ServiceCategories/1
 import CloudHospitalClient
 
 let serviceCategoryId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional) (default to "")
 
 // Get ServiceCategory.
-ServiceCategoriesAPI.apiV1ServicecategoriesServiceCategoryIdGet(serviceCategoryId: serviceCategoryId) { (response, error) in
+ServiceCategoriesAPI.apiV1ServicecategoriesServiceCategoryIdGet(serviceCategoryId: serviceCategoryId, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -207,6 +210,7 @@ ServiceCategoriesAPI.apiV1ServicecategoriesServiceCategoryIdGet(serviceCategoryI
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **serviceCategoryId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
 
 ### Return type
 
