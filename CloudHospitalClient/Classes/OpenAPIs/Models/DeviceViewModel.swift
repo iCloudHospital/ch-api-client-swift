@@ -16,14 +16,16 @@ public struct DeviceViewModel: Codable {
     public var appAlert: Bool?
     public var eventAlert: Bool?
     public var noticeAlert: Bool?
+    public var tags: [String]?
 
-    public init(id: UUID? = nil, token: String? = nil, platform: Platform? = nil, appAlert: Bool? = nil, eventAlert: Bool? = nil, noticeAlert: Bool? = nil) {
+    public init(id: UUID? = nil, token: String? = nil, platform: Platform? = nil, appAlert: Bool? = nil, eventAlert: Bool? = nil, noticeAlert: Bool? = nil, tags: [String]? = nil) {
         self.id = id
         self.token = token
         self.platform = platform
         self.appAlert = appAlert
         self.eventAlert = eventAlert
         self.noticeAlert = noticeAlert
+        self.tags = tags
     }
 
 }

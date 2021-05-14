@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **UUID** |  | [optional] 
 **name** | **String** |  | [optional] 
+**logo** | **String** |  | [optional] 
 **slug** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
 **content** | **String** |  | [optional] 
