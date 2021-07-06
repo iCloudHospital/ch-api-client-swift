@@ -193,12 +193,14 @@ Class | Method | HTTP request | Description
 *QuestionsAPI* | [**apiV1HospitalsHospitalIdQuestionsQuestionIdGet**](docs/QuestionsAPI.md#apiv1hospitalshospitalidquestionsquestionidget) | **GET** /api/v1/hospitals/{hospitalId}/questions/{questionId} | Get question.
 *QuestionsAPI* | [**apiV1HospitalsHospitalIdQuestionsQuestionIdPut**](docs/QuestionsAPI.md#apiv1hospitalshospitalidquestionsquestionidput) | **PUT** /api/v1/hospitals/{hospitalId}/questions/{questionId} | Update question.
 *QuestionsAPI* | [**apiV1HospitalsQuestionsGet**](docs/QuestionsAPI.md#apiv1hospitalsquestionsget) | **GET** /api/v1/hospitals/questions | Get all questions.
+*SearchAPI* | [**apiV1SearchAutocompleteGet**](docs/SearchAPI.md#apiv1searchautocompleteget) | **GET** /api/v1/search/autocomplete | 
 *SearchAPI* | [**apiV1SearchDealsGet**](docs/SearchAPI.md#apiv1searchdealsget) | **GET** /api/v1/search/deals | 
 *SearchAPI* | [**apiV1SearchDoctorsGet**](docs/SearchAPI.md#apiv1searchdoctorsget) | **GET** /api/v1/search/doctors | 
 *SearchAPI* | [**apiV1SearchGetcountGet**](docs/SearchAPI.md#apiv1searchgetcountget) | **GET** /api/v1/search/getcount | 
 *SearchAPI* | [**apiV1SearchHospitalsGet**](docs/SearchAPI.md#apiv1searchhospitalsget) | **GET** /api/v1/search/hospitals | 
 *SearchAPI* | [**apiV1SearchSpecialtiesGet**](docs/SearchAPI.md#apiv1searchspecialtiesget) | **GET** /api/v1/search/specialties | 
 *SearchAPI* | [**apiV1SearchSpecialtytypesGet**](docs/SearchAPI.md#apiv1searchspecialtytypesget) | **GET** /api/v1/search/specialtytypes | 
+*SearchAPI* | [**apiV1SearchSuggestGet**](docs/SearchAPI.md#apiv1searchsuggestget) | **GET** /api/v1/search/suggest | 
 *ServiceCategoriesAPI* | [**apiV1ServicecategoriesGet**](docs/ServiceCategoriesAPI.md#apiv1servicecategoriesget) | **GET** /api/v1/servicecategories | Get all ServiceCategories.
 *ServiceCategoriesAPI* | [**apiV1ServicecategoriesPost**](docs/ServiceCategoriesAPI.md#apiv1servicecategoriespost) | **POST** /api/v1/servicecategories | Create ServiceCategory.
 *ServiceCategoriesAPI* | [**apiV1ServicecategoriesServiceCategoryIdDelete**](docs/ServiceCategoriesAPI.md#apiv1servicecategoriesservicecategoryiddelete) | **DELETE** /api/v1/servicecategories/{serviceCategoryId} | Delete ServiceCategory.
@@ -256,8 +258,11 @@ Class | Method | HTTP request | Description
  - [ArticleViewModel](docs/ArticleViewModel.md)
  - [ArticlesViewModel](docs/ArticlesViewModel.md)
  - [AuditableEntity](docs/AuditableEntity.md)
+ - [AutocompleteMode](docs/AutocompleteMode.md)
  - [Award](docs/Award.md)
  - [AwardViewModel](docs/AwardViewModel.md)
+ - [AzureSearchServiceAutocompleteModel](docs/AzureSearchServiceAutocompleteModel.md)
+ - [AzureSearchServiceSuggestModel](docs/AzureSearchServiceSuggestModel.md)
  - [AzureSearchViewModel](docs/AzureSearchViewModel.md)
  - [Booking](docs/Booking.md)
  - [BookingItemViewModel](docs/BookingItemViewModel.md)
@@ -325,12 +330,9 @@ Class | Method | HTTP request | Description
  - [DealItemViewModel](docs/DealItemViewModel.md)
  - [DealPackage](docs/DealPackage.md)
  - [DealPackageItemViewModel](docs/DealPackageItemViewModel.md)
- - [DealPackageSearchViewModel](docs/DealPackageSearchViewModel.md)
  - [DealPackageService](docs/DealPackageService.md)
  - [DealPackageServiceItemViewModel](docs/DealPackageServiceItemViewModel.md)
  - [DealPackageViewModel](docs/DealPackageViewModel.md)
- - [DealSearchResultViewModel](docs/DealSearchResultViewModel.md)
- - [DealSearchViewModel](docs/DealSearchViewModel.md)
  - [DealViewModel](docs/DealViewModel.md)
  - [DealsViewModel](docs/DealsViewModel.md)
  - [Department](docs/Department.md)
@@ -360,7 +362,6 @@ Class | Method | HTTP request | Description
  - [DoctorReviewItemViewModel](docs/DoctorReviewItemViewModel.md)
  - [DoctorReviewViewModel](docs/DoctorReviewViewModel.md)
  - [DoctorReviewsViewModel](docs/DoctorReviewsViewModel.md)
- - [DoctorSearchResultViewModel](docs/DoctorSearchResultViewModel.md)
  - [DoctorSpecialty](docs/DoctorSpecialty.md)
  - [DoctorSpecialtyItemViewModel](docs/DoctorSpecialtyItemViewModel.md)
  - [DoctorSpecialtyViewModel](docs/DoctorSpecialtyViewModel.md)
@@ -388,8 +389,6 @@ Class | Method | HTTP request | Description
  - [HospitalReviewItemViewModel](docs/HospitalReviewItemViewModel.md)
  - [HospitalReviewViewModel](docs/HospitalReviewViewModel.md)
  - [HospitalReviewsViewModel](docs/HospitalReviewsViewModel.md)
- - [HospitalSearchItemViewModel](docs/HospitalSearchItemViewModel.md)
- - [HospitalSearchResultViewModel](docs/HospitalSearchResultViewModel.md)
  - [HospitalSpecialtiesViewModel](docs/HospitalSpecialtiesViewModel.md)
  - [HospitalSpecialty](docs/HospitalSpecialty.md)
  - [HospitalSpecialtyItemViewModel](docs/HospitalSpecialtyItemViewModel.md)
@@ -409,7 +408,6 @@ Class | Method | HTTP request | Description
  - [ManagersViewModel](docs/ManagersViewModel.md)
  - [MarketingType](docs/MarketingType.md)
  - [Media](docs/Media.md)
- - [MediaSearchViewModel](docs/MediaSearchViewModel.md)
  - [MediaType](docs/MediaType.md)
  - [MediaViewModel](docs/MediaViewModel.md)
  - [Metadata](docs/Metadata.md)
@@ -445,7 +443,6 @@ Class | Method | HTTP request | Description
  - [RejectConsultationCommand](docs/RejectConsultationCommand.md)
  - [RejectReason](docs/RejectReason.md)
  - [ReviewCategory](docs/ReviewCategory.md)
- - [SearchMetaData](docs/SearchMetaData.md)
  - [SendBirdGroupChannelMember](docs/SendBirdGroupChannelMember.md)
  - [SendBirdGroupChannelViewModel](docs/SendBirdGroupChannelViewModel.md)
  - [SendBirdGroupChannelrOperator](docs/SendBirdGroupChannelrOperator.md)
@@ -455,7 +452,6 @@ Class | Method | HTTP request | Description
  - [ServiceCategoryItemViewModel](docs/ServiceCategoryItemViewModel.md)
  - [ServiceCategoryViewModel](docs/ServiceCategoryViewModel.md)
  - [ServiceItemViewModel](docs/ServiceItemViewModel.md)
- - [ServiceSearchViewModel](docs/ServiceSearchViewModel.md)
  - [ServiceViewModel](docs/ServiceViewModel.md)
  - [ServicesViewModel](docs/ServicesViewModel.md)
  - [SnsHandle](docs/SnsHandle.md)
@@ -464,15 +460,11 @@ Class | Method | HTTP request | Description
  - [SpecialtiesViewModel](docs/SpecialtiesViewModel.md)
  - [Specialty](docs/Specialty.md)
  - [SpecialtyItemViewModel](docs/SpecialtyItemViewModel.md)
- - [SpecialtySearchResultViewModel](docs/SpecialtySearchResultViewModel.md)
- - [SpecialtySearchViewModel](docs/SpecialtySearchViewModel.md)
  - [SpecialtyType](docs/SpecialtyType.md)
  - [SpecialtyTypeCategoriesViewModel](docs/SpecialtyTypeCategoriesViewModel.md)
  - [SpecialtyTypeCategoryItemViewModel](docs/SpecialtyTypeCategoryItemViewModel.md)
  - [SpecialtyTypeCategoryViewModel](docs/SpecialtyTypeCategoryViewModel.md)
  - [SpecialtyTypeItemViewModel](docs/SpecialtyTypeItemViewModel.md)
- - [SpecialtyTypeSearchResultViewModel](docs/SpecialtyTypeSearchResultViewModel.md)
- - [SpecialtyTypeSearchViewModel](docs/SpecialtyTypeSearchViewModel.md)
  - [SpecialtyTypeViewModel](docs/SpecialtyTypeViewModel.md)
  - [SpecialtyTypesViewModel](docs/SpecialtyTypesViewModel.md)
  - [SpecialtyViewModel](docs/SpecialtyViewModel.md)
