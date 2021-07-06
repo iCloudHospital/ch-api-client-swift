@@ -15,11 +15,10 @@ Name | Type | Description | Notes
 **user** | [**User**](User.md) |  | [optional] 
 **hospitalId** | **UUID** |  | [optional] 
 **hospital** | [**Hospital**](Hospital.md) |  | [optional] 
-**reviewerId** | **UUID** |  | [optional] 
-**reviewer** | [**Reviewer**](Reviewer.md) |  | [optional] 
 **youtubeUrl** | **String** |  | [optional] 
 **articleTags** | [ArticleTag] |  | [optional] 
 **articleSources** | [ArticleSource] |  | [optional] 
+**articleContributors** | [ArticleContributor] |  | [optional] 
 **medias** | [Media] |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
 

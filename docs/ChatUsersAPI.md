@@ -66,7 +66,7 @@ This endpoint does not need any parameter.
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createSendBirdCurrentUserCommand = CreateSendBirdCurrentUserCommand(nickname: "nickname_example") // CreateSendBirdCurrentUserCommand |  (optional)
+let createSendBirdCurrentUserCommand = CreateSendBirdCurrentUserCommand(nickname: "nickname_example", firstName: "firstName_example", lastName: "lastName_example") // CreateSendBirdCurrentUserCommand |  (optional)
 
 ChatUsersAPI.apiV1ChatusersCurrentPost(createSendBirdCurrentUserCommand: createSendBirdCurrentUserCommand) { (response, error) in
     guard error == nil else {

@@ -170,7 +170,7 @@ Name | Type | Description  | Notes
 
 # **apiV1HospitalsSpecialtiesGet**
 ```swift
-    open class func apiV1HospitalsSpecialtiesGet(hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, marketingType: MarketingType? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: HospitalSpecialtiesViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsSpecialtiesGet(hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, marketingType: MarketingType? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: HospitalSpecialtiesViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all hospitalSpecialties.
@@ -184,6 +184,7 @@ import CloudHospitalClient
 
 let hospitalId = 987 // UUID |  (optional)
 let hospitalName = "hospitalName_example" // String |  (optional)
+let hospitalSlug = "hospitalSlug_example" // String |  (optional)
 let specialtyId = 987 // UUID |  (optional)
 let specialtyName = "specialtyName_example" // String |  (optional)
 let specialtyTypeId = 987 // UUID |  (optional)
@@ -195,7 +196,7 @@ let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all hospitalSpecialties.
-HospitalSpecialtiesAPI.apiV1HospitalsSpecialtiesGet(hospitalId: hospitalId, hospitalName: hospitalName, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, marketingType: marketingType, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+HospitalSpecialtiesAPI.apiV1HospitalsSpecialtiesGet(hospitalId: hospitalId, hospitalName: hospitalName, hospitalSlug: hospitalSlug, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, marketingType: marketingType, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -213,6 +214,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **hospitalId** | [**UUID**](.md) |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
+ **hospitalSlug** | **String** |  | [optional] 
  **specialtyId** | [**UUID**](.md) |  | [optional] 
  **specialtyName** | **String** |  | [optional] 
  **specialtyTypeId** | [**UUID**](.md) |  | [optional] 

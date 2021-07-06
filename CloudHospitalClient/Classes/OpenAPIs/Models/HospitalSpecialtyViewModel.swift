@@ -12,6 +12,7 @@ public struct HospitalSpecialtyViewModel: Codable {
 
     public var hospitalId: UUID?
     public var hospitalName: String?
+    public var hospitalSlug: String?
     public var specialtyId: UUID?
     public var specialtyName: String?
     public var specialtyTypeId: UUID?
@@ -20,9 +21,10 @@ public struct HospitalSpecialtyViewModel: Codable {
     public var auditableEntity: AuditableEntity?
     public var marketingType: MarketingType?
 
-    public init(hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, order: Int? = nil, auditableEntity: AuditableEntity? = nil, marketingType: MarketingType? = nil) {
+    public init(hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, order: Int? = nil, auditableEntity: AuditableEntity? = nil, marketingType: MarketingType? = nil) {
         self.hospitalId = hospitalId
         self.hospitalName = hospitalName
+        self.hospitalSlug = hospitalSlug
         self.specialtyId = specialtyId
         self.specialtyName = specialtyName
         self.specialtyTypeId = specialtyTypeId

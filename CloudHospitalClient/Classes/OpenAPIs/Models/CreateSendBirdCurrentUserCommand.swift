@@ -11,9 +11,13 @@ import Foundation
 public struct CreateSendBirdCurrentUserCommand: Codable {
 
     public var nickname: String?
+    public var firstName: String?
+    public var lastName: String?
 
-    public init(nickname: String? = nil) {
+    public init(nickname: String? = nil, firstName: String? = nil, lastName: String? = nil) {
         self.nickname = nickname
+        self.firstName = firstName
+        self.lastName = lastName
     }
 
 }

@@ -26,7 +26,7 @@ open class ArticlesAPI {
      - parameter countryId: (query)  (optional)
      - parameter tag: (query)  (optional)
      - parameter exceptHospitalId: (query)  (optional)
-     - parameter reviewerId: (query)  (optional)
+     - parameter contributorId: (query)  (optional)
      - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
@@ -36,9 +36,9 @@ open class ArticlesAPI {
      - returns: AnyPublisher<ArticlesViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1HospitalsArticlesGet(id: UUID? = nil, title: String? = nil, description: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, userName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, countryId: UUID? = nil, tag: String? = nil, exceptHospitalId: UUID? = nil, reviewerId: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ArticlesViewModel, Error> {
+    open class func apiV1HospitalsArticlesGet(id: UUID? = nil, title: String? = nil, description: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, userName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, countryId: UUID? = nil, tag: String? = nil, exceptHospitalId: UUID? = nil, contributorId: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ArticlesViewModel, Error> {
         return Future<ArticlesViewModel, Error>.init { promise in
-            apiV1HospitalsArticlesGetWithRequestBuilder(id: id, title: title, description: description, status: status, marketingType: marketingType, userId: userId, userName: userName, hospitalId: hospitalId, hospitalName: hospitalName, countryId: countryId, tag: tag, exceptHospitalId: exceptHospitalId, reviewerId: reviewerId, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1HospitalsArticlesGetWithRequestBuilder(id: id, title: title, description: description, status: status, marketingType: marketingType, userId: userId, userName: userName, hospitalId: hospitalId, hospitalName: hospitalName, countryId: countryId, tag: tag, exceptHospitalId: exceptHospitalId, contributorId: contributorId, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -65,7 +65,7 @@ open class ArticlesAPI {
      - parameter countryId: (query)  (optional)
      - parameter tag: (query)  (optional)
      - parameter exceptHospitalId: (query)  (optional)
-     - parameter reviewerId: (query)  (optional)
+     - parameter contributorId: (query)  (optional)
      - parameter languageCode: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
@@ -73,7 +73,7 @@ open class ArticlesAPI {
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<ArticlesViewModel> 
      */
-    open class func apiV1HospitalsArticlesGetWithRequestBuilder(id: UUID? = nil, title: String? = nil, description: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, userName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, countryId: UUID? = nil, tag: String? = nil, exceptHospitalId: UUID? = nil, reviewerId: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<ArticlesViewModel> {
+    open class func apiV1HospitalsArticlesGetWithRequestBuilder(id: UUID? = nil, title: String? = nil, description: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, userName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, countryId: UUID? = nil, tag: String? = nil, exceptHospitalId: UUID? = nil, contributorId: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<ArticlesViewModel> {
         let path = "/api/v1/hospitals/articles"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -92,7 +92,7 @@ open class ArticlesAPI {
             "CountryId": countryId?.encodeToJSON(), 
             "Tag": tag?.encodeToJSON(), 
             "ExceptHospitalId": exceptHospitalId?.encodeToJSON(), 
-            "ReviewerId": reviewerId?.encodeToJSON(), 
+            "ContributorId": contributorId?.encodeToJSON(), 
             "LanguageCode": languageCode?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 

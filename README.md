@@ -74,6 +74,9 @@ Class | Method | HTTP request | Description
 *ConsultationsAPI* | [**apiV1ConsultationsConsultationIdRejectPost**](docs/ConsultationsAPI.md#apiv1consultationsconsultationidrejectpost) | **POST** /api/v1/consultations/{consultationId}/reject | Reject consultation.
 *ConsultationsAPI* | [**apiV1ConsultationsGet**](docs/ConsultationsAPI.md#apiv1consultationsget) | **GET** /api/v1/consultations | Get all consultations.
 *ConsultationsAPI* | [**apiV1ConsultationsRequestIdPost**](docs/ConsultationsAPI.md#apiv1consultationsrequestidpost) | **POST** /api/v1/consultations/{requestId} | Create consultation.
+*ContributorsAPI* | [**apiV1ContributorsContributorIdGet**](docs/ContributorsAPI.md#apiv1contributorscontributoridget) | **GET** /api/v1/contributors/{contributorId} | Get contributor.
+*ContributorsAPI* | [**apiV1ContributorsGet**](docs/ContributorsAPI.md#apiv1contributorsget) | **GET** /api/v1/contributors | Get all contributors.
+*ContributorsAPI* | [**apiV1ContributorsSlugsSlugGet**](docs/ContributorsAPI.md#apiv1contributorsslugsslugget) | **GET** /api/v1/contributors/slugs/{slug} | Get contributor by slug.
 *CountriesAPI* | [**apiV1CountriesCountryIdDelete**](docs/CountriesAPI.md#apiv1countriescountryiddelete) | **DELETE** /api/v1/countries/{countryId} | Delete country.
 *CountriesAPI* | [**apiV1CountriesCountryIdGet**](docs/CountriesAPI.md#apiv1countriescountryidget) | **GET** /api/v1/countries/{countryId} | Get country.
 *CountriesAPI* | [**apiV1CountriesCountryIdPut**](docs/CountriesAPI.md#apiv1countriescountryidput) | **PUT** /api/v1/countries/{countryId} | Update country.
@@ -126,6 +129,7 @@ Class | Method | HTTP request | Description
 *EquipmentsAPI* | [**apiV1HospitalsHospitalIdEquipmentsPost**](docs/EquipmentsAPI.md#apiv1hospitalshospitalidequipmentspost) | **POST** /api/v1/hospitals/{hospitalId}/equipments | Create an equipment and add to a hospital.
 *FaqCategoriesAPI* | [**apiV1FaqcategoriesFaqCategoryIdGet**](docs/FaqCategoriesAPI.md#apiv1faqcategoriesfaqcategoryidget) | **GET** /api/v1/faqcategories/{faqCategoryId} | Get faqCategory.
 *FaqCategoriesAPI* | [**apiV1FaqcategoriesGet**](docs/FaqCategoriesAPI.md#apiv1faqcategoriesget) | **GET** /api/v1/faqcategories | Get all faqCategory.
+*FaqCategoriesAPI* | [**apiV1FaqcategoriesSlugsSlugGet**](docs/FaqCategoriesAPI.md#apiv1faqcategoriesslugsslugget) | **GET** /api/v1/faqcategories/slugs/{slug} | Get faqCategory by slug.
 *FaqsAPI* | [**apiV1FaqsFaqIdGet**](docs/FaqsAPI.md#apiv1faqsfaqidget) | **GET** /api/v1/faqs/{faqId} | Get faq.
 *FaqsAPI* | [**apiV1FaqsGet**](docs/FaqsAPI.md#apiv1faqsget) | **GET** /api/v1/faqs | Get all faq.
 *FaqsAPI* | [**apiV1FaqsSlugsSlugGet**](docs/FaqsAPI.md#apiv1faqsslugsslugget) | **GET** /api/v1/faqs/slugs/{slug} | Get faq by slug.
@@ -189,9 +193,6 @@ Class | Method | HTTP request | Description
 *QuestionsAPI* | [**apiV1HospitalsHospitalIdQuestionsQuestionIdGet**](docs/QuestionsAPI.md#apiv1hospitalshospitalidquestionsquestionidget) | **GET** /api/v1/hospitals/{hospitalId}/questions/{questionId} | Get question.
 *QuestionsAPI* | [**apiV1HospitalsHospitalIdQuestionsQuestionIdPut**](docs/QuestionsAPI.md#apiv1hospitalshospitalidquestionsquestionidput) | **PUT** /api/v1/hospitals/{hospitalId}/questions/{questionId} | Update question.
 *QuestionsAPI* | [**apiV1HospitalsQuestionsGet**](docs/QuestionsAPI.md#apiv1hospitalsquestionsget) | **GET** /api/v1/hospitals/questions | Get all questions.
-*ReviewersAPI* | [**apiV1ReviewersGet**](docs/ReviewersAPI.md#apiv1reviewersget) | **GET** /api/v1/reviewers | Get all reviewers.
-*ReviewersAPI* | [**apiV1ReviewersReviewerIdGet**](docs/ReviewersAPI.md#apiv1reviewersrevieweridget) | **GET** /api/v1/reviewers/{reviewerId} | Get reviewer.
-*ReviewersAPI* | [**apiV1ReviewersSlugsSlugGet**](docs/ReviewersAPI.md#apiv1reviewersslugsslugget) | **GET** /api/v1/reviewers/slugs/{slug} | Get reviewer by slug.
 *SearchAPI* | [**apiV1SearchDealsGet**](docs/SearchAPI.md#apiv1searchdealsget) | **GET** /api/v1/search/deals | 
 *SearchAPI* | [**apiV1SearchDoctorsGet**](docs/SearchAPI.md#apiv1searchdoctorsget) | **GET** /api/v1/search/doctors | 
 *SearchAPI* | [**apiV1SearchGetcountGet**](docs/SearchAPI.md#apiv1searchgetcountget) | **GET** /api/v1/search/getcount | 
@@ -244,6 +245,8 @@ Class | Method | HTTP request | Description
  - [ApproveBookingCommand](docs/ApproveBookingCommand.md)
  - [ApproveConsultationCommand](docs/ApproveConsultationCommand.md)
  - [Article](docs/Article.md)
+ - [ArticleContributor](docs/ArticleContributor.md)
+ - [ArticleContributorItemViewModel](docs/ArticleContributorItemViewModel.md)
  - [ArticleItemViewModel](docs/ArticleItemViewModel.md)
  - [ArticleSource](docs/ArticleSource.md)
  - [ArticleSourceItemViewModel](docs/ArticleSourceItemViewModel.md)
@@ -279,6 +282,11 @@ Class | Method | HTTP request | Description
  - [ConsultationType](docs/ConsultationType.md)
  - [ConsultationViewModel](docs/ConsultationViewModel.md)
  - [ConsultationsViewModel](docs/ConsultationsViewModel.md)
+ - [ContributionType](docs/ContributionType.md)
+ - [Contributor](docs/Contributor.md)
+ - [ContributorItemViewModel](docs/ContributorItemViewModel.md)
+ - [ContributorViewModel](docs/ContributorViewModel.md)
+ - [ContributorsViewModel](docs/ContributorsViewModel.md)
  - [CountriesViewModel](docs/CountriesViewModel.md)
  - [Country](docs/Country.md)
  - [CountryItemViewModel](docs/CountryItemViewModel.md)
@@ -363,6 +371,7 @@ Class | Method | HTTP request | Description
  - [EquipmentViewModel](docs/EquipmentViewModel.md)
  - [EquipmentsViewModel](docs/EquipmentsViewModel.md)
  - [FaqCategoriesViewModel](docs/FaqCategoriesViewModel.md)
+ - [FaqCategoryBreadCrumbViewModel](docs/FaqCategoryBreadCrumbViewModel.md)
  - [FaqCategoryItemViewModel](docs/FaqCategoryItemViewModel.md)
  - [FaqCategoryViewModel](docs/FaqCategoryViewModel.md)
  - [FaqItemViewModel](docs/FaqItemViewModel.md)
@@ -436,10 +445,6 @@ Class | Method | HTTP request | Description
  - [RejectConsultationCommand](docs/RejectConsultationCommand.md)
  - [RejectReason](docs/RejectReason.md)
  - [ReviewCategory](docs/ReviewCategory.md)
- - [Reviewer](docs/Reviewer.md)
- - [ReviewerItemViewModel](docs/ReviewerItemViewModel.md)
- - [ReviewerViewModel](docs/ReviewerViewModel.md)
- - [ReviewersViewModel](docs/ReviewersViewModel.md)
  - [SearchMetaData](docs/SearchMetaData.md)
  - [SendBirdGroupChannelMember](docs/SendBirdGroupChannelMember.md)
  - [SendBirdGroupChannelViewModel](docs/SendBirdGroupChannelViewModel.md)

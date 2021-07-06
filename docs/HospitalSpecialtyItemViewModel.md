@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **hospitalId** | **UUID** |  | [optional] 
 **hospitalName** | **String** |  | [optional] 
+**hospitalSlug** | **String** |  | [optional] 
 **specialtyId** | **UUID** |  | [optional] 
 **specialtyName** | **String** |  | [optional] 
 **specialtyTypeId** | **UUID** |  | [optional] 

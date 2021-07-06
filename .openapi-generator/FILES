@@ -12,6 +12,7 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/CacheAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ChatUsersAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CommunicationsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ConsultationsAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/ContributorsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CountriesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DealPackagesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DealsAPI.swift
@@ -39,7 +40,6 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/PatientsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ProfilesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/QuestionCommentsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/QuestionsAPI.swift
-CloudHospitalClient/Classes/OpenAPIs/APIs/ReviewersAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/SearchAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ServiceCategoriesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ServicesAPI.swift
@@ -61,6 +61,8 @@ CloudHospitalClient/Classes/OpenAPIs/Models/AdminMessageViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ApproveBookingCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ApproveConsultationCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Article.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ArticleContributor.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ArticleContributorItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ArticleItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ArticleSource.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ArticleSourceItemViewModel.swift
@@ -96,6 +98,11 @@ CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationStatus.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationsViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ContributionType.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/Contributor.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ContributorItemViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ContributorViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ContributorsViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CountriesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Country.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CountryItemViewModel.swift
@@ -180,6 +187,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/EquipmentItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/EquipmentViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/EquipmentsViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoriesViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoryBreadCrumbViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoryItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoryViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqItemViewModel.swift
@@ -253,10 +261,6 @@ CloudHospitalClient/Classes/OpenAPIs/Models/RejectBookingCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/RejectConsultationCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/RejectReason.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ReviewCategory.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/Reviewer.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/ReviewerItemViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/ReviewerViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/ReviewersViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SearchMetaData.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelMember.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelViewModel.swift
@@ -346,6 +350,8 @@ docs/AffiliationsAPI.md
 docs/ApproveBookingCommand.md
 docs/ApproveConsultationCommand.md
 docs/Article.md
+docs/ArticleContributor.md
+docs/ArticleContributorItemViewModel.md
 docs/ArticleItemViewModel.md
 docs/ArticleSource.md
 docs/ArticleSourceItemViewModel.md
@@ -389,6 +395,12 @@ docs/ConsultationType.md
 docs/ConsultationViewModel.md
 docs/ConsultationsAPI.md
 docs/ConsultationsViewModel.md
+docs/ContributionType.md
+docs/Contributor.md
+docs/ContributorItemViewModel.md
+docs/ContributorViewModel.md
+docs/ContributorsAPI.md
+docs/ContributorsViewModel.md
 docs/CountriesAPI.md
 docs/CountriesViewModel.md
 docs/Country.md
@@ -484,6 +496,7 @@ docs/EquipmentsAPI.md
 docs/EquipmentsViewModel.md
 docs/FaqCategoriesAPI.md
 docs/FaqCategoriesViewModel.md
+docs/FaqCategoryBreadCrumbViewModel.md
 docs/FaqCategoryItemViewModel.md
 docs/FaqCategoryViewModel.md
 docs/FaqItemViewModel.md
@@ -573,11 +586,6 @@ docs/RejectBookingCommand.md
 docs/RejectConsultationCommand.md
 docs/RejectReason.md
 docs/ReviewCategory.md
-docs/Reviewer.md
-docs/ReviewerItemViewModel.md
-docs/ReviewerViewModel.md
-docs/ReviewersAPI.md
-docs/ReviewersViewModel.md
 docs/SearchAPI.md
 docs/SearchMetaData.md
 docs/SendBirdGroupChannelMember.md

@@ -16,14 +16,16 @@ public struct FaqViewModel: Codable {
     public var content: String?
     public var medias: [MediaViewModel]?
     public var auditableEntity: AuditableEntity?
+    public var categories: [FaqCategoryBreadCrumbViewModel]?
 
-    public init(id: UUID? = nil, title: String? = nil, slug: String? = nil, content: String? = nil, medias: [MediaViewModel]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, title: String? = nil, slug: String? = nil, content: String? = nil, medias: [MediaViewModel]? = nil, auditableEntity: AuditableEntity? = nil, categories: [FaqCategoryBreadCrumbViewModel]? = nil) {
         self.id = id
         self.title = title
         self.slug = slug
         self.content = content
         self.medias = medias
         self.auditableEntity = auditableEntity
+        self.categories = categories
     }
 
 }

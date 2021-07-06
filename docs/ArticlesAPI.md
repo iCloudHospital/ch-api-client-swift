@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 # **apiV1HospitalsArticlesGet**
 ```swift
-    open class func apiV1HospitalsArticlesGet(id: UUID? = nil, title: String? = nil, description: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, userName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, countryId: UUID? = nil, tag: String? = nil, exceptHospitalId: UUID? = nil, reviewerId: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: ArticlesViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsArticlesGet(id: UUID? = nil, title: String? = nil, description: String? = nil, status: ArticleStatus? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, userName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, countryId: UUID? = nil, tag: String? = nil, exceptHospitalId: UUID? = nil, contributorId: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: ArticlesViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all articles.
@@ -38,7 +38,7 @@ let hospitalName = "hospitalName_example" // String |  (optional)
 let countryId = 987 // UUID |  (optional)
 let tag = "tag_example" // String |  (optional)
 let exceptHospitalId = 987 // UUID |  (optional)
-let reviewerId = 987 // UUID |  (optional)
+let contributorId = 987 // UUID |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
@@ -46,7 +46,7 @@ let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all articles.
-ArticlesAPI.apiV1HospitalsArticlesGet(id: id, title: title, description: description, status: status, marketingType: marketingType, userId: userId, userName: userName, hospitalId: hospitalId, hospitalName: hospitalName, countryId: countryId, tag: tag, exceptHospitalId: exceptHospitalId, reviewerId: reviewerId, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+ArticlesAPI.apiV1HospitalsArticlesGet(id: id, title: title, description: description, status: status, marketingType: marketingType, userId: userId, userName: userName, hospitalId: hospitalId, hospitalName: hospitalName, countryId: countryId, tag: tag, exceptHospitalId: exceptHospitalId, contributorId: contributorId, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
  **countryId** | [**UUID**](.md) |  | [optional] 
  **tag** | **String** |  | [optional] 
  **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
- **reviewerId** | [**UUID**](.md) |  | [optional] 
+ **contributorId** | [**UUID**](.md) |  | [optional] 
  **languageCode** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -268,7 +268,7 @@ import CloudHospitalClient
 
 let hospitalId = 987 // UUID | 
 let articleId = 987 // UUID | 
-let updateArticleCommand = UpdateArticleCommand(title: "title_example", slug: "slug_example", description: "description_example", body: "body_example", status: ArticleStatus(), marketingType: ArticleStatus(), hospitalSlug: "hospitalSlug_example", reviewerId: 123, reviewerName: "reviewerName_example", reviewerSlug: "reviewerSlug_example", reviewerPhoto: "reviewerPhoto_example", youtubeUrl: "youtubeUrl_example", articleTags: [{...}], articleSources: [{...}], medias: [{...}]) // UpdateArticleCommand |  (optional)
+let updateArticleCommand = UpdateArticleCommand(title: "title_example", slug: "slug_example", description: "description_example", body: "body_example", status: ArticleStatus(), marketingType: ArticleStatus(), hospitalSlug: "hospitalSlug_example", youtubeUrl: "youtubeUrl_example", articleTags: [{...}], articleSources: [{...}], articleContributors: [{...}], medias: [{...}]) // UpdateArticleCommand |  (optional)
 
 // Update article.
 ArticlesAPI.apiV1HospitalsHospitalIdArticlesArticleIdPut(hospitalId: hospitalId, articleId: articleId, updateArticleCommand: updateArticleCommand) { (response, error) in

@@ -1,15 +1,16 @@
-# FaqViewModel
+# ContributorViewModel
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **UUID** |  | [optional] 
-**title** | **String** |  | [optional] 
+**name** | **String** |  | [optional] 
 **slug** | **String** |  | [optional] 
-**content** | **String** |  | [optional] 
-**medias** | [MediaViewModel] |  | [optional] 
-**auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
-**categories** | [FaqCategoryBreadCrumbViewModel] |  | [optional] 
+**email** | **String** |  | [optional] 
+**photo** | **String** |  | [optional] 
+**description** | **String** |  | [optional] 
+**website** | **String** |  | [optional] 
+**snsHandles** | [SnsHandleViewModel] |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

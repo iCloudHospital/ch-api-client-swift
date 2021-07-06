@@ -171,6 +171,7 @@ open class HospitalSpecialtiesAPI {
      
      - parameter hospitalId: (query)  (optional)
      - parameter hospitalName: (query)  (optional)
+     - parameter hospitalSlug: (query)  (optional)
      - parameter specialtyId: (query)  (optional)
      - parameter specialtyName: (query)  (optional)
      - parameter specialtyTypeId: (query)  (optional)
@@ -184,9 +185,9 @@ open class HospitalSpecialtiesAPI {
      - returns: AnyPublisher<HospitalSpecialtiesViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1HospitalsSpecialtiesGet(hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, marketingType: MarketingType? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalSpecialtiesViewModel, Error> {
+    open class func apiV1HospitalsSpecialtiesGet(hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, marketingType: MarketingType? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalSpecialtiesViewModel, Error> {
         return Future<HospitalSpecialtiesViewModel, Error>.init { promise in
-            apiV1HospitalsSpecialtiesGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, marketingType: marketingType, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1HospitalsSpecialtiesGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, hospitalSlug: hospitalSlug, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, marketingType: marketingType, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -203,6 +204,7 @@ open class HospitalSpecialtiesAPI {
      - Sample request:        GET /api/v1/hospitals/specialties
      - parameter hospitalId: (query)  (optional)
      - parameter hospitalName: (query)  (optional)
+     - parameter hospitalSlug: (query)  (optional)
      - parameter specialtyId: (query)  (optional)
      - parameter specialtyName: (query)  (optional)
      - parameter specialtyTypeId: (query)  (optional)
@@ -214,7 +216,7 @@ open class HospitalSpecialtiesAPI {
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<HospitalSpecialtiesViewModel> 
      */
-    open class func apiV1HospitalsSpecialtiesGetWithRequestBuilder(hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, marketingType: MarketingType? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<HospitalSpecialtiesViewModel> {
+    open class func apiV1HospitalsSpecialtiesGetWithRequestBuilder(hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, marketingType: MarketingType? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<HospitalSpecialtiesViewModel> {
         let path = "/api/v1/hospitals/specialties"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -223,6 +225,7 @@ open class HospitalSpecialtiesAPI {
         url?.queryItems = APIHelper.mapValuesToQueryItems([
             "HospitalId": hospitalId?.encodeToJSON(), 
             "HospitalName": hospitalName?.encodeToJSON(), 
+            "HospitalSlug": hospitalSlug?.encodeToJSON(), 
             "SpecialtyId": specialtyId?.encodeToJSON(), 
             "SpecialtyName": specialtyName?.encodeToJSON(), 
             "SpecialtyTypeId": specialtyTypeId?.encodeToJSON(), 

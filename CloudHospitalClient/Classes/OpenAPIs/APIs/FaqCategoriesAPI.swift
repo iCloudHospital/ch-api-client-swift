@@ -124,4 +124,51 @@ open class FaqCategoriesAPI {
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
+    /**
+     Get faqCategory by slug.
+     
+     - parameter slug: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<FaqCategoryViewModel, Error>
+     */
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1FaqcategoriesSlugsSlugGet(slug: String, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<FaqCategoryViewModel, Error> {
+        return Future<FaqCategoryViewModel, Error>.init { promise in
+            apiV1FaqcategoriesSlugsSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    /**
+     Get faqCategory by slug.
+     - GET /api/v1/faqcategories/slugs/{slug}
+     - parameter slug: (path)  
+     - parameter languageCode: (query)  (optional, default to "")
+     - returns: RequestBuilder<FaqCategoryViewModel> 
+     */
+    open class func apiV1FaqcategoriesSlugsSlugGetWithRequestBuilder(slug: String, languageCode: String? = nil) -> RequestBuilder<FaqCategoryViewModel> {
+        var path = "/api/v1/faqcategories/slugs/{slug}"
+        let slugPreEscape = "\(APIHelper.mapValueToPathItem(slug))"
+        let slugPostEscape = slugPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        path = path.replacingOccurrences(of: "{slug}", with: slugPostEscape, options: .literal, range: nil)
+        let URLString = CloudHospitalClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<FaqCategoryViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
 }

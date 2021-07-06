@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **id** | **UUID** |  | [optional] 
 **parentId** | **UUID** |  | [optional] 
 **name** | **String** |  | [optional] 
+**slug** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
 **order** | **Int** |  | [optional] 
 **faqs** | [FaqItemViewModel] |  | [optional] 
