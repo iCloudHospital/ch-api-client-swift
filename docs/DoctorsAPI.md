@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 # **apiV1DoctorsGet**
 ```swift
-    open class func apiV1DoctorsGet(countryId: UUID? = nil, hospitalId: UUID? = nil, marketingType: MarketingType? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, consultationEnabled: Bool? = nil, exceptDoctorId: UUID? = nil, exceptDoctorIds: [UUID]? = nil, languageCode: String? = nil, id: UUID? = nil, fullname: String? = nil, email: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: DoctorsViewModel?, _ error: Error?) -> Void)
+    open class func apiV1DoctorsGet(countryId: UUID? = nil, hospitalId: UUID? = nil, marketingType: MarketingType? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, consultationEnabled: Bool? = nil, exceptDoctorId: UUID? = nil, exceptDoctorIds: [UUID]? = nil, languageCode: String? = nil, ids: [UUID]? = nil, id: UUID? = nil, fullname: String? = nil, email: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: DoctorsViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all hospital doctors.
@@ -187,6 +187,7 @@ let consultationEnabled = true // Bool |  (optional)
 let exceptDoctorId = 987 // UUID |  (optional)
 let exceptDoctorIds = [123] // [UUID] |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
+let ids = [123] // [UUID] |  (optional)
 let id = 987 // UUID |  (optional)
 let fullname = "fullname_example" // String |  (optional)
 let email = "email_example" // String |  (optional)
@@ -199,7 +200,7 @@ let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all hospital doctors.
-DoctorsAPI.apiV1DoctorsGet(countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, specialtyId: specialtyId, specialtyTypeId: specialtyTypeId, consultationEnabled: consultationEnabled, exceptDoctorId: exceptDoctorId, exceptDoctorIds: exceptDoctorIds, languageCode: languageCode, id: id, fullname: fullname, email: email, gender: gender, dateOfBirth: dateOfBirth, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+DoctorsAPI.apiV1DoctorsGet(countryId: countryId, hospitalId: hospitalId, marketingType: marketingType, specialtyId: specialtyId, specialtyTypeId: specialtyTypeId, consultationEnabled: consultationEnabled, exceptDoctorId: exceptDoctorId, exceptDoctorIds: exceptDoctorIds, languageCode: languageCode, ids: ids, id: id, fullname: fullname, email: email, gender: gender, dateOfBirth: dateOfBirth, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -224,6 +225,7 @@ Name | Type | Description  | Notes
  **exceptDoctorId** | [**UUID**](.md) |  | [optional] 
  **exceptDoctorIds** | [**[UUID]**](UUID.md) |  | [optional] 
  **languageCode** | **String** |  | [optional] 
+ **ids** | [**[UUID]**](UUID.md) |  | [optional] 
  **id** | [**UUID**](.md) |  | [optional] 
  **fullname** | **String** |  | [optional] 
  **email** | **String** |  | [optional] 

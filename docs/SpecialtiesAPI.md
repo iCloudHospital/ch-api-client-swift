@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 # **apiV1SpecialtiesGet**
 ```swift
-    open class func apiV1SpecialtiesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, specialtyTypeId: UUID? = nil, created: Date? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: SpecialtiesViewModel?, _ error: Error?) -> Void)
+    open class func apiV1SpecialtiesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, specialtyTypeId: UUID? = nil, created: Date? = nil, languageCode: String? = nil, ids: [UUID]? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: SpecialtiesViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all specialties.
@@ -32,13 +32,14 @@ let description = "description_example" // String |  (optional)
 let specialtyTypeId = 987 // UUID |  (optional)
 let created = Date() // Date |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
+let ids = [123] // [UUID] |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all specialties.
-SpecialtiesAPI.apiV1SpecialtiesGet(id: id, name: name, description: description, specialtyTypeId: specialtyTypeId, created: created, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+SpecialtiesAPI.apiV1SpecialtiesGet(id: id, name: name, description: description, specialtyTypeId: specialtyTypeId, created: created, languageCode: languageCode, ids: ids, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -60,6 +61,7 @@ Name | Type | Description  | Notes
  **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
  **created** | **Date** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
+ **ids** | [**[UUID]**](UUID.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 

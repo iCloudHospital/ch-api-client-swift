@@ -72,8 +72,11 @@ CloudHospitalClient/Classes/OpenAPIs/Models/ArticleTagItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ArticleViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ArticlesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/AuditableEntity.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/AutocompleteMode.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Award.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/AwardViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/AzureSearchServiceAutocompleteModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/AzureSearchServiceSuggestModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/AzureSearchViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Booking.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/BookingItemViewModel.swift
@@ -141,12 +144,9 @@ CloudHospitalClient/Classes/OpenAPIs/Models/Deal.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealPackage.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealPackageItemViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/DealPackageSearchViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealPackageService.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealPackageServiceItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealPackageViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/DealSearchResultViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/DealSearchViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealsViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Department.swift
@@ -176,7 +176,6 @@ CloudHospitalClient/Classes/OpenAPIs/Models/DoctorReview.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorReviewItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorReviewViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorReviewsViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/DoctorSearchResultViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorSpecialty.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorSpecialtyItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorSpecialtyViewModel.swift
@@ -204,8 +203,6 @@ CloudHospitalClient/Classes/OpenAPIs/Models/HospitalReview.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalReviewItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalReviewViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalReviewsViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/HospitalSearchItemViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/HospitalSearchResultViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalSpecialtiesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalSpecialty.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalSpecialtyItemViewModel.swift
@@ -225,7 +222,6 @@ CloudHospitalClient/Classes/OpenAPIs/Models/ManagerViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ManagersViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/MarketingType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Media.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/MediaSearchViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/MediaType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/MediaViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Metadata.swift
@@ -261,7 +257,6 @@ CloudHospitalClient/Classes/OpenAPIs/Models/RejectBookingCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/RejectConsultationCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/RejectReason.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ReviewCategory.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/SearchMetaData.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelMember.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelrOperator.swift
@@ -271,7 +266,6 @@ CloudHospitalClient/Classes/OpenAPIs/Models/ServiceCategoriesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceCategoryItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceCategoryViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceItemViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/ServiceSearchViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServicesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SnsHandle.swift
@@ -280,15 +274,11 @@ CloudHospitalClient/Classes/OpenAPIs/Models/SnsType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtiesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Specialty.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyItemViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtySearchResultViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtySearchViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyTypeCategoriesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyTypeCategoryItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyTypeCategoryViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyTypeItemViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyTypeSearchResultViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyTypeSearchViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyTypeViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyTypesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyViewModel.swift
@@ -362,8 +352,11 @@ docs/ArticleViewModel.md
 docs/ArticlesAPI.md
 docs/ArticlesViewModel.md
 docs/AuditableEntity.md
+docs/AutocompleteMode.md
 docs/Award.md
 docs/AwardViewModel.md
+docs/AzureSearchServiceAutocompleteModel.md
+docs/AzureSearchServiceSuggestModel.md
 docs/AzureSearchViewModel.md
 docs/Booking.md
 docs/BookingItemViewModel.md
@@ -440,13 +433,10 @@ docs/Deal.md
 docs/DealItemViewModel.md
 docs/DealPackage.md
 docs/DealPackageItemViewModel.md
-docs/DealPackageSearchViewModel.md
 docs/DealPackageService.md
 docs/DealPackageServiceItemViewModel.md
 docs/DealPackageViewModel.md
 docs/DealPackagesAPI.md
-docs/DealSearchResultViewModel.md
-docs/DealSearchViewModel.md
 docs/DealViewModel.md
 docs/DealsAPI.md
 docs/DealsViewModel.md
@@ -481,7 +471,6 @@ docs/DoctorReviewItemViewModel.md
 docs/DoctorReviewViewModel.md
 docs/DoctorReviewsAPI.md
 docs/DoctorReviewsViewModel.md
-docs/DoctorSearchResultViewModel.md
 docs/DoctorSpecialtiesAPI.md
 docs/DoctorSpecialty.md
 docs/DoctorSpecialtyItemViewModel.md
@@ -516,8 +505,6 @@ docs/HospitalReviewItemViewModel.md
 docs/HospitalReviewViewModel.md
 docs/HospitalReviewsAPI.md
 docs/HospitalReviewsViewModel.md
-docs/HospitalSearchItemViewModel.md
-docs/HospitalSearchResultViewModel.md
 docs/HospitalSpecialtiesAPI.md
 docs/HospitalSpecialtiesViewModel.md
 docs/HospitalSpecialty.md
@@ -543,7 +530,6 @@ docs/ManagersAPI.md
 docs/ManagersViewModel.md
 docs/MarketingType.md
 docs/Media.md
-docs/MediaSearchViewModel.md
 docs/MediaType.md
 docs/MediaViewModel.md
 docs/Metadata.md
@@ -587,7 +573,6 @@ docs/RejectConsultationCommand.md
 docs/RejectReason.md
 docs/ReviewCategory.md
 docs/SearchAPI.md
-docs/SearchMetaData.md
 docs/SendBirdGroupChannelMember.md
 docs/SendBirdGroupChannelViewModel.md
 docs/SendBirdGroupChannelrOperator.md
@@ -598,7 +583,6 @@ docs/ServiceCategoriesViewModel.md
 docs/ServiceCategoryItemViewModel.md
 docs/ServiceCategoryViewModel.md
 docs/ServiceItemViewModel.md
-docs/ServiceSearchViewModel.md
 docs/ServiceViewModel.md
 docs/ServicesAPI.md
 docs/ServicesViewModel.md
@@ -609,16 +593,12 @@ docs/SpecialtiesAPI.md
 docs/SpecialtiesViewModel.md
 docs/Specialty.md
 docs/SpecialtyItemViewModel.md
-docs/SpecialtySearchResultViewModel.md
-docs/SpecialtySearchViewModel.md
 docs/SpecialtyType.md
 docs/SpecialtyTypeCategoriesAPI.md
 docs/SpecialtyTypeCategoriesViewModel.md
 docs/SpecialtyTypeCategoryItemViewModel.md
 docs/SpecialtyTypeCategoryViewModel.md
 docs/SpecialtyTypeItemViewModel.md
-docs/SpecialtyTypeSearchResultViewModel.md
-docs/SpecialtyTypeSearchViewModel.md
 docs/SpecialtyTypeViewModel.md
 docs/SpecialtyTypesAPI.md
 docs/SpecialtyTypesViewModel.md

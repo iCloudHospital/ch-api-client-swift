@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 # **apiV1HospitalsCurrentGet**
 ```swift
-    open class func apiV1HospitalsCurrentGet(id: UUID? = nil, name: String? = nil, description: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, serviceId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: HospitalsViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsCurrentGet(id: UUID? = nil, name: String? = nil, description: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, serviceId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: HospitalsViewModel?, _ error: Error?) -> Void)
 ```
 
 
@@ -37,12 +37,13 @@ let serviceId = 987 // UUID |  (optional)
 let exceptHospitalId = 987 // UUID |  (optional)
 let showHidden = true // Bool |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
+let ids = [123] // [UUID] |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
-HospitalsAPI.apiV1HospitalsCurrentGet(id: id, name: name, description: description, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, serviceId: serviceId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+HospitalsAPI.apiV1HospitalsCurrentGet(id: id, name: name, description: description, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, serviceId: serviceId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -70,6 +71,7 @@ Name | Type | Description  | Notes
  **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
+ **ids** | [**[UUID]**](UUID.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
@@ -92,7 +94,7 @@ Name | Type | Description  | Notes
 
 # **apiV1HospitalsGet**
 ```swift
-    open class func apiV1HospitalsGet(id: UUID? = nil, name: String? = nil, description: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, serviceId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: HospitalsViewModel?, _ error: Error?) -> Void)
+    open class func apiV1HospitalsGet(id: UUID? = nil, name: String? = nil, description: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, serviceId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: HospitalsViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all hospitals.
@@ -116,13 +118,14 @@ let serviceId = 987 // UUID |  (optional)
 let exceptHospitalId = 987 // UUID |  (optional)
 let showHidden = true // Bool |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
+let ids = [123] // [UUID] |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all hospitals.
-HospitalsAPI.apiV1HospitalsGet(id: id, name: name, description: description, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, serviceId: serviceId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+HospitalsAPI.apiV1HospitalsGet(id: id, name: name, description: description, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, serviceId: serviceId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -150,6 +153,7 @@ Name | Type | Description  | Notes
  **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
+ **ids** | [**[UUID]**](UUID.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
