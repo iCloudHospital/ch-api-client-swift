@@ -25,9 +25,10 @@ public struct DealItemViewModel: Codable {
     public var photo: String?
     public var photoThumbnail: String?
     public var dealPackages: [DealPackageItemViewModel]?
+    public var dealServices: [DealServiceItemViewModel]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, name: String? = nil, normalizedName: String? = nil, slug: String? = nil, description: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, hospitalLocationCountry: String? = nil, hospitalLocationState: String? = nil, hospitalConsultationEnabled: Bool? = nil, marketingType: MarketingType? = nil, photo: String? = nil, photoThumbnail: String? = nil, dealPackages: [DealPackageItemViewModel]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, name: String? = nil, normalizedName: String? = nil, slug: String? = nil, description: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, hospitalLocationCountry: String? = nil, hospitalLocationState: String? = nil, hospitalConsultationEnabled: Bool? = nil, marketingType: MarketingType? = nil, photo: String? = nil, photoThumbnail: String? = nil, dealPackages: [DealPackageItemViewModel]? = nil, dealServices: [DealServiceItemViewModel]? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.name = name
         self.normalizedName = normalizedName
@@ -43,6 +44,7 @@ public struct DealItemViewModel: Codable {
         self.photo = photo
         self.photoThumbnail = photoThumbnail
         self.dealPackages = dealPackages
+        self.dealServices = dealServices
         self.auditableEntity = auditableEntity
     }
 

@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **hospitalConsultationEnabled** | **Bool** |  | [optional] 
 **marketingType** | [**MarketingType**](MarketingType.md) |  | [optional] 
 **dealPackages** | [DealPackageItemViewModel] |  | [optional] 
+**dealServices** | [DealServiceItemViewModel] |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
 **photo** | **String** |  | [optional] 
 **photoThumbnail** | **String** |  | [optional] 

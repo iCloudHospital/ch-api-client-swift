@@ -14,8 +14,6 @@ Name | Type | Description | Notes
 **transfer** | **String** |  | [optional] 
 **bonus** | **String** |  | [optional] 
 **price** | **Double** |  | [optional] 
-**serviceCount** | **Int** |  | [optional] 
-**dealPackageServices** | [DealPackageServiceItemViewModel] |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

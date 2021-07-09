@@ -19,13 +19,12 @@ public struct DealPackage: Codable {
     public var transfer: String?
     public var bonus: String?
     public var price: Double?
-    public var dealPackageServices: [DealPackageService]?
     public var managers: [Manager]?
     public var questions: [Question]?
     public var bookings: [Booking]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, dealId: UUID? = nil, deal: Deal? = nil, refundPolicy: RefundPolicy? = nil, additionalServices: String? = nil, accomodation: String? = nil, transfer: String? = nil, bonus: String? = nil, price: Double? = nil, dealPackageServices: [DealPackageService]? = nil, managers: [Manager]? = nil, questions: [Question]? = nil, bookings: [Booking]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, dealId: UUID? = nil, deal: Deal? = nil, refundPolicy: RefundPolicy? = nil, additionalServices: String? = nil, accomodation: String? = nil, transfer: String? = nil, bonus: String? = nil, price: Double? = nil, managers: [Manager]? = nil, questions: [Question]? = nil, bookings: [Booking]? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.dealId = dealId
         self.deal = deal
@@ -35,7 +34,6 @@ public struct DealPackage: Codable {
         self.transfer = transfer
         self.bonus = bonus
         self.price = price
-        self.dealPackageServices = dealPackageServices
         self.managers = managers
         self.questions = questions
         self.bookings = bookings

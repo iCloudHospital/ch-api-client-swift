@@ -124,7 +124,7 @@ import CloudHospitalClient
 
 let dealId = 987 // UUID | 
 let packageId = 987 // UUID | 
-let updateDealPackageCommand = UpdateDealPackageCommand(dealName: "dealName_example", hospitalId: 123, hospitalName: "hospitalName_example", refundPolicy: RefundPolicy(), additionalServices: "additionalServices_example", accomodation: "accomodation_example", transfer: "transfer_example", bonus: "bonus_example", price: 123, serviceCount: 123, dealPackageServices: [{...}], auditableEntity: {...}) // UpdateDealPackageCommand |  (optional)
+let updateDealPackageCommand = UpdateDealPackageCommand(dealName: "dealName_example", hospitalId: 123, hospitalName: "hospitalName_example", refundPolicy: RefundPolicy(), additionalServices: "additionalServices_example", accomodation: "accomodation_example", transfer: "transfer_example", bonus: "bonus_example", price: 123, auditableEntity: {...}) // UpdateDealPackageCommand |  (optional)
 
 // Update deal package.
 DealPackagesAPI.apiV1DealsDealIdPackagesPackageIdPut(dealId: dealId, packageId: packageId, updateDealPackageCommand: updateDealPackageCommand) { (response, error) in
@@ -175,7 +175,7 @@ Create deal package.
 import CloudHospitalClient
 
 let dealId = 987 // UUID | 
-let createDealPackageCommand = CreateDealPackageCommand(dealId: 123, refundPolicy: RefundPolicy(), additionalServices: "additionalServices_example", accomodation: "accomodation_example", transfer: "transfer_example", bonus: "bonus_example", price: 123, dealPackageServices: [{...}]) // CreateDealPackageCommand |  (optional)
+let createDealPackageCommand = CreateDealPackageCommand(dealId: 123, refundPolicy: RefundPolicy(), additionalServices: "additionalServices_example", accomodation: "accomodation_example", transfer: "transfer_example", bonus: "bonus_example", price: 123) // CreateDealPackageCommand |  (optional)
 
 // Create deal package.
 DealPackagesAPI.apiV1DealsDealIdPackagesPost(dealId: dealId, createDealPackageCommand: createDealPackageCommand) { (response, error) in

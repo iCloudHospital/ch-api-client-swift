@@ -17,9 +17,8 @@ public struct CreateDealPackageCommand: Codable {
     public var transfer: String?
     public var bonus: String?
     public var price: Double?
-    public var dealPackageServices: [ServiceViewModel]?
 
-    public init(dealId: UUID? = nil, refundPolicy: RefundPolicy? = nil, additionalServices: String? = nil, accomodation: String? = nil, transfer: String? = nil, bonus: String? = nil, price: Double? = nil, dealPackageServices: [ServiceViewModel]? = nil) {
+    public init(dealId: UUID? = nil, refundPolicy: RefundPolicy? = nil, additionalServices: String? = nil, accomodation: String? = nil, transfer: String? = nil, bonus: String? = nil, price: Double? = nil) {
         self.dealId = dealId
         self.refundPolicy = refundPolicy
         self.additionalServices = additionalServices
@@ -27,7 +26,6 @@ public struct CreateDealPackageCommand: Codable {
         self.transfer = transfer
         self.bonus = bonus
         self.price = price
-        self.dealPackageServices = dealPackageServices
     }
 
 }

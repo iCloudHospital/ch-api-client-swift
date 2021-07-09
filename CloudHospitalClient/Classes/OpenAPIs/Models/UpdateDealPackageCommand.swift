@@ -19,11 +19,9 @@ public struct UpdateDealPackageCommand: Codable {
     public var transfer: String?
     public var bonus: String?
     public var price: Double?
-    public var serviceCount: Int?
-    public var dealPackageServices: [DealPackageServiceItemViewModel]?
     public var auditableEntity: AuditableEntity?
 
-    public init(dealName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, refundPolicy: RefundPolicy? = nil, additionalServices: String? = nil, accomodation: String? = nil, transfer: String? = nil, bonus: String? = nil, price: Double? = nil, serviceCount: Int? = nil, dealPackageServices: [DealPackageServiceItemViewModel]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(dealName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, refundPolicy: RefundPolicy? = nil, additionalServices: String? = nil, accomodation: String? = nil, transfer: String? = nil, bonus: String? = nil, price: Double? = nil, auditableEntity: AuditableEntity? = nil) {
         self.dealName = dealName
         self.hospitalId = hospitalId
         self.hospitalName = hospitalName
@@ -33,8 +31,6 @@ public struct UpdateDealPackageCommand: Codable {
         self.transfer = transfer
         self.bonus = bonus
         self.price = price
-        self.serviceCount = serviceCount
-        self.dealPackageServices = dealPackageServices
         self.auditableEntity = auditableEntity
     }
 
