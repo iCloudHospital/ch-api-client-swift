@@ -21,11 +21,9 @@ public struct DealPackageViewModel: Codable {
     public var transfer: String?
     public var bonus: String?
     public var price: Double?
-    public var serviceCount: Int?
-    public var dealPackageServices: [DealPackageServiceItemViewModel]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, dealId: UUID? = nil, dealName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, refundPolicy: RefundPolicy? = nil, additionalServices: String? = nil, accomodation: String? = nil, transfer: String? = nil, bonus: String? = nil, price: Double? = nil, serviceCount: Int? = nil, dealPackageServices: [DealPackageServiceItemViewModel]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, dealId: UUID? = nil, dealName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, refundPolicy: RefundPolicy? = nil, additionalServices: String? = nil, accomodation: String? = nil, transfer: String? = nil, bonus: String? = nil, price: Double? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.dealId = dealId
         self.dealName = dealName
@@ -37,8 +35,6 @@ public struct DealPackageViewModel: Codable {
         self.transfer = transfer
         self.bonus = bonus
         self.price = price
-        self.serviceCount = serviceCount
-        self.dealPackageServices = dealPackageServices
         self.auditableEntity = auditableEntity
     }
 

@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **transfer** | **String** |  | [optional] 
 **bonus** | **String** |  | [optional] 
 **price** | **Double** |  | [optional] 
-**dealPackageServices** | [DealPackageService] |  | [optional] 
 **managers** | [Manager] |  | [optional] 
 **questions** | [Question] |  | [optional] 
 **bookings** | [Booking] |  | [optional] 

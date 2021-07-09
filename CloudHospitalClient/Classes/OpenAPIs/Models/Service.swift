@@ -27,11 +27,10 @@ public struct Service: Codable {
     public var maxPrice: Double?
     public var priceReuqest: Bool?
     public var order: Int?
-    public var dealPackageServices: [DealPackageService]?
     public var medias: [Media]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, name: String? = nil, normalizedName: String? = nil, slug: String? = nil, description: String? = nil, content: String? = nil, normalizedDescription: String? = nil, hospitalId: UUID? = nil, specialtyId: UUID? = nil, packageServiceId: UUID? = nil, hospitalSpecialty: HospitalSpecialty? = nil, procedure: Procedure? = nil, serviceCategoryId: UUID? = nil, minPrice: Double? = nil, maxPrice: Double? = nil, priceReuqest: Bool? = nil, order: Int? = nil, dealPackageServices: [DealPackageService]? = nil, medias: [Media]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, name: String? = nil, normalizedName: String? = nil, slug: String? = nil, description: String? = nil, content: String? = nil, normalizedDescription: String? = nil, hospitalId: UUID? = nil, specialtyId: UUID? = nil, packageServiceId: UUID? = nil, hospitalSpecialty: HospitalSpecialty? = nil, procedure: Procedure? = nil, serviceCategoryId: UUID? = nil, minPrice: Double? = nil, maxPrice: Double? = nil, priceReuqest: Bool? = nil, order: Int? = nil, medias: [Media]? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.name = name
         self.normalizedName = normalizedName
@@ -49,7 +48,6 @@ public struct Service: Codable {
         self.maxPrice = maxPrice
         self.priceReuqest = priceReuqest
         self.order = order
-        self.dealPackageServices = dealPackageServices
         self.medias = medias
         self.auditableEntity = auditableEntity
     }

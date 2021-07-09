@@ -144,9 +144,9 @@ CloudHospitalClient/Classes/OpenAPIs/Models/Deal.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealPackage.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealPackageItemViewModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/DealPackageService.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/DealPackageServiceItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealPackageViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/DealService.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/DealServiceItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealsViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Department.swift
@@ -433,10 +433,10 @@ docs/Deal.md
 docs/DealItemViewModel.md
 docs/DealPackage.md
 docs/DealPackageItemViewModel.md
-docs/DealPackageService.md
-docs/DealPackageServiceItemViewModel.md
 docs/DealPackageViewModel.md
 docs/DealPackagesAPI.md
+docs/DealService.md
+docs/DealServiceItemViewModel.md
 docs/DealViewModel.md
 docs/DealsAPI.md
 docs/DealsViewModel.md

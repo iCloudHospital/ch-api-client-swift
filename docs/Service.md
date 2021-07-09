@@ -20,7 +20,6 @@ Name | Type | Description | Notes
 **maxPrice** | **Double** |  | [optional] 
 **priceReuqest** | **Bool** |  | [optional] 
 **order** | **Int** |  | [optional] 
-**dealPackageServices** | [DealPackageService] |  | [optional] 
 **medias** | [Media] |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
 
