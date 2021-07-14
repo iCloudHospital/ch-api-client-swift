@@ -11,5 +11,5 @@ import Foundation
 public enum ContributionType: String, Codable, CaseIterable {
     case reviewedBy = "ReviewedBy"
     case writtenBy = "WrittenBy"
-    case translatedBy = "TranslatedBy"
+    case interviewWith = "InterviewWith"
 }
