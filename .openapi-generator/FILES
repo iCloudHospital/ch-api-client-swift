@@ -9,6 +9,7 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/BookingsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CHAdminsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CHManagersAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CacheAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/ChatMessagesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ChatUsersAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CommunicationsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ConsultationsAPI.swift
@@ -261,6 +262,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelMember.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdGroupChannelrOperator.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SendBirdUserViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/SendFileRequestModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Service.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceCategoriesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceCategoryItemViewModel.swift
@@ -376,6 +378,7 @@ docs/CacheAPI.md
 docs/ChangeEmailCommand.md
 docs/ChangeLog.md
 docs/ChargeStatus.md
+docs/ChatMessagesAPI.md
 docs/ChatUsersAPI.md
 docs/CheckNotificationsCommand.md
 docs/CommunicationUserTokenModel.md
@@ -577,6 +580,7 @@ docs/SendBirdGroupChannelMember.md
 docs/SendBirdGroupChannelViewModel.md
 docs/SendBirdGroupChannelrOperator.md
 docs/SendBirdUserViewModel.md
+docs/SendFileRequestModel.md
 docs/Service.md
 docs/ServiceCategoriesAPI.md
 docs/ServiceCategoriesViewModel.md
