@@ -13,11 +13,13 @@ public struct CommunicationUserTokenModel: Codable {
     public var token: String?
     public var expiresOn: Date?
     public var communicationUserId: String?
+    public var gatewary: String?
 
-    public init(token: String? = nil, expiresOn: Date? = nil, communicationUserId: String? = nil) {
+    public init(token: String? = nil, expiresOn: Date? = nil, communicationUserId: String? = nil, gatewary: String? = nil) {
         self.token = token
         self.expiresOn = expiresOn
         self.communicationUserId = communicationUserId
+        self.gatewary = gatewary
     }
 
 }
