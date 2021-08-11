@@ -27,4 +27,5 @@ public enum NotificationCode: String, Codable, CaseIterable {
     case consultationCanceled = "ConsultationCanceled"
     case consultationRefundRequested = "ConsultationRefundRequested"
     case consultationRefunded = "ConsultationRefunded"
+    case consultationReady = "ConsultationReady"
 }

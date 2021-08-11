@@ -4,6 +4,7 @@ CloudHospitalClient.podspec
 CloudHospitalClient/Classes/OpenAPIs/APIHelper.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/AffiliationsAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/AppVersionAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ArticlesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/BookingsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CHAdminsAPI.swift
@@ -24,6 +25,7 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorReviewsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorSpecialtiesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/EquipmentsAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/ExternalAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/FaqCategoriesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/FaqsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/GroupChannelsAPI.swift
@@ -59,6 +61,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/Account.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Accreditation.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/AccreditationViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/AdminMessageViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/AppVersionViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ApproveBookingCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ApproveConsultationCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Article.swift
@@ -186,6 +189,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/Equipment.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/EquipmentItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/EquipmentViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/EquipmentsViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/FacebookUserDataDeletionResponseModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoriesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoryBreadCrumbViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoryItemViewModel.swift
@@ -339,6 +343,8 @@ docs/Accreditation.md
 docs/AccreditationViewModel.md
 docs/AdminMessageViewModel.md
 docs/AffiliationsAPI.md
+docs/AppVersionAPI.md
+docs/AppVersionViewModel.md
 docs/ApproveBookingCommand.md
 docs/ApproveConsultationCommand.md
 docs/Article.md
@@ -486,6 +492,8 @@ docs/EquipmentItemViewModel.md
 docs/EquipmentViewModel.md
 docs/EquipmentsAPI.md
 docs/EquipmentsViewModel.md
+docs/ExternalAPI.md
+docs/FacebookUserDataDeletionResponseModel.md
 docs/FaqCategoriesAPI.md
 docs/FaqCategoriesViewModel.md
 docs/FaqCategoryBreadCrumbViewModel.md
