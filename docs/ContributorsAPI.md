@@ -61,7 +61,7 @@ No authorization required
 
 # **apiV1ContributorsGet**
 ```swift
-    open class func apiV1ContributorsGet(id: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: ContributorsViewModel?, _ error: Error?) -> Void)
+    open class func apiV1ContributorsGet(id: UUID? = nil, languageCode: String? = nil, interviewerOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: ContributorsViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all contributors.
@@ -73,13 +73,14 @@ import CloudHospitalClient
 
 let id = 987 // UUID |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
+let interviewerOnly = true // Bool |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all contributors.
-ContributorsAPI.apiV1ContributorsGet(id: id, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+ContributorsAPI.apiV1ContributorsGet(id: id, languageCode: languageCode, interviewerOnly: interviewerOnly, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -97,6 +98,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | [**UUID**](.md) |  | [optional] 
  **languageCode** | **String** |  | [optional] 
+ **interviewerOnly** | **Bool** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 

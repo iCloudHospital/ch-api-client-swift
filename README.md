@@ -30,6 +30,7 @@ Class | Method | HTTP request | Description
 *AffiliationsAPI* | [**apiV1HospitalsHospitalIdDoctorsDoctorIdPost**](docs/AffiliationsAPI.md#apiv1hospitalshospitaliddoctorsdoctoridpost) | **POST** /api/v1/hospitals/{hospitalId}/doctors/{doctorId} | Link a doctor to a hospital.
 *AffiliationsAPI* | [**apiV1HospitalsHospitalIdManagersManagerIdDelete**](docs/AffiliationsAPI.md#apiv1hospitalshospitalidmanagersmanageriddelete) | **DELETE** /api/v1/hospitals/{hospitalId}/managers/{managerId} | Remove link between the manager and the hospital.
 *AffiliationsAPI* | [**apiV1HospitalsHospitalIdManagersManagerIdPost**](docs/AffiliationsAPI.md#apiv1hospitalshospitalidmanagersmanageridpost) | **POST** /api/v1/hospitals/{hospitalId}/managers/{managerId} | Link a manager to a hospital.
+*AppVersionAPI* | [**apiV1AppversionPlatformGet**](docs/AppVersionAPI.md#apiv1appversionplatformget) | **GET** /api/v1/appversion/{platform} | 
 *ArticlesAPI* | [**apiV1HospitalsArticlesGet**](docs/ArticlesAPI.md#apiv1hospitalsarticlesget) | **GET** /api/v1/hospitals/articles | Get all articles.
 *ArticlesAPI* | [**apiV1HospitalsArticlesSlugsSlugGet**](docs/ArticlesAPI.md#apiv1hospitalsarticlesslugsslugget) | **GET** /api/v1/hospitals/articles/slugs/{slug} | Get article by slug.
 *ArticlesAPI* | [**apiV1HospitalsHospitalIdArticlesArticleIdDelete**](docs/ArticlesAPI.md#apiv1hospitalshospitalidarticlesarticleiddelete) | **DELETE** /api/v1/hospitals/{hospitalId}/articles/{articleId} | Delete article.
@@ -128,6 +129,7 @@ Class | Method | HTTP request | Description
 *EquipmentsAPI* | [**apiV1HospitalsHospitalIdEquipmentsEquipmentIdGet**](docs/EquipmentsAPI.md#apiv1hospitalshospitalidequipmentsequipmentidget) | **GET** /api/v1/hospitals/{hospitalId}/equipments/{equipmentId} | Get equipment.
 *EquipmentsAPI* | [**apiV1HospitalsHospitalIdEquipmentsEquipmentIdPut**](docs/EquipmentsAPI.md#apiv1hospitalshospitalidequipmentsequipmentidput) | **PUT** /api/v1/hospitals/{hospitalId}/equipments/{equipmentId} | Update equipment.
 *EquipmentsAPI* | [**apiV1HospitalsHospitalIdEquipmentsPost**](docs/EquipmentsAPI.md#apiv1hospitalshospitalidequipmentspost) | **POST** /api/v1/hospitals/{hospitalId}/equipments | Create an equipment and add to a hospital.
+*ExternalAPI* | [**apiV1ExternalFacebookDeleteuserdataPost**](docs/ExternalAPI.md#apiv1externalfacebookdeleteuserdatapost) | **POST** /api/v1/external/facebook/deleteuserdata | Callback for Facebook user data deletion
 *FaqCategoriesAPI* | [**apiV1FaqcategoriesFaqCategoryIdGet**](docs/FaqCategoriesAPI.md#apiv1faqcategoriesfaqcategoryidget) | **GET** /api/v1/faqcategories/{faqCategoryId} | Get faqCategory.
 *FaqCategoriesAPI* | [**apiV1FaqcategoriesGet**](docs/FaqCategoriesAPI.md#apiv1faqcategoriesget) | **GET** /api/v1/faqcategories | Get all faqCategory.
 *FaqCategoriesAPI* | [**apiV1FaqcategoriesSlugsSlugGet**](docs/FaqCategoriesAPI.md#apiv1faqcategoriesslugsslugget) | **GET** /api/v1/faqcategories/slugs/{slug} | Get faqCategory by slug.
@@ -245,6 +247,7 @@ Class | Method | HTTP request | Description
  - [Accreditation](docs/Accreditation.md)
  - [AccreditationViewModel](docs/AccreditationViewModel.md)
  - [AdminMessageViewModel](docs/AdminMessageViewModel.md)
+ - [AppVersionViewModel](docs/AppVersionViewModel.md)
  - [ApproveBookingCommand](docs/ApproveBookingCommand.md)
  - [ApproveConsultationCommand](docs/ApproveConsultationCommand.md)
  - [Article](docs/Article.md)
@@ -372,6 +375,7 @@ Class | Method | HTTP request | Description
  - [EquipmentItemViewModel](docs/EquipmentItemViewModel.md)
  - [EquipmentViewModel](docs/EquipmentViewModel.md)
  - [EquipmentsViewModel](docs/EquipmentsViewModel.md)
+ - [FacebookUserDataDeletionResponseModel](docs/FacebookUserDataDeletionResponseModel.md)
  - [FaqCategoriesViewModel](docs/FaqCategoriesViewModel.md)
  - [FaqCategoryBreadCrumbViewModel](docs/FaqCategoryBreadCrumbViewModel.md)
  - [FaqCategoryItemViewModel](docs/FaqCategoryItemViewModel.md)

@@ -63,6 +63,7 @@ open class ContributorsAPI {
      
      - parameter id: (query)  (optional)
      - parameter languageCode: (query)  (optional)
+     - parameter interviewerOnly: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -71,9 +72,9 @@ open class ContributorsAPI {
      - returns: AnyPublisher<ContributorsViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ContributorsGet(id: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ContributorsViewModel, Error> {
+    open class func apiV1ContributorsGet(id: UUID? = nil, languageCode: String? = nil, interviewerOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ContributorsViewModel, Error> {
         return Future<ContributorsViewModel, Error>.init { promise in
-            apiV1ContributorsGetWithRequestBuilder(id: id, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1ContributorsGetWithRequestBuilder(id: id, languageCode: languageCode, interviewerOnly: interviewerOnly, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -89,13 +90,14 @@ open class ContributorsAPI {
      - GET /api/v1/contributors
      - parameter id: (query)  (optional)
      - parameter languageCode: (query)  (optional)
+     - parameter interviewerOnly: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<ContributorsViewModel> 
      */
-    open class func apiV1ContributorsGetWithRequestBuilder(id: UUID? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<ContributorsViewModel> {
+    open class func apiV1ContributorsGetWithRequestBuilder(id: UUID? = nil, languageCode: String? = nil, interviewerOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<ContributorsViewModel> {
         let path = "/api/v1/contributors"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -104,6 +106,7 @@ open class ContributorsAPI {
         url?.queryItems = APIHelper.mapValuesToQueryItems([
             "Id": id?.encodeToJSON(), 
             "LanguageCode": languageCode?.encodeToJSON(), 
+            "InterviewerOnly": interviewerOnly?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 
