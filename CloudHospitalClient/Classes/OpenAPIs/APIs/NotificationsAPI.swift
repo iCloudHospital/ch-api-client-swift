@@ -57,6 +57,7 @@ open class NotificationsAPI {
      Get all notifications.
      
      - parameter notificationCode: (query)  (optional)
+     - parameter unreadCountOnly: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
@@ -65,9 +66,9 @@ open class NotificationsAPI {
      - returns: AnyPublisher<NotificationsViewModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1NotificationsGet(notificationCode: NotificationCode? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<NotificationsViewModel, Error> {
+    open class func apiV1NotificationsGet(notificationCode: NotificationCode? = nil, unreadCountOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<NotificationsViewModel, Error> {
         return Future<NotificationsViewModel, Error>.init { promise in
-            apiV1NotificationsGetWithRequestBuilder(notificationCode: notificationCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+            apiV1NotificationsGetWithRequestBuilder(notificationCode: notificationCode, unreadCountOnly: unreadCountOnly, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -85,13 +86,14 @@ open class NotificationsAPI {
        - type: oauth2
        - name: oauth2
      - parameter notificationCode: (query)  (optional)
+     - parameter unreadCountOnly: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
      - parameter current: (query)  (optional)
      - returns: RequestBuilder<NotificationsViewModel> 
      */
-    open class func apiV1NotificationsGetWithRequestBuilder(notificationCode: NotificationCode? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<NotificationsViewModel> {
+    open class func apiV1NotificationsGetWithRequestBuilder(notificationCode: NotificationCode? = nil, unreadCountOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<NotificationsViewModel> {
         let path = "/api/v1/notifications"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
@@ -99,6 +101,7 @@ open class NotificationsAPI {
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
             "NotificationCode": notificationCode?.encodeToJSON(), 
+            "UnreadCountOnly": unreadCountOnly?.encodeToJSON(), 
             "page": page?.encodeToJSON(), 
             "limit": limit?.encodeToJSON(), 
             "lastRetrieved": lastRetrieved?.encodeToJSON(), 

@@ -58,7 +58,7 @@ Name | Type | Description  | Notes
 
 # **apiV1NotificationsGet**
 ```swift
-    open class func apiV1NotificationsGet(notificationCode: NotificationCode? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: NotificationsViewModel?, _ error: Error?) -> Void)
+    open class func apiV1NotificationsGet(notificationCode: NotificationCode? = nil, unreadCountOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: NotificationsViewModel?, _ error: Error?) -> Void)
 ```
 
 Get all notifications.
@@ -69,13 +69,14 @@ Get all notifications.
 import CloudHospitalClient
 
 let notificationCode = NotificationCode() // NotificationCode |  (optional)
+let unreadCountOnly = true // Bool |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 let current = true // Bool |  (optional)
 
 // Get all notifications.
-NotificationsAPI.apiV1NotificationsGet(notificationCode: notificationCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+NotificationsAPI.apiV1NotificationsGet(notificationCode: notificationCode, unreadCountOnly: unreadCountOnly, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -92,6 +93,7 @@ NotificationsAPI.apiV1NotificationsGet(notificationCode: notificationCode, page:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **notificationCode** | [**NotificationCode**](.md) |  | [optional] 
+ **unreadCountOnly** | **Bool** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
