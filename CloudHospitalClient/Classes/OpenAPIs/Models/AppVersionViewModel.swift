@@ -11,12 +11,14 @@ import Foundation
 public struct AppVersionViewModel: Codable {
 
     public var platform: Platform?
-    public var version: String?
+    public var latestVersion: String?
+    public var minimumVersion: String?
     public var committedDate: Date?
 
-    public init(platform: Platform? = nil, version: String? = nil, committedDate: Date? = nil) {
+    public init(platform: Platform? = nil, latestVersion: String? = nil, minimumVersion: String? = nil, committedDate: Date? = nil) {
         self.platform = platform
-        self.version = version
+        self.latestVersion = latestVersion
+        self.minimumVersion = minimumVersion
         self.committedDate = committedDate
     }
 
