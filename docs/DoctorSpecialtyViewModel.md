@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **specialtyId** | **UUID** |  | [optional] 
 **specialtyName** | **String** |  | [optional] 
+**specialtySlug** | **String** |  | [optional] 
 **specialtyTypeId** | **UUID** |  | [optional] 
 **specialtyTypeName** | **String** |  | [optional] 
 **order** | **Int** |  | [optional] 
