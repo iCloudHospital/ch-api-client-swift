@@ -12,13 +12,15 @@ public struct DoctorSpecialtyItemViewModel: Codable {
 
     public var specialtyId: UUID?
     public var specialtyName: String?
+    public var specialtySlug: String?
     public var specialtyTypeId: UUID?
     public var specialtyTypeName: String?
     public var order: Int?
 
-    public init(specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, order: Int? = nil) {
+    public init(specialtyId: UUID? = nil, specialtyName: String? = nil, specialtySlug: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, order: Int? = nil) {
         self.specialtyId = specialtyId
         self.specialtyName = specialtyName
+        self.specialtySlug = specialtySlug
         self.specialtyTypeId = specialtyTypeId
         self.specialtyTypeName = specialtyTypeName
         self.order = order

@@ -40,6 +40,7 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/MoviesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/NotificationsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/PartnersAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/PatientsAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/PlansAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ProfilesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/QuestionCommentsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/QuestionsAPI.swift
@@ -49,6 +50,7 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/ServicesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/SpecialtiesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/SpecialtyTypeCategoriesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/SpecialtyTypesAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/SurveysAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/YoutubesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/AlamofireImplementations.swift
 CloudHospitalClient/Classes/OpenAPIs/CodableHelper.swift
@@ -110,6 +112,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/Contributor.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ContributorItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ContributorViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ContributorsViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ControlType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CountriesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Country.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CountryItemViewModel.swift
@@ -142,6 +145,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/CreateServiceCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateSpecialtyCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateSpecialtyTypeCategoryCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateSpecialtyTypeCommand.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/CreateSurveyResponseCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateYoutubeCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Customer.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Deal.swift
@@ -198,6 +202,8 @@ CloudHospitalClient/Classes/OpenAPIs/Models/FaqItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqsViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Gender.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/HealthProfile.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/HealthProfileViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Hospital.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalAccreditation.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalAffiliationViewModel.swift
@@ -244,6 +250,9 @@ CloudHospitalClient/Classes/OpenAPIs/Models/PatientsViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Payment.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/PaymentMethod.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/PaymentStatus.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/PlanItemViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/PlanViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/PlansViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Platform.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Procedure.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Question.swift
@@ -256,6 +265,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/QuestionStatus.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/QuestionType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/QuestionViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/QuestionsViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/RecurringInterval.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/RefundPolicy.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/RefundStatus.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/RejectBookingCommand.swift
@@ -288,6 +298,8 @@ CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyTypeItemViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyTypeViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyTypesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SpecialtyViewModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/SurveyModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/SurveyQuestionModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Tag.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateArticleCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateBookingCommand.swift
@@ -303,6 +315,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/UpdateDoctorCertificateCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateDoctorCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateDoctorReviewCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateEquipmentCommand.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/UpdateHealthProfileCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateHospitalCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateHospitalReviewCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateHospitalSpecialtySequenceCommand.swift
@@ -403,6 +416,7 @@ docs/ContributorItemViewModel.md
 docs/ContributorViewModel.md
 docs/ContributorsAPI.md
 docs/ContributorsViewModel.md
+docs/ControlType.md
 docs/CountriesAPI.md
 docs/CountriesViewModel.md
 docs/Country.md
@@ -436,6 +450,7 @@ docs/CreateServiceCommand.md
 docs/CreateSpecialtyCommand.md
 docs/CreateSpecialtyTypeCategoryCommand.md
 docs/CreateSpecialtyTypeCommand.md
+docs/CreateSurveyResponseCommand.md
 docs/CreateYoutubeCommand.md
 docs/Customer.md
 docs/Deal.md
@@ -505,6 +520,8 @@ docs/FaqsAPI.md
 docs/FaqsViewModel.md
 docs/Gender.md
 docs/GroupChannelsAPI.md
+docs/HealthProfile.md
+docs/HealthProfileViewModel.md
 docs/Hospital.md
 docs/HospitalAccreditation.md
 docs/HospitalAffiliationViewModel.md
@@ -562,6 +579,10 @@ docs/PatientsViewModel.md
 docs/Payment.md
 docs/PaymentMethod.md
 docs/PaymentStatus.md
+docs/PlanItemViewModel.md
+docs/PlanViewModel.md
+docs/PlansAPI.md
+docs/PlansViewModel.md
 docs/Platform.md
 docs/Procedure.md
 docs/ProfilesAPI.md
@@ -577,6 +598,7 @@ docs/QuestionType.md
 docs/QuestionViewModel.md
 docs/QuestionsAPI.md
 docs/QuestionsViewModel.md
+docs/RecurringInterval.md
 docs/RefundPolicy.md
 docs/RefundStatus.md
 docs/RejectBookingCommand.md
@@ -615,6 +637,9 @@ docs/SpecialtyTypeViewModel.md
 docs/SpecialtyTypesAPI.md
 docs/SpecialtyTypesViewModel.md
 docs/SpecialtyViewModel.md
+docs/SurveyModel.md
+docs/SurveyQuestionModel.md
+docs/SurveysAPI.md
 docs/Tag.md
 docs/UpdateArticleCommand.md
 docs/UpdateBookingCommand.md
@@ -630,6 +655,7 @@ docs/UpdateDoctorCertificateCommand.md
 docs/UpdateDoctorCommand.md
 docs/UpdateDoctorReviewCommand.md
 docs/UpdateEquipmentCommand.md
+docs/UpdateHealthProfileCommand.md
 docs/UpdateHospitalCommand.md
 docs/UpdateHospitalReviewCommand.md
 docs/UpdateHospitalSpecialtySequenceCommand.md

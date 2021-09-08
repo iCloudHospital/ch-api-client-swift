@@ -85,6 +85,88 @@ open class PatientsAPI {
     }
 
     /**
+     Get health profile for patient.
+     
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<HealthProfileViewModel, Error>
+     */
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1PatientsHealthprofileGet(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HealthProfileViewModel, Error> {
+        return Future<HealthProfileViewModel, Error>.init { promise in
+            apiV1PatientsHealthprofileGetWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    /**
+     Get health profile for patient.
+     - GET /api/v1/patients/healthprofile
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - returns: RequestBuilder<HealthProfileViewModel> 
+     */
+    open class func apiV1PatientsHealthprofileGetWithRequestBuilder() -> RequestBuilder<HealthProfileViewModel> {
+        let path = "/api/v1/patients/healthprofile"
+        let URLString = CloudHospitalClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
+        
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<HealthProfileViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Update health profile for patient.
+     
+     - parameter updateHealthProfileCommand: (body)  (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<Bool, Error>
+     */
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV1PatientsHealthprofilePut(updateHealthProfileCommand: UpdateHealthProfileCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error>.init { promise in
+            apiV1PatientsHealthprofilePutWithRequestBuilder(updateHealthProfileCommand: updateHealthProfileCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    /**
+     Update health profile for patient.
+     - PUT /api/v1/patients/healthprofile
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter updateHealthProfileCommand: (body)  (optional)
+     - returns: RequestBuilder<Bool> 
+     */
+    open class func apiV1PatientsHealthprofilePutWithRequestBuilder(updateHealthProfileCommand: UpdateHealthProfileCommand? = nil) -> RequestBuilder<Bool> {
+        let path = "/api/v1/patients/healthprofile"
+        let URLString = CloudHospitalClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateHealthProfileCommand)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
      Delete patient.
      
      - parameter patientId: (path)  
