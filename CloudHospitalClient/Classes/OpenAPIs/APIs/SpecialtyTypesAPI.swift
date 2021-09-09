@@ -6,9 +6,9 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
 
 open class SpecialtyTypesAPI {
     /**
@@ -28,6 +28,7 @@ open class SpecialtyTypesAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SpecialtyTypesViewModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SpecialtytypesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, created: Date? = nil, languageCode: String? = nil, ids: [UUID]? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypesViewModel, Error> {
         return Future<SpecialtyTypesViewModel, Error>.init { promise in
@@ -41,6 +42,7 @@ open class SpecialtyTypesAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all SpecialtyTypes.
@@ -62,26 +64,32 @@ open class SpecialtyTypesAPI {
     open class func apiV1SpecialtytypesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, created: Date? = nil, languageCode: String? = nil, ids: [UUID]? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<SpecialtyTypesViewModel> {
         let path = "/api/v1/specialtytypes"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "Name": name?.encodeToJSON(), 
-            "Description": description?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "Created": created?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "Ids": ids?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON(), 
-            "Current": current?.encodeToJSON()
+            "Id": id?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "Description": description?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "Created": created?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "Ids": ids?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "Current": current?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<SpecialtyTypesViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -92,6 +100,7 @@ open class SpecialtyTypesAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<UUID, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SpecialtytypesPost(specialtyTypeId: UUID? = nil, createSpecialtyTypeCommand: CreateSpecialtyTypeCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<UUID, Error> {
         return Future<UUID, Error>.init { promise in
@@ -105,6 +114,7 @@ open class SpecialtyTypesAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Create specialtyType.
@@ -124,12 +134,18 @@ open class SpecialtyTypesAPI {
 
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "specialtyTypeId": specialtyTypeId?.encodeToJSON()
+            "specialtyTypeId": specialtyTypeId?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<UUID>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -140,6 +156,7 @@ open class SpecialtyTypesAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SpecialtyTypeViewModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SpecialtytypesSlugsSlugGet(slug: String, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypeViewModel, Error> {
         return Future<SpecialtyTypeViewModel, Error>.init { promise in
@@ -153,6 +170,7 @@ open class SpecialtyTypesAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get specialtyType by slug.
@@ -167,16 +185,22 @@ open class SpecialtyTypesAPI {
         let slugPostEscape = slugPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         path = path.replacingOccurrences(of: "{slug}", with: slugPostEscape, options: .literal, range: nil)
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON()
+            "languageCode": languageCode?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<SpecialtyTypeViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -186,6 +210,7 @@ open class SpecialtyTypesAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Bool, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SpecialtytypesSpecialtyTypeIdDelete(specialtyTypeId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error>.init { promise in
@@ -199,6 +224,7 @@ open class SpecialtyTypesAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Delete specialtyType.
@@ -216,13 +242,19 @@ open class SpecialtyTypesAPI {
         let specialtyTypeIdPostEscape = specialtyTypeIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         path = path.replacingOccurrences(of: "{specialtyTypeId}", with: specialtyTypeIdPostEscape, options: .literal, range: nil)
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         let url = URLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -233,6 +265,7 @@ open class SpecialtyTypesAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SpecialtyTypeViewModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SpecialtytypesSpecialtyTypeIdGet(specialtyTypeId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypeViewModel, Error> {
         return Future<SpecialtyTypeViewModel, Error>.init { promise in
@@ -246,6 +279,7 @@ open class SpecialtyTypesAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get specialtyType.
@@ -261,16 +295,22 @@ open class SpecialtyTypesAPI {
         let specialtyTypeIdPostEscape = specialtyTypeIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         path = path.replacingOccurrences(of: "{specialtyTypeId}", with: specialtyTypeIdPostEscape, options: .literal, range: nil)
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON()
+            "languageCode": languageCode?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<SpecialtyTypeViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -281,6 +321,7 @@ open class SpecialtyTypesAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Bool, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SpecialtytypesSpecialtyTypeIdPut(specialtyTypeId: UUID, updateSpecialtyTypeCommand: UpdateSpecialtyTypeCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error>.init { promise in
@@ -294,6 +335,7 @@ open class SpecialtyTypesAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Update specialtyType
@@ -316,9 +358,15 @@ open class SpecialtyTypesAPI {
 
         let url = URLComponents(string: URLString)
 
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
 }

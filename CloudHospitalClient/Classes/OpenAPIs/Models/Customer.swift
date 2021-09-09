@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct Customer: Codable {
 
     public var id: String?
@@ -27,4 +26,3 @@ public struct Customer: Codable {
     }
 
 }
-

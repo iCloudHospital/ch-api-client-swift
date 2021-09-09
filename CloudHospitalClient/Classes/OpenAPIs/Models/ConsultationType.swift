@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum ConsultationType: String, Codable, CaseIterable {
     case hospital = "Hospital"
     case doctor = "Doctor"

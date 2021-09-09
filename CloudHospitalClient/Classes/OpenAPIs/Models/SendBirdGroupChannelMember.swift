@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct SendBirdGroupChannelMember: Codable {
 
     public var userId: String?
@@ -34,7 +33,7 @@ public struct SendBirdGroupChannelMember: Codable {
         self.metadata = metadata
     }
 
-    public enum CodingKeys: String, CodingKey, CaseIterable { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case userId = "user_id"
         case nickname
         case profileUrl = "profile_url"
@@ -48,4 +47,3 @@ public struct SendBirdGroupChannelMember: Codable {
     }
 
 }
-

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct UpdateDealPackageCommand: Codable {
 
     public var dealName: String?
@@ -35,4 +34,3 @@ public struct UpdateDealPackageCommand: Codable {
     }
 
 }
-

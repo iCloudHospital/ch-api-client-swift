@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum NotificationCode: String, Codable, CaseIterable {
     case welcomeEmail = "WelcomeEmail"
     case directMessageSent = "DirectMessageSent"

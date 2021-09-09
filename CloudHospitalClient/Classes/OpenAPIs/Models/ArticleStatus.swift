@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum ArticleStatus: String, Codable, CaseIterable {
     case draft = "Draft"
     case active = "Active"

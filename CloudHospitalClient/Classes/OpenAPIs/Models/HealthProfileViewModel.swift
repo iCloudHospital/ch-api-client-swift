@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct HealthProfileViewModel: Codable {
 
     public var firstName: String?
@@ -33,4 +32,3 @@ public struct HealthProfileViewModel: Codable {
     }
 
 }
-

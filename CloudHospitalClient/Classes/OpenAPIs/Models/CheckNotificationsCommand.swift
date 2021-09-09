@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CheckNotificationsCommand: Codable {
 
     public var notificationId: UUID?
@@ -19,4 +18,3 @@ public struct CheckNotificationsCommand: Codable {
     }
 
 }
-

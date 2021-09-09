@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct PartnerItemViewModel: Codable {
 
     public var id: UUID?
@@ -45,4 +44,3 @@ public struct PartnerItemViewModel: Codable {
     }
 
 }
-

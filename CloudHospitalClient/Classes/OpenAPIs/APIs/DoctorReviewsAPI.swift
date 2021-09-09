@@ -6,9 +6,9 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
 
 open class DoctorReviewsAPI {
     /**
@@ -19,6 +19,7 @@ open class DoctorReviewsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Bool, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1DoctorsDoctorIdReviewsPatientIdDelete(doctorId: UUID, patientId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error>.init { promise in
@@ -32,6 +33,7 @@ open class DoctorReviewsAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Delete review.
@@ -53,13 +55,19 @@ open class DoctorReviewsAPI {
         let patientIdPostEscape = patientIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         path = path.replacingOccurrences(of: "{patientId}", with: patientIdPostEscape, options: .literal, range: nil)
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         let url = URLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -70,6 +78,7 @@ open class DoctorReviewsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<DoctorReviewViewModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1DoctorsDoctorIdReviewsPatientIdGet(doctorId: UUID, patientId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DoctorReviewViewModel, Error> {
         return Future<DoctorReviewViewModel, Error>.init { promise in
@@ -83,6 +92,7 @@ open class DoctorReviewsAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get review.
@@ -101,13 +111,19 @@ open class DoctorReviewsAPI {
         let patientIdPostEscape = patientIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         path = path.replacingOccurrences(of: "{patientId}", with: patientIdPostEscape, options: .literal, range: nil)
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         let url = URLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<DoctorReviewViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -119,6 +135,7 @@ open class DoctorReviewsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Bool, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1DoctorsDoctorIdReviewsPatientIdPut(doctorId: UUID, patientId: UUID, updateDoctorReviewCommand: UpdateDoctorReviewCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error>.init { promise in
@@ -132,6 +149,7 @@ open class DoctorReviewsAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Update review.
@@ -158,9 +176,15 @@ open class DoctorReviewsAPI {
 
         let url = URLComponents(string: URLString)
 
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -172,6 +196,7 @@ open class DoctorReviewsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<DoctorReview, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1DoctorsDoctorIdReviewsPost(doctorId: UUID, patientId: UUID, createDoctorReviewCommand: CreateDoctorReviewCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DoctorReview, Error> {
         return Future<DoctorReview, Error>.init { promise in
@@ -185,6 +210,7 @@ open class DoctorReviewsAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Create review.
@@ -211,9 +237,15 @@ open class DoctorReviewsAPI {
 
         let url = URLComponents(string: URLString)
 
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<DoctorReview>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -235,6 +267,7 @@ open class DoctorReviewsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<DoctorReviewsViewModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1DoctorsReviewsGet(doctorId: UUID? = nil, doctorName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, body: String? = nil, recommended: Bool? = nil, reviewCategory: ReviewCategory? = nil, rate: Int? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DoctorReviewsViewModel, Error> {
         return Future<DoctorReviewsViewModel, Error>.init { promise in
@@ -248,6 +281,7 @@ open class DoctorReviewsAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all reviews.
@@ -271,28 +305,34 @@ open class DoctorReviewsAPI {
     open class func apiV1DoctorsReviewsGetWithRequestBuilder(doctorId: UUID? = nil, doctorName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, body: String? = nil, recommended: Bool? = nil, reviewCategory: ReviewCategory? = nil, rate: Int? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<DoctorReviewsViewModel> {
         let path = "/api/v1/doctors/reviews"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "DoctorId": doctorId?.encodeToJSON(), 
-            "DoctorName": doctorName?.encodeToJSON(), 
-            "PatientId": patientId?.encodeToJSON(), 
-            "PatientName": patientName?.encodeToJSON(), 
-            "Body": body?.encodeToJSON(), 
-            "Recommended": recommended?.encodeToJSON(), 
-            "ReviewCategory": reviewCategory?.encodeToJSON(), 
-            "Rate": rate?.encodeToJSON(), 
-            "Created": created?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON(), 
-            "Current": current?.encodeToJSON()
+            "DoctorId": doctorId?.encodeToJSON(),
+            "DoctorName": doctorName?.encodeToJSON(),
+            "PatientId": patientId?.encodeToJSON(),
+            "PatientName": patientName?.encodeToJSON(),
+            "Body": body?.encodeToJSON(),
+            "Recommended": recommended?.encodeToJSON(),
+            "ReviewCategory": reviewCategory?.encodeToJSON(),
+            "Rate": rate?.encodeToJSON(),
+            "Created": created?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "Current": current?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<DoctorReviewsViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
 }

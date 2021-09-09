@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct Manager: Codable {
 
     public var id: UUID?
@@ -57,4 +56,3 @@ public struct Manager: Codable {
     }
 
 }
-

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum ReviewCategory: String, Codable, CaseIterable {
     case services = "Services"
     case hospitality = "Hospitality"

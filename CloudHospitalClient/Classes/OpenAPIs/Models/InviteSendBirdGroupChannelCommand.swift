@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct InviteSendBirdGroupChannelCommand: Codable {
 
     public var userIds: [String]?
@@ -16,9 +15,8 @@ public struct InviteSendBirdGroupChannelCommand: Codable {
         self.userIds = userIds
     }
 
-    public enum CodingKeys: String, CodingKey, CaseIterable { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case userIds = "user_ids"
     }
 
 }
-

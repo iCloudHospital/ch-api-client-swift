@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CreatePartnerCommand: Codable {
 
     public var firstName: String?
@@ -39,4 +38,3 @@ public struct CreatePartnerCommand: Codable {
     }
 
 }
-

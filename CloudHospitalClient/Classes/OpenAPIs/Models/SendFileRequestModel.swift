@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct SendFileRequestModel: Codable {
 
     public var threadId: String?
@@ -21,4 +20,3 @@ public struct SendFileRequestModel: Codable {
     }
 
 }
-

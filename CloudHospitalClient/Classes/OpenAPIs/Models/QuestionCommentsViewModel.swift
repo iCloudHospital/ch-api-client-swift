@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct QuestionCommentsViewModel: Codable {
 
     public var items: [QuestionCommentItemViewModel]?
@@ -19,4 +18,3 @@ public struct QuestionCommentsViewModel: Codable {
     }
 
 }
-

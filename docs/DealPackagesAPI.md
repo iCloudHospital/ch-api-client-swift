@@ -124,7 +124,7 @@ import CloudHospitalClient
 
 let dealId = 987 // UUID | 
 let packageId = 987 // UUID | 
-let updateDealPackageCommand = UpdateDealPackageCommand(dealName: "dealName_example", hospitalId: 123, hospitalName: "hospitalName_example", refundPolicy: RefundPolicy(), additionalServices: "additionalServices_example", accomodation: "accomodation_example", transfer: "transfer_example", bonus: "bonus_example", price: 123, auditableEntity: {...}) // UpdateDealPackageCommand |  (optional)
+let updateDealPackageCommand = UpdateDealPackageCommand(dealName: "dealName_example", hospitalId: 123, hospitalName: "hospitalName_example", refundPolicy: RefundPolicy(), additionalServices: "additionalServices_example", accomodation: "accomodation_example", transfer: "transfer_example", bonus: "bonus_example", price: 123, auditableEntity: AuditableEntity(createdBy: 123, updatedBy: 123, deletedBy: 123, createdDate: Date(), updatedDate: Date(), deletedDate: Date(), isHidden: false, isDeleted: false)) // UpdateDealPackageCommand |  (optional)
 
 // Update deal package.
 DealPackagesAPI.apiV1DealsDealIdPackagesPackageIdPut(dealId: dealId, packageId: packageId, updateDealPackageCommand: updateDealPackageCommand) { (response, error) in

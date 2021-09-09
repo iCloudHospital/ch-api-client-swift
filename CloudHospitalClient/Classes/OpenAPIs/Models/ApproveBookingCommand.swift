@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct ApproveBookingCommand: Codable {
 
     public var confirmedDateStart: Date?
@@ -19,4 +18,3 @@ public struct ApproveBookingCommand: Codable {
     }
 
 }
-

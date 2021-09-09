@@ -6,9 +6,9 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
 
 open class CommunicationsAPI {
     /**
@@ -16,6 +16,7 @@ open class CommunicationsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Int, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1CommunicationsDelete(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Int, Error> {
         return Future<Int, Error>.init { promise in
@@ -29,6 +30,7 @@ open class CommunicationsAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - DELETE /api/v1/communications
@@ -40,13 +42,19 @@ open class CommunicationsAPI {
     open class func apiV1CommunicationsDeleteWithRequestBuilder() -> RequestBuilder<Int> {
         let path = "/api/v1/communications"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         let url = URLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<Int>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -54,6 +62,7 @@ open class CommunicationsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<CommunicationUserTokenModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1CommunicationsGet(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<CommunicationUserTokenModel, Error> {
         return Future<CommunicationUserTokenModel, Error>.init { promise in
@@ -67,6 +76,7 @@ open class CommunicationsAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v1/communications
@@ -78,13 +88,19 @@ open class CommunicationsAPI {
     open class func apiV1CommunicationsGetWithRequestBuilder() -> RequestBuilder<CommunicationUserTokenModel> {
         let path = "/api/v1/communications"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         let url = URLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<CommunicationUserTokenModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -92,6 +108,7 @@ open class CommunicationsAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<CommunicationUserTokenModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1CommunicationsPut(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<CommunicationUserTokenModel, Error> {
         return Future<CommunicationUserTokenModel, Error>.init { promise in
@@ -105,6 +122,7 @@ open class CommunicationsAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - PUT /api/v1/communications
@@ -116,13 +134,19 @@ open class CommunicationsAPI {
     open class func apiV1CommunicationsPutWithRequestBuilder() -> RequestBuilder<CommunicationUserTokenModel> {
         let path = "/api/v1/communications"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         let url = URLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<CommunicationUserTokenModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
 }

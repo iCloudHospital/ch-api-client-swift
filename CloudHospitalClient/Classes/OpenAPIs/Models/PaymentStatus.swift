@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum PaymentStatus: String, Codable, CaseIterable {
     case unpaid = "Unpaid"
     case paid = "Paid"

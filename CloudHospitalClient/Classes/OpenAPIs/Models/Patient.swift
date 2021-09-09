@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct Patient: Codable {
 
     public var id: UUID?
@@ -77,4 +76,3 @@ public struct Patient: Codable {
     }
 
 }
-

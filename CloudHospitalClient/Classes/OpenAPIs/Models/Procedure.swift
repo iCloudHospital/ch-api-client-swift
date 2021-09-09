@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum Procedure: String, Codable, CaseIterable {
     case treatment = "Treatment"
     case diagnostic = "Diagnostic"

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct YoutubeTagItemViewModel: Codable {
 
     public var youtubeId: UUID?
@@ -21,4 +20,3 @@ public struct YoutubeTagItemViewModel: Codable {
     }
 
 }
-

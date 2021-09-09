@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct AppVersionViewModel: Codable {
 
     public var platform: Platform?
@@ -23,4 +22,3 @@ public struct AppVersionViewModel: Codable {
     }
 
 }
-

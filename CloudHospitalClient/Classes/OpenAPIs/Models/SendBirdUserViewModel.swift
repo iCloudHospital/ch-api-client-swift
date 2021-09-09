@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct SendBirdUserViewModel: Codable {
 
     public var phoneNumber: String?
@@ -38,7 +37,7 @@ public struct SendBirdUserViewModel: Codable {
         self.profileUrl = profileUrl
     }
 
-    public enum CodingKeys: String, CodingKey, CaseIterable { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case phoneNumber = "phone_number"
         case hasEverLoggedIn = "has_ever_logged_in"
         case userId = "user_id"
@@ -54,4 +53,3 @@ public struct SendBirdUserViewModel: Codable {
     }
 
 }
-

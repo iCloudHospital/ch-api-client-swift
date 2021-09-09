@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CreateSurveyResponseCommand: Codable {
 
     public var surveyId: UUID?
@@ -19,4 +18,3 @@ public struct CreateSurveyResponseCommand: Codable {
     }
 
 }
-

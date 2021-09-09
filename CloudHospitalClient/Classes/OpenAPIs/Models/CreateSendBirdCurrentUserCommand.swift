@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CreateSendBirdCurrentUserCommand: Codable {
 
     public var nickname: String?
@@ -21,4 +20,3 @@ public struct CreateSendBirdCurrentUserCommand: Codable {
     }
 
 }
-

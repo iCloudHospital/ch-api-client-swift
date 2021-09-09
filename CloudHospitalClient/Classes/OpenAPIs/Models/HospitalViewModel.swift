@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct HospitalViewModel: Codable {
 
     public var id: UUID?
@@ -81,4 +80,3 @@ public struct HospitalViewModel: Codable {
     }
 
 }
-

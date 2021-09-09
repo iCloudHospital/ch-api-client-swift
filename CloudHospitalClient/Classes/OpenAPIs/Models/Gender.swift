@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum Gender: String, Codable, CaseIterable {
     case notSpecified = "NotSpecified"
     case male = "Male"

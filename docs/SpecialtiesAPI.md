@@ -301,7 +301,7 @@ Sample request:        PUT /api/v1/specialties/1      {          \"name\": \"Dil
 import CloudHospitalClient
 
 let specialtyId = 987 // UUID | 
-let updateSpecialtyCommand = UpdateSpecialtyCommand(name: "name_example", slug: "slug_example", description: "description_example", specialtyTypeId: 123, specialtyTypeName: "specialtyTypeName_example", auditableEntity: {...}, content: "content_example") // UpdateSpecialtyCommand |  (optional)
+let updateSpecialtyCommand = UpdateSpecialtyCommand(name: "name_example", slug: "slug_example", description: "description_example", specialtyTypeId: 123, specialtyTypeName: "specialtyTypeName_example", auditableEntity: AuditableEntity(createdBy: 123, updatedBy: 123, deletedBy: 123, createdDate: Date(), updatedDate: Date(), deletedDate: Date(), isHidden: false, isDeleted: false), content: "content_example") // UpdateSpecialtyCommand |  (optional)
 
 // Update specialty
 SpecialtiesAPI.apiV1SpecialtiesSpecialtyIdPut(specialtyId: specialtyId, updateSpecialtyCommand: updateSpecialtyCommand) { (response, error) in

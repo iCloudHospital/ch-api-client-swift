@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum QuestionStatus: String, Codable, CaseIterable {
     case new = "New"
     case answered = "Answered"

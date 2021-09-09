@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct UpdateConsultationCommand: Codable {
 
     public var specialtyId: UUID?
@@ -45,4 +44,3 @@ public struct UpdateConsultationCommand: Codable {
     }
 
 }
-

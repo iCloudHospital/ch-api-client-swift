@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CreateQuestionCommand: Codable {
 
     public var title: String?
@@ -29,4 +28,3 @@ public struct CreateQuestionCommand: Codable {
     }
 
 }
-

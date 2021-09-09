@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct PlanViewModel: Codable {
 
     public var id: UUID?
@@ -27,4 +26,3 @@ public struct PlanViewModel: Codable {
     }
 
 }
-

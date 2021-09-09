@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct PagedListMetaData: Codable {
 
     public var pageCount: Int?
@@ -35,4 +34,3 @@ public struct PagedListMetaData: Codable {
     }
 
 }
-

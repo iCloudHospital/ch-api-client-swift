@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CreateCHManagerCommand: Codable {
 
     public var firstName: String?
@@ -39,4 +38,3 @@ public struct CreateCHManagerCommand: Codable {
     }
 
 }
-

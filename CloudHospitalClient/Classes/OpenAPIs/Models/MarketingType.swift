@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum MarketingType: String, Codable, CaseIterable {
     case both = "Both"
     case generalHealth = "GeneralHealth"

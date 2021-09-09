@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct FaqCategoryViewModel: Codable {
 
     public var id: UUID?
@@ -29,4 +28,3 @@ public struct FaqCategoryViewModel: Codable {
     }
 
 }
-

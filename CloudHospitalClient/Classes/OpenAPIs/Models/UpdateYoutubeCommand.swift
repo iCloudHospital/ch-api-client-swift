@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct UpdateYoutubeCommand: Codable {
 
     public var title: String?
@@ -27,4 +26,3 @@ public struct UpdateYoutubeCommand: Codable {
     }
 
 }
-

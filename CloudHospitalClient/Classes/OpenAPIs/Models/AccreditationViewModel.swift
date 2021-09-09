@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct AccreditationViewModel: Codable {
 
     public var id: UUID?
@@ -21,4 +20,3 @@ public struct AccreditationViewModel: Codable {
     }
 
 }
-

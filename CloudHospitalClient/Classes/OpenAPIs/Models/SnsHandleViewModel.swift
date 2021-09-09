@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct SnsHandleViewModel: Codable {
 
     public var snsType: SnsType?
@@ -19,4 +18,3 @@ public struct SnsHandleViewModel: Codable {
     }
 
 }
-

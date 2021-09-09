@@ -268,7 +268,7 @@ import CloudHospitalClient
 
 let hospitalId = 987 // UUID | 
 let articleId = 987 // UUID | 
-let updateArticleCommand = UpdateArticleCommand(title: "title_example", slug: "slug_example", description: "description_example", body: "body_example", status: ArticleStatus(), marketingType: ArticleStatus(), hospitalSlug: "hospitalSlug_example", youtubeUrl: "youtubeUrl_example", articleTags: [{...}], articleSources: [{...}], articleContributors: [{...}], medias: [{...}]) // UpdateArticleCommand |  (optional)
+let updateArticleCommand = UpdateArticleCommand(title: "title_example", slug: "slug_example", description: "description_example", body: "body_example", status: ArticleStatus(), marketingType: MarketingType(), hospitalSlug: "hospitalSlug_example", youtubeUrl: "youtubeUrl_example", articleTags: [ArticleTagItemViewModel(articleId: 123, tagId: "tagId_example", order: 123)], articleSources: [ArticleSourceItemViewModel(articleId: 123, name: "name_example", referenceUrl: "referenceUrl_example", order: 123)], articleContributors: [ArticleContributorItemViewModel(contributorId: 123, contributorName: "contributorName_example", contributorSlug: "contributorSlug_example", contributorEmail: "contributorEmail_example", contributorPhoto: "contributorPhoto_example", contributorDescription: "contributorDescription_example", type: ContributionType(), filter: "filter_example", order: 123)], medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)]) // UpdateArticleCommand |  (optional)
 
 // Update article.
 ArticlesAPI.apiV1HospitalsHospitalIdArticlesArticleIdPut(hospitalId: hospitalId, articleId: articleId, updateArticleCommand: updateArticleCommand) { (response, error) in
@@ -321,7 +321,7 @@ Sample request:        POST /api/v1/hospitals/1/articles      {          \"title
 import CloudHospitalClient
 
 let hospitalId = 987 // UUID | 
-let createArticleCommand = CreateArticleCommand(title: "title_example", description: "description_example", body: "body_example", status: ArticleStatus(), marketingType: ArticleStatus(), articleTags: [{...}], medias: [{...}]) // CreateArticleCommand |  (optional)
+let createArticleCommand = CreateArticleCommand(title: "title_example", description: "description_example", body: "body_example", status: ArticleStatus(), marketingType: MarketingType(), articleTags: [ArticleTagItemViewModel(articleId: 123, tagId: "tagId_example", order: 123)], medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)]) // CreateArticleCommand |  (optional)
 
 // Create an article.
 ArticlesAPI.apiV1HospitalsHospitalIdArticlesPost(hospitalId: hospitalId, createArticleCommand: createArticleCommand) { (response, error) in

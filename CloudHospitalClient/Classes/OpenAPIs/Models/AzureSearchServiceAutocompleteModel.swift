@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct AzureSearchServiceAutocompleteModel: Codable {
 
     public var values: [String]?
@@ -17,4 +16,3 @@ public struct AzureSearchServiceAutocompleteModel: Codable {
     }
 
 }
-

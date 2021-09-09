@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct FaqCategoryBreadCrumbViewModel: Codable {
 
     public var id: UUID?
@@ -23,4 +22,3 @@ public struct FaqCategoryBreadCrumbViewModel: Codable {
     }
 
 }
-

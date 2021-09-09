@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct NotificationsViewModel: Codable {
 
     public var items: [NotificationViewModel]?
@@ -21,4 +20,3 @@ public struct NotificationsViewModel: Codable {
     }
 
 }
-

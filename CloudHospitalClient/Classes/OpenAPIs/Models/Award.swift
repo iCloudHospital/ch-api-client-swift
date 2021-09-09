@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct Award: Codable {
 
     public var id: UUID?
@@ -23,4 +22,3 @@ public struct Award: Codable {
     }
 
 }
-

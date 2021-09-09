@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct UpdateDoctorCommand: Codable {
 
     public var firstName: String?
@@ -51,4 +50,3 @@ public struct UpdateDoctorCommand: Codable {
     }
 
 }
-

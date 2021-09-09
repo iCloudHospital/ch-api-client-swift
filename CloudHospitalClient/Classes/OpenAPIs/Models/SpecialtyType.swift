@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct SpecialtyType: Codable {
 
     public var id: UUID?
@@ -37,4 +36,3 @@ public struct SpecialtyType: Codable {
     }
 
 }
-

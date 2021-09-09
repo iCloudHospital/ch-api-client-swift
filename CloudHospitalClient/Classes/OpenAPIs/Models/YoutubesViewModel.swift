@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct YoutubesViewModel: Codable {
 
     public var items: [YoutubeItemViewModel]?
@@ -19,4 +18,3 @@ public struct YoutubesViewModel: Codable {
     }
 
 }
-

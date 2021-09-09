@@ -6,9 +6,9 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
 
 open class ExternalAPI {
     /**
@@ -17,6 +17,7 @@ open class ExternalAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<FacebookUserDataDeletionResponseModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1ExternalFacebookDeleteuserdataPost(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<FacebookUserDataDeletionResponseModel, Error> {
         return Future<FacebookUserDataDeletionResponseModel, Error>.init { promise in
@@ -30,6 +31,7 @@ open class ExternalAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Callback for Facebook user data deletion
@@ -40,13 +42,19 @@ open class ExternalAPI {
     open class func apiV1ExternalFacebookDeleteuserdataPostWithRequestBuilder() -> RequestBuilder<FacebookUserDataDeletionResponseModel> {
         let path = "/api/v1/external/facebook/deleteuserdata"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         let url = URLComponents(string: URLString)
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<FacebookUserDataDeletionResponseModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
 }

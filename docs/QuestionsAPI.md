@@ -26,7 +26,7 @@ Sample request:        POST /api/v1/hospitals/1/questions      {          \"titl
 import CloudHospitalClient
 
 let hospitalId = 987 // UUID | 
-let createQuestionCommand = CreateQuestionCommand(title: "title_example", body: "body_example", questionType: QuestionType(), questionStatus: QuestionType(), dealPackageId: 123, quantity: 123, medias: [{...}]) // CreateQuestionCommand |  (optional)
+let createQuestionCommand = CreateQuestionCommand(title: "title_example", body: "body_example", questionType: QuestionType(), questionStatus: QuestionStatus(), dealPackageId: 123, quantity: 123, medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)]) // CreateQuestionCommand |  (optional)
 
 // Create an question.
 QuestionsAPI.apiV1HospitalsHospitalIdQuestionsPost(hospitalId: hospitalId, createQuestionCommand: createQuestionCommand) { (response, error) in
@@ -183,7 +183,7 @@ import CloudHospitalClient
 
 let hospitalId = 987 // UUID | 
 let questionId = 987 // UUID | 
-let updateQuestionCommand = UpdateQuestionCommand(title: "title_example", body: "body_example", questionType: QuestionType(), questionStatus: QuestionType(), medias: [{...}]) // UpdateQuestionCommand |  (optional)
+let updateQuestionCommand = UpdateQuestionCommand(title: "title_example", body: "body_example", questionType: QuestionType(), questionStatus: QuestionStatus(), medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)]) // UpdateQuestionCommand |  (optional)
 
 // Update question.
 QuestionsAPI.apiV1HospitalsHospitalIdQuestionsQuestionIdPut(hospitalId: hospitalId, questionId: questionId, updateQuestionCommand: updateQuestionCommand) { (response, error) in

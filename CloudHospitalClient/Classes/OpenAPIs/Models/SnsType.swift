@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum SnsType: String, Codable, CaseIterable {
     case twitter = "Twitter"
     case facebook = "Facebook"

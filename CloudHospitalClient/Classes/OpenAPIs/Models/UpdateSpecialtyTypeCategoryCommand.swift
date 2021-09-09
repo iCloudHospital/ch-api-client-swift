@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct UpdateSpecialtyTypeCategoryCommand: Codable {
 
     public var id: UUID?
@@ -29,4 +28,3 @@ public struct UpdateSpecialtyTypeCategoryCommand: Codable {
     }
 
 }
-

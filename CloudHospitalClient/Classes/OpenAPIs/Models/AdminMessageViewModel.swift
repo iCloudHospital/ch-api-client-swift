@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct AdminMessageViewModel: Codable {
 
     public var messageId: Int?
@@ -34,7 +33,7 @@ public struct AdminMessageViewModel: Codable {
         self.updatedAt = updatedAt
     }
 
-    public enum CodingKeys: String, CodingKey, CaseIterable { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case messageId = "message_id"
         case type
         case customType = "custom_type"
@@ -48,4 +47,3 @@ public struct AdminMessageViewModel: Codable {
     }
 
 }
-

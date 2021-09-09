@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct Equipment: Codable {
 
     public var id: UUID?
@@ -31,4 +30,3 @@ public struct Equipment: Codable {
     }
 
 }
-

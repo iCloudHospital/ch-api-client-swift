@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct SendBirdGroupChannelrOperator: Codable {
 
     public var userId: String?
@@ -20,11 +19,10 @@ public struct SendBirdGroupChannelrOperator: Codable {
         self.profileUrl = profileUrl
     }
 
-    public enum CodingKeys: String, CodingKey, CaseIterable { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case userId = "user_id"
         case nickname
         case profileUrl = "profile_url"
     }
 
 }
-
