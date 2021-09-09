@@ -5,6 +5,8 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**apiV1PatientsGet**](PatientsAPI.md#apiv1patientsget) | **GET** /api/v1/patients | Get all patients.
+[**apiV1PatientsHealthprofileGet**](PatientsAPI.md#apiv1patientshealthprofileget) | **GET** /api/v1/patients/healthprofile | Get health profile for patient.
+[**apiV1PatientsHealthprofilePut**](PatientsAPI.md#apiv1patientshealthprofileput) | **PUT** /api/v1/patients/healthprofile | Update health profile for patient.
 [**apiV1PatientsPatientIdDelete**](PatientsAPI.md#apiv1patientspatientiddelete) | **DELETE** /api/v1/patients/{patientId} | Delete patient.
 [**apiV1PatientsPatientIdGet**](PatientsAPI.md#apiv1patientspatientidget) | **GET** /api/v1/patients/{patientId} | Get patient.
 [**apiV1PatientsPatientIdPut**](PatientsAPI.md#apiv1patientspatientidput) | **PUT** /api/v1/patients/{patientId} | Update patient.
@@ -75,6 +77,98 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV1PatientsHealthprofileGet**
+```swift
+    open class func apiV1PatientsHealthprofileGet(completion: @escaping (_ data: HealthProfileViewModel?, _ error: Error?) -> Void)
+```
+
+Get health profile for patient.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+
+// Get health profile for patient.
+PatientsAPI.apiV1PatientsHealthprofileGet() { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**HealthProfileViewModel**](HealthProfileViewModel.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/plain, application/json, text/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV1PatientsHealthprofilePut**
+```swift
+    open class func apiV1PatientsHealthprofilePut(updateHealthProfileCommand: UpdateHealthProfileCommand? = nil, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
+```
+
+Update health profile for patient.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let updateHealthProfileCommand = UpdateHealthProfileCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", gender: Gender(), dateOfBirth: Date(), residenceAddress: "residenceAddress_example", insuranceCompany: "insuranceCompany_example", height: 123, weight: 123) // UpdateHealthProfileCommand |  (optional)
+
+// Update health profile for patient.
+PatientsAPI.apiV1PatientsHealthprofilePut(updateHealthProfileCommand: updateHealthProfileCommand) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **updateHealthProfileCommand** | [**UpdateHealthProfileCommand**](UpdateHealthProfileCommand.md) |  | [optional] 
+
+### Return type
+
+**Bool**
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/_*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -194,7 +288,7 @@ Sample request:        PUT /api/v1/patients/1      {          \"referralCode\": 
 import CloudHospitalClient
 
 let patientId = 987 // UUID | 
-let updatePatientCommand = UpdatePatientCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), languages: [{...}], locations: [{...}]) // UpdatePatientCommand |  (optional)
+let updatePatientCommand = UpdatePatientCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), languages: [UserLanguageViewModel(id: 123, language: "language_example")], locations: [UserLocationViewModel(latitude: 123, longitude: 123, country: "country_example", state: "state_example", county: "county_example", city: "city_example", zipCode: "zipCode_example", address: "address_example", locationType: UserLocationType())]) // UpdatePatientCommand |  (optional)
 
 // Update patient.
 PatientsAPI.apiV1PatientsPatientIdPut(patientId: patientId, updatePatientCommand: updatePatientCommand) { (response, error) in
@@ -245,7 +339,7 @@ Sample request:        POST /api/v1/patients      {          \"referralCode\": \
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createPatientCommand = CreatePatientCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [{...}], languages: [{...}], locations: [{...}], userName: "userName_example", email: "email_example", isAdmin: false) // CreatePatientCommand |  (optional)
+let createPatientCommand = CreatePatientCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)], languages: [UserLanguageViewModel(id: 123, language: "language_example")], locations: [UserLocationViewModel(latitude: 123, longitude: 123, country: "country_example", state: "state_example", county: "county_example", city: "city_example", zipCode: "zipCode_example", address: "address_example", locationType: UserLocationType())], userName: "userName_example", email: "email_example", isAdmin: false) // CreatePatientCommand |  (optional)
 
 // Create patient.
 PatientsAPI.apiV1PatientsPost(createPatientCommand: createPatientCommand) { (response, error) in

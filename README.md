@@ -179,10 +179,17 @@ Class | Method | HTTP request | Description
 *PartnersAPI* | [**apiV1PartnersPartnerIdPut**](docs/PartnersAPI.md#apiv1partnerspartneridput) | **PUT** /api/v1/partners/{partnerId} | Update partner.
 *PartnersAPI* | [**apiV1PartnersPost**](docs/PartnersAPI.md#apiv1partnerspost) | **POST** /api/v1/partners | Create partner.
 *PatientsAPI* | [**apiV1PatientsGet**](docs/PatientsAPI.md#apiv1patientsget) | **GET** /api/v1/patients | Get all patients.
+*PatientsAPI* | [**apiV1PatientsHealthprofileGet**](docs/PatientsAPI.md#apiv1patientshealthprofileget) | **GET** /api/v1/patients/healthprofile | Get health profile for patient.
+*PatientsAPI* | [**apiV1PatientsHealthprofilePut**](docs/PatientsAPI.md#apiv1patientshealthprofileput) | **PUT** /api/v1/patients/healthprofile | Update health profile for patient.
 *PatientsAPI* | [**apiV1PatientsPatientIdDelete**](docs/PatientsAPI.md#apiv1patientspatientiddelete) | **DELETE** /api/v1/patients/{patientId} | Delete patient.
 *PatientsAPI* | [**apiV1PatientsPatientIdGet**](docs/PatientsAPI.md#apiv1patientspatientidget) | **GET** /api/v1/patients/{patientId} | Get patient.
 *PatientsAPI* | [**apiV1PatientsPatientIdPut**](docs/PatientsAPI.md#apiv1patientspatientidput) | **PUT** /api/v1/patients/{patientId} | Update patient.
 *PatientsAPI* | [**apiV1PatientsPost**](docs/PatientsAPI.md#apiv1patientspost) | **POST** /api/v1/patients | Create patient.
+*PlansAPI* | [**apiV1PlansCurrentGet**](docs/PlansAPI.md#apiv1planscurrentget) | **GET** /api/v1/plans/current | Get current plan
+*PlansAPI* | [**apiV1PlansGet**](docs/PlansAPI.md#apiv1plansget) | **GET** /api/v1/plans | Get all plans.
+*PlansAPI* | [**apiV1PlansPlanIdGet**](docs/PlansAPI.md#apiv1plansplanidget) | **GET** /api/v1/plans/{planId} | Get plan.
+*PlansAPI* | [**apiV1PlansPlanIdSubscribePost**](docs/PlansAPI.md#apiv1plansplanidsubscribepost) | **POST** /api/v1/plans/{planId}/subscribe | Subscribe plan.
+*PlansAPI* | [**apiV1PlansPlanIdUnsubscribePost**](docs/PlansAPI.md#apiv1plansplanidunsubscribepost) | **POST** /api/v1/plans/{planId}/unsubscribe | Unsubscribe plan.
 *ProfilesAPI* | [**apiV1ProfilesChangeemailPost**](docs/ProfilesAPI.md#apiv1profileschangeemailpost) | **POST** /api/v1/profiles/changeemail | Change user&#39;s email on both Identity and Api.
 *ProfilesAPI* | [**apiV1ProfilesConfirmemailPost**](docs/ProfilesAPI.md#apiv1profilesconfirmemailpost) | **POST** /api/v1/profiles/confirmemail | 
 *ProfilesAPI* | [**apiV1ProfilesGet**](docs/ProfilesAPI.md#apiv1profilesget) | **GET** /api/v1/profiles | Get current user&#39;s profile.
@@ -233,6 +240,8 @@ Class | Method | HTTP request | Description
 *SpecialtyTypesAPI* | [**apiV1SpecialtytypesSpecialtyTypeIdDelete**](docs/SpecialtyTypesAPI.md#apiv1specialtytypesspecialtytypeiddelete) | **DELETE** /api/v1/specialtytypes/{specialtyTypeId} | Delete specialtyType.
 *SpecialtyTypesAPI* | [**apiV1SpecialtytypesSpecialtyTypeIdGet**](docs/SpecialtyTypesAPI.md#apiv1specialtytypesspecialtytypeidget) | **GET** /api/v1/specialtytypes/{specialtyTypeId} | Get specialtyType.
 *SpecialtyTypesAPI* | [**apiV1SpecialtytypesSpecialtyTypeIdPut**](docs/SpecialtyTypesAPI.md#apiv1specialtytypesspecialtytypeidput) | **PUT** /api/v1/specialtytypes/{specialtyTypeId} | Update specialtyType
+*SurveysAPI* | [**apiV1SurveysIdGet**](docs/SurveysAPI.md#apiv1surveysidget) | **GET** /api/v1/surveys/{id} | Get the survey.
+*SurveysAPI* | [**apiV1SurveysPost**](docs/SurveysAPI.md#apiv1surveyspost) | **POST** /api/v1/surveys | Create user&#39;s survey response.
 *YoutubesAPI* | [**apiV1YoutubesGet**](docs/YoutubesAPI.md#apiv1youtubesget) | **GET** /api/v1/youtubes | Get all youtubes.
 *YoutubesAPI* | [**apiV1YoutubesPost**](docs/YoutubesAPI.md#apiv1youtubespost) | **POST** /api/v1/youtubes | Create an youtube.
 *YoutubesAPI* | [**apiV1YoutubesSlugsSlugGet**](docs/YoutubesAPI.md#apiv1youtubesslugsslugget) | **GET** /api/v1/youtubes/slugs/{slug} | Get youtube by slug.
@@ -296,6 +305,7 @@ Class | Method | HTTP request | Description
  - [ContributorItemViewModel](docs/ContributorItemViewModel.md)
  - [ContributorViewModel](docs/ContributorViewModel.md)
  - [ContributorsViewModel](docs/ContributorsViewModel.md)
+ - [ControlType](docs/ControlType.md)
  - [CountriesViewModel](docs/CountriesViewModel.md)
  - [Country](docs/Country.md)
  - [CountryItemViewModel](docs/CountryItemViewModel.md)
@@ -328,6 +338,7 @@ Class | Method | HTTP request | Description
  - [CreateSpecialtyCommand](docs/CreateSpecialtyCommand.md)
  - [CreateSpecialtyTypeCategoryCommand](docs/CreateSpecialtyTypeCategoryCommand.md)
  - [CreateSpecialtyTypeCommand](docs/CreateSpecialtyTypeCommand.md)
+ - [CreateSurveyResponseCommand](docs/CreateSurveyResponseCommand.md)
  - [CreateYoutubeCommand](docs/CreateYoutubeCommand.md)
  - [Customer](docs/Customer.md)
  - [Deal](docs/Deal.md)
@@ -384,6 +395,8 @@ Class | Method | HTTP request | Description
  - [FaqViewModel](docs/FaqViewModel.md)
  - [FaqsViewModel](docs/FaqsViewModel.md)
  - [Gender](docs/Gender.md)
+ - [HealthProfile](docs/HealthProfile.md)
+ - [HealthProfileViewModel](docs/HealthProfileViewModel.md)
  - [Hospital](docs/Hospital.md)
  - [HospitalAccreditation](docs/HospitalAccreditation.md)
  - [HospitalAffiliationViewModel](docs/HospitalAffiliationViewModel.md)
@@ -430,6 +443,9 @@ Class | Method | HTTP request | Description
  - [Payment](docs/Payment.md)
  - [PaymentMethod](docs/PaymentMethod.md)
  - [PaymentStatus](docs/PaymentStatus.md)
+ - [PlanItemViewModel](docs/PlanItemViewModel.md)
+ - [PlanViewModel](docs/PlanViewModel.md)
+ - [PlansViewModel](docs/PlansViewModel.md)
  - [Platform](docs/Platform.md)
  - [Procedure](docs/Procedure.md)
  - [Question](docs/Question.md)
@@ -442,6 +458,7 @@ Class | Method | HTTP request | Description
  - [QuestionType](docs/QuestionType.md)
  - [QuestionViewModel](docs/QuestionViewModel.md)
  - [QuestionsViewModel](docs/QuestionsViewModel.md)
+ - [RecurringInterval](docs/RecurringInterval.md)
  - [RefundPolicy](docs/RefundPolicy.md)
  - [RefundStatus](docs/RefundStatus.md)
  - [RejectBookingCommand](docs/RejectBookingCommand.md)
@@ -474,6 +491,8 @@ Class | Method | HTTP request | Description
  - [SpecialtyTypeViewModel](docs/SpecialtyTypeViewModel.md)
  - [SpecialtyTypesViewModel](docs/SpecialtyTypesViewModel.md)
  - [SpecialtyViewModel](docs/SpecialtyViewModel.md)
+ - [SurveyModel](docs/SurveyModel.md)
+ - [SurveyQuestionModel](docs/SurveyQuestionModel.md)
  - [Tag](docs/Tag.md)
  - [UpdateArticleCommand](docs/UpdateArticleCommand.md)
  - [UpdateBookingCommand](docs/UpdateBookingCommand.md)
@@ -489,6 +508,7 @@ Class | Method | HTTP request | Description
  - [UpdateDoctorCommand](docs/UpdateDoctorCommand.md)
  - [UpdateDoctorReviewCommand](docs/UpdateDoctorReviewCommand.md)
  - [UpdateEquipmentCommand](docs/UpdateEquipmentCommand.md)
+ - [UpdateHealthProfileCommand](docs/UpdateHealthProfileCommand.md)
  - [UpdateHospitalCommand](docs/UpdateHospitalCommand.md)
  - [UpdateHospitalReviewCommand](docs/UpdateHospitalReviewCommand.md)
  - [UpdateHospitalSpecialtySequenceCommand](docs/UpdateHospitalSpecialtySequenceCommand.md)

@@ -432,7 +432,7 @@ Create consultation.
 import CloudHospitalClient
 
 let requestId = 987 // UUID | 
-let createConsultationCommand = CreateConsultationCommand(consultationType: ConsultationType(), hospitalId: 123, specialtyId: 123, doctorId: 123, dealId: 123, language: "language_example", isAccountHolder: false, firstName: "firstName_example", lastName: "lastName_example", email: "email_example", phone: "phone_example", dateOfBirth: Date(), gender: ConsultationType(), comment: "comment_example", timeRange: "timeRange_example", approximateDateStart: Date(), approximateDateEnd: Date(), timeZone: "timeZone_example") // CreateConsultationCommand |  (optional)
+let createConsultationCommand = CreateConsultationCommand(consultationType: ConsultationType(), hospitalId: 123, specialtyId: 123, doctorId: 123, dealId: 123, language: "language_example", isAccountHolder: false, firstName: "firstName_example", lastName: "lastName_example", email: "email_example", phone: "phone_example", dateOfBirth: Date(), gender: Gender(), comment: "comment_example", timeRange: "timeRange_example", approximateDateStart: Date(), approximateDateEnd: Date(), timeZone: "timeZone_example") // CreateConsultationCommand |  (optional)
 
 // Create consultation.
 ConsultationsAPI.apiV1ConsultationsRequestIdPost(requestId: requestId, createConsultationCommand: createConsultationCommand) { (response, error) in

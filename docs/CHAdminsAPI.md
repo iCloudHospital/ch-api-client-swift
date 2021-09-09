@@ -126,7 +126,7 @@ Sample request:        PUT /api/v1/chadmins/1      {          \"email\": \"admin
 import CloudHospitalClient
 
 let chAdminId = 987 // UUID | 
-let updateCHAdminCommand = UpdateCHAdminCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), languages: [{...}], locations: [{...}]) // UpdateCHAdminCommand |  (optional)
+let updateCHAdminCommand = UpdateCHAdminCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), languages: [UserLanguageViewModel(id: 123, language: "language_example")], locations: [UserLocationViewModel(latitude: 123, longitude: 123, country: "country_example", state: "state_example", county: "county_example", city: "city_example", zipCode: "zipCode_example", address: "address_example", locationType: UserLocationType())]) // UpdateCHAdminCommand |  (optional)
 
 // Update cloud hospital admin user.
 CHAdminsAPI.apiV1ChadminsChAdminIdPut(chAdminId: chAdminId, updateCHAdminCommand: updateCHAdminCommand) { (response, error) in
@@ -245,7 +245,7 @@ Sample request:        POST /api/v1/chadmins      {          \"firstName\": \"Cl
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createCHAdminCommand = CreateCHAdminCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [{...}], languages: [{...}], locations: [{...}]) // CreateCHAdminCommand |  (optional)
+let createCHAdminCommand = CreateCHAdminCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)], languages: [UserLanguageViewModel(id: 123, language: "language_example")], locations: [UserLocationViewModel(latitude: 123, longitude: 123, country: "country_example", state: "state_example", county: "county_example", city: "city_example", zipCode: "zipCode_example", address: "address_example", locationType: UserLocationType())]) // CreateCHAdminCommand |  (optional)
 
 // Create cloud hospital admin user.
 CHAdminsAPI.apiV1ChadminsPost(createCHAdminCommand: createCHAdminCommand) { (response, error) in

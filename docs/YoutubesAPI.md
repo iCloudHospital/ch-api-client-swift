@@ -94,7 +94,7 @@ Sample request:        POST /api/v1/youtubes      {          \"title\": \"Samsun
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createYoutubeCommand = CreateYoutubeCommand(title: "title_example", description: "description_example", url: "url_example", youtubeTags: [{...}], marketingType: MarketingType()) // CreateYoutubeCommand |  (optional)
+let createYoutubeCommand = CreateYoutubeCommand(title: "title_example", description: "description_example", url: "url_example", youtubeTags: [YoutubeTagItemViewModel(youtubeId: 123, tagId: "tagId_example", order: 123)], marketingType: MarketingType()) // CreateYoutubeCommand |  (optional)
 
 // Create an youtube.
 YoutubesAPI.apiV1YoutubesPost(createYoutubeCommand: createYoutubeCommand) { (response, error) in
@@ -293,7 +293,7 @@ Sample request:        PUT /api/v1/youtubes/1      {          \"title\": \"Samsu
 import CloudHospitalClient
 
 let youtubeId = 987 // UUID | 
-let updateYoutubeCommand = UpdateYoutubeCommand(title: "title_example", slug: "slug_example", description: "description_example", url: "url_example", youtubeTags: [{...}], marketingType: MarketingType()) // UpdateYoutubeCommand |  (optional)
+let updateYoutubeCommand = UpdateYoutubeCommand(title: "title_example", slug: "slug_example", description: "description_example", url: "url_example", youtubeTags: [YoutubeTagItemViewModel(youtubeId: 123, tagId: "tagId_example", order: 123)], marketingType: MarketingType()) // UpdateYoutubeCommand |  (optional)
 
 // Update youtube.
 YoutubesAPI.apiV1YoutubesYoutubeIdPut(youtubeId: youtubeId, updateYoutubeCommand: updateYoutubeCommand) { (response, error) in

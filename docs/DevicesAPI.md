@@ -187,7 +187,7 @@ Create device login.
 import CloudHospitalClient
 
 let id = 987 // UUID | 
-let createDeviceLoginCommand = CreateDeviceLoginCommand(version: "version_example", location: {...}) // CreateDeviceLoginCommand |  (optional)
+let createDeviceLoginCommand = CreateDeviceLoginCommand(version: "version_example", location: LocationViewModel(latitude: 123, longitude: 123, country: "country_example", state: "state_example", county: "county_example", city: "city_example", zipCode: "zipCode_example", address: "address_example")) // CreateDeviceLoginCommand |  (optional)
 
 // Create device login.
 DevicesAPI.apiV1DevicesIdLoginsPost(id: id, createDeviceLoginCommand: createDeviceLoginCommand) { (response, error) in
