@@ -25,6 +25,8 @@ Name | Type | Description | Notes
 **contact** | **String** |  | [optional] 
 **contactNumber** | **String** |  | [optional] 
 **nationality** | **String** |  | [optional] 
+**currentPlanId** | **UUID** |  | [optional] 
+**healthProfile** | [**HealthProfile**](HealthProfile.md) |  | [optional] 
 **questions** | [Question] |  | [optional] 
 **bookings** | [Booking] |  | [optional] 
 **consultations** | [Consultation] |  | [optional] 

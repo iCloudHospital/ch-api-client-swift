@@ -90,7 +90,7 @@ Sample request:        POST /api/v1/questions/1/questionComment      {          
 import CloudHospitalClient
 
 let questionId = 987 // UUID | 
-let createQuestionCommentCommand = CreateQuestionCommentCommand(body: "body_example", medias: [{...}]) // CreateQuestionCommentCommand |  (optional)
+let createQuestionCommentCommand = CreateQuestionCommentCommand(body: "body_example", medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)]) // CreateQuestionCommentCommand |  (optional)
 
 // Create an questionComment.
 QuestionCommentsAPI.apiV1QuestionsQuestionIdQuestioncommentsPost(questionId: questionId, createQuestionCommentCommand: createQuestionCommentCommand) { (response, error) in
@@ -247,7 +247,7 @@ import CloudHospitalClient
 
 let questionId = 987 // UUID | 
 let questionCommentId = 987 // UUID | 
-let updateQuestionCommentCommand = UpdateQuestionCommentCommand(body: "body_example", medias: [{...}]) // UpdateQuestionCommentCommand |  (optional)
+let updateQuestionCommentCommand = UpdateQuestionCommentCommand(body: "body_example", medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)]) // UpdateQuestionCommentCommand |  (optional)
 
 // Update questionComment.
 QuestionCommentsAPI.apiV1QuestionsQuestionIdQuestioncommentsQuestionCommentIdPut(questionId: questionId, questionCommentId: questionCommentId, updateQuestionCommentCommand: updateQuestionCommentCommand) { (response, error) in

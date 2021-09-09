@@ -121,7 +121,7 @@ Update deal.
 import CloudHospitalClient
 
 let dealId = 987 // UUID | 
-let updateDealCommand = UpdateDealCommand(id: 123, name: "name_example", normalizedName: "normalizedName_example", slug: "slug_example", description: "description_example", hospitalId: 123, hospitalName: "hospitalName_example", hospitalSlug: "hospitalSlug_example", hospitalLocationCountry: "hospitalLocationCountry_example", hospitalLocationState: "hospitalLocationState_example", hospitalConsultationEnabled: false, marketingType: MarketingType(), dealPackages: [{...}], dealServices: [{...}], auditableEntity: {...}, photo: "photo_example", photoThumbnail: "photoThumbnail_example") // UpdateDealCommand |  (optional)
+let updateDealCommand = UpdateDealCommand(id: 123, name: "name_example", normalizedName: "normalizedName_example", slug: "slug_example", description: "description_example", hospitalId: 123, hospitalName: "hospitalName_example", hospitalSlug: "hospitalSlug_example", hospitalLocationCountry: "hospitalLocationCountry_example", hospitalLocationState: "hospitalLocationState_example", hospitalConsultationEnabled: false, marketingType: MarketingType(), dealPackages: [DealPackageItemViewModel(id: 123, dealId: 123, dealName: "dealName_example", hospitalId: 123, hospitalName: "hospitalName_example", refundPolicy: RefundPolicy(), additionalServices: "additionalServices_example", accomodation: "accomodation_example", transfer: "transfer_example", bonus: "bonus_example", price: 123, auditableEntity: AuditableEntity(createdBy: 123, updatedBy: 123, deletedBy: 123, createdDate: Date(), updatedDate: Date(), deletedDate: Date(), isHidden: false, isDeleted: false))], dealServices: [DealServiceItemViewModel(dealId: 123, dealName: "dealName_example", serviceId: 123, serviceName: "serviceName_example", order: 123)], auditableEntity: nil, photo: "photo_example", photoThumbnail: "photoThumbnail_example") // UpdateDealCommand |  (optional)
 
 // Update deal.
 DealsAPI.apiV1DealsDealIdPut(dealId: dealId, updateDealCommand: updateDealCommand) { (response, error) in
@@ -246,7 +246,7 @@ Create deal.
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createDealCommand = CreateDealCommand(name: "name_example", description: "description_example", hospitalId: 123, marketingType: MarketingType(), photo: "photo_example", photoThumbnail: "photoThumbnail_example", medias: [{...}]) // CreateDealCommand |  (optional)
+let createDealCommand = CreateDealCommand(name: "name_example", description: "description_example", hospitalId: 123, marketingType: MarketingType(), photo: "photo_example", photoThumbnail: "photoThumbnail_example", medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)]) // CreateDealCommand |  (optional)
 
 // Create deal.
 DealsAPI.apiV1DealsPost(createDealCommand: createDealCommand) { (response, error) in

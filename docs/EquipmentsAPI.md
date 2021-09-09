@@ -199,7 +199,7 @@ import CloudHospitalClient
 
 let hospitalId = 987 // UUID | 
 let equipmentId = 987 // UUID | 
-let updateEquipmentCommand = UpdateEquipmentCommand(name: "name_example", description: "description_example", hospitalName: "hospitalName_example", medias: [{...}], auditableEntity: {...}) // UpdateEquipmentCommand |  (optional)
+let updateEquipmentCommand = UpdateEquipmentCommand(name: "name_example", description: "description_example", hospitalName: "hospitalName_example", medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)], auditableEntity: AuditableEntity(createdBy: 123, updatedBy: 123, deletedBy: 123, createdDate: Date(), updatedDate: Date(), deletedDate: Date(), isHidden: false, isDeleted: false)) // UpdateEquipmentCommand |  (optional)
 
 // Update equipment.
 EquipmentsAPI.apiV1HospitalsHospitalIdEquipmentsEquipmentIdPut(hospitalId: hospitalId, equipmentId: equipmentId, updateEquipmentCommand: updateEquipmentCommand) { (response, error) in
@@ -252,7 +252,7 @@ Sample request:        POST /api/v1/hospitals/1/equipments      {          \"nam
 import CloudHospitalClient
 
 let hospitalId = 987 // UUID | 
-let createEquipmentCommand = CreateEquipmentCommand(name: "name_example", description: "description_example", medias: [{...}], auditableEntity: {...}) // CreateEquipmentCommand |  (optional)
+let createEquipmentCommand = CreateEquipmentCommand(name: "name_example", description: "description_example", medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)], auditableEntity: AuditableEntity(createdBy: 123, updatedBy: 123, deletedBy: 123, createdDate: Date(), updatedDate: Date(), deletedDate: Date(), isHidden: false, isDeleted: false)) // CreateEquipmentCommand |  (optional)
 
 // Create an equipment and add to a hospital.
 EquipmentsAPI.apiV1HospitalsHospitalIdEquipmentsPost(hospitalId: hospitalId, createEquipmentCommand: createEquipmentCommand) { (response, error) in

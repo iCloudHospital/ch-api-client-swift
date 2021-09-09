@@ -238,7 +238,7 @@ Sample request:        PUT /api/v1/SpecialtyTypeCategories/1      {          \"n
 import CloudHospitalClient
 
 let specialtyTypeCategoryId = 987 // UUID | 
-let updateSpecialtyTypeCategoryCommand = UpdateSpecialtyTypeCategoryCommand(id: 123, name: "name_example", description: "description_example", order: 123, specialtyTypeCount: 123, specialtyTypes: [{...}], selectedSpecialtyTypes: [123]) // UpdateSpecialtyTypeCategoryCommand |  (optional)
+let updateSpecialtyTypeCategoryCommand = UpdateSpecialtyTypeCategoryCommand(id: 123, name: "name_example", description: "description_example", order: 123, specialtyTypeCount: 123, specialtyTypes: [SpecialtyTypeItemViewModel(id: 123, name: "name_example", slug: "slug_example", description: "description_example", content: "content_example", marketingType: MarketingType(), specialtyCount: 123, hospitalSpecialtyCount: 123, serviceCount: 123, created: Date())], selectedSpecialtyTypes: [123]) // UpdateSpecialtyTypeCategoryCommand |  (optional)
 
 // Update specialtyTypeCategory
 SpecialtyTypeCategoriesAPI.apiV1SpecialtytypecategoriesSpecialtyTypeCategoryIdPut(specialtyTypeCategoryId: specialtyTypeCategoryId, updateSpecialtyTypeCategoryCommand: updateSpecialtyTypeCategoryCommand) { (response, error) in
