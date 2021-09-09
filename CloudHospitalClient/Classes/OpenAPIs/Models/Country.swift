@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct Country: Codable {
 
     public var id: UUID?
@@ -35,4 +34,3 @@ public struct Country: Codable {
     }
 
 }
-

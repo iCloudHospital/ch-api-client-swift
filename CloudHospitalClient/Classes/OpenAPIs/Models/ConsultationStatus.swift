@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum ConsultationStatus: String, Codable, CaseIterable {
     case new = "New"
     case rejected = "Rejected"

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum AutocompleteMode: String, Codable, CaseIterable {
     case oneTerm = "OneTerm"
     case twoTerms = "TwoTerms"

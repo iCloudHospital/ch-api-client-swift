@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct FacebookUserDataDeletionResponseModel: Codable {
 
     public var userId: String?
@@ -23,4 +22,3 @@ public struct FacebookUserDataDeletionResponseModel: Codable {
     }
 
 }
-

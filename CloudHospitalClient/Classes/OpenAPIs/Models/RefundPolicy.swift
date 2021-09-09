@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum RefundPolicy: String, Codable, CaseIterable {
     case nonRefundable = "NonRefundable"
     case refundable = "Refundable"

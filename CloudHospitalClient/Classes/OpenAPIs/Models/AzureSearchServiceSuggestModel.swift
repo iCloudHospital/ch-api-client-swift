@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct AzureSearchServiceSuggestModel: Codable {
 
     public var values: [String]?
@@ -17,4 +16,3 @@ public struct AzureSearchServiceSuggestModel: Codable {
     }
 
 }
-

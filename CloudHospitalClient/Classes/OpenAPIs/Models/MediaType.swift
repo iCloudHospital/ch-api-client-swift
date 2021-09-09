@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum MediaType: String, Codable, CaseIterable {
     case photo = "Photo"
     case video = "Video"

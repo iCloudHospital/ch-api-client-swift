@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum UserLocationType: String, Codable, CaseIterable {
     case livesIn = "LivesIn"
     case birthPlace = "BirthPlace"

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum VendorType: String, Codable, CaseIterable {
     case stripe = "Stripe"
     case weChat = "WeChat"

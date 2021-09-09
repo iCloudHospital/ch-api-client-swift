@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct ArticleTag: Codable {
 
     public var articleId: UUID?
@@ -25,4 +24,3 @@ public struct ArticleTag: Codable {
     }
 
 }
-

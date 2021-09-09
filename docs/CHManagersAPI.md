@@ -128,7 +128,7 @@ Sample request:        PUT /api/v1/chmanagers/1      {          \"firstName\": \
 import CloudHospitalClient
 
 let chManagerId = 987 // UUID | 
-let updateCHManagerCommand = UpdateCHManagerCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), languages: [{...}], locations: [{...}]) // UpdateCHManagerCommand |  (optional)
+let updateCHManagerCommand = UpdateCHManagerCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), languages: [UserLanguageViewModel(id: 123, language: "language_example")], locations: [UserLocationViewModel(latitude: 123, longitude: 123, country: "country_example", state: "state_example", county: "county_example", city: "city_example", zipCode: "zipCode_example", address: "address_example", locationType: UserLocationType())]) // UpdateCHManagerCommand |  (optional)
 
 // Update cloud hospital manager.
 CHManagersAPI.apiV1ChmanagersChManagerIdPut(chManagerId: chManagerId, updateCHManagerCommand: updateCHManagerCommand) { (response, error) in
@@ -247,7 +247,7 @@ Sample request:        POST /api/v1/chmanagers      {          \"userName\": \"c
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createCHManagerCommand = CreateCHManagerCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [{...}], languages: [{...}], locations: [{...}], userName: "userName_example", email: "email_example") // CreateCHManagerCommand |  (optional)
+let createCHManagerCommand = CreateCHManagerCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)], languages: [UserLanguageViewModel(id: 123, language: "language_example")], locations: [UserLocationViewModel(latitude: 123, longitude: 123, country: "country_example", state: "state_example", county: "county_example", city: "city_example", zipCode: "zipCode_example", address: "address_example", locationType: UserLocationType())], userName: "userName_example", email: "email_example") // CreateCHManagerCommand |  (optional)
 
 // Create cloud hospital manager.
 CHManagersAPI.apiV1ChmanagersPost(createCHManagerCommand: createCHManagerCommand) { (response, error) in

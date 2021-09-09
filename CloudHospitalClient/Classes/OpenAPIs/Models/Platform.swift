@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum Platform: String, Codable, CaseIterable {
     case web = "Web"
     case ios = "iOS"

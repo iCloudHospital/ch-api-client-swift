@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct AuditableEntity: Codable {
 
     public var createdBy: UUID?
@@ -31,4 +30,3 @@ public struct AuditableEntity: Codable {
     }
 
 }
-

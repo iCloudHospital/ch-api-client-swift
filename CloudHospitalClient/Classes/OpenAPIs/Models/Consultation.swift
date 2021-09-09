@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct Consultation: Codable {
 
     public var id: UUID?
@@ -93,4 +92,3 @@ public struct Consultation: Codable {
     }
 
 }
-

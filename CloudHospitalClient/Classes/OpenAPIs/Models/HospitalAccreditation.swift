@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct HospitalAccreditation: Codable {
 
     public var hospitalId: UUID?
@@ -23,4 +22,3 @@ public struct HospitalAccreditation: Codable {
     }
 
 }
-

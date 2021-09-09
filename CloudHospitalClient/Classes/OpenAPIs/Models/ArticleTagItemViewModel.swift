@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct ArticleTagItemViewModel: Codable {
 
     public var articleId: UUID?
@@ -21,4 +20,3 @@ public struct ArticleTagItemViewModel: Codable {
     }
 
 }
-

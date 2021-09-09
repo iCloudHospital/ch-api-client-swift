@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CreateDoctorCertificateCommand: Codable {
 
     public var certificate: String?
@@ -21,4 +20,3 @@ public struct CreateDoctorCertificateCommand: Codable {
     }
 
 }
-

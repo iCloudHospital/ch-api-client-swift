@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct HospitalReviewsViewModel: Codable {
 
     public var items: [HospitalReviewItemViewModel]?
@@ -19,4 +18,3 @@ public struct HospitalReviewsViewModel: Codable {
     }
 
 }
-

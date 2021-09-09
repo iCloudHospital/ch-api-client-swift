@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum ControlType: String, Codable, CaseIterable {
     case textbox = "Textbox"
     case multipleTextbox = "MultipleTextbox"

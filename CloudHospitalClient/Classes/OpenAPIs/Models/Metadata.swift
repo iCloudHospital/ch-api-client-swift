@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct Metadata: Codable {
 
     public var location: String?
@@ -21,4 +20,3 @@ public struct Metadata: Codable {
     }
 
 }
-

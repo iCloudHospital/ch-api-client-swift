@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct ArticleContributor: Codable {
 
     public var articleId: UUID?
@@ -29,4 +28,3 @@ public struct ArticleContributor: Codable {
     }
 
 }
-

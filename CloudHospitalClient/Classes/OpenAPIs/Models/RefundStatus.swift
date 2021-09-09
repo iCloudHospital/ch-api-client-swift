@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum RefundStatus: String, Codable, CaseIterable {
     case pending = "Pending"
     case succeeded = "Succeeded"

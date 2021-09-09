@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct DoctorEducationItemViewModel: Codable {
 
     public var id: UUID?
@@ -31,4 +30,3 @@ public struct DoctorEducationItemViewModel: Codable {
     }
 
 }
-

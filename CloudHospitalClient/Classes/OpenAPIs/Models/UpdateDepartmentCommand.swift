@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct UpdateDepartmentCommand: Codable {
 
     public var name: String?
@@ -19,4 +18,3 @@ public struct UpdateDepartmentCommand: Codable {
     }
 
 }
-

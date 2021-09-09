@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CHManagersViewModel: Codable {
 
     public var items: [CHManagerItemViewModel]?
@@ -19,4 +18,3 @@ public struct CHManagersViewModel: Codable {
     }
 
 }
-

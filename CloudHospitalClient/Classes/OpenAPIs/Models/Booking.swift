@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct Booking: Codable {
 
     public var id: UUID?
@@ -77,4 +76,3 @@ public struct Booking: Codable {
     }
 
 }
-

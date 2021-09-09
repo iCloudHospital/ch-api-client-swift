@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum RejectReason: String, Codable, CaseIterable {
     case assessmentNotCompleted = "AssessmentNotCompleted"
     case paymentNotCompleted = "PaymentNotCompleted"

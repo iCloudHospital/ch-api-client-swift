@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CountryViewModel: Codable {
 
     public var id: UUID?
@@ -41,4 +40,3 @@ public struct CountryViewModel: Codable {
     }
 
 }
-

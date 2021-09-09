@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct ConfirmEmailCommand: Codable {
 
     public var code: String?
@@ -17,4 +16,3 @@ public struct ConfirmEmailCommand: Codable {
     }
 
 }
-

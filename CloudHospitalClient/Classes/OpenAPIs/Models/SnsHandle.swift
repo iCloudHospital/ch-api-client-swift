@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct SnsHandle: Codable {
 
     public var id: UUID?
@@ -21,4 +20,3 @@ public struct SnsHandle: Codable {
     }
 
 }
-

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CreateDepartmentCommand: Codable {
 
     public var hospitalId: UUID?
@@ -21,4 +20,3 @@ public struct CreateDepartmentCommand: Codable {
     }
 
 }
-

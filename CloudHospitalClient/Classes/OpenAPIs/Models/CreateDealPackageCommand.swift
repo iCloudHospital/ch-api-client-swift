@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CreateDealPackageCommand: Codable {
 
     public var dealId: UUID?
@@ -29,4 +28,3 @@ public struct CreateDealPackageCommand: Codable {
     }
 
 }
-

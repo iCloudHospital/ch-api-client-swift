@@ -242,7 +242,7 @@ Sample request:        PUT /api/v1/ServiceCategories/1      {          \"name\":
 import CloudHospitalClient
 
 let serviceCategoryId = 987 // UUID | 
-let updateServiceCategoryCommand = UpdateServiceCategoryCommand(id: 123, name: "name_example", normalizedName: "normalizedName_example", description: "description_example", order: 123, serviceCount: 123, services: [{...}], selectedServices: [123]) // UpdateServiceCategoryCommand |  (optional)
+let updateServiceCategoryCommand = UpdateServiceCategoryCommand(id: 123, name: "name_example", normalizedName: "normalizedName_example", description: "description_example", order: 123, serviceCount: 123, services: [ServiceItemViewModel(id: 123, name: "name_example", slug: "slug_example", description: "description_example", content: "content_example", hospitalId: 123, hospitalName: "hospitalName_example", specialtyTypeId: 123, specialtyTypeName: "specialtyTypeName_example", specialtyId: 123, specialtyName: "specialtyName_example", marketingType: MarketingType(), procedure: Procedure(), minPrice: 123, maxPrice: 123, priceReuqest: false, order: 123, auditableEntity: AuditableEntity(createdBy: 123, updatedBy: 123, deletedBy: 123, createdDate: Date(), updatedDate: Date(), deletedDate: Date(), isHidden: false, isDeleted: false))], selectedServices: [123]) // UpdateServiceCategoryCommand |  (optional)
 
 // Update ServiceCategory
 ServiceCategoriesAPI.apiV1ServicecategoriesServiceCategoryIdPut(serviceCategoryId: serviceCategoryId, updateServiceCategoryCommand: updateServiceCategoryCommand) { (response, error) in

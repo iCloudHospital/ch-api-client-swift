@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct UpdateBookingCommand: Codable {
 
     public var quantity: Int?
@@ -37,4 +36,3 @@ public struct UpdateBookingCommand: Codable {
     }
 
 }
-

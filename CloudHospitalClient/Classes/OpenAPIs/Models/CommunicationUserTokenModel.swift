@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CommunicationUserTokenModel: Codable {
 
     public var token: String?
@@ -23,4 +22,3 @@ public struct CommunicationUserTokenModel: Codable {
     }
 
 }
-

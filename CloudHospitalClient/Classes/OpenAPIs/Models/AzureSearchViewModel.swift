@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct AzureSearchViewModel: Codable {
 
     public var hospitals: Int?
@@ -25,4 +24,3 @@ public struct AzureSearchViewModel: Codable {
     }
 
 }
-

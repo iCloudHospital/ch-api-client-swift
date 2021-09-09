@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CreateConsultationCommand: Codable {
 
     public var consultationType: ConsultationType?
@@ -51,4 +50,3 @@ public struct CreateConsultationCommand: Codable {
     }
 
 }
-

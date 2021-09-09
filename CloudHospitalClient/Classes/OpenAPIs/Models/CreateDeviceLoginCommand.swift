@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CreateDeviceLoginCommand: Codable {
 
     public var version: String?
@@ -19,4 +18,3 @@ public struct CreateDeviceLoginCommand: Codable {
     }
 
 }
-

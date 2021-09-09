@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct ManagerAffiliation: Codable {
 
     public var managerId: UUID?
@@ -23,4 +22,3 @@ public struct ManagerAffiliation: Codable {
     }
 
 }
-

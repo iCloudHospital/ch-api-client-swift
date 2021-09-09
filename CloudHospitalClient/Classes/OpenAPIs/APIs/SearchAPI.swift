@@ -6,9 +6,9 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
 
 open class SearchAPI {
     /**
@@ -22,6 +22,7 @@ open class SearchAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<AzureSearchServiceAutocompleteModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SearchAutocompleteGet(mode: AutocompleteMode? = nil, keyword: String? = nil, fuzzy: Bool? = nil, highlights: Bool? = nil, size: Int? = nil, minimumCoverage: Double? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<AzureSearchServiceAutocompleteModel, Error> {
         return Future<AzureSearchServiceAutocompleteModel, Error>.init { promise in
@@ -35,6 +36,7 @@ open class SearchAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v1/search/autocomplete
@@ -49,21 +51,27 @@ open class SearchAPI {
     open class func apiV1SearchAutocompleteGetWithRequestBuilder(mode: AutocompleteMode? = nil, keyword: String? = nil, fuzzy: Bool? = nil, highlights: Bool? = nil, size: Int? = nil, minimumCoverage: Double? = nil) -> RequestBuilder<AzureSearchServiceAutocompleteModel> {
         let path = "/api/v1/search/autocomplete"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Mode": mode?.encodeToJSON(), 
-            "Keyword": keyword?.encodeToJSON(), 
-            "Fuzzy": fuzzy?.encodeToJSON(), 
-            "Highlights": highlights?.encodeToJSON(), 
-            "Size": size?.encodeToJSON(), 
-            "MinimumCoverage": minimumCoverage?.encodeToJSON()
+            "Mode": mode?.encodeToJSON(),
+            "Keyword": keyword?.encodeToJSON(),
+            "Fuzzy": fuzzy?.encodeToJSON(),
+            "Highlights": highlights?.encodeToJSON(),
+            "Size": size?.encodeToJSON(),
+            "MinimumCoverage": minimumCoverage?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<AzureSearchServiceAutocompleteModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -81,6 +89,7 @@ open class SearchAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<DealsViewModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SearchDealsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DealsViewModel, Error> {
         return Future<DealsViewModel, Error>.init { promise in
@@ -94,6 +103,7 @@ open class SearchAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v1/search/deals
@@ -112,25 +122,31 @@ open class SearchAPI {
     open class func apiV1SearchDealsGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<DealsViewModel> {
         let path = "/api/v1/search/deals"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "SearchTerm": searchTerm?.encodeToJSON(), 
-            "CountOnly": countOnly?.encodeToJSON(), 
-            "CountryId": countryId?.encodeToJSON(), 
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON(), 
-            "Current": current?.encodeToJSON()
+            "SearchTerm": searchTerm?.encodeToJSON(),
+            "CountOnly": countOnly?.encodeToJSON(),
+            "CountryId": countryId?.encodeToJSON(),
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "Current": current?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<DealsViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -148,6 +164,7 @@ open class SearchAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<DoctorsViewModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SearchDoctorsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<DoctorsViewModel, Error> {
         return Future<DoctorsViewModel, Error>.init { promise in
@@ -161,6 +178,7 @@ open class SearchAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v1/search/doctors
@@ -179,25 +197,31 @@ open class SearchAPI {
     open class func apiV1SearchDoctorsGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<DoctorsViewModel> {
         let path = "/api/v1/search/doctors"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "SearchTerm": searchTerm?.encodeToJSON(), 
-            "CountOnly": countOnly?.encodeToJSON(), 
-            "CountryId": countryId?.encodeToJSON(), 
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON(), 
-            "Current": current?.encodeToJSON()
+            "SearchTerm": searchTerm?.encodeToJSON(),
+            "CountOnly": countOnly?.encodeToJSON(),
+            "CountryId": countryId?.encodeToJSON(),
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "Current": current?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<DoctorsViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -215,6 +239,7 @@ open class SearchAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<AzureSearchViewModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SearchGetcountGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<AzureSearchViewModel, Error> {
         return Future<AzureSearchViewModel, Error>.init { promise in
@@ -228,6 +253,7 @@ open class SearchAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v1/search/getcount
@@ -246,25 +272,31 @@ open class SearchAPI {
     open class func apiV1SearchGetcountGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<AzureSearchViewModel> {
         let path = "/api/v1/search/getcount"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "SearchTerm": searchTerm?.encodeToJSON(), 
-            "CountOnly": countOnly?.encodeToJSON(), 
-            "CountryId": countryId?.encodeToJSON(), 
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON(), 
-            "Current": current?.encodeToJSON()
+            "SearchTerm": searchTerm?.encodeToJSON(),
+            "CountOnly": countOnly?.encodeToJSON(),
+            "CountryId": countryId?.encodeToJSON(),
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "Current": current?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<AzureSearchViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -282,6 +314,7 @@ open class SearchAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalsViewModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SearchHospitalsGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalsViewModel, Error> {
         return Future<HospitalsViewModel, Error>.init { promise in
@@ -295,6 +328,7 @@ open class SearchAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v1/search/hospitals
@@ -313,25 +347,31 @@ open class SearchAPI {
     open class func apiV1SearchHospitalsGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<HospitalsViewModel> {
         let path = "/api/v1/search/hospitals"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "SearchTerm": searchTerm?.encodeToJSON(), 
-            "CountOnly": countOnly?.encodeToJSON(), 
-            "CountryId": countryId?.encodeToJSON(), 
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON(), 
-            "Current": current?.encodeToJSON()
+            "SearchTerm": searchTerm?.encodeToJSON(),
+            "CountOnly": countOnly?.encodeToJSON(),
+            "CountryId": countryId?.encodeToJSON(),
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "Current": current?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<HospitalsViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -349,6 +389,7 @@ open class SearchAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SpecialtiesViewModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SearchSpecialtiesGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtiesViewModel, Error> {
         return Future<SpecialtiesViewModel, Error>.init { promise in
@@ -362,6 +403,7 @@ open class SearchAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v1/search/specialties
@@ -380,25 +422,31 @@ open class SearchAPI {
     open class func apiV1SearchSpecialtiesGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<SpecialtiesViewModel> {
         let path = "/api/v1/search/specialties"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "SearchTerm": searchTerm?.encodeToJSON(), 
-            "CountOnly": countOnly?.encodeToJSON(), 
-            "CountryId": countryId?.encodeToJSON(), 
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON(), 
-            "Current": current?.encodeToJSON()
+            "SearchTerm": searchTerm?.encodeToJSON(),
+            "CountOnly": countOnly?.encodeToJSON(),
+            "CountryId": countryId?.encodeToJSON(),
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "Current": current?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<SpecialtiesViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -416,6 +464,7 @@ open class SearchAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SpecialtyTypesViewModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SearchSpecialtytypesGet(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypesViewModel, Error> {
         return Future<SpecialtyTypesViewModel, Error>.init { promise in
@@ -429,6 +478,7 @@ open class SearchAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v1/search/specialtytypes
@@ -447,25 +497,31 @@ open class SearchAPI {
     open class func apiV1SearchSpecialtytypesGetWithRequestBuilder(searchTerm: String? = nil, countOnly: Bool? = nil, countryId: String? = nil, hospitalId: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<SpecialtyTypesViewModel> {
         let path = "/api/v1/search/specialtytypes"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "SearchTerm": searchTerm?.encodeToJSON(), 
-            "CountOnly": countOnly?.encodeToJSON(), 
-            "CountryId": countryId?.encodeToJSON(), 
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON(), 
-            "Current": current?.encodeToJSON()
+            "SearchTerm": searchTerm?.encodeToJSON(),
+            "CountOnly": countOnly?.encodeToJSON(),
+            "CountryId": countryId?.encodeToJSON(),
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "Current": current?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<SpecialtyTypesViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
     /**
@@ -477,6 +533,7 @@ open class SearchAPI {
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<AzureSearchServiceSuggestModel, Error>
      */
+    #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
     open class func apiV1SearchSuggestGet(keyword: String? = nil, fuzzy: Bool? = nil, highlights: Bool? = nil, size: Int? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<AzureSearchServiceSuggestModel, Error> {
         return Future<AzureSearchServiceSuggestModel, Error>.init { promise in
@@ -490,6 +547,7 @@ open class SearchAPI {
             }
         }.eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v1/search/suggest
@@ -502,19 +560,25 @@ open class SearchAPI {
     open class func apiV1SearchSuggestGetWithRequestBuilder(keyword: String? = nil, fuzzy: Bool? = nil, highlights: Bool? = nil, size: Int? = nil) -> RequestBuilder<AzureSearchServiceSuggestModel> {
         let path = "/api/v1/search/suggest"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
+        let parameters: [String: Any]? = nil
+
         var url = URLComponents(string: URLString)
         url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Keyword": keyword?.encodeToJSON(), 
-            "Fuzzy": fuzzy?.encodeToJSON(), 
-            "Highlights": highlights?.encodeToJSON(), 
-            "Size": size?.encodeToJSON()
+            "Keyword": keyword?.encodeToJSON(),
+            "Fuzzy": fuzzy?.encodeToJSON(),
+            "Highlights": highlights?.encodeToJSON(),
+            "Size": size?.encodeToJSON(),
         ])
+
+        let nillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
         let requestBuilder: RequestBuilder<AzureSearchServiceSuggestModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, headers: headerParameters)
     }
 
 }

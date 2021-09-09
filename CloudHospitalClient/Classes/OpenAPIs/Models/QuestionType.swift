@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum QuestionType: String, Codable, CaseIterable {
     case general = "General"
     case health = "Health"

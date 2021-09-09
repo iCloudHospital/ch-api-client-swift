@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct QuestionItemViewModel: Codable {
 
     public var id: UUID?
@@ -47,4 +46,3 @@ public struct QuestionItemViewModel: Codable {
     }
 
 }
-

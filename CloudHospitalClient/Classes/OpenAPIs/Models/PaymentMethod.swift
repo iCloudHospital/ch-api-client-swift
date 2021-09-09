@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum PaymentMethod: String, Codable, CaseIterable {
     case stripe = "Stripe"
     case paypal = "Paypal"

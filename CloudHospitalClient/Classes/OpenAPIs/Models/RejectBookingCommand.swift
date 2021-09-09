@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct RejectBookingCommand: Codable {
 
     public var rejectReason: RejectReason?
@@ -19,4 +18,3 @@ public struct RejectBookingCommand: Codable {
     }
 
 }
-

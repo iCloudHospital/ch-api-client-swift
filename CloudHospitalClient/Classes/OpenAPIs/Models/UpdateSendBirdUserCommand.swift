@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct UpdateSendBirdUserCommand: Codable {
 
     public var nickname: String?
@@ -18,10 +17,9 @@ public struct UpdateSendBirdUserCommand: Codable {
         self.profileUrl = profileUrl
     }
 
-    public enum CodingKeys: String, CodingKey, CaseIterable { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case nickname
         case profileUrl = "profile_url"
     }
 
 }
-

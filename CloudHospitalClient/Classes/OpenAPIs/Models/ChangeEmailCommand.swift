@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct ChangeEmailCommand: Codable {
 
     public var email: String?
@@ -17,4 +16,3 @@ public struct ChangeEmailCommand: Codable {
     }
 
 }
-

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct SurveyModel: Codable {
 
     public var id: UUID?
@@ -21,4 +20,3 @@ public struct SurveyModel: Codable {
     }
 
 }
-

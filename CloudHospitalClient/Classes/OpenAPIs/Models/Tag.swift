@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct Tag: Codable {
 
     public var tagId: String?
@@ -23,4 +22,3 @@ public struct Tag: Codable {
     }
 
 }
-

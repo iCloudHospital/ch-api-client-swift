@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct DepartmentsViewModel: Codable {
 
     public var items: [DepartmentItemViewModel]?
@@ -19,4 +18,3 @@ public struct DepartmentsViewModel: Codable {
     }
 
 }
-

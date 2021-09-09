@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct UserLocationViewModel: Codable {
 
     public var latitude: Double?
@@ -33,4 +32,3 @@ public struct UserLocationViewModel: Codable {
     }
 
 }
-

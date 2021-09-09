@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct UpdateHospitalSpecialtySequenceCommand: Codable {
 
     public var hospitalSpecialtySequence: [UUID]?
@@ -17,4 +16,3 @@ public struct UpdateHospitalSpecialtySequenceCommand: Codable {
     }
 
 }
-

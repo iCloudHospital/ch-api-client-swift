@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct CHAdminItemViewModel: Codable {
 
     public var id: UUID?
@@ -43,4 +42,3 @@ public struct CHAdminItemViewModel: Codable {
     }
 
 }
-

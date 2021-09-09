@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct SendBirdGroupChannelViewModel: Codable {
 
     public var name: String?
@@ -54,7 +53,7 @@ public struct SendBirdGroupChannelViewModel: Codable {
         self.freeze = freeze
     }
 
-    public enum CodingKeys: String, CodingKey, CaseIterable { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case name
         case channelUrl = "channel_url"
         case coverUrl = "cover_url"
@@ -78,4 +77,3 @@ public struct SendBirdGroupChannelViewModel: Codable {
     }
 
 }
-

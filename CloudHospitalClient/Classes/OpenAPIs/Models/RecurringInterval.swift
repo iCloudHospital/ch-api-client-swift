@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public enum RecurringInterval: String, Codable, CaseIterable {
     case day = "Day"
     case week = "Week"

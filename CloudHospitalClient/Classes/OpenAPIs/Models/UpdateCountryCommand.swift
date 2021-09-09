@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public struct UpdateCountryCommand: Codable {
 
     public var name: String?
@@ -23,4 +22,3 @@ public struct UpdateCountryCommand: Codable {
     }
 
 }
-
