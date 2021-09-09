@@ -52,7 +52,6 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/SpecialtyTypeCategoriesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/SpecialtyTypesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/SurveysAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/YoutubesAPI.swift
-CloudHospitalClient/Classes/OpenAPIs/AlamofireImplementations.swift
 CloudHospitalClient/Classes/OpenAPIs/CodableHelper.swift
 CloudHospitalClient/Classes/OpenAPIs/Configuration.swift
 CloudHospitalClient/Classes/OpenAPIs/Extensions.swift
@@ -349,6 +348,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/YoutubeViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/YoutubesViewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/OpenISO8601DateFormatter.swift
 CloudHospitalClient/Classes/OpenAPIs/SynchronizedDictionary.swift
+CloudHospitalClient/Classes/OpenAPIs/URLSessionImplementations.swift
 Package.swift
 README.md
 docs/Account.md
