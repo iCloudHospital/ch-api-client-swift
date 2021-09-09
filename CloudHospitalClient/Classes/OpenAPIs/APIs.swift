@@ -10,7 +10,7 @@ open class CloudHospitalClientAPI {
     public static var basePath = "http://localhost"
     public static var credential: URLCredential?
     public static var customHeaders: [String: String] = [:]
-    public static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
+    public static var requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory()
     public static var apiResponseQueue: DispatchQueue = .main
 }
 
@@ -22,6 +22,8 @@ open class RequestBuilder<T> {
     public let URLString: String
 
     /// Optional block to obtain a reference to the request's progress instance when available.
+    /// With the URLSession http client the request's progress only works on iOS 11.0, macOS 10.13, macCatalyst 13.0, tvOS 11.0, watchOS 4.0.
+    /// If you need to get the request's progress in older OS versions, please use Alamofire http client.
     public var onProgressReady: ((Progress) -> Void)?
 
     required public init(method: String, URLString: String, parameters: [String: Any]?, headers: [String: String] = [:]) {
