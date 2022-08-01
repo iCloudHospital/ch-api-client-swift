@@ -13,16 +13,16 @@ import AnyCodable
 public struct CheckNotificationsCommand: Codable, Hashable {
 
     public var notificationId: UUID?
-    public var delete: Bool?
+    public var isDelete: Bool?
 
-    public init(notificationId: UUID? = nil, delete: Bool? = nil) {
+    public init(notificationId: UUID? = nil, isDelete: Bool? = nil) {
         self.notificationId = notificationId
-        self.delete = delete
+        self.isDelete = isDelete
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
         case notificationId
-        case delete
+        case isDelete
     }
 
     // Encodable protocol methods
@@ -30,7 +30,7 @@ public struct CheckNotificationsCommand: Codable, Hashable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(notificationId, forKey: .notificationId)
-        try container.encodeIfPresent(delete, forKey: .delete)
+        try container.encodeIfPresent(isDelete, forKey: .isDelete)
     }
 }
 

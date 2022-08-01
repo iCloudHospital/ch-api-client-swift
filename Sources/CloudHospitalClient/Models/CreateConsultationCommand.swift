@@ -30,8 +30,9 @@ public struct CreateConsultationCommand: Codable, Hashable {
     public var approximateDateStart: Date?
     public var approximateDateEnd: Date?
     public var timeZone: String?
+    public var isExternal: Bool?
 
-    public init(consultationType: ConsultationType? = nil, hospitalId: UUID? = nil, specialtyId: UUID? = nil, doctorId: UUID? = nil, dealId: UUID? = nil, language: String? = nil, isAccountHolder: Bool? = nil, firstName: String? = nil, lastName: String? = nil, email: String? = nil, phone: String? = nil, dateOfBirth: Date? = nil, gender: Gender? = nil, comment: String? = nil, timeRange: String? = nil, approximateDateStart: Date? = nil, approximateDateEnd: Date? = nil, timeZone: String? = nil) {
+    public init(consultationType: ConsultationType? = nil, hospitalId: UUID? = nil, specialtyId: UUID? = nil, doctorId: UUID? = nil, dealId: UUID? = nil, language: String? = nil, isAccountHolder: Bool? = nil, firstName: String? = nil, lastName: String? = nil, email: String? = nil, phone: String? = nil, dateOfBirth: Date? = nil, gender: Gender? = nil, comment: String? = nil, timeRange: String? = nil, approximateDateStart: Date? = nil, approximateDateEnd: Date? = nil, timeZone: String? = nil, isExternal: Bool? = nil) {
         self.consultationType = consultationType
         self.hospitalId = hospitalId
         self.specialtyId = specialtyId
@@ -50,6 +51,7 @@ public struct CreateConsultationCommand: Codable, Hashable {
         self.approximateDateStart = approximateDateStart
         self.approximateDateEnd = approximateDateEnd
         self.timeZone = timeZone
+        self.isExternal = isExternal
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -71,6 +73,7 @@ public struct CreateConsultationCommand: Codable, Hashable {
         case approximateDateStart
         case approximateDateEnd
         case timeZone
+        case isExternal
     }
 
     // Encodable protocol methods
@@ -95,6 +98,7 @@ public struct CreateConsultationCommand: Codable, Hashable {
         try container.encodeIfPresent(approximateDateStart, forKey: .approximateDateStart)
         try container.encodeIfPresent(approximateDateEnd, forKey: .approximateDateEnd)
         try container.encodeIfPresent(timeZone, forKey: .timeZone)
+        try container.encodeIfPresent(isExternal, forKey: .isExternal)
     }
 }
 

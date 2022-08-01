@@ -16,18 +16,19 @@ import AnyCodable
 open class ContributorsAPI {
 
     /**
-     Get contributor.
+     Get Contributor.
      
      - parameter contributorId: (path)  
-     - parameter languageCode: (query)  (optional, default to "")
+     - parameter languageCode: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<ContributorViewModel, Error>
+     - returns: AnyPublisher<ContributorModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ContributorsContributorIdGet(contributorId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<ContributorViewModel, Error> {
-        return Future<ContributorViewModel, Error>.init { promise in
-            apiV1ContributorsContributorIdGetWithRequestBuilder(contributorId: contributorId, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2ContributorsContributorIdGet(contributorId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<ContributorModel, Error> {
+        return Future<ContributorModel, Error>.init { promise in
+            apiV2ContributorsContributorIdGetWithRequestBuilder(contributorId: contributorId, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -40,14 +41,15 @@ open class ContributorsAPI {
     #endif
 
     /**
-     Get contributor.
-     - GET /api/v1/contributors/{contributorId}
+     Get Contributor.
+     - GET /api/v2/contributors/{contributorId}
      - parameter contributorId: (path)  
-     - parameter languageCode: (query)  (optional, default to "")
-     - returns: RequestBuilder<ContributorViewModel> 
+     - parameter languageCode: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
+     - returns: RequestBuilder<ContributorModel> 
      */
-    open class func apiV1ContributorsContributorIdGetWithRequestBuilder(contributorId: UUID, languageCode: String? = nil) -> RequestBuilder<ContributorViewModel> {
-        var localVariablePath = "/api/v1/contributors/{contributorId}"
+    open class func apiV2ContributorsContributorIdGetWithRequestBuilder(contributorId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> RequestBuilder<ContributorModel> {
+        var localVariablePath = "/api/v2/contributors/{contributorId}"
         let contributorIdPreEscape = "\(APIHelper.mapValueToPathItem(contributorId))"
         let contributorIdPostEscape = contributorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{contributorId}", with: contributorIdPostEscape, options: .literal, range: nil)
@@ -57,6 +59,7 @@ open class ContributorsAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "languageCode": languageCode?.encodeToJSON(),
+            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -65,29 +68,30 @@ open class ContributorsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<ContributorViewModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ContributorModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
-     Get all contributors.
+     Get all ContributorHandles.
      
+     - parameter contributorId: (path)  
+     - parameter contributorId2: (query)  (optional)
      - parameter id: (query)  (optional)
-     - parameter languageCode: (query)  (optional)
-     - parameter interviewerOnly: (query)  (optional)
+     - parameter snsType: (query)  (optional)
+     - parameter handle: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<ContributorsViewModel, Error>
+     - returns: AnyPublisher<ContributorSnsHandlesModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ContributorsGet(id: UUID? = nil, languageCode: String? = nil, interviewerOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<ContributorsViewModel, Error> {
-        return Future<ContributorsViewModel, Error>.init { promise in
-            apiV1ContributorsGetWithRequestBuilder(id: id, languageCode: languageCode, interviewerOnly: interviewerOnly, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2ContributorsContributorIdHandlesGet(contributorId: UUID, contributorId2: UUID? = nil, id: UUID? = nil, snsType: SnsType? = nil, handle: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<ContributorSnsHandlesModel, Error> {
+        return Future<ContributorSnsHandlesModel, Error>.init { promise in
+            apiV2ContributorsContributorIdHandlesGetWithRequestBuilder(contributorId: contributorId, contributorId2: contributorId2, id: id, snsType: snsType, handle: handle, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -100,31 +104,173 @@ open class ContributorsAPI {
     #endif
 
     /**
-     Get all contributors.
-     - GET /api/v1/contributors
+     Get all ContributorHandles.
+     - GET /api/v2/contributors/{contributorId}/handles
+     - parameter contributorId: (path)  
+     - parameter contributorId2: (query)  (optional)
      - parameter id: (query)  (optional)
-     - parameter languageCode: (query)  (optional)
-     - parameter interviewerOnly: (query)  (optional)
+     - parameter snsType: (query)  (optional)
+     - parameter handle: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter current: (query)  (optional)
-     - returns: RequestBuilder<ContributorsViewModel> 
+     - returns: RequestBuilder<ContributorSnsHandlesModel> 
      */
-    open class func apiV1ContributorsGetWithRequestBuilder(id: UUID? = nil, languageCode: String? = nil, interviewerOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<ContributorsViewModel> {
-        let localVariablePath = "/api/v1/contributors"
+    open class func apiV2ContributorsContributorIdHandlesGetWithRequestBuilder(contributorId: UUID, contributorId2: UUID? = nil, id: UUID? = nil, snsType: SnsType? = nil, handle: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<ContributorSnsHandlesModel> {
+        var localVariablePath = "/api/v2/contributors/{contributorId}/handles"
+        let contributorIdPreEscape = "\(APIHelper.mapValueToPathItem(contributorId))"
+        let contributorIdPostEscape = contributorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{contributorId}", with: contributorIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "ContributorId": contributorId2?.encodeToJSON(),
+            "Id": id?.encodeToJSON(),
+            "SnsType": snsType?.encodeToJSON(),
+            "Handle": handle?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ContributorSnsHandlesModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Get ContributorHandle.
+     
+     - parameter contributorId: (path)  
+     - parameter handleId: (path)  
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<SnsHandleModel, Error>
+     */
+    #if canImport(Combine)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ContributorsContributorIdHandlesHandleIdGet(contributorId: UUID, handleId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<SnsHandleModel, Error> {
+        return Future<SnsHandleModel, Error>.init { promise in
+            apiV2ContributorsContributorIdHandlesHandleIdGetWithRequestBuilder(contributorId: contributorId, handleId: handleId).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    #endif
+
+    /**
+     Get ContributorHandle.
+     - GET /api/v2/contributors/{contributorId}/handles/{handleId}
+     - parameter contributorId: (path)  
+     - parameter handleId: (path)  
+     - returns: RequestBuilder<SnsHandleModel> 
+     */
+    open class func apiV2ContributorsContributorIdHandlesHandleIdGetWithRequestBuilder(contributorId: UUID, handleId: UUID) -> RequestBuilder<SnsHandleModel> {
+        var localVariablePath = "/api/v2/contributors/{contributorId}/handles/{handleId}"
+        let contributorIdPreEscape = "\(APIHelper.mapValueToPathItem(contributorId))"
+        let contributorIdPostEscape = contributorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{contributorId}", with: contributorIdPostEscape, options: .literal, range: nil)
+        let handleIdPreEscape = "\(APIHelper.mapValueToPathItem(handleId))"
+        let handleIdPostEscape = handleIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{handleId}", with: handleIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SnsHandleModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Get all Contributors.
+     
+     - parameter id: (query)  (optional)
+     - parameter name: (query)  (optional)
+     - parameter email: (query)  (optional)
+     - parameter website: (query)  (optional)
+     - parameter hospitalId: (query)  (optional)
+     - parameter interviewerOnly: (query)  (optional)
+     - parameter showHidden: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
+     - parameter page: (query)  (optional)
+     - parameter limit: (query)  (optional)
+     - parameter lastRetrieved: (query)  (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<ContributorsModel, Error>
+     */
+    #if canImport(Combine)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ContributorsGet(id: UUID? = nil, name: String? = nil, email: String? = nil, website: String? = nil, hospitalId: UUID? = nil, interviewerOnly: Bool? = nil, showHidden: Bool? = nil, languageCode: String? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<ContributorsModel, Error> {
+        return Future<ContributorsModel, Error>.init { promise in
+            apiV2ContributorsGetWithRequestBuilder(id: id, name: name, email: email, website: website, hospitalId: hospitalId, interviewerOnly: interviewerOnly, showHidden: showHidden, languageCode: languageCode, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    #endif
+
+    /**
+     Get all Contributors.
+     - GET /api/v2/contributors
+     - parameter id: (query)  (optional)
+     - parameter name: (query)  (optional)
+     - parameter email: (query)  (optional)
+     - parameter website: (query)  (optional)
+     - parameter hospitalId: (query)  (optional)
+     - parameter interviewerOnly: (query)  (optional)
+     - parameter showHidden: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
+     - parameter page: (query)  (optional)
+     - parameter limit: (query)  (optional)
+     - parameter lastRetrieved: (query)  (optional)
+     - returns: RequestBuilder<ContributorsModel> 
+     */
+    open class func apiV2ContributorsGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, email: String? = nil, website: String? = nil, hospitalId: UUID? = nil, interviewerOnly: Bool? = nil, showHidden: Bool? = nil, languageCode: String? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<ContributorsModel> {
+        let localVariablePath = "/api/v2/contributors"
         let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "Id": id?.encodeToJSON(),
-            "LanguageCode": languageCode?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "Email": email?.encodeToJSON(),
+            "Website": website?.encodeToJSON(),
+            "HospitalId": hospitalId?.encodeToJSON(),
             "InterviewerOnly": interviewerOnly?.encodeToJSON(),
+            "ShowHidden": showHidden?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(),
             "page": page?.encodeToJSON(),
             "limit": limit?.encodeToJSON(),
             "lastRetrieved": lastRetrieved?.encodeToJSON(),
-            "Current": current?.encodeToJSON(),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -133,24 +279,25 @@ open class ContributorsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<ContributorsViewModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ContributorsModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
-     Get contributor by slug.
+     Get Contributor by slug.
      
      - parameter slug: (path)  
-     - parameter languageCode: (query)  (optional, default to "")
+     - parameter languageCode: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<ContributorViewModel, Error>
+     - returns: AnyPublisher<ContributorModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ContributorsSlugsSlugGet(slug: String, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<ContributorViewModel, Error> {
-        return Future<ContributorViewModel, Error>.init { promise in
-            apiV1ContributorsSlugsSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2ContributorsSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<ContributorModel, Error> {
+        return Future<ContributorModel, Error>.init { promise in
+            apiV2ContributorsSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -163,14 +310,15 @@ open class ContributorsAPI {
     #endif
 
     /**
-     Get contributor by slug.
-     - GET /api/v1/contributors/slugs/{slug}
+     Get Contributor by slug.
+     - GET /api/v2/contributors/{slug}
      - parameter slug: (path)  
-     - parameter languageCode: (query)  (optional, default to "")
-     - returns: RequestBuilder<ContributorViewModel> 
+     - parameter languageCode: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
+     - returns: RequestBuilder<ContributorModel> 
      */
-    open class func apiV1ContributorsSlugsSlugGetWithRequestBuilder(slug: String, languageCode: String? = nil) -> RequestBuilder<ContributorViewModel> {
-        var localVariablePath = "/api/v1/contributors/slugs/{slug}"
+    open class func apiV2ContributorsSlugGetWithRequestBuilder(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> RequestBuilder<ContributorModel> {
+        var localVariablePath = "/api/v2/contributors/{slug}"
         let slugPreEscape = "\(APIHelper.mapValueToPathItem(slug))"
         let slugPostEscape = slugPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{slug}", with: slugPostEscape, options: .literal, range: nil)
@@ -180,6 +328,7 @@ open class ContributorsAPI {
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "languageCode": languageCode?.encodeToJSON(),
+            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -188,7 +337,7 @@ open class ContributorsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<ContributorViewModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<ContributorModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }

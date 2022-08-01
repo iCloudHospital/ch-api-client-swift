@@ -4,17 +4,17 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV1CommunicationsDelete**](CommunicationsAPI.md#apiv1communicationsdelete) | **DELETE** /api/v1/communications | 
-[**apiV1CommunicationsGet**](CommunicationsAPI.md#apiv1communicationsget) | **GET** /api/v1/communications | 
-[**apiV1CommunicationsPut**](CommunicationsAPI.md#apiv1communicationsput) | **PUT** /api/v1/communications | 
+[**apiV2CommunicationsDelete**](CommunicationsAPI.md#apiv2communicationsdelete) | **DELETE** /api/v2/communications | Delete CommunicationUser.
+[**apiV2CommunicationsGet**](CommunicationsAPI.md#apiv2communicationsget) | **GET** /api/v2/communications | Get CommunicationUser.
+[**apiV2CommunicationsPut**](CommunicationsAPI.md#apiv2communicationsput) | **PUT** /api/v2/communications | Revoke CommunicationUser.
 
 
-# **apiV1CommunicationsDelete**
+# **apiV2CommunicationsDelete**
 ```swift
-    open class func apiV1CommunicationsDelete(completion: @escaping (_ data: Int?, _ error: Error?) -> Void)
+    open class func apiV2CommunicationsDelete(completion: @escaping (_ data: Int?, _ error: Error?) -> Void)
 ```
 
-
+Delete CommunicationUser.
 
 ### Example 
 ```swift
@@ -22,7 +22,8 @@ Method | HTTP request | Description
 import CloudHospitalClient
 
 
-CommunicationsAPI.apiV1CommunicationsDelete() { (response, error) in
+// Delete CommunicationUser.
+CommunicationsAPI.apiV2CommunicationsDelete() { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -48,16 +49,16 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1CommunicationsGet**
+# **apiV2CommunicationsGet**
 ```swift
-    open class func apiV1CommunicationsGet(completion: @escaping (_ data: CommunicationUserTokenModel?, _ error: Error?) -> Void)
+    open class func apiV2CommunicationsGet(completion: @escaping (_ data: CommunicationUserTokenModel?, _ error: Error?) -> Void)
 ```
 
-
+Get CommunicationUser.
 
 ### Example 
 ```swift
@@ -65,7 +66,8 @@ This endpoint does not need any parameter.
 import CloudHospitalClient
 
 
-CommunicationsAPI.apiV1CommunicationsGet() { (response, error) in
+// Get CommunicationUser.
+CommunicationsAPI.apiV2CommunicationsGet() { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -91,16 +93,16 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1CommunicationsPut**
+# **apiV2CommunicationsPut**
 ```swift
-    open class func apiV1CommunicationsPut(completion: @escaping (_ data: CommunicationUserTokenModel?, _ error: Error?) -> Void)
+    open class func apiV2CommunicationsPut(completion: @escaping (_ data: CommunicationUserTokenModel?, _ error: Error?) -> Void)
 ```
 
-
+Revoke CommunicationUser.
 
 ### Example 
 ```swift
@@ -108,7 +110,8 @@ This endpoint does not need any parameter.
 import CloudHospitalClient
 
 
-CommunicationsAPI.apiV1CommunicationsPut() { (response, error) in
+// Revoke CommunicationUser.
+CommunicationsAPI.apiV2CommunicationsPut() { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -134,7 +137,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

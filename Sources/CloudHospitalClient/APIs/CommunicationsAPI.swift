@@ -16,15 +16,16 @@ import AnyCodable
 open class CommunicationsAPI {
 
     /**
-
+     Delete CommunicationUser.
+     
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Int, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1CommunicationsDelete(apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<Int, Error> {
+    open class func apiV2CommunicationsDelete(apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<Int, Error> {
         return Future<Int, Error>.init { promise in
-            apiV1CommunicationsDeleteWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+            apiV2CommunicationsDeleteWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -37,14 +38,15 @@ open class CommunicationsAPI {
     #endif
 
     /**
-     - DELETE /api/v1/communications
+     Delete CommunicationUser.
+     - DELETE /api/v2/communications
      - OAuth:
        - type: oauth2
        - name: oauth2
      - returns: RequestBuilder<Int> 
      */
-    open class func apiV1CommunicationsDeleteWithRequestBuilder() -> RequestBuilder<Int> {
-        let localVariablePath = "/api/v1/communications"
+    open class func apiV2CommunicationsDeleteWithRequestBuilder() -> RequestBuilder<Int> {
+        let localVariablePath = "/api/v2/communications"
         let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
@@ -62,15 +64,16 @@ open class CommunicationsAPI {
     }
 
     /**
-
+     Get CommunicationUser.
+     
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<CommunicationUserTokenModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1CommunicationsGet(apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<CommunicationUserTokenModel, Error> {
+    open class func apiV2CommunicationsGet(apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<CommunicationUserTokenModel, Error> {
         return Future<CommunicationUserTokenModel, Error>.init { promise in
-            apiV1CommunicationsGetWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+            apiV2CommunicationsGetWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -83,14 +86,15 @@ open class CommunicationsAPI {
     #endif
 
     /**
-     - GET /api/v1/communications
+     Get CommunicationUser.
+     - GET /api/v2/communications
      - OAuth:
        - type: oauth2
        - name: oauth2
      - returns: RequestBuilder<CommunicationUserTokenModel> 
      */
-    open class func apiV1CommunicationsGetWithRequestBuilder() -> RequestBuilder<CommunicationUserTokenModel> {
-        let localVariablePath = "/api/v1/communications"
+    open class func apiV2CommunicationsGetWithRequestBuilder() -> RequestBuilder<CommunicationUserTokenModel> {
+        let localVariablePath = "/api/v2/communications"
         let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
@@ -108,15 +112,16 @@ open class CommunicationsAPI {
     }
 
     /**
-
+     Revoke CommunicationUser.
+     
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<CommunicationUserTokenModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1CommunicationsPut(apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<CommunicationUserTokenModel, Error> {
+    open class func apiV2CommunicationsPut(apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<CommunicationUserTokenModel, Error> {
         return Future<CommunicationUserTokenModel, Error>.init { promise in
-            apiV1CommunicationsPutWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+            apiV2CommunicationsPutWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -129,14 +134,15 @@ open class CommunicationsAPI {
     #endif
 
     /**
-     - PUT /api/v1/communications
+     Revoke CommunicationUser.
+     - PUT /api/v2/communications
      - OAuth:
        - type: oauth2
        - name: oauth2
      - returns: RequestBuilder<CommunicationUserTokenModel> 
      */
-    open class func apiV1CommunicationsPutWithRequestBuilder() -> RequestBuilder<CommunicationUserTokenModel> {
-        let localVariablePath = "/api/v1/communications"
+    open class func apiV2CommunicationsPutWithRequestBuilder() -> RequestBuilder<CommunicationUserTokenModel> {
+        let localVariablePath = "/api/v2/communications"
         let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 

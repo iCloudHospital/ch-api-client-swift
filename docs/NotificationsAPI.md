@@ -4,13 +4,13 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV1NotificationsCheckPost**](NotificationsAPI.md#apiv1notificationscheckpost) | **POST** /api/v1/notifications/check | Check notification.
-[**apiV1NotificationsGet**](NotificationsAPI.md#apiv1notificationsget) | **GET** /api/v1/notifications | Get all notifications.
+[**apiV2NotificationsCheckPost**](NotificationsAPI.md#apiv2notificationscheckpost) | **POST** /api/v2/notifications/check | Check notification.
+[**apiV2NotificationsGet**](NotificationsAPI.md#apiv2notificationsget) | **GET** /api/v2/notifications | Get all notifications.
 
 
-# **apiV1NotificationsCheckPost**
+# **apiV2NotificationsCheckPost**
 ```swift
-    open class func apiV1NotificationsCheckPost(checkNotificationsCommand: CheckNotificationsCommand? = nil, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
+    open class func apiV2NotificationsCheckPost(checkNotificationsCommand: CheckNotificationsCommand? = nil, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
 ```
 
 Check notification.
@@ -20,10 +20,10 @@ Check notification.
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let checkNotificationsCommand = CheckNotificationsCommand(notificationId: 123, delete: false) // CheckNotificationsCommand |  (optional)
+let checkNotificationsCommand = CheckNotificationsCommand(notificationId: 123, isDelete: false) // CheckNotificationsCommand |  (optional)
 
 // Check notification.
-NotificationsAPI.apiV1NotificationsCheckPost(checkNotificationsCommand: checkNotificationsCommand) { (response, error) in
+NotificationsAPI.apiV2NotificationsCheckPost(checkNotificationsCommand: checkNotificationsCommand) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -52,13 +52,13 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1NotificationsGet**
+# **apiV2NotificationsGet**
 ```swift
-    open class func apiV1NotificationsGet(notificationCode: NotificationCode? = nil, unreadCountOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: NotificationsViewModel?, _ error: Error?) -> Void)
+    open class func apiV2NotificationsGet(notificationCode: NotificationCode? = nil, unreadCountOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: NotificationsModel?, _ error: Error?) -> Void)
 ```
 
 Get all notifications.
@@ -73,10 +73,9 @@ let unreadCountOnly = true // Bool |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
-let current = true // Bool |  (optional)
 
 // Get all notifications.
-NotificationsAPI.apiV1NotificationsGet(notificationCode: notificationCode, unreadCountOnly: unreadCountOnly, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+NotificationsAPI.apiV2NotificationsGet(notificationCode: notificationCode, unreadCountOnly: unreadCountOnly, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -97,11 +96,10 @@ Name | Type | Description  | Notes
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
- **current** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**NotificationsViewModel**](NotificationsViewModel.md)
+[**NotificationsModel**](NotificationsModel.md)
 
 ### Authorization
 
@@ -110,7 +108,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

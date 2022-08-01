@@ -15,4 +15,7 @@ public enum MediaType: String, Codable, CaseIterable {
     case video = "Video"
     case youtube = "Youtube"
     case document = "Document"
+    case frontal = "Frontal"
+    case diagonal = "Diagonal"
+    case side = "Side"
 }

@@ -24,9 +24,9 @@ open class NotificationsAPI {
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1NotificationsCheckPost(checkNotificationsCommand: CheckNotificationsCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+    open class func apiV2NotificationsCheckPost(checkNotificationsCommand: CheckNotificationsCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error>.init { promise in
-            apiV1NotificationsCheckPostWithRequestBuilder(checkNotificationsCommand: checkNotificationsCommand).execute(apiResponseQueue) { result -> Void in
+            apiV2NotificationsCheckPostWithRequestBuilder(checkNotificationsCommand: checkNotificationsCommand).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -40,15 +40,15 @@ open class NotificationsAPI {
 
     /**
      Check notification.
-     - POST /api/v1/notifications/check
+     - POST /api/v2/notifications/check
      - OAuth:
        - type: oauth2
        - name: oauth2
      - parameter checkNotificationsCommand: (body)  (optional)
      - returns: RequestBuilder<Bool> 
      */
-    open class func apiV1NotificationsCheckPostWithRequestBuilder(checkNotificationsCommand: CheckNotificationsCommand? = nil) -> RequestBuilder<Bool> {
-        let localVariablePath = "/api/v1/notifications/check"
+    open class func apiV2NotificationsCheckPostWithRequestBuilder(checkNotificationsCommand: CheckNotificationsCommand? = nil) -> RequestBuilder<Bool> {
+        let localVariablePath = "/api/v2/notifications/check"
         let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: checkNotificationsCommand)
 
@@ -73,15 +73,14 @@ open class NotificationsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<NotificationsViewModel, Error>
+     - returns: AnyPublisher<NotificationsModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1NotificationsGet(notificationCode: NotificationCode? = nil, unreadCountOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<NotificationsViewModel, Error> {
-        return Future<NotificationsViewModel, Error>.init { promise in
-            apiV1NotificationsGetWithRequestBuilder(notificationCode: notificationCode, unreadCountOnly: unreadCountOnly, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2NotificationsGet(notificationCode: NotificationCode? = nil, unreadCountOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<NotificationsModel, Error> {
+        return Future<NotificationsModel, Error>.init { promise in
+            apiV2NotificationsGetWithRequestBuilder(notificationCode: notificationCode, unreadCountOnly: unreadCountOnly, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -95,7 +94,7 @@ open class NotificationsAPI {
 
     /**
      Get all notifications.
-     - GET /api/v1/notifications
+     - GET /api/v2/notifications
      - OAuth:
        - type: oauth2
        - name: oauth2
@@ -104,11 +103,10 @@ open class NotificationsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter current: (query)  (optional)
-     - returns: RequestBuilder<NotificationsViewModel> 
+     - returns: RequestBuilder<NotificationsModel> 
      */
-    open class func apiV1NotificationsGetWithRequestBuilder(notificationCode: NotificationCode? = nil, unreadCountOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<NotificationsViewModel> {
-        let localVariablePath = "/api/v1/notifications"
+    open class func apiV2NotificationsGetWithRequestBuilder(notificationCode: NotificationCode? = nil, unreadCountOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<NotificationsModel> {
+        let localVariablePath = "/api/v2/notifications"
         let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
@@ -119,7 +117,6 @@ open class NotificationsAPI {
             "page": page?.encodeToJSON(),
             "limit": limit?.encodeToJSON(),
             "lastRetrieved": lastRetrieved?.encodeToJSON(),
-            "Current": current?.encodeToJSON(),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -128,7 +125,7 @@ open class NotificationsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<NotificationsViewModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<NotificationsModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }

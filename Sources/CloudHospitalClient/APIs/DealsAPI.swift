@@ -16,70 +16,19 @@ import AnyCodable
 open class DealsAPI {
 
     /**
-     Delete deal.
-     
-     - parameter dealId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<Bool, Error>
-     */
-    #if canImport(Combine)
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1DealsDealIdDelete(dealId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error>.init { promise in
-            apiV1DealsDealIdDeleteWithRequestBuilder(dealId: dealId).execute(apiResponseQueue) { result -> Void in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body!))
-                case let .failure(error):
-                    promise(.failure(error))
-                }
-            }
-        }.eraseToAnyPublisher()
-    }
-    #endif
-
-    /**
-     Delete deal.
-     - DELETE /api/v1/deals/{dealId}
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter dealId: (path)  
-     - returns: RequestBuilder<Bool> 
-     */
-    open class func apiV1DealsDealIdDeleteWithRequestBuilder(dealId: UUID) -> RequestBuilder<Bool> {
-        var localVariablePath = "/api/v1/deals/{dealId}"
-        let dealIdPreEscape = "\(APIHelper.mapValueToPathItem(dealId))"
-        let dealIdPostEscape = dealIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{dealId}", with: dealIdPostEscape, options: .literal, range: nil)
-        let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
-        let localVariableParameters: [String: Any]? = nil
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: Any?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
-    }
-
-    /**
      Get deal.
      
      - parameter dealId: (path)  
+     - parameter languageCode: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<DealViewModel, Error>
+     - returns: AnyPublisher<DealModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1DealsDealIdGet(dealId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<DealViewModel, Error> {
-        return Future<DealViewModel, Error>.init { promise in
-            apiV1DealsDealIdGetWithRequestBuilder(dealId: dealId).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2DealsDealIdGet(dealId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<DealModel, Error> {
+        return Future<DealModel, Error>.init { promise in
+            apiV2DealsDealIdGetWithRequestBuilder(dealId: dealId, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -93,19 +42,25 @@ open class DealsAPI {
 
     /**
      Get deal.
-     - GET /api/v1/deals/{dealId}
+     - GET /api/v2/deals/{dealId}
      - parameter dealId: (path)  
-     - returns: RequestBuilder<DealViewModel> 
+     - parameter languageCode: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
+     - returns: RequestBuilder<DealModel> 
      */
-    open class func apiV1DealsDealIdGetWithRequestBuilder(dealId: UUID) -> RequestBuilder<DealViewModel> {
-        var localVariablePath = "/api/v1/deals/{dealId}"
+    open class func apiV2DealsDealIdGetWithRequestBuilder(dealId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> RequestBuilder<DealModel> {
+        var localVariablePath = "/api/v2/deals/{dealId}"
         let dealIdPreEscape = "\(APIHelper.mapValueToPathItem(dealId))"
         let dealIdPostEscape = dealIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{dealId}", with: dealIdPostEscape, options: .literal, range: nil)
         let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
+            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
+        ])
 
         let localVariableNillableHeaders: [String: Any?] = [
             :
@@ -113,24 +68,34 @@ open class DealsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<DealViewModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<DealModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
-     Update deal.
+     Get all DealPackage.
      
      - parameter dealId: (path)  
-     - parameter updateDealCommand: (body)  (optional)
+     - parameter relatedDealPackageId: (query)  (optional)
+     - parameter dealName: (query)  (optional)
+     - parameter name: (query)  (optional)
+     - parameter countryId: (query)  (optional)
+     - parameter hospitalId: (query)  (optional)
+     - parameter hospitalName: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
+     - parameter showHidden: (query)  (optional)
+     - parameter page: (query)  (optional)
+     - parameter limit: (query)  (optional)
+     - parameter lastRetrieved: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<Bool, Error>
+     - returns: AnyPublisher<DealPackagesModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1DealsDealIdPut(dealId: UUID, updateDealCommand: UpdateDealCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error>.init { promise in
-            apiV1DealsDealIdPutWithRequestBuilder(dealId: dealId, updateDealCommand: updateDealCommand).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2DealsDealIdPackagesGet(dealId: UUID, relatedDealPackageId: UUID? = nil, dealName: String? = nil, name: String? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<DealPackagesModel, Error> {
+        return Future<DealPackagesModel, Error>.init { promise in
+            apiV2DealsDealIdPackagesGetWithRequestBuilder(dealId: dealId, relatedDealPackageId: relatedDealPackageId, dealName: dealName, name: name, countryId: countryId, hospitalId: hospitalId, hospitalName: hospitalName, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -143,24 +108,44 @@ open class DealsAPI {
     #endif
 
     /**
-     Update deal.
-     - PUT /api/v1/deals/{dealId}
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
+     Get all DealPackage.
+     - GET /api/v2/deals/{dealId}/packages
      - parameter dealId: (path)  
-     - parameter updateDealCommand: (body)  (optional)
-     - returns: RequestBuilder<Bool> 
+     - parameter relatedDealPackageId: (query)  (optional)
+     - parameter dealName: (query)  (optional)
+     - parameter name: (query)  (optional)
+     - parameter countryId: (query)  (optional)
+     - parameter hospitalId: (query)  (optional)
+     - parameter hospitalName: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
+     - parameter showHidden: (query)  (optional)
+     - parameter page: (query)  (optional)
+     - parameter limit: (query)  (optional)
+     - parameter lastRetrieved: (query)  (optional)
+     - returns: RequestBuilder<DealPackagesModel> 
      */
-    open class func apiV1DealsDealIdPutWithRequestBuilder(dealId: UUID, updateDealCommand: UpdateDealCommand? = nil) -> RequestBuilder<Bool> {
-        var localVariablePath = "/api/v1/deals/{dealId}"
+    open class func apiV2DealsDealIdPackagesGetWithRequestBuilder(dealId: UUID, relatedDealPackageId: UUID? = nil, dealName: String? = nil, name: String? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<DealPackagesModel> {
+        var localVariablePath = "/api/v2/deals/{dealId}/packages"
         let dealIdPreEscape = "\(APIHelper.mapValueToPathItem(dealId))"
         let dealIdPostEscape = dealIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{dealId}", with: dealIdPostEscape, options: .literal, range: nil)
         let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateDealCommand)
+        let localVariableParameters: [String: Any]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "RelatedDealPackageId": relatedDealPackageId?.encodeToJSON(),
+            "DealName": dealName?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "CountryId": countryId?.encodeToJSON(),
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "HospitalName": hospitalName?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "ShowHidden": showHidden?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+        ])
 
         let localVariableNillableHeaders: [String: Any?] = [
             :
@@ -168,9 +153,193 @@ open class DealsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<DealPackagesModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Get DealPackage.
+     
+     - parameter dealId: (path)  
+     - parameter packageId: (path)  
+     - parameter languageCode: (query)  (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<DealPackageModel, Error>
+     */
+    #if canImport(Combine)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2DealsDealIdPackagesPackageIdGet(dealId: UUID, packageId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<DealPackageModel, Error> {
+        return Future<DealPackageModel, Error>.init { promise in
+            apiV2DealsDealIdPackagesPackageIdGetWithRequestBuilder(dealId: dealId, packageId: packageId, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    #endif
+
+    /**
+     Get DealPackage.
+     - GET /api/v2/deals/{dealId}/packages/{packageId}
+     - parameter dealId: (path)  
+     - parameter packageId: (path)  
+     - parameter languageCode: (query)  (optional)
+     - returns: RequestBuilder<DealPackageModel> 
+     */
+    open class func apiV2DealsDealIdPackagesPackageIdGetWithRequestBuilder(dealId: UUID, packageId: UUID, languageCode: String? = nil) -> RequestBuilder<DealPackageModel> {
+        var localVariablePath = "/api/v2/deals/{dealId}/packages/{packageId}"
+        let dealIdPreEscape = "\(APIHelper.mapValueToPathItem(dealId))"
+        let dealIdPostEscape = dealIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{dealId}", with: dealIdPostEscape, options: .literal, range: nil)
+        let packageIdPreEscape = "\(APIHelper.mapValueToPathItem(packageId))"
+        let packageIdPostEscape = packageIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{packageId}", with: packageIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<DealPackageModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Get all DealService.
+     
+     - parameter dealId: (path)  
+     - parameter languageCode: (query)  (optional)
+     - parameter page: (query)  (optional)
+     - parameter limit: (query)  (optional)
+     - parameter lastRetrieved: (query)  (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<DealServicesModel, Error>
+     */
+    #if canImport(Combine)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2DealsDealIdServicesGet(dealId: UUID, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<DealServicesModel, Error> {
+        return Future<DealServicesModel, Error>.init { promise in
+            apiV2DealsDealIdServicesGetWithRequestBuilder(dealId: dealId, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    #endif
+
+    /**
+     Get all DealService.
+     - GET /api/v2/deals/{dealId}/services
+     - parameter dealId: (path)  
+     - parameter languageCode: (query)  (optional)
+     - parameter page: (query)  (optional)
+     - parameter limit: (query)  (optional)
+     - parameter lastRetrieved: (query)  (optional)
+     - returns: RequestBuilder<DealServicesModel> 
+     */
+    open class func apiV2DealsDealIdServicesGetWithRequestBuilder(dealId: UUID, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<DealServicesModel> {
+        var localVariablePath = "/api/v2/deals/{dealId}/services"
+        let dealIdPreEscape = "\(APIHelper.mapValueToPathItem(dealId))"
+        let dealIdPostEscape = dealIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{dealId}", with: dealIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<DealServicesModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+     Get DealService.
+     
+     - parameter dealId: (path)  
+     - parameter serviceId: (path)  
+     - parameter languageCode: (query)  (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<DealServiceModel, Error>
+     */
+    #if canImport(Combine)
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2DealsDealIdServicesServiceIdGet(dealId: UUID, serviceId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<DealServiceModel, Error> {
+        return Future<DealServiceModel, Error>.init { promise in
+            apiV2DealsDealIdServicesServiceIdGetWithRequestBuilder(dealId: dealId, serviceId: serviceId, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    #endif
+
+    /**
+     Get DealService.
+     - GET /api/v2/deals/{dealId}/services/{serviceId}
+     - parameter dealId: (path)  
+     - parameter serviceId: (path)  
+     - parameter languageCode: (query)  (optional)
+     - returns: RequestBuilder<DealServiceModel> 
+     */
+    open class func apiV2DealsDealIdServicesServiceIdGetWithRequestBuilder(dealId: UUID, serviceId: UUID, languageCode: String? = nil) -> RequestBuilder<DealServiceModel> {
+        var localVariablePath = "/api/v2/deals/{dealId}/services/{serviceId}"
+        let dealIdPreEscape = "\(APIHelper.mapValueToPathItem(dealId))"
+        let dealIdPostEscape = dealIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{dealId}", with: dealIdPostEscape, options: .literal, range: nil)
+        let serviceIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceId))"
+        let serviceIdPostEscape = serviceIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceId}", with: serviceIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<DealServiceModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -183,22 +352,29 @@ open class DealsAPI {
      - parameter hospitalId: (query)  (optional)
      - parameter hospitalName: (query)  (optional)
      - parameter specialtyId: (query)  (optional)
+     - parameter specialtyName: (query)  (optional)
      - parameter specialtyTypeId: (query)  (optional)
+     - parameter specialtyTypeName: (query)  (optional)
+     - parameter serviceId: (query)  (optional)
+     - parameter serviceName: (query)  (optional)
      - parameter exceptHospitalId: (query)  (optional)
      - parameter exceptDealId: (query)  (optional)
      - parameter ids: (query)  (optional)
+     - parameter serviceDuration: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
+     - parameter showHidden: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<DealsViewModel, Error>
+     - returns: AnyPublisher<DealsModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1DealsGet(id: UUID? = nil, name: String? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, exceptHospitalId: UUID? = nil, exceptDealId: UUID? = nil, ids: [UUID]? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<DealsViewModel, Error> {
-        return Future<DealsViewModel, Error>.init { promise in
-            apiV1DealsGetWithRequestBuilder(id: id, name: name, marketingType: marketingType, countryId: countryId, hospitalId: hospitalId, hospitalName: hospitalName, specialtyId: specialtyId, specialtyTypeId: specialtyTypeId, exceptHospitalId: exceptHospitalId, exceptDealId: exceptDealId, ids: ids, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2DealsGet(id: UUID? = nil, name: String? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, serviceId: UUID? = nil, serviceName: String? = nil, exceptHospitalId: UUID? = nil, exceptDealId: UUID? = nil, ids: [UUID]? = nil, serviceDuration: Int? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<DealsModel, Error> {
+        return Future<DealsModel, Error>.init { promise in
+            apiV2DealsGetWithRequestBuilder(id: id, name: name, marketingType: marketingType, countryId: countryId, hospitalId: hospitalId, hospitalName: hospitalName, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, serviceId: serviceId, serviceName: serviceName, exceptHospitalId: exceptHospitalId, exceptDealId: exceptDealId, ids: ids, serviceDuration: serviceDuration, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -212,7 +388,7 @@ open class DealsAPI {
 
     /**
      Get all deals.
-     - GET /api/v1/deals
+     - GET /api/v2/deals
      - parameter id: (query)  (optional)
      - parameter name: (query)  (optional)
      - parameter marketingType: (query)  (optional)
@@ -220,18 +396,25 @@ open class DealsAPI {
      - parameter hospitalId: (query)  (optional)
      - parameter hospitalName: (query)  (optional)
      - parameter specialtyId: (query)  (optional)
+     - parameter specialtyName: (query)  (optional)
      - parameter specialtyTypeId: (query)  (optional)
+     - parameter specialtyTypeName: (query)  (optional)
+     - parameter serviceId: (query)  (optional)
+     - parameter serviceName: (query)  (optional)
      - parameter exceptHospitalId: (query)  (optional)
      - parameter exceptDealId: (query)  (optional)
      - parameter ids: (query)  (optional)
+     - parameter serviceDuration: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
+     - parameter showHidden: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter current: (query)  (optional)
-     - returns: RequestBuilder<DealsViewModel> 
+     - returns: RequestBuilder<DealsModel> 
      */
-    open class func apiV1DealsGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, exceptHospitalId: UUID? = nil, exceptDealId: UUID? = nil, ids: [UUID]? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<DealsViewModel> {
-        let localVariablePath = "/api/v1/deals"
+    open class func apiV2DealsGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, serviceId: UUID? = nil, serviceName: String? = nil, exceptHospitalId: UUID? = nil, exceptDealId: UUID? = nil, ids: [UUID]? = nil, serviceDuration: Int? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<DealsModel> {
+        let localVariablePath = "/api/v2/deals"
         let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
@@ -244,14 +427,21 @@ open class DealsAPI {
             "HospitalId": hospitalId?.encodeToJSON(),
             "HospitalName": hospitalName?.encodeToJSON(),
             "SpecialtyId": specialtyId?.encodeToJSON(),
+            "SpecialtyName": specialtyName?.encodeToJSON(),
             "SpecialtyTypeId": specialtyTypeId?.encodeToJSON(),
+            "SpecialtyTypeName": specialtyTypeName?.encodeToJSON(),
+            "ServiceId": serviceId?.encodeToJSON(),
+            "ServiceName": serviceName?.encodeToJSON(),
             "ExceptHospitalId": exceptHospitalId?.encodeToJSON(),
             "ExceptDealId": exceptDealId?.encodeToJSON(),
             "Ids": ids?.encodeToJSON(),
+            "ServiceDuration": serviceDuration?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "ShowHidden": showHidden?.encodeToJSON(),
+            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(),
             "page": page?.encodeToJSON(),
             "limit": limit?.encodeToJSON(),
             "lastRetrieved": lastRetrieved?.encodeToJSON(),
-            "Current": current?.encodeToJSON(),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -260,23 +450,44 @@ open class DealsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<DealsViewModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<DealsModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
-     Create deal.
+     Get all deals.
      
-     - parameter createDealCommand: (body)  (optional)
+     - parameter id: (query)  (optional)
+     - parameter name: (query)  (optional)
+     - parameter marketingType: (query)  (optional)
+     - parameter countryId: (query)  (optional)
+     - parameter hospitalId: (query)  (optional)
+     - parameter hospitalName: (query)  (optional)
+     - parameter specialtyId: (query)  (optional)
+     - parameter specialtyName: (query)  (optional)
+     - parameter specialtyTypeId: (query)  (optional)
+     - parameter specialtyTypeName: (query)  (optional)
+     - parameter serviceId: (query)  (optional)
+     - parameter serviceName: (query)  (optional)
+     - parameter exceptHospitalId: (query)  (optional)
+     - parameter exceptDealId: (query)  (optional)
+     - parameter ids: (query)  (optional)
+     - parameter serviceDuration: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
+     - parameter showHidden: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
+     - parameter page: (query)  (optional)
+     - parameter limit: (query)  (optional)
+     - parameter lastRetrieved: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<UUID, Error>
+     - returns: AnyPublisher<DealsSimpleModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1DealsPost(createDealCommand: CreateDealCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<UUID, Error> {
-        return Future<UUID, Error>.init { promise in
-            apiV1DealsPostWithRequestBuilder(createDealCommand: createDealCommand).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2DealsSimpleGet(id: UUID? = nil, name: String? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, serviceId: UUID? = nil, serviceName: String? = nil, exceptHospitalId: UUID? = nil, exceptDealId: UUID? = nil, ids: [UUID]? = nil, serviceDuration: Int? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<DealsSimpleModel, Error> {
+        return Future<DealsSimpleModel, Error>.init { promise in
+            apiV2DealsSimpleGetWithRequestBuilder(id: id, name: name, marketingType: marketingType, countryId: countryId, hospitalId: hospitalId, hospitalName: hospitalName, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, serviceId: serviceId, serviceName: serviceName, exceptHospitalId: exceptHospitalId, exceptDealId: exceptDealId, ids: ids, serviceDuration: serviceDuration, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -289,20 +500,62 @@ open class DealsAPI {
     #endif
 
     /**
-     Create deal.
-     - POST /api/v1/deals
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter createDealCommand: (body)  (optional)
-     - returns: RequestBuilder<UUID> 
+     Get all deals.
+     - GET /api/v2/deals/simple
+     - parameter id: (query)  (optional)
+     - parameter name: (query)  (optional)
+     - parameter marketingType: (query)  (optional)
+     - parameter countryId: (query)  (optional)
+     - parameter hospitalId: (query)  (optional)
+     - parameter hospitalName: (query)  (optional)
+     - parameter specialtyId: (query)  (optional)
+     - parameter specialtyName: (query)  (optional)
+     - parameter specialtyTypeId: (query)  (optional)
+     - parameter specialtyTypeName: (query)  (optional)
+     - parameter serviceId: (query)  (optional)
+     - parameter serviceName: (query)  (optional)
+     - parameter exceptHospitalId: (query)  (optional)
+     - parameter exceptDealId: (query)  (optional)
+     - parameter ids: (query)  (optional)
+     - parameter serviceDuration: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
+     - parameter showHidden: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
+     - parameter page: (query)  (optional)
+     - parameter limit: (query)  (optional)
+     - parameter lastRetrieved: (query)  (optional)
+     - returns: RequestBuilder<DealsSimpleModel> 
      */
-    open class func apiV1DealsPostWithRequestBuilder(createDealCommand: CreateDealCommand? = nil) -> RequestBuilder<UUID> {
-        let localVariablePath = "/api/v1/deals"
+    open class func apiV2DealsSimpleGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, serviceId: UUID? = nil, serviceName: String? = nil, exceptHospitalId: UUID? = nil, exceptDealId: UUID? = nil, ids: [UUID]? = nil, serviceDuration: Int? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<DealsSimpleModel> {
+        let localVariablePath = "/api/v2/deals/simple"
         let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
-        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createDealCommand)
+        let localVariableParameters: [String: Any]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "CountryId": countryId?.encodeToJSON(),
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "HospitalName": hospitalName?.encodeToJSON(),
+            "SpecialtyId": specialtyId?.encodeToJSON(),
+            "SpecialtyName": specialtyName?.encodeToJSON(),
+            "SpecialtyTypeId": specialtyTypeId?.encodeToJSON(),
+            "SpecialtyTypeName": specialtyTypeName?.encodeToJSON(),
+            "ServiceId": serviceId?.encodeToJSON(),
+            "ServiceName": serviceName?.encodeToJSON(),
+            "ExceptHospitalId": exceptHospitalId?.encodeToJSON(),
+            "ExceptDealId": exceptDealId?.encodeToJSON(),
+            "Ids": ids?.encodeToJSON(),
+            "ServiceDuration": serviceDuration?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "ShowHidden": showHidden?.encodeToJSON(),
+            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+        ])
 
         let localVariableNillableHeaders: [String: Any?] = [
             :
@@ -310,23 +563,25 @@ open class DealsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<UUID>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<DealsSimpleModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Get deal by slug.
      
      - parameter slug: (path)  
+     - parameter languageCode: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<DealViewModel, Error>
+     - returns: AnyPublisher<DealModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1DealsSlugsSlugGet(slug: String, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<DealViewModel, Error> {
-        return Future<DealViewModel, Error>.init { promise in
-            apiV1DealsSlugsSlugGetWithRequestBuilder(slug: slug).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2DealsSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<DealModel, Error> {
+        return Future<DealModel, Error>.init { promise in
+            apiV2DealsSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -340,19 +595,25 @@ open class DealsAPI {
 
     /**
      Get deal by slug.
-     - GET /api/v1/deals/slugs/{slug}
+     - GET /api/v2/deals/{slug}
      - parameter slug: (path)  
-     - returns: RequestBuilder<DealViewModel> 
+     - parameter languageCode: (query)  (optional)
+     - parameter returnDefaultValue: (query)  (optional)
+     - returns: RequestBuilder<DealModel> 
      */
-    open class func apiV1DealsSlugsSlugGetWithRequestBuilder(slug: String) -> RequestBuilder<DealViewModel> {
-        var localVariablePath = "/api/v1/deals/slugs/{slug}"
+    open class func apiV2DealsSlugGetWithRequestBuilder(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> RequestBuilder<DealModel> {
+        var localVariablePath = "/api/v2/deals/{slug}"
         let slugPreEscape = "\(APIHelper.mapValueToPathItem(slug))"
         let slugPostEscape = slugPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{slug}", with: slugPostEscape, options: .literal, range: nil)
         let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
+            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
+        ])
 
         let localVariableNillableHeaders: [String: Any?] = [
             :
@@ -360,7 +621,7 @@ open class DealsAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<DealViewModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<DealModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }

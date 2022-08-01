@@ -4,46 +4,67 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV1HospitalsCurrentGet**](HospitalsAPI.md#apiv1hospitalscurrentget) | **GET** /api/v1/hospitals/current | 
-[**apiV1HospitalsGet**](HospitalsAPI.md#apiv1hospitalsget) | **GET** /api/v1/hospitals | Get all hospitals.
-[**apiV1HospitalsHospitalIdDelete**](HospitalsAPI.md#apiv1hospitalshospitaliddelete) | **DELETE** /api/v1/hospitals/{hospitalId} | Delete hospital.
-[**apiV1HospitalsHospitalIdGet**](HospitalsAPI.md#apiv1hospitalshospitalidget) | **GET** /api/v1/hospitals/{hospitalId} | Get hospita.
-[**apiV1HospitalsHospitalIdPut**](HospitalsAPI.md#apiv1hospitalshospitalidput) | **PUT** /api/v1/hospitals/{hospitalId} | Update hospital.
-[**apiV1HospitalsPost**](HospitalsAPI.md#apiv1hospitalspost) | **POST** /api/v1/hospitals | Create a hospital.
-[**apiV1HospitalsSlugsSlugGet**](HospitalsAPI.md#apiv1hospitalsslugsslugget) | **GET** /api/v1/hospitals/slugs/{slug} | Get hospital by slug.
+[**apiV2HospitalsGet**](HospitalsAPI.md#apiv2hospitalsget) | **GET** /api/v2/hospitals | Get all Hospitals.
+[**apiV2HospitalsHospitalIdAccreditationsAccreditationIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidaccreditationsaccreditationidget) | **GET** /api/v2/hospitals/{hospitalId}/accreditations/{accreditationId} | Get HospitalAccreditation.
+[**apiV2HospitalsHospitalIdAccreditationsGet**](HospitalsAPI.md#apiv2hospitalshospitalidaccreditationsget) | **GET** /api/v2/hospitals/{hospitalId}/accreditations | Get all HospitalAccreditations.
+[**apiV2HospitalsHospitalIdEquipmentsEquipmentIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidequipmentsequipmentidget) | **GET** /api/v2/hospitals/{hospitalId}/equipments/{equipmentId} | Get HospitalEquipment.
+[**apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasGet**](HospitalsAPI.md#apiv2hospitalshospitalidequipmentsequipmentidmediasget) | **GET** /api/v2/hospitals/{hospitalId}/equipments/{equipmentId}/medias | Get all EquipmentMedia.
+[**apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasMediaIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidequipmentsequipmentidmediasmediaidget) | **GET** /api/v2/hospitals/{hospitalId}/equipments/{equipmentId}/medias/{mediaId} | Get EquipmentMedia.
+[**apiV2HospitalsHospitalIdEquipmentsGet**](HospitalsAPI.md#apiv2hospitalshospitalidequipmentsget) | **GET** /api/v2/hospitals/{hospitalId}/equipments | Get all HospitalEquipments.
+[**apiV2HospitalsHospitalIdEvaluationsEvaluationIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidevaluationsevaluationidget) | **GET** /api/v2/hospitals/{hospitalId}/evaluations/{evaluationId} | Get HospitalEvaluation.
+[**apiV2HospitalsHospitalIdEvaluationsGet**](HospitalsAPI.md#apiv2hospitalshospitalidevaluationsget) | **GET** /api/v2/hospitals/{hospitalId}/evaluations | Get all HospitalEvaluations.
+[**apiV2HospitalsHospitalIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidget) | **GET** /api/v2/hospitals/{hospitalId} | 
+[**apiV2HospitalsHospitalIdHandlesGet**](HospitalsAPI.md#apiv2hospitalshospitalidhandlesget) | **GET** /api/v2/hospitals/{hospitalId}/handles | Get all HospitalHandles.
+[**apiV2HospitalsHospitalIdHandlesHandleIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidhandleshandleidget) | **GET** /api/v2/hospitals/{hospitalId}/handles/{handleId} | Get HospitalHandle.
+[**apiV2HospitalsHospitalIdMediasGet**](HospitalsAPI.md#apiv2hospitalshospitalidmediasget) | **GET** /api/v2/hospitals/{hospitalId}/medias | Get all HospitalMedias.
+[**apiV2HospitalsHospitalIdMediasMediaIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidmediasmediaidget) | **GET** /api/v2/hospitals/{hospitalId}/medias/{mediaId} | Get HospitalMedia.
+[**apiV2HospitalsHospitalIdSpecialtiesGet**](HospitalsAPI.md#apiv2hospitalshospitalidspecialtiesget) | **GET** /api/v2/hospitals/{hospitalId}/specialties | Get all HospitalSpecialties.
+[**apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasGet**](HospitalsAPI.md#apiv2hospitalshospitalidspecialtieshospitalspecialtyidmediasget) | **GET** /api/v2/hospitals/{hospitalId}/specialties/{hospitalSpecialtyId}/medias | Get all HospitalServiceMedias.
+[**apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasMediaIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidspecialtieshospitalspecialtyidmediasmediaidget) | **GET** /api/v2/hospitals/{hospitalId}/specialties/{hospitalSpecialtyId}/medias/{mediaId} | Get HospitalServiceMedia.
+[**apiV2HospitalsHospitalIdSpecialtiesSimpleGet**](HospitalsAPI.md#apiv2hospitalshospitalidspecialtiessimpleget) | **GET** /api/v2/hospitals/{hospitalId}/specialties/simple | Get all HospitalSpecialties.
+[**apiV2HospitalsHospitalIdSpecialtiesSlugGet**](HospitalsAPI.md#apiv2hospitalshospitalidspecialtiesslugget) | **GET** /api/v2/hospitals/{hospitalId}/specialties/{slug} | Get HospitalSpecialty by slug.
+[**apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidspecialtiesspecialtyidget) | **GET** /api/v2/hospitals/{hospitalId}/specialties/{specialtyId} | Get HospitalSpecialty.
+[**apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesGet**](HospitalsAPI.md#apiv2hospitalshospitalidspecialtiesspecialtyidservicesget) | **GET** /api/v2/hospitals/{hospitalId}/specialties/{specialtyId}/services | Get all HospitalServices.
+[**apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidspecialtiesspecialtyidservicesserviceidget) | **GET** /api/v2/hospitals/{hospitalId}/specialties/{specialtyId}/services/{serviceId} | Get HospitalService.
+[**apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasGet**](HospitalsAPI.md#apiv2hospitalshospitalidspecialtiesspecialtyidservicesserviceidmediasget) | **GET** /api/v2/hospitals/{hospitalId}/specialties/{specialtyId}/services/{serviceId}/medias | Get all HospitalServiceMedias.
+[**apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasMediaIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidspecialtiesspecialtyidservicesserviceidmediasmediaidget) | **GET** /api/v2/hospitals/{hospitalId}/specialties/{specialtyId}/services/{serviceId}/medias/{mediaId} | Get HospitalServiceMedia.
+[**apiV2HospitalsHospitalIdWorkingdaysGet**](HospitalsAPI.md#apiv2hospitalshospitalidworkingdaysget) | **GET** /api/v2/hospitals/{hospitalId}/workingdays | Get all HospitalWorkingDays.
+[**apiV2HospitalsHospitalIdWorkingdaysWorkingDayIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidworkingdaysworkingdayidget) | **GET** /api/v2/hospitals/{hospitalId}/workingdays/{workingDayId} | Get HospitalWorkingDay.
+[**apiV2HospitalsSimpleGet**](HospitalsAPI.md#apiv2hospitalssimpleget) | **GET** /api/v2/hospitals/simple | Get all Hospitals.
+[**apiV2HospitalsSlugGet**](HospitalsAPI.md#apiv2hospitalsslugget) | **GET** /api/v2/hospitals/{slug} | 
 
 
-# **apiV1HospitalsCurrentGet**
+# **apiV2HospitalsGet**
 ```swift
-    open class func apiV1HospitalsCurrentGet(id: UUID? = nil, name: String? = nil, description: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, serviceId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: HospitalsViewModel?, _ error: Error?) -> Void)
+    open class func apiV2HospitalsGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalsModel?, _ error: Error?) -> Void)
 ```
 
-
+Get all Hospitals.
 
 ### Example 
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let id = 987 // UUID |  (optional)
+let hospitalId = 987 // UUID |  (optional)
 let name = "name_example" // String |  (optional)
-let description = "description_example" // String |  (optional)
 let countryId = 987 // UUID |  (optional)
 let created = Date() // Date |  (optional)
 let marketingType = MarketingType() // MarketingType |  (optional)
 let specialtyTypeId = 987 // UUID |  (optional)
 let specialtyId = 987 // UUID |  (optional)
-let serviceId = 987 // UUID |  (optional)
 let exceptHospitalId = 987 // UUID |  (optional)
 let showHidden = true // Bool |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
 let ids = [123] // [UUID] |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
+let paymentEnabled = true // Bool |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
-let current = true // Bool |  (optional)
 
-HospitalsAPI.apiV1HospitalsCurrentGet(id: id, name: name, description: description, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, serviceId: serviceId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+// Get all Hospitals.
+HospitalsAPI.apiV2HospitalsGet(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -59,109 +80,26 @@ HospitalsAPI.apiV1HospitalsCurrentGet(id: id, name: name, description: descripti
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | [**UUID**](.md) |  | [optional] 
  **name** | **String** |  | [optional] 
- **description** | **String** |  | [optional] 
  **countryId** | [**UUID**](.md) |  | [optional] 
  **created** | **Date** |  | [optional] 
  **marketingType** | [**MarketingType**](.md) |  | [optional] 
  **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
  **specialtyId** | [**UUID**](.md) |  | [optional] 
- **serviceId** | [**UUID**](.md) |  | [optional] 
  **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
  **ids** | [**[UUID]**](UUID.md) |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
+ **paymentEnabled** | **Bool** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
- **current** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**HospitalsViewModel**](HospitalsViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apiV1HospitalsGet**
-```swift
-    open class func apiV1HospitalsGet(id: UUID? = nil, name: String? = nil, description: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, serviceId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: HospitalsViewModel?, _ error: Error?) -> Void)
-```
-
-Get all hospitals.
-
-Sample request:        GET /api/v1/hospitals      {          \"pageQueryFilter\": {              \"page\": 1,              \"limit\": 20,              \"lastRetrived\": \"2020-02-05T08:40\"          },          \"searchString\": \"Samsung\"      }
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-let id = 987 // UUID |  (optional)
-let name = "name_example" // String |  (optional)
-let description = "description_example" // String |  (optional)
-let countryId = 987 // UUID |  (optional)
-let created = Date() // Date |  (optional)
-let marketingType = MarketingType() // MarketingType |  (optional)
-let specialtyTypeId = 987 // UUID |  (optional)
-let specialtyId = 987 // UUID |  (optional)
-let serviceId = 987 // UUID |  (optional)
-let exceptHospitalId = 987 // UUID |  (optional)
-let showHidden = true // Bool |  (optional)
-let languageCode = "languageCode_example" // String |  (optional)
-let ids = [123] // [UUID] |  (optional)
-let page = 987 // Int |  (optional)
-let limit = 987 // Int |  (optional)
-let lastRetrieved = Date() // Date |  (optional)
-let current = true // Bool |  (optional)
-
-// Get all hospitals.
-HospitalsAPI.apiV1HospitalsGet(id: id, name: name, description: description, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, serviceId: serviceId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
- **name** | **String** |  | [optional] 
- **description** | **String** |  | [optional] 
- **countryId** | [**UUID**](.md) |  | [optional] 
- **created** | **Date** |  | [optional] 
- **marketingType** | [**MarketingType**](.md) |  | [optional] 
- **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
- **specialtyId** | [**UUID**](.md) |  | [optional] 
- **serviceId** | [**UUID**](.md) |  | [optional] 
- **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
- **showHidden** | **Bool** |  | [optional] 
- **languageCode** | **String** |  | [optional] 
- **ids** | [**[UUID]**](UUID.md) |  | [optional] 
- **page** | **Int** |  | [optional] 
- **limit** | **Int** |  | [optional] 
- **lastRetrieved** | **Date** |  | [optional] 
- **current** | **Bool** |  | [optional] 
-
-### Return type
-
-[**HospitalsViewModel**](HospitalsViewModel.md)
+[**HospitalsModel**](HospitalsModel.md)
 
 ### Authorization
 
@@ -170,18 +108,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1HospitalsHospitalIdDelete**
+# **apiV2HospitalsHospitalIdAccreditationsAccreditationIdGet**
 ```swift
-    open class func apiV1HospitalsHospitalIdDelete(hospitalId: UUID, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
+    open class func apiV2HospitalsHospitalIdAccreditationsAccreditationIdGet(hospitalId: UUID, accreditationId: UUID, completion: @escaping (_ data: HospitalAccreditationModel?, _ error: Error?) -> Void)
 ```
 
-Delete hospital.
-
-Sample request:        DELETE /api/v1/hospitals/1
+Get HospitalAccreditation.
 
 ### Example 
 ```swift
@@ -189,9 +125,10 @@ Sample request:        DELETE /api/v1/hospitals/1
 import CloudHospitalClient
 
 let hospitalId = 987 // UUID | 
+let accreditationId = 987 // UUID | 
 
-// Delete hospital.
-HospitalsAPI.apiV1HospitalsHospitalIdDelete(hospitalId: hospitalId) { (response, error) in
+// Get HospitalAccreditation.
+HospitalsAPI.apiV2HospitalsHospitalIdAccreditationsAccreditationIdGet(hospitalId: hospitalId, accreditationId: accreditationId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -208,62 +145,11 @@ HospitalsAPI.apiV1HospitalsHospitalIdDelete(hospitalId: hospitalId) { (response,
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **hospitalId** | [**UUID**](.md) |  | 
+ **accreditationId** | [**UUID**](.md) |  | 
 
 ### Return type
 
-**Bool**
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apiV1HospitalsHospitalIdGet**
-```swift
-    open class func apiV1HospitalsHospitalIdGet(hospitalId: UUID, languageCode: String? = nil, completion: @escaping (_ data: HospitalViewModel?, _ error: Error?) -> Void)
-```
-
-Get hospita.
-
-Sample request:        GET /api/v1/hospitals/1
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-let hospitalId = 987 // UUID | 
-let languageCode = "languageCode_example" // String |  (optional) (default to "")
-
-// Get hospita.
-HospitalsAPI.apiV1HospitalsHospitalIdGet(hospitalId: hospitalId, languageCode: languageCode) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
-
-### Return type
-
-[**HospitalViewModel**](HospitalViewModel.md)
+[**HospitalAccreditationModel**](HospitalAccreditationModel.md)
 
 ### Authorization
 
@@ -272,18 +158,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1HospitalsHospitalIdPut**
+# **apiV2HospitalsHospitalIdAccreditationsGet**
 ```swift
-    open class func apiV1HospitalsHospitalIdPut(hospitalId: UUID, updateHospitalCommand: UpdateHospitalCommand? = nil, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
+    open class func apiV2HospitalsHospitalIdAccreditationsGet(hospitalId: UUID, hospitalName: String? = nil, accreditationId: UUID? = nil, accreditationName: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalAccreditationsModel?, _ error: Error?) -> Void)
 ```
 
-Update hospital.
-
-Sameple request:        PUT /api/v1/hospitals      {          \"overview\": \"Overview of Samsung Medical Center\",          \"bedsCount\": 2436,          \"operationsPerYear\": 44,          \"foundationYear\": 2012,          \"departmentsCount\": 200,          \"medicalStaffCount\": 1200,      }
+Get all HospitalAccreditations.
 
 ### Example 
 ```swift
@@ -291,10 +175,15 @@ Sameple request:        PUT /api/v1/hospitals      {          \"overview\": \"Ov
 import CloudHospitalClient
 
 let hospitalId = 987 // UUID | 
-let updateHospitalCommand = UpdateHospitalCommand(name: "name_example", slug: "slug_example", description: "description_example", logo: "logo_example", overview: "overview_example", bedsCount: 123, operationsPerYear: 123, foundationYear: 123, medicalStaffCount: 123, doctorCount: 123, countryName: "countryName_example", marketingType: MarketingType(), consultationEnabled: false, consultationFee: 123, timeZone: "timeZone_example", articlesCount: 123, packagesCount: 123, equipmentsCount: 123, reviewsCount: 123, departmentsCount: 123, specialtiesCount: 123, accreditationsCount: 123, doctorAffiliationsCount: 123, managerAffiliationsCount: 123, specialtiesSummerized: "specialtiesSummerized_example", awards: [AwardViewModel(id: 123, name: "name_example", image: "image_example", date: Date())], medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)], accreditations: [AccreditationViewModel(id: 123, name: "name_example", logo: "logo_example")], evaluations: [HospitalEvaluationViewModel(id: 123, hospitalId: 123, hospitalName: "hospitalName_example", name: "name_example", stars: 123, description: "description_example", referenceUrl: "referenceUrl_example")], location: LocationViewModel(latitude: 123, longitude: 123, country: "country_example", state: "state_example", county: "county_example", city: "city_example", zipCode: "zipCode_example", address: "address_example"), auditableEntity: AuditableEntity(createdBy: 123, updatedBy: 123, deletedBy: 123, createdDate: Date(), updatedDate: Date(), deletedDate: Date(), isHidden: false, isDeleted: false)) // UpdateHospitalCommand |  (optional)
+let hospitalName = "hospitalName_example" // String |  (optional)
+let accreditationId = 987 // UUID |  (optional)
+let accreditationName = "accreditationName_example" // String |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
 
-// Update hospital.
-HospitalsAPI.apiV1HospitalsHospitalIdPut(hospitalId: hospitalId, updateHospitalCommand: updateHospitalCommand) { (response, error) in
+// Get all HospitalAccreditations.
+HospitalsAPI.apiV2HospitalsHospitalIdAccreditationsGet(hospitalId: hospitalId, hospitalName: hospitalName, accreditationId: accreditationId, accreditationName: accreditationName, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -311,41 +200,45 @@ HospitalsAPI.apiV1HospitalsHospitalIdPut(hospitalId: hospitalId, updateHospitalC
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **hospitalId** | [**UUID**](.md) |  | 
- **updateHospitalCommand** | [**UpdateHospitalCommand**](UpdateHospitalCommand.md) |  | [optional] 
+ **hospitalName** | **String** |  | [optional] 
+ **accreditationId** | [**UUID**](.md) |  | [optional] 
+ **accreditationName** | **String** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
 
 ### Return type
 
-**Bool**
+[**HospitalAccreditationsModel**](HospitalAccreditationsModel.md)
 
 ### Authorization
 
-[oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1HospitalsPost**
+# **apiV2HospitalsHospitalIdEquipmentsEquipmentIdGet**
 ```swift
-    open class func apiV1HospitalsPost(createHospitalCommand: CreateHospitalCommand? = nil, completion: @escaping (_ data: UUID?, _ error: Error?) -> Void)
+    open class func apiV2HospitalsHospitalIdEquipmentsEquipmentIdGet(hospitalId: UUID, equipmentId: UUID, completion: @escaping (_ data: HospitalEquipmentModel?, _ error: Error?) -> Void)
 ```
 
-Create a hospital.
-
-Sample request:        POST /api/v1/hospitals      {          \"name\": \"Samsung Medical Center\",          \"description\": \"Comprehensive Cancer Center in Seoul, South Korea is nationally ranked in 1 adult specialty.\",          \"logo\": \"http://www.samsunghospital.com/home/main/index.do\",          \"overview\": \"Overview of Samsung Medical Center\",          \"bedsCount\": 1436,          \"operationsPerYear\": 34,          \"foundationYear\": 2012,          \"departmentsCount\": 20,          \"medicalStaffCount\": 600,          \"countryId\": 1,          \"awards\": [            {              \"name\": \"Award1\",              \"image\": \"string\",              \"date\": \"2020-02-05T09:29:19.240Z\"            },            {              \"name\": \"Award2\",              \"image\": \"string\",              \"date\": \"2020-02-05T09:29:19.240Z\"            }          ],          \"medias\": [            {              \"mediaType\": \"Photo\",              \"url\": \"https://cloudhospitalblob.blob.core.windows.net/imagecontainer/SamsungMedicalCenter.jpg\",              \"thumbnailUrl\": \"https://cloudhospitalblob.blob.core.windows.net/thumbnailcontainer/SamsungMedicalCenter.jpg\",              \"description\": \"string\",              \"order\": 0            },            {              \"mediaType\": \"Video\",              \"url\": \"string\",              \"description\": \"string\",              \"order\": 1            }          ],          \"location\": {            \"latitude\": 37.4881568,            \"longitude\": 127.0855952,            \"country\": \"Korea\",            \"state\": \"string\",            \"county\": \"Gangnamgu\",            \"city\": \"Seoul\",            \"zipCode\": \"12345\",            \"address\": \"Il-won ro 81\"          }      }
+Get HospitalEquipment.
 
 ### Example 
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createHospitalCommand = CreateHospitalCommand(name: "name_example", description: "description_example", logo: "logo_example", overview: "overview_example", bedsCount: 123, operationsPerYear: 123, foundationYear: 123, departmentsCount: 123, medicalStaffCount: 123, countryId: 123, marketingType: MarketingType(), consultationEnabled: false, consultationFee: 123, timeZone: "timeZone_example", awards: [AwardViewModel(id: 123, name: "name_example", image: "image_example", date: Date())], medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)], location: LocationViewModel(latitude: 123, longitude: 123, country: "country_example", state: "state_example", county: "county_example", city: "city_example", zipCode: "zipCode_example", address: "address_example")) // CreateHospitalCommand |  (optional)
+let hospitalId = 987 // UUID | 
+let equipmentId = 987 // UUID | 
 
-// Create a hospital.
-HospitalsAPI.apiV1HospitalsPost(createHospitalCommand: createHospitalCommand) { (response, error) in
+// Get HospitalEquipment.
+HospitalsAPI.apiV2HospitalsHospitalIdEquipmentsEquipmentIdGet(hospitalId: hospitalId, equipmentId: equipmentId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -361,29 +254,1389 @@ HospitalsAPI.apiV1HospitalsPost(createHospitalCommand: createHospitalCommand) { 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createHospitalCommand** | [**CreateHospitalCommand**](CreateHospitalCommand.md) |  | [optional] 
+ **hospitalId** | [**UUID**](.md) |  | 
+ **equipmentId** | [**UUID**](.md) |  | 
 
 ### Return type
 
-**UUID**
+[**HospitalEquipmentModel**](HospitalEquipmentModel.md)
 
 ### Authorization
 
-[oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1HospitalsSlugsSlugGet**
+# **apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasGet**
 ```swift
-    open class func apiV1HospitalsSlugsSlugGet(slug: String, languageCode: String? = nil, completion: @escaping (_ data: HospitalViewModel?, _ error: Error?) -> Void)
+    open class func apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasGet(hospitalId: UUID, equipmentId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: MediasModel?, _ error: Error?) -> Void)
 ```
 
-Get hospital by slug.
+Get all EquipmentMedia.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let equipmentId = 987 // UUID | 
+let id = 987 // UUID |  (optional)
+let mediaType = MediaType() // MediaType |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all EquipmentMedia.
+HospitalsAPI.apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasGet(hospitalId: hospitalId, equipmentId: equipmentId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **equipmentId** | [**UUID**](.md) |  | 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **mediaType** | [**MediaType**](.md) |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**MediasModel**](MediasModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasMediaIdGet**
+```swift
+    open class func apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasMediaIdGet(hospitalId: UUID, equipmentId: UUID, mediaId: UUID, completion: @escaping (_ data: MediaModel?, _ error: Error?) -> Void)
+```
+
+Get EquipmentMedia.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let equipmentId = 987 // UUID | 
+let mediaId = 987 // UUID | 
+
+// Get EquipmentMedia.
+HospitalsAPI.apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasMediaIdGet(hospitalId: hospitalId, equipmentId: equipmentId, mediaId: mediaId) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **equipmentId** | [**UUID**](.md) |  | 
+ **mediaId** | [**UUID**](.md) |  | 
+
+### Return type
+
+[**MediaModel**](MediaModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdEquipmentsGet**
+```swift
+    open class func apiV2HospitalsHospitalIdEquipmentsGet(hospitalId: UUID, id: UUID? = nil, name: String? = nil, hospitalId2: UUID? = nil, hospitalName: String? = nil, description: String? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalEquipmentsModel?, _ error: Error?) -> Void)
+```
+
+Get all HospitalEquipments.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let id = 987 // UUID |  (optional)
+let name = "name_example" // String |  (optional)
+let hospitalId2 = 987 // UUID |  (optional)
+let hospitalName = "hospitalName_example" // String |  (optional)
+let description = "description_example" // String |  (optional)
+let created = Date() // Date |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all HospitalEquipments.
+HospitalsAPI.apiV2HospitalsHospitalIdEquipmentsGet(hospitalId: hospitalId, id: id, name: name, hospitalId2: hospitalId2, hospitalName: hospitalName, description: description, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **name** | **String** |  | [optional] 
+ **hospitalId2** | [**UUID**](.md) |  | [optional] 
+ **hospitalName** | **String** |  | [optional] 
+ **description** | **String** |  | [optional] 
+ **created** | **Date** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**HospitalEquipmentsModel**](HospitalEquipmentsModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdEvaluationsEvaluationIdGet**
+```swift
+    open class func apiV2HospitalsHospitalIdEvaluationsEvaluationIdGet(hospitalId: UUID, evaluationId: UUID, completion: @escaping (_ data: HospitalEvaluationModel?, _ error: Error?) -> Void)
+```
+
+Get HospitalEvaluation.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let evaluationId = 987 // UUID | 
+
+// Get HospitalEvaluation.
+HospitalsAPI.apiV2HospitalsHospitalIdEvaluationsEvaluationIdGet(hospitalId: hospitalId, evaluationId: evaluationId) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **evaluationId** | [**UUID**](.md) |  | 
+
+### Return type
+
+[**HospitalEvaluationModel**](HospitalEvaluationModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdEvaluationsGet**
+```swift
+    open class func apiV2HospitalsHospitalIdEvaluationsGet(hospitalId: UUID, id: UUID? = nil, name: String? = nil, stars: Int? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalEvaluationsModel?, _ error: Error?) -> Void)
+```
+
+Get all HospitalEvaluations.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let id = 987 // UUID |  (optional)
+let name = "name_example" // String |  (optional)
+let stars = 987 // Int |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all HospitalEvaluations.
+HospitalsAPI.apiV2HospitalsHospitalIdEvaluationsGet(hospitalId: hospitalId, id: id, name: name, stars: stars, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **name** | **String** |  | [optional] 
+ **stars** | **Int** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**HospitalEvaluationsModel**](HospitalEvaluationsModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdGet**
+```swift
+    open class func apiV2HospitalsHospitalIdGet(hospitalId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil, completion: @escaping (_ data: HospitalModel?, _ error: Error?) -> Void)
+```
+
+
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
+
+HospitalsAPI.apiV2HospitalsHospitalIdGet(hospitalId: hospitalId, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
+
+### Return type
+
+[**HospitalModel**](HospitalModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdHandlesGet**
+```swift
+    open class func apiV2HospitalsHospitalIdHandlesGet(hospitalId: UUID, id: UUID? = nil, snsType: SnsType? = nil, handle: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalSnsHandlesModel?, _ error: Error?) -> Void)
+```
+
+Get all HospitalHandles.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let id = 987 // UUID |  (optional)
+let snsType = SnsType() // SnsType |  (optional)
+let handle = "handle_example" // String |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all HospitalHandles.
+HospitalsAPI.apiV2HospitalsHospitalIdHandlesGet(hospitalId: hospitalId, id: id, snsType: snsType, handle: handle, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **snsType** | [**SnsType**](.md) |  | [optional] 
+ **handle** | **String** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**HospitalSnsHandlesModel**](HospitalSnsHandlesModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdHandlesHandleIdGet**
+```swift
+    open class func apiV2HospitalsHospitalIdHandlesHandleIdGet(hospitalId: UUID, handleId: UUID, completion: @escaping (_ data: SnsHandleModel?, _ error: Error?) -> Void)
+```
+
+Get HospitalHandle.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let handleId = 987 // UUID | 
+
+// Get HospitalHandle.
+HospitalsAPI.apiV2HospitalsHospitalIdHandlesHandleIdGet(hospitalId: hospitalId, handleId: handleId) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **handleId** | [**UUID**](.md) |  | 
+
+### Return type
+
+[**SnsHandleModel**](SnsHandleModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdMediasGet**
+```swift
+    open class func apiV2HospitalsHospitalIdMediasGet(hospitalId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: MediasModel?, _ error: Error?) -> Void)
+```
+
+Get all HospitalMedias.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let id = 987 // UUID |  (optional)
+let mediaType = MediaType() // MediaType |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all HospitalMedias.
+HospitalsAPI.apiV2HospitalsHospitalIdMediasGet(hospitalId: hospitalId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **mediaType** | [**MediaType**](.md) |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**MediasModel**](MediasModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdMediasMediaIdGet**
+```swift
+    open class func apiV2HospitalsHospitalIdMediasMediaIdGet(hospitalId: UUID, mediaId: UUID, completion: @escaping (_ data: MediaModel?, _ error: Error?) -> Void)
+```
+
+Get HospitalMedia.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let mediaId = 987 // UUID | 
+
+// Get HospitalMedia.
+HospitalsAPI.apiV2HospitalsHospitalIdMediasMediaIdGet(hospitalId: hospitalId, mediaId: mediaId) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **mediaId** | [**UUID**](.md) |  | 
+
+### Return type
+
+[**MediaModel**](MediaModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdSpecialtiesGet**
+```swift
+    open class func apiV2HospitalsHospitalIdSpecialtiesGet(hospitalId: UUID, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, hospitalSpecialtyId: UUID? = nil, name: String? = nil, slug: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalSpecialtiesModel?, _ error: Error?) -> Void)
+```
+
+Get all HospitalSpecialties.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let specialtyId = 987 // UUID |  (optional)
+let specialtyName = "specialtyName_example" // String |  (optional)
+let specialtyTypeId = 987 // UUID |  (optional)
+let specialtyTypeName = "specialtyTypeName_example" // String |  (optional)
+let hospitalSpecialtyId = 987 // UUID |  (optional)
+let name = "name_example" // String |  (optional)
+let slug = "slug_example" // String |  (optional)
+let marketingType = MarketingType() // MarketingType |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
+let showHidden = true // Bool |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all HospitalSpecialties.
+HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesGet(hospitalId: hospitalId, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, hospitalSpecialtyId: hospitalSpecialtyId, name: name, slug: slug, marketingType: marketingType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **specialtyId** | [**UUID**](.md) |  | [optional] 
+ **specialtyName** | **String** |  | [optional] 
+ **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
+ **specialtyTypeName** | **String** |  | [optional] 
+ **hospitalSpecialtyId** | [**UUID**](.md) |  | [optional] 
+ **name** | **String** |  | [optional] 
+ **slug** | **String** |  | [optional] 
+ **marketingType** | [**MarketingType**](.md) |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
+ **showHidden** | **Bool** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**HospitalSpecialtiesModel**](HospitalSpecialtiesModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasGet**
+```swift
+    open class func apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasGet(hospitalId: UUID, hospitalSpecialtyId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: MediasModel?, _ error: Error?) -> Void)
+```
+
+Get all HospitalServiceMedias.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let hospitalSpecialtyId = 987 // UUID | 
+let id = 987 // UUID |  (optional)
+let mediaType = MediaType() // MediaType |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all HospitalServiceMedias.
+HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasGet(hospitalId: hospitalId, hospitalSpecialtyId: hospitalSpecialtyId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **hospitalSpecialtyId** | [**UUID**](.md) |  | 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **mediaType** | [**MediaType**](.md) |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**MediasModel**](MediasModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasMediaIdGet**
+```swift
+    open class func apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasMediaIdGet(hospitalId: UUID, hospitalSpecialtyId: UUID, mediaId: UUID, completion: @escaping (_ data: MediaModel?, _ error: Error?) -> Void)
+```
+
+Get HospitalServiceMedia.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let hospitalSpecialtyId = 987 // UUID | 
+let mediaId = 987 // UUID | 
+
+// Get HospitalServiceMedia.
+HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasMediaIdGet(hospitalId: hospitalId, hospitalSpecialtyId: hospitalSpecialtyId, mediaId: mediaId) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **hospitalSpecialtyId** | [**UUID**](.md) |  | 
+ **mediaId** | [**UUID**](.md) |  | 
+
+### Return type
+
+[**MediaModel**](MediaModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdSpecialtiesSimpleGet**
+```swift
+    open class func apiV2HospitalsHospitalIdSpecialtiesSimpleGet(hospitalId: UUID, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, hospitalSpecialtyId: UUID? = nil, name: String? = nil, slug: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalSpecialtiesSimpleModel?, _ error: Error?) -> Void)
+```
+
+Get all HospitalSpecialties.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let specialtyId = 987 // UUID |  (optional)
+let specialtyName = "specialtyName_example" // String |  (optional)
+let specialtyTypeId = 987 // UUID |  (optional)
+let specialtyTypeName = "specialtyTypeName_example" // String |  (optional)
+let hospitalSpecialtyId = 987 // UUID |  (optional)
+let name = "name_example" // String |  (optional)
+let slug = "slug_example" // String |  (optional)
+let marketingType = MarketingType() // MarketingType |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
+let showHidden = true // Bool |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all HospitalSpecialties.
+HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSimpleGet(hospitalId: hospitalId, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, hospitalSpecialtyId: hospitalSpecialtyId, name: name, slug: slug, marketingType: marketingType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **specialtyId** | [**UUID**](.md) |  | [optional] 
+ **specialtyName** | **String** |  | [optional] 
+ **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
+ **specialtyTypeName** | **String** |  | [optional] 
+ **hospitalSpecialtyId** | [**UUID**](.md) |  | [optional] 
+ **name** | **String** |  | [optional] 
+ **slug** | **String** |  | [optional] 
+ **marketingType** | [**MarketingType**](.md) |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
+ **showHidden** | **Bool** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**HospitalSpecialtiesSimpleModel**](HospitalSpecialtiesSimpleModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdSpecialtiesSlugGet**
+```swift
+    open class func apiV2HospitalsHospitalIdSpecialtiesSlugGet(hospitalId: UUID, slug: String, languageCode: String? = nil, completion: @escaping (_ data: HospitalSpecialtyModel?, _ error: Error?) -> Void)
+```
+
+Get HospitalSpecialty by slug.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let slug = "slug_example" // String | 
+let languageCode = "languageCode_example" // String |  (optional)
+
+// Get HospitalSpecialty by slug.
+HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSlugGet(hospitalId: hospitalId, slug: slug, languageCode: languageCode) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **slug** | **String** |  | 
+ **languageCode** | **String** |  | [optional] 
+
+### Return type
+
+[**HospitalSpecialtyModel**](HospitalSpecialtyModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdGet**
+```swift
+    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdGet(hospitalId: UUID, specialtyId: UUID, languageCode: String? = nil, completion: @escaping (_ data: HospitalSpecialtyModel?, _ error: Error?) -> Void)
+```
+
+Get HospitalSpecialty.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let specialtyId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional)
+
+// Get HospitalSpecialty.
+HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdGet(hospitalId: hospitalId, specialtyId: specialtyId, languageCode: languageCode) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **specialtyId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] 
+
+### Return type
+
+[**HospitalSpecialtyModel**](HospitalSpecialtyModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesGet**
+```swift
+    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesGet(hospitalId: UUID, specialtyId: UUID, id: UUID? = nil, name: String? = nil, slug: String? = nil, serviceCategoryId: UUID? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, created: Date? = nil, languageCode: String? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalServicesModel?, _ error: Error?) -> Void)
+```
+
+Get all HospitalServices.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let specialtyId = 987 // UUID | 
+let id = 987 // UUID |  (optional)
+let name = "name_example" // String |  (optional)
+let slug = "slug_example" // String |  (optional)
+let serviceCategoryId = 987 // UUID |  (optional)
+let marketingType = MarketingType() // MarketingType |  (optional)
+let procedure = Procedure() // Procedure |  (optional)
+let created = Date() // Date |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all HospitalServices.
+HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesGet(hospitalId: hospitalId, specialtyId: specialtyId, id: id, name: name, slug: slug, serviceCategoryId: serviceCategoryId, marketingType: marketingType, procedure: procedure, created: created, languageCode: languageCode, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **specialtyId** | [**UUID**](.md) |  | 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **name** | **String** |  | [optional] 
+ **slug** | **String** |  | [optional] 
+ **serviceCategoryId** | [**UUID**](.md) |  | [optional] 
+ **marketingType** | [**MarketingType**](.md) |  | [optional] 
+ **procedure** | [**Procedure**](.md) |  | [optional] 
+ **created** | **Date** |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**HospitalServicesModel**](HospitalServicesModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet**
+```swift
+    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil, completion: @escaping (_ data: HospitalServiceModel?, _ error: Error?) -> Void)
+```
+
+Get HospitalService.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let specialtyId = 987 // UUID | 
+let serviceId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
+
+// Get HospitalService.
+HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **specialtyId** | [**UUID**](.md) |  | 
+ **serviceId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
+
+### Return type
+
+[**HospitalServiceModel**](HospitalServiceModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasGet**
+```swift
+    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: MediasModel?, _ error: Error?) -> Void)
+```
+
+Get all HospitalServiceMedias.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let specialtyId = 987 // UUID | 
+let serviceId = 987 // UUID | 
+let id = 987 // UUID |  (optional)
+let mediaType = MediaType() // MediaType |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all HospitalServiceMedias.
+HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasGet(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **specialtyId** | [**UUID**](.md) |  | 
+ **serviceId** | [**UUID**](.md) |  | 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **mediaType** | [**MediaType**](.md) |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**MediasModel**](MediasModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasMediaIdGet**
+```swift
+    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasMediaIdGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, mediaId: UUID, completion: @escaping (_ data: MediaModel?, _ error: Error?) -> Void)
+```
+
+Get HospitalServiceMedia.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let specialtyId = 987 // UUID | 
+let serviceId = 987 // UUID | 
+let mediaId = 987 // UUID | 
+
+// Get HospitalServiceMedia.
+HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasMediaIdGet(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId, mediaId: mediaId) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **specialtyId** | [**UUID**](.md) |  | 
+ **serviceId** | [**UUID**](.md) |  | 
+ **mediaId** | [**UUID**](.md) |  | 
+
+### Return type
+
+[**MediaModel**](MediaModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdWorkingdaysGet**
+```swift
+    open class func apiV2HospitalsHospitalIdWorkingdaysGet(hospitalId: UUID, id: UUID? = nil, dayOfWeek: String? = nil, timeFrom: Date? = nil, timeTo: Date? = nil, checkHoliday: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: WorkingDaysModel?, _ error: Error?) -> Void)
+```
+
+Get all HospitalWorkingDays.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let id = 987 // UUID |  (optional)
+let dayOfWeek = "dayOfWeek_example" // String |  (optional)
+let timeFrom = Date() // Date |  (optional)
+let timeTo = Date() // Date |  (optional)
+let checkHoliday = true // Bool |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all HospitalWorkingDays.
+HospitalsAPI.apiV2HospitalsHospitalIdWorkingdaysGet(hospitalId: hospitalId, id: id, dayOfWeek: dayOfWeek, timeFrom: timeFrom, timeTo: timeTo, checkHoliday: checkHoliday, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **dayOfWeek** | **String** |  | [optional] 
+ **timeFrom** | **Date** |  | [optional] 
+ **timeTo** | **Date** |  | [optional] 
+ **checkHoliday** | **Bool** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**WorkingDaysModel**](WorkingDaysModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdWorkingdaysWorkingDayIdGet**
+```swift
+    open class func apiV2HospitalsHospitalIdWorkingdaysWorkingDayIdGet(hospitalId: UUID, workingDayId: UUID, completion: @escaping (_ data: WorkingDayModel?, _ error: Error?) -> Void)
+```
+
+Get HospitalWorkingDay.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let workingDayId = 987 // UUID | 
+
+// Get HospitalWorkingDay.
+HospitalsAPI.apiV2HospitalsHospitalIdWorkingdaysWorkingDayIdGet(hospitalId: hospitalId, workingDayId: workingDayId) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | 
+ **workingDayId** | [**UUID**](.md) |  | 
+
+### Return type
+
+[**WorkingDayModel**](WorkingDayModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsSimpleGet**
+```swift
+    open class func apiV2HospitalsSimpleGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalsSimpleModel?, _ error: Error?) -> Void)
+```
+
+Get all Hospitals.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID |  (optional)
+let name = "name_example" // String |  (optional)
+let countryId = 987 // UUID |  (optional)
+let created = Date() // Date |  (optional)
+let marketingType = MarketingType() // MarketingType |  (optional)
+let specialtyTypeId = 987 // UUID |  (optional)
+let specialtyId = 987 // UUID |  (optional)
+let exceptHospitalId = 987 // UUID |  (optional)
+let showHidden = true // Bool |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
+let ids = [123] // [UUID] |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
+let paymentEnabled = true // Bool |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all Hospitals.
+HospitalsAPI.apiV2HospitalsSimpleGet(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **name** | **String** |  | [optional] 
+ **countryId** | [**UUID**](.md) |  | [optional] 
+ **created** | **Date** |  | [optional] 
+ **marketingType** | [**MarketingType**](.md) |  | [optional] 
+ **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
+ **specialtyId** | [**UUID**](.md) |  | [optional] 
+ **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
+ **showHidden** | **Bool** |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
+ **ids** | [**[UUID]**](UUID.md) |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
+ **paymentEnabled** | **Bool** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**HospitalsSimpleModel**](HospitalsSimpleModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsSlugGet**
+```swift
+    open class func apiV2HospitalsSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil, completion: @escaping (_ data: HospitalModel?, _ error: Error?) -> Void)
+```
+
+
 
 ### Example 
 ```swift
@@ -391,10 +1644,10 @@ Get hospital by slug.
 import CloudHospitalClient
 
 let slug = "slug_example" // String | 
-let languageCode = "languageCode_example" // String |  (optional) (default to "")
+let languageCode = "languageCode_example" // String |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
 
-// Get hospital by slug.
-HospitalsAPI.apiV1HospitalsSlugsSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
+HospitalsAPI.apiV2HospitalsSlugGet(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -411,11 +1664,12 @@ HospitalsAPI.apiV1HospitalsSlugsSlugGet(slug: slug, languageCode: languageCode) 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String** |  | 
- **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
+ **languageCode** | **String** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**HospitalViewModel**](HospitalViewModel.md)
+[**HospitalModel**](HospitalModel.md)
 
 ### Authorization
 
@@ -424,7 +1678,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

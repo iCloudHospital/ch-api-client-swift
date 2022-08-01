@@ -3,6 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**userName** | **String** |  | [optional] 
+**email** | **String** |  | [optional] 
 **firstName** | **String** |  | [optional] 
 **lastName** | **String** |  | [optional] 
 **phone** | **String** |  | [optional] 
@@ -10,8 +12,7 @@ Name | Type | Description | Notes
 **photoThumbnail** | **String** |  | [optional] 
 **gender** | [**Gender**](Gender.md) |  | [optional] 
 **dateOfBirth** | **Date** |  | [optional] 
-**languages** | [UserLanguageViewModel] |  | [optional] 
-**locations** | [UserLocationViewModel] |  | [optional] 
+**timeZone** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

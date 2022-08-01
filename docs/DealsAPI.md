@@ -4,65 +4,19 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV1DealsDealIdDelete**](DealsAPI.md#apiv1dealsdealiddelete) | **DELETE** /api/v1/deals/{dealId} | Delete deal.
-[**apiV1DealsDealIdGet**](DealsAPI.md#apiv1dealsdealidget) | **GET** /api/v1/deals/{dealId} | Get deal.
-[**apiV1DealsDealIdPut**](DealsAPI.md#apiv1dealsdealidput) | **PUT** /api/v1/deals/{dealId} | Update deal.
-[**apiV1DealsGet**](DealsAPI.md#apiv1dealsget) | **GET** /api/v1/deals | Get all deals.
-[**apiV1DealsPost**](DealsAPI.md#apiv1dealspost) | **POST** /api/v1/deals | Create deal.
-[**apiV1DealsSlugsSlugGet**](DealsAPI.md#apiv1dealsslugsslugget) | **GET** /api/v1/deals/slugs/{slug} | Get deal by slug.
+[**apiV2DealsDealIdGet**](DealsAPI.md#apiv2dealsdealidget) | **GET** /api/v2/deals/{dealId} | Get deal.
+[**apiV2DealsDealIdPackagesGet**](DealsAPI.md#apiv2dealsdealidpackagesget) | **GET** /api/v2/deals/{dealId}/packages | Get all DealPackage.
+[**apiV2DealsDealIdPackagesPackageIdGet**](DealsAPI.md#apiv2dealsdealidpackagespackageidget) | **GET** /api/v2/deals/{dealId}/packages/{packageId} | Get DealPackage.
+[**apiV2DealsDealIdServicesGet**](DealsAPI.md#apiv2dealsdealidservicesget) | **GET** /api/v2/deals/{dealId}/services | Get all DealService.
+[**apiV2DealsDealIdServicesServiceIdGet**](DealsAPI.md#apiv2dealsdealidservicesserviceidget) | **GET** /api/v2/deals/{dealId}/services/{serviceId} | Get DealService.
+[**apiV2DealsGet**](DealsAPI.md#apiv2dealsget) | **GET** /api/v2/deals | Get all deals.
+[**apiV2DealsSimpleGet**](DealsAPI.md#apiv2dealssimpleget) | **GET** /api/v2/deals/simple | Get all deals.
+[**apiV2DealsSlugGet**](DealsAPI.md#apiv2dealsslugget) | **GET** /api/v2/deals/{slug} | Get deal by slug.
 
 
-# **apiV1DealsDealIdDelete**
+# **apiV2DealsDealIdGet**
 ```swift
-    open class func apiV1DealsDealIdDelete(dealId: UUID, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
-```
-
-Delete deal.
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-let dealId = 987 // UUID | 
-
-// Delete deal.
-DealsAPI.apiV1DealsDealIdDelete(dealId: dealId) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **dealId** | [**UUID**](.md) |  | 
-
-### Return type
-
-**Bool**
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apiV1DealsDealIdGet**
-```swift
-    open class func apiV1DealsDealIdGet(dealId: UUID, completion: @escaping (_ data: DealViewModel?, _ error: Error?) -> Void)
+    open class func apiV2DealsDealIdGet(dealId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil, completion: @escaping (_ data: DealModel?, _ error: Error?) -> Void)
 ```
 
 Get deal.
@@ -73,9 +27,11 @@ Get deal.
 import CloudHospitalClient
 
 let dealId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
 
 // Get deal.
-DealsAPI.apiV1DealsDealIdGet(dealId: dealId) { (response, error) in
+DealsAPI.apiV2DealsDealIdGet(dealId: dealId, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -92,10 +48,12 @@ DealsAPI.apiV1DealsDealIdGet(dealId: dealId) { (response, error) in
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dealId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**DealViewModel**](DealViewModel.md)
+[**DealModel**](DealModel.md)
 
 ### Authorization
 
@@ -104,16 +62,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1DealsDealIdPut**
+# **apiV2DealsDealIdPackagesGet**
 ```swift
-    open class func apiV1DealsDealIdPut(dealId: UUID, updateDealCommand: UpdateDealCommand? = nil, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
+    open class func apiV2DealsDealIdPackagesGet(dealId: UUID, relatedDealPackageId: UUID? = nil, dealName: String? = nil, name: String? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: DealPackagesModel?, _ error: Error?) -> Void)
 ```
 
-Update deal.
+Get all DealPackage.
 
 ### Example 
 ```swift
@@ -121,10 +79,20 @@ Update deal.
 import CloudHospitalClient
 
 let dealId = 987 // UUID | 
-let updateDealCommand = UpdateDealCommand(id: 123, name: "name_example", normalizedName: "normalizedName_example", slug: "slug_example", description: "description_example", hospitalId: 123, hospitalName: "hospitalName_example", hospitalSlug: "hospitalSlug_example", hospitalLocationCountry: "hospitalLocationCountry_example", hospitalLocationState: "hospitalLocationState_example", hospitalConsultationEnabled: false, marketingType: MarketingType(), dealPackages: [DealPackageItemViewModel(id: 123, dealId: 123, dealName: "dealName_example", hospitalId: 123, hospitalName: "hospitalName_example", refundPolicy: RefundPolicy(), additionalServices: "additionalServices_example", accomodation: "accomodation_example", transfer: "transfer_example", bonus: "bonus_example", price: 123, auditableEntity: AuditableEntity(createdBy: 123, updatedBy: 123, deletedBy: 123, createdDate: Date(), updatedDate: Date(), deletedDate: Date(), isHidden: false, isDeleted: false))], dealServices: [DealServiceItemViewModel(dealId: 123, dealName: "dealName_example", serviceId: 123, serviceName: "serviceName_example", order: 123)], auditableEntity: nil, photo: "photo_example", photoThumbnail: "photoThumbnail_example") // UpdateDealCommand |  (optional)
+let relatedDealPackageId = 987 // UUID |  (optional)
+let dealName = "dealName_example" // String |  (optional)
+let name = "name_example" // String |  (optional)
+let countryId = 987 // UUID |  (optional)
+let hospitalId = 987 // UUID |  (optional)
+let hospitalName = "hospitalName_example" // String |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
+let showHidden = true // Bool |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
 
-// Update deal.
-DealsAPI.apiV1DealsDealIdPut(dealId: dealId, updateDealCommand: updateDealCommand) { (response, error) in
+// Get all DealPackage.
+DealsAPI.apiV2DealsDealIdPackagesGet(dealId: dealId, relatedDealPackageId: relatedDealPackageId, dealName: dealName, name: name, countryId: countryId, hospitalId: hospitalId, hospitalName: hospitalName, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -141,26 +109,196 @@ DealsAPI.apiV1DealsDealIdPut(dealId: dealId, updateDealCommand: updateDealComman
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dealId** | [**UUID**](.md) |  | 
- **updateDealCommand** | [**UpdateDealCommand**](UpdateDealCommand.md) |  | [optional] 
+ **relatedDealPackageId** | [**UUID**](.md) |  | [optional] 
+ **dealName** | **String** |  | [optional] 
+ **name** | **String** |  | [optional] 
+ **countryId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **hospitalName** | **String** |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
+ **showHidden** | **Bool** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
 
 ### Return type
 
-**Bool**
+[**DealPackagesModel**](DealPackagesModel.md)
 
 ### Authorization
 
-[oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1DealsGet**
+# **apiV2DealsDealIdPackagesPackageIdGet**
 ```swift
-    open class func apiV1DealsGet(id: UUID? = nil, name: String? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyTypeId: UUID? = nil, exceptHospitalId: UUID? = nil, exceptDealId: UUID? = nil, ids: [UUID]? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: DealsViewModel?, _ error: Error?) -> Void)
+    open class func apiV2DealsDealIdPackagesPackageIdGet(dealId: UUID, packageId: UUID, languageCode: String? = nil, completion: @escaping (_ data: DealPackageModel?, _ error: Error?) -> Void)
+```
+
+Get DealPackage.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let dealId = 987 // UUID | 
+let packageId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional)
+
+// Get DealPackage.
+DealsAPI.apiV2DealsDealIdPackagesPackageIdGet(dealId: dealId, packageId: packageId, languageCode: languageCode) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dealId** | [**UUID**](.md) |  | 
+ **packageId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] 
+
+### Return type
+
+[**DealPackageModel**](DealPackageModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2DealsDealIdServicesGet**
+```swift
+    open class func apiV2DealsDealIdServicesGet(dealId: UUID, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: DealServicesModel?, _ error: Error?) -> Void)
+```
+
+Get all DealService.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let dealId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get all DealService.
+DealsAPI.apiV2DealsDealIdServicesGet(dealId: dealId, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dealId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**DealServicesModel**](DealServicesModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2DealsDealIdServicesServiceIdGet**
+```swift
+    open class func apiV2DealsDealIdServicesServiceIdGet(dealId: UUID, serviceId: UUID, languageCode: String? = nil, completion: @escaping (_ data: DealServiceModel?, _ error: Error?) -> Void)
+```
+
+Get DealService.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let dealId = 987 // UUID | 
+let serviceId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional)
+
+// Get DealService.
+DealsAPI.apiV2DealsDealIdServicesServiceIdGet(dealId: dealId, serviceId: serviceId, languageCode: languageCode) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **dealId** | [**UUID**](.md) |  | 
+ **serviceId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] 
+
+### Return type
+
+[**DealServiceModel**](DealServiceModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2DealsGet**
+```swift
+    open class func apiV2DealsGet(id: UUID? = nil, name: String? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, serviceId: UUID? = nil, serviceName: String? = nil, exceptHospitalId: UUID? = nil, exceptDealId: UUID? = nil, ids: [UUID]? = nil, serviceDuration: Int? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: DealsModel?, _ error: Error?) -> Void)
 ```
 
 Get all deals.
@@ -177,17 +315,24 @@ let countryId = 987 // UUID |  (optional)
 let hospitalId = 987 // UUID |  (optional)
 let hospitalName = "hospitalName_example" // String |  (optional)
 let specialtyId = 987 // UUID |  (optional)
+let specialtyName = "specialtyName_example" // String |  (optional)
 let specialtyTypeId = 987 // UUID |  (optional)
+let specialtyTypeName = "specialtyTypeName_example" // String |  (optional)
+let serviceId = 987 // UUID |  (optional)
+let serviceName = "serviceName_example" // String |  (optional)
 let exceptHospitalId = 987 // UUID |  (optional)
 let exceptDealId = 987 // UUID |  (optional)
 let ids = [123] // [UUID] |  (optional)
+let serviceDuration = 987 // Int |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
+let showHidden = true // Bool |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
-let current = true // Bool |  (optional)
 
 // Get all deals.
-DealsAPI.apiV1DealsGet(id: id, name: name, marketingType: marketingType, countryId: countryId, hospitalId: hospitalId, hospitalName: hospitalName, specialtyId: specialtyId, specialtyTypeId: specialtyTypeId, exceptHospitalId: exceptHospitalId, exceptDealId: exceptDealId, ids: ids, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+DealsAPI.apiV2DealsGet(id: id, name: name, marketingType: marketingType, countryId: countryId, hospitalId: hospitalId, hospitalName: hospitalName, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, serviceId: serviceId, serviceName: serviceName, exceptHospitalId: exceptHospitalId, exceptDealId: exceptDealId, ids: ids, serviceDuration: serviceDuration, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -210,18 +355,25 @@ Name | Type | Description  | Notes
  **hospitalId** | [**UUID**](.md) |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
  **specialtyId** | [**UUID**](.md) |  | [optional] 
+ **specialtyName** | **String** |  | [optional] 
  **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
+ **specialtyTypeName** | **String** |  | [optional] 
+ **serviceId** | [**UUID**](.md) |  | [optional] 
+ **serviceName** | **String** |  | [optional] 
  **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
  **exceptDealId** | [**UUID**](.md) |  | [optional] 
  **ids** | [**[UUID]**](UUID.md) |  | [optional] 
+ **serviceDuration** | **Int** |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
+ **showHidden** | **Bool** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
- **current** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**DealsViewModel**](DealsViewModel.md)
+[**DealsModel**](DealsModel.md)
 
 ### Authorization
 
@@ -230,26 +382,47 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1DealsPost**
+# **apiV2DealsSimpleGet**
 ```swift
-    open class func apiV1DealsPost(createDealCommand: CreateDealCommand? = nil, completion: @escaping (_ data: UUID?, _ error: Error?) -> Void)
+    open class func apiV2DealsSimpleGet(id: UUID? = nil, name: String? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, serviceId: UUID? = nil, serviceName: String? = nil, exceptHospitalId: UUID? = nil, exceptDealId: UUID? = nil, ids: [UUID]? = nil, serviceDuration: Int? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: DealsSimpleModel?, _ error: Error?) -> Void)
 ```
 
-Create deal.
+Get all deals.
 
 ### Example 
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let createDealCommand = CreateDealCommand(name: "name_example", description: "description_example", hospitalId: 123, marketingType: MarketingType(), photo: "photo_example", photoThumbnail: "photoThumbnail_example", medias: [MediaViewModel(id: 123, mediaType: MediaType(), url: "url_example", thumbnailUrl: "thumbnailUrl_example", description: "description_example", order: 123)]) // CreateDealCommand |  (optional)
+let id = 987 // UUID |  (optional)
+let name = "name_example" // String |  (optional)
+let marketingType = MarketingType() // MarketingType |  (optional)
+let countryId = 987 // UUID |  (optional)
+let hospitalId = 987 // UUID |  (optional)
+let hospitalName = "hospitalName_example" // String |  (optional)
+let specialtyId = 987 // UUID |  (optional)
+let specialtyName = "specialtyName_example" // String |  (optional)
+let specialtyTypeId = 987 // UUID |  (optional)
+let specialtyTypeName = "specialtyTypeName_example" // String |  (optional)
+let serviceId = 987 // UUID |  (optional)
+let serviceName = "serviceName_example" // String |  (optional)
+let exceptHospitalId = 987 // UUID |  (optional)
+let exceptDealId = 987 // UUID |  (optional)
+let ids = [123] // [UUID] |  (optional)
+let serviceDuration = 987 // Int |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
+let showHidden = true // Bool |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
 
-// Create deal.
-DealsAPI.apiV1DealsPost(createDealCommand: createDealCommand) { (response, error) in
+// Get all deals.
+DealsAPI.apiV2DealsSimpleGet(id: id, name: name, marketingType: marketingType, countryId: countryId, hospitalId: hospitalId, hospitalName: hospitalName, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, serviceId: serviceId, serviceName: serviceName, exceptHospitalId: exceptHospitalId, exceptDealId: exceptDealId, ids: ids, serviceDuration: serviceDuration, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -265,26 +438,47 @@ DealsAPI.apiV1DealsPost(createDealCommand: createDealCommand) { (response, error
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createDealCommand** | [**CreateDealCommand**](CreateDealCommand.md) |  | [optional] 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **name** | **String** |  | [optional] 
+ **marketingType** | [**MarketingType**](.md) |  | [optional] 
+ **countryId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **hospitalName** | **String** |  | [optional] 
+ **specialtyId** | [**UUID**](.md) |  | [optional] 
+ **specialtyName** | **String** |  | [optional] 
+ **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
+ **specialtyTypeName** | **String** |  | [optional] 
+ **serviceId** | [**UUID**](.md) |  | [optional] 
+ **serviceName** | **String** |  | [optional] 
+ **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
+ **exceptDealId** | [**UUID**](.md) |  | [optional] 
+ **ids** | [**[UUID]**](UUID.md) |  | [optional] 
+ **serviceDuration** | **Int** |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
+ **showHidden** | **Bool** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
 
 ### Return type
 
-**UUID**
+[**DealsSimpleModel**](DealsSimpleModel.md)
 
 ### Authorization
 
-[oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1DealsSlugsSlugGet**
+# **apiV2DealsSlugGet**
 ```swift
-    open class func apiV1DealsSlugsSlugGet(slug: String, completion: @escaping (_ data: DealViewModel?, _ error: Error?) -> Void)
+    open class func apiV2DealsSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil, completion: @escaping (_ data: DealModel?, _ error: Error?) -> Void)
 ```
 
 Get deal by slug.
@@ -295,9 +489,11 @@ Get deal by slug.
 import CloudHospitalClient
 
 let slug = "slug_example" // String | 
+let languageCode = "languageCode_example" // String |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
 
 // Get deal by slug.
-DealsAPI.apiV1DealsSlugsSlugGet(slug: slug) { (response, error) in
+DealsAPI.apiV2DealsSlugGet(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -314,10 +510,12 @@ DealsAPI.apiV1DealsSlugsSlugGet(slug: slug) { (response, error) in
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String** |  | 
+ **languageCode** | **String** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**DealViewModel**](DealViewModel.md)
+[**DealModel**](DealModel.md)
 
 ### Authorization
 
@@ -326,7 +524,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

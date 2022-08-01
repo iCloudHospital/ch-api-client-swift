@@ -4,60 +4,15 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV1PlansCurrentGet**](PlansAPI.md#apiv1planscurrentget) | **GET** /api/v1/plans/current | Get current plan
-[**apiV1PlansGet**](PlansAPI.md#apiv1plansget) | **GET** /api/v1/plans | Get all plans.
-[**apiV1PlansPlanIdGet**](PlansAPI.md#apiv1plansplanidget) | **GET** /api/v1/plans/{planId} | Get plan.
-[**apiV1PlansPlanIdSubscribePost**](PlansAPI.md#apiv1plansplanidsubscribepost) | **POST** /api/v1/plans/{planId}/subscribe | Subscribe plan.
-[**apiV1PlansPlanIdUnsubscribePost**](PlansAPI.md#apiv1plansplanidunsubscribepost) | **POST** /api/v1/plans/{planId}/unsubscribe | Unsubscribe plan.
+[**apiV2PlansGet**](PlansAPI.md#apiv2plansget) | **GET** /api/v2/plans | Get all plans.
+[**apiV2PlansPlanIdGet**](PlansAPI.md#apiv2plansplanidget) | **GET** /api/v2/plans/{planId} | Get plan.
+[**apiV2PlansPlanIdHospitalsGet**](PlansAPI.md#apiv2plansplanidhospitalsget) | **GET** /api/v2/plans/{planId}/hospitals | Get all plan hospital.
+[**apiV2PlansPlanIdHospitalsHospitalIdGet**](PlansAPI.md#apiv2plansplanidhospitalshospitalidget) | **GET** /api/v2/plans/{planId}/hospitals/{hospitalId} | Get plan hospital.
 
 
-# **apiV1PlansCurrentGet**
+# **apiV2PlansGet**
 ```swift
-    open class func apiV1PlansCurrentGet(completion: @escaping (_ data: PlanViewModel?, _ error: Error?) -> Void)
-```
-
-Get current plan
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-
-// Get current plan
-PlansAPI.apiV1PlansCurrentGet() { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-This endpoint does not need any parameter.
-
-### Return type
-
-[**PlanViewModel**](PlanViewModel.md)
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apiV1PlansGet**
-```swift
-    open class func apiV1PlansGet(id: UUID? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: PlansViewModel?, _ error: Error?) -> Void)
+    open class func apiV2PlansGet(id: UUID? = nil, name: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: PlansModel?, _ error: Error?) -> Void)
 ```
 
 Get all plans.
@@ -68,13 +23,13 @@ Get all plans.
 import CloudHospitalClient
 
 let id = 987 // UUID |  (optional)
+let name = "name_example" // String |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
-let current = true // Bool |  (optional)
 
 // Get all plans.
-PlansAPI.apiV1PlansGet(id: id, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+PlansAPI.apiV2PlansGet(id: id, name: name, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -91,14 +46,14 @@ PlansAPI.apiV1PlansGet(id: id, page: page, limit: limit, lastRetrieved: lastRetr
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | [**UUID**](.md) |  | [optional] 
+ **name** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
- **current** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**PlansViewModel**](PlansViewModel.md)
+[**PlansModel**](PlansModel.md)
 
 ### Authorization
 
@@ -107,13 +62,13 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1PlansPlanIdGet**
+# **apiV2PlansPlanIdGet**
 ```swift
-    open class func apiV1PlansPlanIdGet(planId: UUID, completion: @escaping (_ data: PlanViewModel?, _ error: Error?) -> Void)
+    open class func apiV2PlansPlanIdGet(planId: UUID, completion: @escaping (_ data: PlanModel?, _ error: Error?) -> Void)
 ```
 
 Get plan.
@@ -126,7 +81,7 @@ import CloudHospitalClient
 let planId = 987 // UUID | 
 
 // Get plan.
-PlansAPI.apiV1PlansPlanIdGet(planId: planId) { (response, error) in
+PlansAPI.apiV2PlansPlanIdGet(planId: planId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -146,7 +101,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PlanViewModel**](PlanViewModel.md)
+[**PlanModel**](PlanModel.md)
 
 ### Authorization
 
@@ -155,16 +110,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1PlansPlanIdSubscribePost**
+# **apiV2PlansPlanIdHospitalsGet**
 ```swift
-    open class func apiV1PlansPlanIdSubscribePost(planId: UUID, completion: @escaping (_ data: String?, _ error: Error?) -> Void)
+    open class func apiV2PlansPlanIdHospitalsGet(planId: UUID, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: PlanHospitalsModel?, _ error: Error?) -> Void)
 ```
 
-Subscribe plan.
+Get all plan hospital.
 
 ### Example 
 ```swift
@@ -172,9 +127,12 @@ Subscribe plan.
 import CloudHospitalClient
 
 let planId = 987 // UUID | 
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
 
-// Subscribe plan.
-PlansAPI.apiV1PlansPlanIdSubscribePost(planId: planId) { (response, error) in
+// Get all plan hospital.
+PlansAPI.apiV2PlansPlanIdHospitalsGet(planId: planId, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -191,28 +149,31 @@ PlansAPI.apiV1PlansPlanIdSubscribePost(planId: planId) { (response, error) in
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **planId** | [**UUID**](.md) |  | 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
 
 ### Return type
 
-**String**
+[**PlanHospitalsModel**](PlanHospitalsModel.md)
 
 ### Authorization
 
-[oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1PlansPlanIdUnsubscribePost**
+# **apiV2PlansPlanIdHospitalsHospitalIdGet**
 ```swift
-    open class func apiV1PlansPlanIdUnsubscribePost(planId: UUID, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
+    open class func apiV2PlansPlanIdHospitalsHospitalIdGet(planId: UUID, hospitalId: UUID, completion: @escaping (_ data: PlanHospitalModel?, _ error: Error?) -> Void)
 ```
 
-Unsubscribe plan.
+Get plan hospital.
 
 ### Example 
 ```swift
@@ -220,9 +181,10 @@ Unsubscribe plan.
 import CloudHospitalClient
 
 let planId = 987 // UUID | 
+let hospitalId = 987 // UUID | 
 
-// Unsubscribe plan.
-PlansAPI.apiV1PlansPlanIdUnsubscribePost(planId: planId) { (response, error) in
+// Get plan hospital.
+PlansAPI.apiV2PlansPlanIdHospitalsHospitalIdGet(planId: planId, hospitalId: hospitalId) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -239,19 +201,20 @@ PlansAPI.apiV1PlansPlanIdUnsubscribePost(planId: planId) { (response, error) in
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **planId** | [**UUID**](.md) |  | 
+ **hospitalId** | [**UUID**](.md) |  | 
 
 ### Return type
 
-**Bool**
+[**PlanHospitalModel**](PlanHospitalModel.md)
 
 ### Authorization
 
-[oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

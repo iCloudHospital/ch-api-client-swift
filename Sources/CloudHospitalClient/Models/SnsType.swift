@@ -14,4 +14,7 @@ public enum SnsType: String, Codable, CaseIterable {
     case twitter = "Twitter"
     case facebook = "Facebook"
     case instagram = "Instagram"
+    case linkedIn = "LinkedIn"
+    case youtube = "Youtube"
+    case kakaoTalk = "KakaoTalk"
 }

@@ -16,17 +16,17 @@ import AnyCodable
 open class LanguagesAPI {
 
     /**
-     Get a language by code
+     Get Language by code.
      
      - parameter code: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<LanguageViewModel, Error>
+     - returns: AnyPublisher<LanguageModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1LanguagesCodeGet(code: String, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<LanguageViewModel, Error> {
-        return Future<LanguageViewModel, Error>.init { promise in
-            apiV1LanguagesCodeGetWithRequestBuilder(code: code).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2LanguagesCodeGet(code: String, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<LanguageModel, Error> {
+        return Future<LanguageModel, Error>.init { promise in
+            apiV2LanguagesCodeGetWithRequestBuilder(code: code).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -39,13 +39,13 @@ open class LanguagesAPI {
     #endif
 
     /**
-     Get a language by code
-     - GET /api/v1/languages/{code}
+     Get Language by code.
+     - GET /api/v2/languages/{code}
      - parameter code: (path)  
-     - returns: RequestBuilder<LanguageViewModel> 
+     - returns: RequestBuilder<LanguageModel> 
      */
-    open class func apiV1LanguagesCodeGetWithRequestBuilder(code: String) -> RequestBuilder<LanguageViewModel> {
-        var localVariablePath = "/api/v1/languages/{code}"
+    open class func apiV2LanguagesCodeGetWithRequestBuilder(code: String) -> RequestBuilder<LanguageModel> {
+        var localVariablePath = "/api/v2/languages/{code}"
         let codePreEscape = "\(APIHelper.mapValueToPathItem(code))"
         let codePostEscape = codePreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{code}", with: codePostEscape, options: .literal, range: nil)
@@ -60,13 +60,13 @@ open class LanguagesAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<LanguageViewModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<LanguageModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
-     Get all languages.
+     Get all Languages.
      
      - parameter id: (query)  (optional)
      - parameter name: (query)  (optional)
@@ -75,15 +75,14 @@ open class LanguagesAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter current: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<LanguagesViewModel, Error>
+     - returns: AnyPublisher<LanguagesModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1LanguagesGet(id: UUID? = nil, name: String? = nil, code: String? = nil, description: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<LanguagesViewModel, Error> {
-        return Future<LanguagesViewModel, Error>.init { promise in
-            apiV1LanguagesGetWithRequestBuilder(id: id, name: name, code: code, description: description, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2LanguagesGet(id: UUID? = nil, name: String? = nil, code: String? = nil, description: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<LanguagesModel, Error> {
+        return Future<LanguagesModel, Error>.init { promise in
+            apiV2LanguagesGetWithRequestBuilder(id: id, name: name, code: code, description: description, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -96,9 +95,8 @@ open class LanguagesAPI {
     #endif
 
     /**
-     Get all languages.
-     - GET /api/v1/languages
-     - Sample request:        GET: /api/v1/languages
+     Get all Languages.
+     - GET /api/v2/languages
      - parameter id: (query)  (optional)
      - parameter name: (query)  (optional)
      - parameter code: (query)  (optional)
@@ -106,11 +104,10 @@ open class LanguagesAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter current: (query)  (optional)
-     - returns: RequestBuilder<LanguagesViewModel> 
+     - returns: RequestBuilder<LanguagesModel> 
      */
-    open class func apiV1LanguagesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, code: String? = nil, description: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil) -> RequestBuilder<LanguagesViewModel> {
-        let localVariablePath = "/api/v1/languages"
+    open class func apiV2LanguagesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, code: String? = nil, description: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<LanguagesModel> {
+        let localVariablePath = "/api/v2/languages"
         let localVariableURLString = CloudHospitalClient.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
@@ -123,7 +120,6 @@ open class LanguagesAPI {
             "page": page?.encodeToJSON(),
             "limit": limit?.encodeToJSON(),
             "lastRetrieved": lastRetrieved?.encodeToJSON(),
-            "Current": current?.encodeToJSON(),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -132,23 +128,23 @@ open class LanguagesAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<LanguagesViewModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<LanguagesModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
-     Get a language by id
+     Get Language.
      
      - parameter id: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<LanguageViewModel, Error>
+     - returns: AnyPublisher<LanguageModel, Error>
      */
     #if canImport(Combine)
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1LanguagesIdGet(id: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<LanguageViewModel, Error> {
-        return Future<LanguageViewModel, Error>.init { promise in
-            apiV1LanguagesIdGetWithRequestBuilder(id: id).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2LanguagesIdGet(id: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClient.apiResponseQueue) -> AnyPublisher<LanguageModel, Error> {
+        return Future<LanguageModel, Error>.init { promise in
+            apiV2LanguagesIdGetWithRequestBuilder(id: id).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -161,13 +157,13 @@ open class LanguagesAPI {
     #endif
 
     /**
-     Get a language by id
-     - GET /api/v1/languages/{id}
+     Get Language.
+     - GET /api/v2/languages/{id}
      - parameter id: (path)  
-     - returns: RequestBuilder<LanguageViewModel> 
+     - returns: RequestBuilder<LanguageModel> 
      */
-    open class func apiV1LanguagesIdGetWithRequestBuilder(id: UUID) -> RequestBuilder<LanguageViewModel> {
-        var localVariablePath = "/api/v1/languages/{id}"
+    open class func apiV2LanguagesIdGetWithRequestBuilder(id: UUID) -> RequestBuilder<LanguageModel> {
+        var localVariablePath = "/api/v2/languages/{id}"
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
@@ -182,7 +178,7 @@ open class LanguagesAPI {
 
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
-        let localVariableRequestBuilder: RequestBuilder<LanguageViewModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
+        let localVariableRequestBuilder: RequestBuilder<LanguageModel>.Type = CloudHospitalClient.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }

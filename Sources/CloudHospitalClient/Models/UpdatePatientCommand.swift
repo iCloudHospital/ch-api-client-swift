@@ -12,6 +12,8 @@ import AnyCodable
 
 public struct UpdatePatientCommand: Codable, Hashable {
 
+    public var userName: String?
+    public var email: String?
     public var firstName: String?
     public var lastName: String?
     public var phone: String?
@@ -19,10 +21,11 @@ public struct UpdatePatientCommand: Codable, Hashable {
     public var photoThumbnail: String?
     public var gender: Gender?
     public var dateOfBirth: Date?
-    public var languages: [UserLanguageViewModel]?
-    public var locations: [UserLocationViewModel]?
+    public var timeZone: String?
 
-    public init(firstName: String? = nil, lastName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil) {
+    public init(userName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil) {
+        self.userName = userName
+        self.email = email
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
@@ -30,11 +33,12 @@ public struct UpdatePatientCommand: Codable, Hashable {
         self.photoThumbnail = photoThumbnail
         self.gender = gender
         self.dateOfBirth = dateOfBirth
-        self.languages = languages
-        self.locations = locations
+        self.timeZone = timeZone
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
+        case userName
+        case email
         case firstName
         case lastName
         case phone
@@ -42,14 +46,15 @@ public struct UpdatePatientCommand: Codable, Hashable {
         case photoThumbnail
         case gender
         case dateOfBirth
-        case languages
-        case locations
+        case timeZone
     }
 
     // Encodable protocol methods
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(userName, forKey: .userName)
+        try container.encodeIfPresent(email, forKey: .email)
         try container.encodeIfPresent(firstName, forKey: .firstName)
         try container.encodeIfPresent(lastName, forKey: .lastName)
         try container.encodeIfPresent(phone, forKey: .phone)
@@ -57,8 +62,7 @@ public struct UpdatePatientCommand: Codable, Hashable {
         try container.encodeIfPresent(photoThumbnail, forKey: .photoThumbnail)
         try container.encodeIfPresent(gender, forKey: .gender)
         try container.encodeIfPresent(dateOfBirth, forKey: .dateOfBirth)
-        try container.encodeIfPresent(languages, forKey: .languages)
-        try container.encodeIfPresent(locations, forKey: .locations)
+        try container.encodeIfPresent(timeZone, forKey: .timeZone)
     }
 }
 
