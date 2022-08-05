@@ -20,5 +20,7 @@
   ],
   "author": "hyounoosung@gmail.com",
   "license": "ISC",
-  "dependencies": {}
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.5.1"
+  }
 }
