@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **serviceId** | **UUID** |  | [optional] 
 **serviceName** | **String** |  | [optional] [readonly] 
 **serviceSlug** | **String** |  | [optional] [readonly] 
+**hospitalId** | **UUID** |  | [optional] [readonly] 
 **patientId** | **UUID** |  | [optional] 
 **patientName** | **String** |  | [optional] 
 **patientPhoto** | **String** |  | [optional] 

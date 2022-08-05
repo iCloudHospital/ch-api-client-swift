@@ -23,6 +23,7 @@ public struct ServiceReviewModel: Codable, Hashable {
     public var serviceId: UUID?
     public var serviceName: String?
     public var serviceSlug: String?
+    public var hospitalId: UUID?
     public var patientId: UUID?
     public var patientName: String?
     public var patientPhoto: String?
@@ -33,7 +34,7 @@ public struct ServiceReviewModel: Codable, Hashable {
     public var medias: [MediaModel]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, confirmed: Bool? = nil, serviceId: UUID? = nil, serviceName: String? = nil, serviceSlug: String? = nil, patientId: UUID? = nil, patientName: String? = nil, patientPhoto: String? = nil, createdDate: Date? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, medias: [MediaModel]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, confirmed: Bool? = nil, serviceId: UUID? = nil, serviceName: String? = nil, serviceSlug: String? = nil, hospitalId: UUID? = nil, patientId: UUID? = nil, patientName: String? = nil, patientPhoto: String? = nil, createdDate: Date? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, medias: [MediaModel]? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.languageCode = languageCode
         self.name = name
@@ -45,6 +46,7 @@ public struct ServiceReviewModel: Codable, Hashable {
         self.serviceId = serviceId
         self.serviceName = serviceName
         self.serviceSlug = serviceSlug
+        self.hospitalId = hospitalId
         self.patientId = patientId
         self.patientName = patientName
         self.patientPhoto = patientPhoto
@@ -68,6 +70,7 @@ public struct ServiceReviewModel: Codable, Hashable {
         case serviceId
         case serviceName
         case serviceSlug
+        case hospitalId
         case patientId
         case patientName
         case patientPhoto
@@ -94,6 +97,7 @@ public struct ServiceReviewModel: Codable, Hashable {
         try container.encodeIfPresent(serviceId, forKey: .serviceId)
         try container.encodeIfPresent(serviceName, forKey: .serviceName)
         try container.encodeIfPresent(serviceSlug, forKey: .serviceSlug)
+        try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
         try container.encodeIfPresent(patientId, forKey: .patientId)
         try container.encodeIfPresent(patientName, forKey: .patientName)
         try container.encodeIfPresent(patientPhoto, forKey: .patientPhoto)

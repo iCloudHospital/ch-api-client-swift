@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 # **apiV2GroupchannelsDealDealIdGet**
 ```swift
-    open class func apiV2GroupchannelsDealDealIdGet(dealId: UUID, hospitalId: UUID? = nil, completion: @escaping (_ data: SendBirdGroupChannelModel?, _ error: Error?) -> Void)
+    open class func apiV2GroupchannelsDealDealIdGet(dealId: UUID, hospitalId: UUID? = nil, isExternal: Bool? = nil, completion: @escaping (_ data: String?, _ error: Error?) -> Void)
 ```
 
 
@@ -73,8 +73,9 @@ import CloudHospitalClient
 
 let dealId = 987 // UUID | 
 let hospitalId = 987 // UUID |  (optional)
+let isExternal = true // Bool |  (optional)
 
-GroupChannelsAPI.apiV2GroupchannelsDealDealIdGet(dealId: dealId, hospitalId: hospitalId) { (response, error) in
+GroupChannelsAPI.apiV2GroupchannelsDealDealIdGet(dealId: dealId, hospitalId: hospitalId, isExternal: isExternal) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -92,10 +93,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dealId** | [**UUID**](.md) |  | 
  **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **isExternal** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**SendBirdGroupChannelModel**](SendBirdGroupChannelModel.md)
+**String**
 
 ### Authorization
 
@@ -110,7 +112,7 @@ Name | Type | Description  | Notes
 
 # **apiV2GroupchannelsDoctorDoctorIdGet**
 ```swift
-    open class func apiV2GroupchannelsDoctorDoctorIdGet(doctorId: UUID, hospitalId: UUID? = nil, completion: @escaping (_ data: SendBirdGroupChannelModel?, _ error: Error?) -> Void)
+    open class func apiV2GroupchannelsDoctorDoctorIdGet(doctorId: UUID, hospitalId: UUID? = nil, isExternal: Bool? = nil, completion: @escaping (_ data: String?, _ error: Error?) -> Void)
 ```
 
 
@@ -122,8 +124,9 @@ import CloudHospitalClient
 
 let doctorId = 987 // UUID | 
 let hospitalId = 987 // UUID |  (optional)
+let isExternal = true // Bool |  (optional)
 
-GroupChannelsAPI.apiV2GroupchannelsDoctorDoctorIdGet(doctorId: doctorId, hospitalId: hospitalId) { (response, error) in
+GroupChannelsAPI.apiV2GroupchannelsDoctorDoctorIdGet(doctorId: doctorId, hospitalId: hospitalId, isExternal: isExternal) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -141,10 +144,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **doctorId** | [**UUID**](.md) |  | 
  **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **isExternal** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**SendBirdGroupChannelModel**](SendBirdGroupChannelModel.md)
+**String**
 
 ### Authorization
 
@@ -159,7 +163,7 @@ Name | Type | Description  | Notes
 
 # **apiV2GroupchannelsHospitalHospitalIdGet**
 ```swift
-    open class func apiV2GroupchannelsHospitalHospitalIdGet(hospitalId: UUID, completion: @escaping (_ data: SendBirdGroupChannelModel?, _ error: Error?) -> Void)
+    open class func apiV2GroupchannelsHospitalHospitalIdGet(hospitalId: UUID, isExternal: Bool? = nil, completion: @escaping (_ data: String?, _ error: Error?) -> Void)
 ```
 
 
@@ -170,8 +174,9 @@ Name | Type | Description  | Notes
 import CloudHospitalClient
 
 let hospitalId = 987 // UUID | 
+let isExternal = true // Bool |  (optional)
 
-GroupChannelsAPI.apiV2GroupchannelsHospitalHospitalIdGet(hospitalId: hospitalId) { (response, error) in
+GroupChannelsAPI.apiV2GroupchannelsHospitalHospitalIdGet(hospitalId: hospitalId, isExternal: isExternal) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -188,10 +193,11 @@ GroupChannelsAPI.apiV2GroupchannelsHospitalHospitalIdGet(hospitalId: hospitalId)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **hospitalId** | [**UUID**](.md) |  | 
+ **isExternal** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**SendBirdGroupChannelModel**](SendBirdGroupChannelModel.md)
+**String**
 
 ### Authorization
 
