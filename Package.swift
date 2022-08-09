@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "CloudHospitalClient",
     platforms: [
-        .iOS(.v14),
+        .iOS(.v10),
         .macOS(.v11),
         .tvOS(.v10),
         .watchOS(.v3),
