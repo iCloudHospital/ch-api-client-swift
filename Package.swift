@@ -6,7 +6,7 @@ let package = Package(
     name: "CloudHospitalClient",
     platforms: [
         .iOS(.v10),
-        .macOS(.v11),
+        .macOS(.v10_12),
         .tvOS(.v10),
         .watchOS(.v3),
     ],
