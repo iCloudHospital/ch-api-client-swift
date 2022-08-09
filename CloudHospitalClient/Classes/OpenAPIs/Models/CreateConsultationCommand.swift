@@ -28,8 +28,9 @@ public struct CreateConsultationCommand: Codable {
     public var approximateDateStart: Date?
     public var approximateDateEnd: Date?
     public var timeZone: String?
+    public var isExternal: Bool?
 
-    public init(consultationType: ConsultationType? = nil, hospitalId: UUID? = nil, specialtyId: UUID? = nil, doctorId: UUID? = nil, dealId: UUID? = nil, language: String? = nil, isAccountHolder: Bool? = nil, firstName: String? = nil, lastName: String? = nil, email: String? = nil, phone: String? = nil, dateOfBirth: Date? = nil, gender: Gender? = nil, comment: String? = nil, timeRange: String? = nil, approximateDateStart: Date? = nil, approximateDateEnd: Date? = nil, timeZone: String? = nil) {
+    public init(consultationType: ConsultationType? = nil, hospitalId: UUID? = nil, specialtyId: UUID? = nil, doctorId: UUID? = nil, dealId: UUID? = nil, language: String? = nil, isAccountHolder: Bool? = nil, firstName: String? = nil, lastName: String? = nil, email: String? = nil, phone: String? = nil, dateOfBirth: Date? = nil, gender: Gender? = nil, comment: String? = nil, timeRange: String? = nil, approximateDateStart: Date? = nil, approximateDateEnd: Date? = nil, timeZone: String? = nil, isExternal: Bool? = nil) {
         self.consultationType = consultationType
         self.hospitalId = hospitalId
         self.specialtyId = specialtyId
@@ -48,6 +49,7 @@ public struct CreateConsultationCommand: Codable {
         self.approximateDateStart = approximateDateStart
         self.approximateDateEnd = approximateDateEnd
         self.timeZone = timeZone
+        self.isExternal = isExternal
     }
 
 }

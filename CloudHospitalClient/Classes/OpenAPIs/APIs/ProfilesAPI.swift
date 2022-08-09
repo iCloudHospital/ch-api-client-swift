@@ -19,9 +19,9 @@ open class ProfilesAPI {
      - returns: AnyPublisher<Bool, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ProfilesChangeemailPost(changeEmailCommand: ChangeEmailCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+    open class func apiV2ProfilesChangeemailPost(changeEmailCommand: ChangeEmailCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error>.init { promise in
-            apiV1ProfilesChangeemailPostWithRequestBuilder(changeEmailCommand: changeEmailCommand).execute(apiResponseQueue) { result -> Void in
+            apiV2ProfilesChangeemailPostWithRequestBuilder(changeEmailCommand: changeEmailCommand).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -34,7 +34,7 @@ open class ProfilesAPI {
 
     /**
      Change user's email on both Identity and Api.
-     - POST /api/v1/profiles/changeemail
+     - POST /api/v2/profiles/changeemail
      - Sample request:        POST /api/v1/profiles/changeEmail      {          \"email\": \"user@example.com\"      }
      - OAuth:
        - type: oauth2
@@ -42,8 +42,8 @@ open class ProfilesAPI {
      - parameter changeEmailCommand: (body)  (optional)
      - returns: RequestBuilder<Bool> 
      */
-    open class func apiV1ProfilesChangeemailPostWithRequestBuilder(changeEmailCommand: ChangeEmailCommand? = nil) -> RequestBuilder<Bool> {
-        let path = "/api/v1/profiles/changeemail"
+    open class func apiV2ProfilesChangeemailPostWithRequestBuilder(changeEmailCommand: ChangeEmailCommand? = nil) -> RequestBuilder<Bool> {
+        let path = "/api/v2/profiles/changeemail"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: changeEmailCommand)
 
@@ -55,15 +55,16 @@ open class ProfilesAPI {
     }
 
     /**
-
+     Configm email.
+     
      - parameter confirmEmailCommand: (body)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Bool, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ProfilesConfirmemailPost(confirmEmailCommand: ConfirmEmailCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+    open class func apiV2ProfilesConfirmemailPost(confirmEmailCommand: ConfirmEmailCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error>.init { promise in
-            apiV1ProfilesConfirmemailPostWithRequestBuilder(confirmEmailCommand: confirmEmailCommand).execute(apiResponseQueue) { result -> Void in
+            apiV2ProfilesConfirmemailPostWithRequestBuilder(confirmEmailCommand: confirmEmailCommand).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -75,15 +76,16 @@ open class ProfilesAPI {
     }
 
     /**
-     - POST /api/v1/profiles/confirmemail
+     Configm email.
+     - POST /api/v2/profiles/confirmemail
      - OAuth:
        - type: oauth2
        - name: oauth2
      - parameter confirmEmailCommand: (body)  (optional)
      - returns: RequestBuilder<Bool> 
      */
-    open class func apiV1ProfilesConfirmemailPostWithRequestBuilder(confirmEmailCommand: ConfirmEmailCommand? = nil) -> RequestBuilder<Bool> {
-        let path = "/api/v1/profiles/confirmemail"
+    open class func apiV2ProfilesConfirmemailPostWithRequestBuilder(confirmEmailCommand: ConfirmEmailCommand? = nil) -> RequestBuilder<Bool> {
+        let path = "/api/v2/profiles/confirmemail"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: confirmEmailCommand)
 
@@ -95,15 +97,15 @@ open class ProfilesAPI {
     }
 
     /**
-     Get current user's profile.
+     Get Profile.
      
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<UserViewModel, Error>
+     - returns: AnyPublisher<UserModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ProfilesGet(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<UserViewModel, Error> {
-        return Future<UserViewModel, Error>.init { promise in
-            apiV1ProfilesGetWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+    open class func apiV2ProfilesGet(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<UserModel, Error> {
+        return Future<UserModel, Error>.init { promise in
+            apiV2ProfilesGetWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -115,24 +117,65 @@ open class ProfilesAPI {
     }
 
     /**
-     Get current user's profile.
-     - GET /api/v1/profiles
-     - Sample request:        GET /api/v1/profiles
+     Get Profile.
+     - GET /api/v2/profiles
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - returns: RequestBuilder<UserViewModel> 
+     - returns: RequestBuilder<UserModel> 
      */
-    open class func apiV1ProfilesGetWithRequestBuilder() -> RequestBuilder<UserViewModel> {
-        let path = "/api/v1/profiles"
+    open class func apiV2ProfilesGetWithRequestBuilder() -> RequestBuilder<UserModel> {
+        let path = "/api/v2/profiles"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
         let url = URLComponents(string: URLString)
 
-        let requestBuilder: RequestBuilder<UserViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<UserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Update Profile.
+     
+     - parameter updateProfileCommand: (body)  (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<UserModel, Error>
+     */
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ProfilesPut(updateProfileCommand: UpdateProfileCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<UserModel, Error> {
+        return Future<UserModel, Error>.init { promise in
+            apiV2ProfilesPutWithRequestBuilder(updateProfileCommand: updateProfileCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    /**
+     Update Profile.
+     - PUT /api/v2/profiles
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter updateProfileCommand: (body)  (optional)
+     - returns: RequestBuilder<UserModel> 
+     */
+    open class func apiV2ProfilesPutWithRequestBuilder(updateProfileCommand: UpdateProfileCommand? = nil) -> RequestBuilder<UserModel> {
+        let path = "/api/v2/profiles"
+        let URLString = CloudHospitalClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateProfileCommand)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<UserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
 }

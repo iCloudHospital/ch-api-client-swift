@@ -11,11 +11,11 @@ import Foundation
 public struct CheckNotificationsCommand: Codable {
 
     public var notificationId: UUID?
-    public var delete: Bool?
+    public var isDelete: Bool?
 
-    public init(notificationId: UUID? = nil, delete: Bool? = nil) {
+    public init(notificationId: UUID? = nil, isDelete: Bool? = nil) {
         self.notificationId = notificationId
-        self.delete = delete
+        self.isDelete = isDelete
     }
 
 }

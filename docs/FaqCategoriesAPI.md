@@ -4,17 +4,17 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV1FaqcategoriesFaqCategoryIdGet**](FaqCategoriesAPI.md#apiv1faqcategoriesfaqcategoryidget) | **GET** /api/v1/faqcategories/{faqCategoryId} | Get faqCategory.
-[**apiV1FaqcategoriesGet**](FaqCategoriesAPI.md#apiv1faqcategoriesget) | **GET** /api/v1/faqcategories | Get all faqCategory.
-[**apiV1FaqcategoriesSlugsSlugGet**](FaqCategoriesAPI.md#apiv1faqcategoriesslugsslugget) | **GET** /api/v1/faqcategories/slugs/{slug} | Get faqCategory by slug.
+[**apiV2FaqcategoriesFaqCategoryIdGet**](FaqCategoriesAPI.md#apiv2faqcategoriesfaqcategoryidget) | **GET** /api/v2/faqcategories/{faqCategoryId} | Get FaqCategory.
+[**apiV2FaqcategoriesGet**](FaqCategoriesAPI.md#apiv2faqcategoriesget) | **GET** /api/v2/faqcategories | Get all FaqCategories.
+[**apiV2FaqcategoriesSlugGet**](FaqCategoriesAPI.md#apiv2faqcategoriesslugget) | **GET** /api/v2/faqcategories/{slug} | Get FaqCategory by slug.
 
 
-# **apiV1FaqcategoriesFaqCategoryIdGet**
+# **apiV2FaqcategoriesFaqCategoryIdGet**
 ```swift
-    open class func apiV1FaqcategoriesFaqCategoryIdGet(faqCategoryId: UUID, languageCode: String? = nil, completion: @escaping (_ data: FaqCategoryViewModel?, _ error: Error?) -> Void)
+    open class func apiV2FaqcategoriesFaqCategoryIdGet(faqCategoryId: UUID, languageCode: String? = nil, completion: @escaping (_ data: FaqCategoryModel?, _ error: Error?) -> Void)
 ```
 
-Get faqCategory.
+Get FaqCategory.
 
 ### Example 
 ```swift
@@ -22,10 +22,10 @@ Get faqCategory.
 import CloudHospitalClient
 
 let faqCategoryId = 987 // UUID | 
-let languageCode = "languageCode_example" // String |  (optional) (default to "")
+let languageCode = "languageCode_example" // String |  (optional)
 
-// Get faqCategory.
-FaqCategoriesAPI.apiV1FaqcategoriesFaqCategoryIdGet(faqCategoryId: faqCategoryId, languageCode: languageCode) { (response, error) in
+// Get FaqCategory.
+FaqCategoriesAPI.apiV2FaqcategoriesFaqCategoryIdGet(faqCategoryId: faqCategoryId, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -42,11 +42,11 @@ FaqCategoriesAPI.apiV1FaqcategoriesFaqCategoryIdGet(faqCategoryId: faqCategoryId
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **faqCategoryId** | [**UUID**](.md) |  | 
- **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
+ **languageCode** | **String** |  | [optional] 
 
 ### Return type
 
-[**FaqCategoryViewModel**](FaqCategoryViewModel.md)
+[**FaqCategoryModel**](FaqCategoryModel.md)
 
 ### Authorization
 
@@ -55,16 +55,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1FaqcategoriesGet**
+# **apiV2FaqcategoriesGet**
 ```swift
-    open class func apiV1FaqcategoriesGet(id: UUID? = nil, parentId: UUID? = nil, name: String? = nil, description: String? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: FaqCategoriesViewModel?, _ error: Error?) -> Void)
+    open class func apiV2FaqcategoriesGet(id: UUID? = nil, parentId: UUID? = nil, name: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: FaqCategoriesModel?, _ error: Error?) -> Void)
 ```
 
-Get all faqCategory.
+Get all FaqCategories.
 
 ### Example 
 ```swift
@@ -74,15 +74,17 @@ import CloudHospitalClient
 let id = 987 // UUID |  (optional)
 let parentId = 987 // UUID |  (optional)
 let name = "name_example" // String |  (optional)
-let description = "description_example" // String |  (optional)
+let hospitalId = 987 // UUID |  (optional)
+let hospitalName = "hospitalName_example" // String |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
+let showHidden = true // Bool |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
-let current = true // Bool |  (optional)
 
-// Get all faqCategory.
-FaqCategoriesAPI.apiV1FaqcategoriesGet(id: id, parentId: parentId, name: name, description: description, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+// Get all FaqCategories.
+FaqCategoriesAPI.apiV2FaqcategoriesGet(id: id, parentId: parentId, name: name, hospitalId: hospitalId, hospitalName: hospitalName, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -101,16 +103,18 @@ Name | Type | Description  | Notes
  **id** | [**UUID**](.md) |  | [optional] 
  **parentId** | [**UUID**](.md) |  | [optional] 
  **name** | **String** |  | [optional] 
- **description** | **String** |  | [optional] 
+ **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **hospitalName** | **String** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
+ **showHidden** | **Bool** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
- **current** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**FaqCategoriesViewModel**](FaqCategoriesViewModel.md)
+[**FaqCategoriesModel**](FaqCategoriesModel.md)
 
 ### Authorization
 
@@ -119,16 +123,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1FaqcategoriesSlugsSlugGet**
+# **apiV2FaqcategoriesSlugGet**
 ```swift
-    open class func apiV1FaqcategoriesSlugsSlugGet(slug: String, languageCode: String? = nil, completion: @escaping (_ data: FaqCategoryViewModel?, _ error: Error?) -> Void)
+    open class func apiV2FaqcategoriesSlugGet(slug: String, languageCode: String? = nil, completion: @escaping (_ data: FaqCategoryModel?, _ error: Error?) -> Void)
 ```
 
-Get faqCategory by slug.
+Get FaqCategory by slug.
 
 ### Example 
 ```swift
@@ -136,10 +140,10 @@ Get faqCategory by slug.
 import CloudHospitalClient
 
 let slug = "slug_example" // String | 
-let languageCode = "languageCode_example" // String |  (optional) (default to "")
+let languageCode = "languageCode_example" // String |  (optional)
 
-// Get faqCategory by slug.
-FaqCategoriesAPI.apiV1FaqcategoriesSlugsSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
+// Get FaqCategory by slug.
+FaqCategoriesAPI.apiV2FaqcategoriesSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -156,11 +160,11 @@ FaqCategoriesAPI.apiV1FaqcategoriesSlugsSlugGet(slug: slug, languageCode: langua
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String** |  | 
- **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
+ **languageCode** | **String** |  | [optional] 
 
 ### Return type
 
-[**FaqCategoryViewModel**](FaqCategoryViewModel.md)
+[**FaqCategoryModel**](FaqCategoryModel.md)
 
 ### Authorization
 
@@ -169,7 +173,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

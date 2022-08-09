@@ -14,12 +14,12 @@ open class ChatUsersAPI {
     /**
 
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<SendBirdUserViewModel, Error>
+     - returns: AnyPublisher<ChatUserModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ChatusersCurrentGet(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SendBirdUserViewModel, Error> {
-        return Future<SendBirdUserViewModel, Error>.init { promise in
-            apiV1ChatusersCurrentGetWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+    open class func apiV2ChatusersCurrentGet(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ChatUserModel, Error> {
+        return Future<ChatUserModel, Error>.init { promise in
+            apiV2ChatusersCurrentGetWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -31,73 +31,34 @@ open class ChatUsersAPI {
     }
 
     /**
-     - GET /api/v1/chatusers/current
+     - GET /api/v2/chatusers/current
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - returns: RequestBuilder<SendBirdUserViewModel> 
+     - returns: RequestBuilder<ChatUserModel> 
      */
-    open class func apiV1ChatusersCurrentGetWithRequestBuilder() -> RequestBuilder<SendBirdUserViewModel> {
-        let path = "/api/v1/chatusers/current"
+    open class func apiV2ChatusersCurrentGetWithRequestBuilder() -> RequestBuilder<ChatUserModel> {
+        let path = "/api/v2/chatusers/current"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
         let url = URLComponents(string: URLString)
 
-        let requestBuilder: RequestBuilder<SendBirdUserViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
     /**
-
-     - parameter createSendBirdCurrentUserCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<SendBirdUserViewModel, Error>
-     */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ChatusersCurrentPost(createSendBirdCurrentUserCommand: CreateSendBirdCurrentUserCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SendBirdUserViewModel, Error> {
-        return Future<SendBirdUserViewModel, Error>.init { promise in
-            apiV1ChatusersCurrentPostWithRequestBuilder(createSendBirdCurrentUserCommand: createSendBirdCurrentUserCommand).execute(apiResponseQueue) { result -> Void in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body!))
-                case let .failure(error):
-                    promise(.failure(error))
-                }
-            }
-        }.eraseToAnyPublisher()
-    }
-
-    /**
-     - POST /api/v1/chatusers/current
-     - OAuth:
-       - type: oauth2
-       - name: oauth2
-     - parameter createSendBirdCurrentUserCommand: (body)  (optional)
-     - returns: RequestBuilder<SendBirdUserViewModel> 
-     */
-    open class func apiV1ChatusersCurrentPostWithRequestBuilder(createSendBirdCurrentUserCommand: CreateSendBirdCurrentUserCommand? = nil) -> RequestBuilder<SendBirdUserViewModel> {
-        let path = "/api/v1/chatusers/current"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createSendBirdCurrentUserCommand)
-
-        let url = URLComponents(string: URLString)
-
-        let requestBuilder: RequestBuilder<SendBirdUserViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
-    }
-
-    /**
-
+     Delete chatUser.
+     
      - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Bool, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ChatusersDelete(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
+    open class func apiV2ChatusersDelete(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
         return Future<Bool, Error>.init { promise in
-            apiV1ChatusersDeleteWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+            apiV2ChatusersDeleteWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -109,14 +70,15 @@ open class ChatUsersAPI {
     }
 
     /**
-     - DELETE /api/v1/chatusers
+     Delete chatUser.
+     - DELETE /api/v2/chatusers
      - OAuth:
        - type: oauth2
        - name: oauth2
      - returns: RequestBuilder<Bool> 
      */
-    open class func apiV1ChatusersDeleteWithRequestBuilder() -> RequestBuilder<Bool> {
-        let path = "/api/v1/chatusers"
+    open class func apiV2ChatusersDeleteWithRequestBuilder() -> RequestBuilder<Bool> {
+        let path = "/api/v2/chatusers"
         let URLString = CloudHospitalClientAPI.basePath + path
         let parameters: [String:Any]? = nil
         
@@ -128,15 +90,20 @@ open class ChatUsersAPI {
     }
 
     /**
-
-     - parameter updateSendBirdUserCommand: (body)  (optional)
+     Get all chatUsers.
+     
+     - parameter limit: (query)  (optional)
+     - parameter token: (query)  (optional)
+     - parameter userIds: (query)  (optional)
+     - parameter nickname: (query)  (optional)
+     - parameter nicknameStartswith: (query)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<SendBirdUserViewModel, Error>
+     - returns: AnyPublisher<ChatUsersModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ChatusersPut(updateSendBirdUserCommand: UpdateSendBirdUserCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SendBirdUserViewModel, Error> {
-        return Future<SendBirdUserViewModel, Error>.init { promise in
-            apiV1ChatusersPutWithRequestBuilder(updateSendBirdUserCommand: updateSendBirdUserCommand).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2ChatusersGet(limit: Int? = nil, token: String? = nil, userIds: String? = nil, nickname: String? = nil, nicknameStartswith: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ChatUsersModel, Error> {
+        return Future<ChatUsersModel, Error>.init { promise in
+            apiV2ChatusersGetWithRequestBuilder(limit: limit, token: token, userIds: userIds, nickname: nickname, nicknameStartswith: nicknameStartswith).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -148,35 +115,132 @@ open class ChatUsersAPI {
     }
 
     /**
-     - PUT /api/v1/chatusers
+     Get all chatUsers.
+     - GET /api/v2/chatusers
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - parameter updateSendBirdUserCommand: (body)  (optional)
-     - returns: RequestBuilder<SendBirdUserViewModel> 
+     - parameter limit: (query)  (optional)
+     - parameter token: (query)  (optional)
+     - parameter userIds: (query)  (optional)
+     - parameter nickname: (query)  (optional)
+     - parameter nicknameStartswith: (query)  (optional)
+     - returns: RequestBuilder<ChatUsersModel> 
      */
-    open class func apiV1ChatusersPutWithRequestBuilder(updateSendBirdUserCommand: UpdateSendBirdUserCommand? = nil) -> RequestBuilder<SendBirdUserViewModel> {
-        let path = "/api/v1/chatusers"
+    open class func apiV2ChatusersGetWithRequestBuilder(limit: Int? = nil, token: String? = nil, userIds: String? = nil, nickname: String? = nil, nicknameStartswith: String? = nil) -> RequestBuilder<ChatUsersModel> {
+        let path = "/api/v2/chatusers"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateSendBirdUserCommand)
+        let parameters: [String:Any]? = nil
+        
+        var url = URLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Limit": limit?.encodeToJSON(), 
+            "Token": token?.encodeToJSON(), 
+            "UserIds": userIds?.encodeToJSON(), 
+            "Nickname": nickname?.encodeToJSON(), 
+            "NicknameStartswith": nicknameStartswith?.encodeToJSON()
+        ])
+
+        let requestBuilder: RequestBuilder<ChatUsersModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+    }
+
+    /**
+     Create a chatUser.
+     
+     - parameter createChatUserCommand: (body)  (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<ChatUserModel, Error>
+     */
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ChatusersPost(createChatUserCommand: CreateChatUserCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ChatUserModel, Error> {
+        return Future<ChatUserModel, Error>.init { promise in
+            apiV2ChatusersPostWithRequestBuilder(createChatUserCommand: createChatUserCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    /**
+     Create a chatUser.
+     - POST /api/v2/chatusers
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter createChatUserCommand: (body)  (optional)
+     - returns: RequestBuilder<ChatUserModel> 
+     */
+    open class func apiV2ChatusersPostWithRequestBuilder(createChatUserCommand: CreateChatUserCommand? = nil) -> RequestBuilder<ChatUserModel> {
+        let path = "/api/v2/chatusers"
+        let URLString = CloudHospitalClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createChatUserCommand)
 
         let url = URLComponents(string: URLString)
 
-        let requestBuilder: RequestBuilder<SendBirdUserViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+    }
+
+    /**
+     Update chatUser.
+     
+     - parameter updateChatUserCommand: (body)  (optional)
+     - parameter apiResponseQueue: The queue on which api response is dispatched.
+     - returns: AnyPublisher<ChatUserModel, Error>
+     */
+    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ChatusersPut(updateChatUserCommand: UpdateChatUserCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ChatUserModel, Error> {
+        return Future<ChatUserModel, Error>.init { promise in
+            apiV2ChatusersPutWithRequestBuilder(updateChatUserCommand: updateChatUserCommand).execute(apiResponseQueue) { result -> Void in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body!))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+
+    /**
+     Update chatUser.
+     - PUT /api/v2/chatusers
+     - OAuth:
+       - type: oauth2
+       - name: oauth2
+     - parameter updateChatUserCommand: (body)  (optional)
+     - returns: RequestBuilder<ChatUserModel> 
+     */
+    open class func apiV2ChatusersPutWithRequestBuilder(updateChatUserCommand: UpdateChatUserCommand? = nil) -> RequestBuilder<ChatUserModel> {
+        let path = "/api/v2/chatusers"
+        let URLString = CloudHospitalClientAPI.basePath + path
+        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateChatUserCommand)
+
+        let url = URLComponents(string: URLString)
+
+        let requestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
     }
 
     /**
-
+     Get chatUser.
+     
      - parameter userId: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<SendBirdUserViewModel, Error>
+     - returns: AnyPublisher<ChatUserModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ChatusersUserIdGet(userId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SendBirdUserViewModel, Error> {
-        return Future<SendBirdUserViewModel, Error>.init { promise in
-            apiV1ChatusersUserIdGetWithRequestBuilder(userId: userId).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2ChatusersUserIdGet(userId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ChatUserModel, Error> {
+        return Future<ChatUserModel, Error>.init { promise in
+            apiV2ChatusersUserIdGetWithRequestBuilder(userId: userId).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -188,15 +252,16 @@ open class ChatUsersAPI {
     }
 
     /**
-     - GET /api/v1/chatusers/{userId}
+     Get chatUser.
+     - GET /api/v2/chatusers/{userId}
      - OAuth:
        - type: oauth2
        - name: oauth2
      - parameter userId: (path)  
-     - returns: RequestBuilder<SendBirdUserViewModel> 
+     - returns: RequestBuilder<ChatUserModel> 
      */
-    open class func apiV1ChatusersUserIdGetWithRequestBuilder(userId: UUID) -> RequestBuilder<SendBirdUserViewModel> {
-        var path = "/api/v1/chatusers/{userId}"
+    open class func apiV2ChatusersUserIdGetWithRequestBuilder(userId: UUID) -> RequestBuilder<ChatUserModel> {
+        var path = "/api/v2/chatusers/{userId}"
         let userIdPreEscape = "\(APIHelper.mapValueToPathItem(userId))"
         let userIdPostEscape = userIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         path = path.replacingOccurrences(of: "{userId}", with: userIdPostEscape, options: .literal, range: nil)
@@ -205,7 +270,7 @@ open class ChatUsersAPI {
         
         let url = URLComponents(string: URLString)
 
-        let requestBuilder: RequestBuilder<SendBirdUserViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

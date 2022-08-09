@@ -13,16 +13,17 @@ import Combine
 open class ImagesAPI {
     /**
 
+     - parameter files: (form)  (optional)
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<Void, Error>
+     - returns: AnyPublisher<[MediaModel], Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ImagesPost(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Void, Error> {
-        return Future<Void, Error>.init { promise in
-            apiV1ImagesPostWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+    open class func apiV2ImagesPost(files: [URL]? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<[MediaModel], Error> {
+        return Future<[MediaModel], Error>.init { promise in
+            apiV2ImagesPostWithRequestBuilder(files: files).execute(apiResponseQueue) { result -> Void in
                 switch result {
-                case .success:
-                    promise(.success(()))
+                case let .success(response):
+                    promise(.success(response.body!))
                 case let .failure(error):
                     promise(.failure(error))
                 }
@@ -31,20 +32,26 @@ open class ImagesAPI {
     }
 
     /**
-     - POST /api/v1/images
+     - POST /api/v2/images
      - OAuth:
        - type: oauth2
        - name: oauth2
-     - returns: RequestBuilder<Void> 
+     - parameter files: (form)  (optional)
+     - returns: RequestBuilder<[MediaModel]> 
      */
-    open class func apiV1ImagesPostWithRequestBuilder() -> RequestBuilder<Void> {
-        let path = "/api/v1/images"
+    open class func apiV2ImagesPostWithRequestBuilder(files: [URL]? = nil) -> RequestBuilder<[MediaModel]> {
+        let path = "/api/v2/images"
         let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
+        let formParams: [String:Any?] = [
+            "files": files?.encodeToJSON()
+        ]
+
+        let nonNullParameters = APIHelper.rejectNil(formParams)
+        let parameters = APIHelper.convertBoolToString(nonNullParameters)
         
         let url = URLComponents(string: URLString)
 
-        let requestBuilder: RequestBuilder<Void>.Type = CloudHospitalClientAPI.requestBuilderFactory.getNonDecodableBuilder()
+        let requestBuilder: RequestBuilder<[MediaModel]>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

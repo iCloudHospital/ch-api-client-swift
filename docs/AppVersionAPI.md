@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV1AppversionPlatformGet**](AppVersionAPI.md#apiv1appversionplatformget) | **GET** /api/v1/appversion/{platform} | 
+[**apiV2AppversionPlatformGet**](AppVersionAPI.md#apiv2appversionplatformget) | **GET** /api/v2/appversion/{platform} | 
 
 
-# **apiV1AppversionPlatformGet**
+# **apiV2AppversionPlatformGet**
 ```swift
-    open class func apiV1AppversionPlatformGet(platform: Platform, completion: @escaping (_ data: AppVersionViewModel?, _ error: Error?) -> Void)
+    open class func apiV2AppversionPlatformGet(platform: Platform, completion: @escaping (_ data: AppVersionModel?, _ error: Error?) -> Void)
 ```
 
 
@@ -21,7 +21,7 @@ import CloudHospitalClient
 
 let platform = Platform() // Platform | 
 
-AppVersionAPI.apiV1AppversionPlatformGet(platform: platform) { (response, error) in
+AppVersionAPI.apiV2AppversionPlatformGet(platform: platform) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -41,7 +41,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AppVersionViewModel**](AppVersionViewModel.md)
+[**AppVersionModel**](AppVersionModel.md)
 
 ### Authorization
 

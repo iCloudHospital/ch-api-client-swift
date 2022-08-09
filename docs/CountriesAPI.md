@@ -4,22 +4,19 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV1CountriesCountryIdDelete**](CountriesAPI.md#apiv1countriescountryiddelete) | **DELETE** /api/v1/countries/{countryId} | Delete country.
-[**apiV1CountriesCountryIdGet**](CountriesAPI.md#apiv1countriescountryidget) | **GET** /api/v1/countries/{countryId} | Get country.
-[**apiV1CountriesCountryIdPut**](CountriesAPI.md#apiv1countriescountryidput) | **PUT** /api/v1/countries/{countryId} | Update country.
-[**apiV1CountriesGet**](CountriesAPI.md#apiv1countriesget) | **GET** /api/v1/countries | Get all countries.
-[**apiV1CountriesPost**](CountriesAPI.md#apiv1countriespost) | **POST** /api/v1/countries | Create a country.
-[**apiV1CountriesSlugsSlugGet**](CountriesAPI.md#apiv1countriesslugsslugget) | **GET** /api/v1/countries/slugs/{slug} | Get country by slug.
+[**apiV2CountriesCountryIdGet**](CountriesAPI.md#apiv2countriescountryidget) | **GET** /api/v2/countries/{countryId} | 
+[**apiV2CountriesCountryIdMediasGet**](CountriesAPI.md#apiv2countriescountryidmediasget) | **GET** /api/v2/countries/{countryId}/medias | Get all CountryMedias.
+[**apiV2CountriesCountryIdMediasMediaIdGet**](CountriesAPI.md#apiv2countriescountryidmediasmediaidget) | **GET** /api/v2/countries/{countryId}/medias/{mediaId} | Get CountryMedia.
+[**apiV2CountriesGet**](CountriesAPI.md#apiv2countriesget) | **GET** /api/v2/countries | Get all countries.
+[**apiV2CountriesSlugGet**](CountriesAPI.md#apiv2countriesslugget) | **GET** /api/v2/countries/{slug} | 
 
 
-# **apiV1CountriesCountryIdDelete**
+# **apiV2CountriesCountryIdGet**
 ```swift
-    open class func apiV1CountriesCountryIdDelete(countryId: UUID, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
+    open class func apiV2CountriesCountryIdGet(countryId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil, completion: @escaping (_ data: CountryModel?, _ error: Error?) -> Void)
 ```
 
-Delete country.
 
-Sample request:        DELETE /api/v1/countries/1
 
 ### Example 
 ```swift
@@ -27,9 +24,10 @@ Sample request:        DELETE /api/v1/countries/1
 import CloudHospitalClient
 
 let countryId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
 
-// Delete country.
-CountriesAPI.apiV1CountriesCountryIdDelete(countryId: countryId) { (response, error) in
+CountriesAPI.apiV2CountriesCountryIdGet(countryId: countryId, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -46,62 +44,12 @@ CountriesAPI.apiV1CountriesCountryIdDelete(countryId: countryId) { (response, er
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **countryId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
 
 ### Return type
 
-**Bool**
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apiV1CountriesCountryIdGet**
-```swift
-    open class func apiV1CountriesCountryIdGet(countryId: UUID, languageCode: String? = nil, completion: @escaping (_ data: CountryViewModel?, _ error: Error?) -> Void)
-```
-
-Get country.
-
-Sample request:        GET /api/v1/countries/1
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-let countryId = 987 // UUID | 
-let languageCode = "languageCode_example" // String |  (optional) (default to "")
-
-// Get country.
-CountriesAPI.apiV1CountriesCountryIdGet(countryId: countryId, languageCode: languageCode) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **countryId** | [**UUID**](.md) |  | 
- **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
-
-### Return type
-
-[**CountryViewModel**](CountryViewModel.md)
+[**CountryModel**](CountryModel.md)
 
 ### Authorization
 
@@ -110,18 +58,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1CountriesCountryIdPut**
+# **apiV2CountriesCountryIdMediasGet**
 ```swift
-    open class func apiV1CountriesCountryIdPut(countryId: UUID, updateCountryCommand: UpdateCountryCommand? = nil, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
+    open class func apiV2CountriesCountryIdMediasGet(countryId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: MediasModel?, _ error: Error?) -> Void)
 ```
 
-Update country.
-
-Sample request:        PUT /api/v1/countries/1      {          \"name\": \"USA\",          \"description\": \"United States of America\"          \"medias\": [            {              \"mediaType\": 0,              \"url\": \"https://cloudhospitalblob.blob.core.windows.net/imagecontainer/SouthKorea.png\",              \"thumbnailUrl\": \"https://cloudhospitalblob.blob.core.windows.net/thumbnailcontainer/SouthKorea.png\"              \"description\": \"string\",              \"order\": 0            },            {              \"mediaType\": 1,              \"url\": \"string\",              \"description\": \"string\",              \"order\": 1            }          ],      }
+Get all CountryMedias.
 
 ### Example 
 ```swift
@@ -129,10 +75,14 @@ Sample request:        PUT /api/v1/countries/1      {          \"name\": \"USA\"
 import CloudHospitalClient
 
 let countryId = 987 // UUID | 
-let updateCountryCommand = UpdateCountryCommand(name: "name_example", description: "description_example", content: "content_example", medias: [{...}]) // UpdateCountryCommand |  (optional)
+let id = 987 // UUID |  (optional)
+let mediaType = MediaType() // MediaType |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
 
-// Update country.
-CountriesAPI.apiV1CountriesCountryIdPut(countryId: countryId, updateCountryCommand: updateCountryCommand) { (response, error) in
+// Get all CountryMedias.
+CountriesAPI.apiV2CountriesCountryIdMediasGet(countryId: countryId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -149,31 +99,83 @@ CountriesAPI.apiV1CountriesCountryIdPut(countryId: countryId, updateCountryComma
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **countryId** | [**UUID**](.md) |  | 
- **updateCountryCommand** | [**UpdateCountryCommand**](UpdateCountryCommand.md) |  | [optional] 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **mediaType** | [**MediaType**](.md) |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
 
 ### Return type
 
-**Bool**
+[**MediasModel**](MediasModel.md)
 
 ### Authorization
 
-[oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1CountriesGet**
+# **apiV2CountriesCountryIdMediasMediaIdGet**
 ```swift
-    open class func apiV1CountriesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, createdDate: Date? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: CountriesViewModel?, _ error: Error?) -> Void)
+    open class func apiV2CountriesCountryIdMediasMediaIdGet(countryId: UUID, mediaId: UUID, completion: @escaping (_ data: MediaModel?, _ error: Error?) -> Void)
+```
+
+Get CountryMedia.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let countryId = 987 // UUID | 
+let mediaId = 987 // UUID | 
+
+// Get CountryMedia.
+CountriesAPI.apiV2CountriesCountryIdMediasMediaIdGet(countryId: countryId, mediaId: mediaId) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **countryId** | [**UUID**](.md) |  | 
+ **mediaId** | [**UUID**](.md) |  | 
+
+### Return type
+
+[**MediaModel**](MediaModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2CountriesGet**
+```swift
+    open class func apiV2CountriesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, createdDate: Date? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: CountriesModel?, _ error: Error?) -> Void)
 ```
 
 Get all countries.
-
-Sample request:        GET /api/v1/countries      {          \"countryPageQueryFilter\": {              \"page\": 1,              \"limit\": 20,              \"lastRetrived\": \"2020-02-05T08:40\",              \"languageCode\": \"en\"          }      }
 
 ### Example 
 ```swift
@@ -185,13 +187,14 @@ let name = "name_example" // String |  (optional)
 let description = "description_example" // String |  (optional)
 let createdDate = Date() // Date |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
+let showHidden = true // Bool |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
-let current = true // Bool |  (optional)
 
 // Get all countries.
-CountriesAPI.apiV1CountriesGet(id: id, name: name, description: description, createdDate: createdDate, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+CountriesAPI.apiV2CountriesGet(id: id, name: name, description: description, createdDate: createdDate, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -212,14 +215,15 @@ Name | Type | Description  | Notes
  **description** | **String** |  | [optional] 
  **createdDate** | **Date** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
+ **showHidden** | **Bool** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
- **current** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**CountriesViewModel**](CountriesViewModel.md)
+[**CountriesModel**](CountriesModel.md)
 
 ### Authorization
 
@@ -228,66 +232,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1CountriesPost**
+# **apiV2CountriesSlugGet**
 ```swift
-    open class func apiV1CountriesPost(createCountryCommand: CreateCountryCommand? = nil, completion: @escaping (_ data: UUID?, _ error: Error?) -> Void)
+    open class func apiV2CountriesSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil, completion: @escaping (_ data: CountryModel?, _ error: Error?) -> Void)
 ```
 
-Create a country.
 
-Sample request:        POST /api/v1/countries      {          \"name\": \"Korea\",          \"description\": \"Republic of Korea\",          \"medias\": [              {                  \"mediaType\": \"Photo\",                  \"url\": \"https://cloudhospitalblob.blob.core.windows.net/imagecontainer/SouthKorea.png\",                  \"thumbnailUrl\": \"https://cloudhospitalblob.blob.core.windows.net/thumbnailcontainer/SouthKorea.png\",                  \"description\": \"string\"              }          ]      }
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-let createCountryCommand = CreateCountryCommand(name: "name_example", description: "description_example", content: "content_example", medias: [{...}]) // CreateCountryCommand |  (optional)
-
-// Create a country.
-CountriesAPI.apiV1CountriesPost(createCountryCommand: createCountryCommand) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createCountryCommand** | [**CreateCountryCommand**](CreateCountryCommand.md) |  | [optional] 
-
-### Return type
-
-**UUID**
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apiV1CountriesSlugsSlugGet**
-```swift
-    open class func apiV1CountriesSlugsSlugGet(slug: String, languageCode: String? = nil, completion: @escaping (_ data: CountryViewModel?, _ error: Error?) -> Void)
-```
-
-Get country by slug.
 
 ### Example 
 ```swift
@@ -295,10 +249,10 @@ Get country by slug.
 import CloudHospitalClient
 
 let slug = "slug_example" // String | 
-let languageCode = "languageCode_example" // String |  (optional) (default to "")
+let languageCode = "languageCode_example" // String |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
 
-// Get country by slug.
-CountriesAPI.apiV1CountriesSlugsSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
+CountriesAPI.apiV2CountriesSlugGet(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -315,11 +269,12 @@ CountriesAPI.apiV1CountriesSlugsSlugGet(slug: slug, languageCode: languageCode) 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String** |  | 
- **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
+ **languageCode** | **String** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**CountryViewModel**](CountryViewModel.md)
+[**CountryModel**](CountryModel.md)
 
 ### Authorization
 
@@ -328,7 +283,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

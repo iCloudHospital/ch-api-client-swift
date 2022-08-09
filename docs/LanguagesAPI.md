@@ -4,17 +4,17 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV1LanguagesCodeGet**](LanguagesAPI.md#apiv1languagescodeget) | **GET** /api/v1/languages/{code} | Get a language by code
-[**apiV1LanguagesGet**](LanguagesAPI.md#apiv1languagesget) | **GET** /api/v1/languages | Get all languages.
-[**apiV1LanguagesIdGet**](LanguagesAPI.md#apiv1languagesidget) | **GET** /api/v1/languages/{id} | Get a language by id
+[**apiV2LanguagesCodeGet**](LanguagesAPI.md#apiv2languagescodeget) | **GET** /api/v2/languages/{code} | Get Language by code.
+[**apiV2LanguagesGet**](LanguagesAPI.md#apiv2languagesget) | **GET** /api/v2/languages | Get all Languages.
+[**apiV2LanguagesIdGet**](LanguagesAPI.md#apiv2languagesidget) | **GET** /api/v2/languages/{id} | Get Language.
 
 
-# **apiV1LanguagesCodeGet**
+# **apiV2LanguagesCodeGet**
 ```swift
-    open class func apiV1LanguagesCodeGet(code: String, completion: @escaping (_ data: LanguageViewModel?, _ error: Error?) -> Void)
+    open class func apiV2LanguagesCodeGet(code: String, completion: @escaping (_ data: LanguageModel?, _ error: Error?) -> Void)
 ```
 
-Get a language by code
+Get Language by code.
 
 ### Example 
 ```swift
@@ -23,8 +23,8 @@ import CloudHospitalClient
 
 let code = "code_example" // String | 
 
-// Get a language by code
-LanguagesAPI.apiV1LanguagesCodeGet(code: code) { (response, error) in
+// Get Language by code.
+LanguagesAPI.apiV2LanguagesCodeGet(code: code) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -44,7 +44,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LanguageViewModel**](LanguageViewModel.md)
+[**LanguageModel**](LanguageModel.md)
 
 ### Authorization
 
@@ -53,18 +53,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1LanguagesGet**
+# **apiV2LanguagesGet**
 ```swift
-    open class func apiV1LanguagesGet(id: UUID? = nil, name: String? = nil, code: String? = nil, description: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: LanguagesViewModel?, _ error: Error?) -> Void)
+    open class func apiV2LanguagesGet(id: UUID? = nil, name: String? = nil, code: String? = nil, description: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: LanguagesModel?, _ error: Error?) -> Void)
 ```
 
-Get all languages.
-
-Sample request:        GET: /api/v1/languages
+Get all Languages.
 
 ### Example 
 ```swift
@@ -78,10 +76,9 @@ let description = "description_example" // String |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
-let current = true // Bool |  (optional)
 
-// Get all languages.
-LanguagesAPI.apiV1LanguagesGet(id: id, name: name, code: code, description: description, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+// Get all Languages.
+LanguagesAPI.apiV2LanguagesGet(id: id, name: name, code: code, description: description, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -104,11 +101,10 @@ Name | Type | Description  | Notes
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
- **current** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**LanguagesViewModel**](LanguagesViewModel.md)
+[**LanguagesModel**](LanguagesModel.md)
 
 ### Authorization
 
@@ -117,16 +113,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1LanguagesIdGet**
+# **apiV2LanguagesIdGet**
 ```swift
-    open class func apiV1LanguagesIdGet(id: UUID, completion: @escaping (_ data: LanguageViewModel?, _ error: Error?) -> Void)
+    open class func apiV2LanguagesIdGet(id: UUID, completion: @escaping (_ data: LanguageModel?, _ error: Error?) -> Void)
 ```
 
-Get a language by id
+Get Language.
 
 ### Example 
 ```swift
@@ -135,8 +131,8 @@ import CloudHospitalClient
 
 let id = 987 // UUID | 
 
-// Get a language by id
-LanguagesAPI.apiV1LanguagesIdGet(id: id) { (response, error) in
+// Get Language.
+LanguagesAPI.apiV2LanguagesIdGet(id: id) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -156,7 +152,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LanguageViewModel**](LanguageViewModel.md)
+[**LanguageModel**](LanguageModel.md)
 
 ### Authorization
 
@@ -165,7 +161,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

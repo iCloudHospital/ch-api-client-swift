@@ -15,12 +15,12 @@ open class AppVersionAPI {
 
      - parameter platform: (path)  
      - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - returns: AnyPublisher<AppVersionViewModel, Error>
+     - returns: AnyPublisher<AppVersionModel, Error>
      */
     @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AppversionPlatformGet(platform: Platform, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<AppVersionViewModel, Error> {
-        return Future<AppVersionViewModel, Error>.init { promise in
-            apiV1AppversionPlatformGetWithRequestBuilder(platform: platform).execute(apiResponseQueue) { result -> Void in
+    open class func apiV2AppversionPlatformGet(platform: Platform, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<AppVersionModel, Error> {
+        return Future<AppVersionModel, Error>.init { promise in
+            apiV2AppversionPlatformGetWithRequestBuilder(platform: platform).execute(apiResponseQueue) { result -> Void in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body!))
@@ -32,12 +32,12 @@ open class AppVersionAPI {
     }
 
     /**
-     - GET /api/v1/appversion/{platform}
+     - GET /api/v2/appversion/{platform}
      - parameter platform: (path)  
-     - returns: RequestBuilder<AppVersionViewModel> 
+     - returns: RequestBuilder<AppVersionModel> 
      */
-    open class func apiV1AppversionPlatformGetWithRequestBuilder(platform: Platform) -> RequestBuilder<AppVersionViewModel> {
-        var path = "/api/v1/appversion/{platform}"
+    open class func apiV2AppversionPlatformGetWithRequestBuilder(platform: Platform) -> RequestBuilder<AppVersionModel> {
+        var path = "/api/v2/appversion/{platform}"
         let platformPreEscape = "\(APIHelper.mapValueToPathItem(platform))"
         let platformPostEscape = platformPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         path = path.replacingOccurrences(of: "{platform}", with: platformPostEscape, options: .literal, range: nil)
@@ -46,7 +46,7 @@ open class AppVersionAPI {
         
         let url = URLComponents(string: URLString)
 
-        let requestBuilder: RequestBuilder<AppVersionViewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let requestBuilder: RequestBuilder<AppVersionModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
         return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }

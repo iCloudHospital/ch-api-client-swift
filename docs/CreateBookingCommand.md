@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **approximateDateEnd** | **Date** |  | [optional] 
 **comment** | **String** |  | [optional] 
 **timeZone** | **String** |  | [optional] 
+**isExternal** | **Bool** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

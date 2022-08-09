@@ -23,8 +23,9 @@ public struct CreateBookingCommand: Codable {
     public var approximateDateEnd: Date?
     public var comment: String?
     public var timeZone: String?
+    public var isExternal: Bool?
 
-    public init(hospitalId: UUID? = nil, dealPackageId: UUID? = nil, quantity: Int? = nil, firstName: String? = nil, lastName: String? = nil, email: String? = nil, phone: String? = nil, dateOfBirth: Date? = nil, gender: Gender? = nil, approximateDateStart: Date? = nil, approximateDateEnd: Date? = nil, comment: String? = nil, timeZone: String? = nil) {
+    public init(hospitalId: UUID? = nil, dealPackageId: UUID? = nil, quantity: Int? = nil, firstName: String? = nil, lastName: String? = nil, email: String? = nil, phone: String? = nil, dateOfBirth: Date? = nil, gender: Gender? = nil, approximateDateStart: Date? = nil, approximateDateEnd: Date? = nil, comment: String? = nil, timeZone: String? = nil, isExternal: Bool? = nil) {
         self.hospitalId = hospitalId
         self.dealPackageId = dealPackageId
         self.quantity = quantity
@@ -38,6 +39,7 @@ public struct CreateBookingCommand: Codable {
         self.approximateDateEnd = approximateDateEnd
         self.comment = comment
         self.timeZone = timeZone
+        self.isExternal = isExternal
     }
 
 }

@@ -10,6 +10,8 @@ import Foundation
 
 public struct UpdatePatientCommand: Codable {
 
+    public var userName: String?
+    public var email: String?
     public var firstName: String?
     public var lastName: String?
     public var phone: String?
@@ -17,10 +19,11 @@ public struct UpdatePatientCommand: Codable {
     public var photoThumbnail: String?
     public var gender: Gender?
     public var dateOfBirth: Date?
-    public var languages: [UserLanguageViewModel]?
-    public var locations: [UserLocationViewModel]?
+    public var timeZone: String?
 
-    public init(firstName: String? = nil, lastName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, languages: [UserLanguageViewModel]? = nil, locations: [UserLocationViewModel]? = nil) {
+    public init(userName: String? = nil, email: String? = nil, firstName: String? = nil, lastName: String? = nil, phone: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, timeZone: String? = nil) {
+        self.userName = userName
+        self.email = email
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
@@ -28,8 +31,7 @@ public struct UpdatePatientCommand: Codable {
         self.photoThumbnail = photoThumbnail
         self.gender = gender
         self.dateOfBirth = dateOfBirth
-        self.languages = languages
-        self.locations = locations
+        self.timeZone = timeZone
     }
 
 }

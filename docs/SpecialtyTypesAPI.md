@@ -4,22 +4,20 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV1SpecialtytypesGet**](SpecialtyTypesAPI.md#apiv1specialtytypesget) | **GET** /api/v1/specialtytypes | Get all SpecialtyTypes.
-[**apiV1SpecialtytypesPost**](SpecialtyTypesAPI.md#apiv1specialtytypespost) | **POST** /api/v1/specialtytypes | Create specialtyType.
-[**apiV1SpecialtytypesSlugsSlugGet**](SpecialtyTypesAPI.md#apiv1specialtytypesslugsslugget) | **GET** /api/v1/specialtytypes/slugs/{slug} | Get specialtyType by slug.
-[**apiV1SpecialtytypesSpecialtyTypeIdDelete**](SpecialtyTypesAPI.md#apiv1specialtytypesspecialtytypeiddelete) | **DELETE** /api/v1/specialtytypes/{specialtyTypeId} | Delete specialtyType.
-[**apiV1SpecialtytypesSpecialtyTypeIdGet**](SpecialtyTypesAPI.md#apiv1specialtytypesspecialtytypeidget) | **GET** /api/v1/specialtytypes/{specialtyTypeId} | Get specialtyType.
-[**apiV1SpecialtytypesSpecialtyTypeIdPut**](SpecialtyTypesAPI.md#apiv1specialtytypesspecialtytypeidput) | **PUT** /api/v1/specialtytypes/{specialtyTypeId} | Update specialtyType
+[**apiV2SpecialtytypesGet**](SpecialtyTypesAPI.md#apiv2specialtytypesget) | **GET** /api/v2/specialtytypes | Get all Departments.
+[**apiV2SpecialtytypesSimpleGet**](SpecialtyTypesAPI.md#apiv2specialtytypessimpleget) | **GET** /api/v2/specialtytypes/simple | Get all Hospitals.
+[**apiV2SpecialtytypesSlugGet**](SpecialtyTypesAPI.md#apiv2specialtytypesslugget) | **GET** /api/v2/specialtytypes/{slug} | 
+[**apiV2SpecialtytypesSpecialtyTypeIdGet**](SpecialtyTypesAPI.md#apiv2specialtytypesspecialtytypeidget) | **GET** /api/v2/specialtytypes/{specialtyTypeId} | 
+[**apiV2SpecialtytypesSpecialtyTypeIdMediasGet**](SpecialtyTypesAPI.md#apiv2specialtytypesspecialtytypeidmediasget) | **GET** /api/v2/specialtytypes/{specialtyTypeId}/medias | Get all SpecialtyTypeMedias.
+[**apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGet**](SpecialtyTypesAPI.md#apiv2specialtytypesspecialtytypeidmediasmediaidget) | **GET** /api/v2/specialtytypes/{specialtyTypeId}/medias/{mediaId} | Get SpecialtyTypeMedia.
 
 
-# **apiV1SpecialtytypesGet**
+# **apiV2SpecialtytypesGet**
 ```swift
-    open class func apiV1SpecialtytypesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, created: Date? = nil, languageCode: String? = nil, ids: [UUID]? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, current: Bool? = nil, completion: @escaping (_ data: SpecialtyTypesViewModel?, _ error: Error?) -> Void)
+    open class func apiV2SpecialtytypesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, ids: [UUID]? = nil, specialtyTypeCategoryId: UUID? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: SpecialtyTypesModel?, _ error: Error?) -> Void)
 ```
 
-Get all SpecialtyTypes.
-
-Sample request:        GET /api/v1/SpecialtyTypes
+Get all Departments.
 
 ### Example 
 ```swift
@@ -30,16 +28,19 @@ let id = 987 // UUID |  (optional)
 let name = "name_example" // String |  (optional)
 let description = "description_example" // String |  (optional)
 let marketingType = MarketingType() // MarketingType |  (optional)
+let hospitalId = 987 // UUID |  (optional)
 let created = Date() // Date |  (optional)
-let languageCode = "languageCode_example" // String |  (optional)
 let ids = [123] // [UUID] |  (optional)
+let specialtyTypeCategoryId = 987 // UUID |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
+let showHidden = true // Bool |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
 let page = 987 // Int |  (optional)
 let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
-let current = true // Bool |  (optional)
 
-// Get all SpecialtyTypes.
-SpecialtyTypesAPI.apiV1SpecialtytypesGet(id: id, name: name, description: description, marketingType: marketingType, created: created, languageCode: languageCode, ids: ids, page: page, limit: limit, lastRetrieved: lastRetrieved, current: current) { (response, error) in
+// Get all Departments.
+SpecialtyTypesAPI.apiV2SpecialtytypesGet(id: id, name: name, description: description, marketingType: marketingType, hospitalId: hospitalId, created: created, ids: ids, specialtyTypeCategoryId: specialtyTypeCategoryId, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -59,17 +60,20 @@ Name | Type | Description  | Notes
  **name** | **String** |  | [optional] 
  **description** | **String** |  | [optional] 
  **marketingType** | [**MarketingType**](.md) |  | [optional] 
+ **hospitalId** | [**UUID**](.md) |  | [optional] 
  **created** | **Date** |  | [optional] 
- **languageCode** | **String** |  | [optional] 
  **ids** | [**[UUID]**](UUID.md) |  | [optional] 
+ **specialtyTypeCategoryId** | [**UUID**](.md) |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
+ **showHidden** | **Bool** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
- **current** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**SpecialtyTypesViewModel**](SpecialtyTypesViewModel.md)
+[**SpecialtyTypesModel**](SpecialtyTypesModel.md)
 
 ### Authorization
 
@@ -78,29 +82,39 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1SpecialtytypesPost**
+# **apiV2SpecialtytypesSimpleGet**
 ```swift
-    open class func apiV1SpecialtytypesPost(specialtyTypeId: UUID? = nil, createSpecialtyTypeCommand: CreateSpecialtyTypeCommand? = nil, completion: @escaping (_ data: UUID?, _ error: Error?) -> Void)
+    open class func apiV2SpecialtytypesSimpleGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, ids: [UUID]? = nil, specialtyTypeCategoryId: UUID? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: SpecialtyTypesSimpleModel?, _ error: Error?) -> Void)
 ```
 
-Create specialtyType.
-
-Sample request:        POST /api/v1/SpecialtyTypes      {          \"name\": \"Coronary artery disease\",          \"description\": \"Coronary artery disease\",          \"specialtyTypeType\": \"Cardiology\"      }
+Get all Hospitals.
 
 ### Example 
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let specialtyTypeId = 987 // UUID |  (optional)
-let createSpecialtyTypeCommand = CreateSpecialtyTypeCommand(name: "name_example", description: "description_example", content: "content_example", marketingType: MarketingType()) // CreateSpecialtyTypeCommand |  (optional)
+let id = 987 // UUID |  (optional)
+let name = "name_example" // String |  (optional)
+let description = "description_example" // String |  (optional)
+let marketingType = MarketingType() // MarketingType |  (optional)
+let hospitalId = 987 // UUID |  (optional)
+let created = Date() // Date |  (optional)
+let ids = [123] // [UUID] |  (optional)
+let specialtyTypeCategoryId = 987 // UUID |  (optional)
+let languageCode = "languageCode_example" // String |  (optional)
+let showHidden = true // Bool |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
 
-// Create specialtyType.
-SpecialtyTypesAPI.apiV1SpecialtytypesPost(specialtyTypeId: specialtyTypeId, createSpecialtyTypeCommand: createSpecialtyTypeCommand) { (response, error) in
+// Get all Hospitals.
+SpecialtyTypesAPI.apiV2SpecialtytypesSimpleGet(id: id, name: name, description: description, marketingType: marketingType, hospitalId: hospitalId, created: created, ids: ids, specialtyTypeCategoryId: specialtyTypeCategoryId, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -116,30 +130,42 @@ SpecialtyTypesAPI.apiV1SpecialtytypesPost(specialtyTypeId: specialtyTypeId, crea
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
- **createSpecialtyTypeCommand** | [**CreateSpecialtyTypeCommand**](CreateSpecialtyTypeCommand.md) |  | [optional] 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **name** | **String** |  | [optional] 
+ **description** | **String** |  | [optional] 
+ **marketingType** | [**MarketingType**](.md) |  | [optional] 
+ **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **created** | **Date** |  | [optional] 
+ **ids** | [**[UUID]**](UUID.md) |  | [optional] 
+ **specialtyTypeCategoryId** | [**UUID**](.md) |  | [optional] 
+ **languageCode** | **String** |  | [optional] 
+ **showHidden** | **Bool** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
 
 ### Return type
 
-**UUID**
+[**SpecialtyTypesSimpleModel**](SpecialtyTypesSimpleModel.md)
 
 ### Authorization
 
-[oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1SpecialtytypesSlugsSlugGet**
+# **apiV2SpecialtytypesSlugGet**
 ```swift
-    open class func apiV1SpecialtytypesSlugsSlugGet(slug: String, languageCode: String? = nil, completion: @escaping (_ data: SpecialtyTypeViewModel?, _ error: Error?) -> Void)
+    open class func apiV2SpecialtytypesSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil, completion: @escaping (_ data: SpecialtyTypeModel?, _ error: Error?) -> Void)
 ```
 
-Get specialtyType by slug.
+
 
 ### Example 
 ```swift
@@ -147,10 +173,10 @@ Get specialtyType by slug.
 import CloudHospitalClient
 
 let slug = "slug_example" // String | 
-let languageCode = "languageCode_example" // String |  (optional) (default to "")
+let languageCode = "languageCode_example" // String |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
 
-// Get specialtyType by slug.
-SpecialtyTypesAPI.apiV1SpecialtytypesSlugsSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
+SpecialtyTypesAPI.apiV2SpecialtytypesSlugGet(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -167,11 +193,12 @@ SpecialtyTypesAPI.apiV1SpecialtytypesSlugsSlugGet(slug: slug, languageCode: lang
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **slug** | **String** |  | 
- **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
+ **languageCode** | **String** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
 
 ### Return type
 
-[**SpecialtyTypeViewModel**](SpecialtyTypeViewModel.md)
+[**SpecialtyTypeModel**](SpecialtyTypeModel.md)
 
 ### Authorization
 
@@ -180,18 +207,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1SpecialtytypesSpecialtyTypeIdDelete**
+# **apiV2SpecialtytypesSpecialtyTypeIdGet**
 ```swift
-    open class func apiV1SpecialtytypesSpecialtyTypeIdDelete(specialtyTypeId: UUID, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
+    open class func apiV2SpecialtytypesSpecialtyTypeIdGet(specialtyTypeId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil, completion: @escaping (_ data: SpecialtyTypeModel?, _ error: Error?) -> Void)
 ```
 
-Delete specialtyType.
 
-Sample request:        DELETE /api/v1/SpecialtyTypes/1
 
 ### Example 
 ```swift
@@ -199,9 +224,10 @@ Sample request:        DELETE /api/v1/SpecialtyTypes/1
 import CloudHospitalClient
 
 let specialtyTypeId = 987 // UUID | 
+let languageCode = "languageCode_example" // String |  (optional)
+let returnDefaultValue = true // Bool |  (optional)
 
-// Delete specialtyType.
-SpecialtyTypesAPI.apiV1SpecialtytypesSpecialtyTypeIdDelete(specialtyTypeId: specialtyTypeId) { (response, error) in
+SpecialtyTypesAPI.apiV2SpecialtytypesSpecialtyTypeIdGet(specialtyTypeId: specialtyTypeId, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -218,62 +244,12 @@ SpecialtyTypesAPI.apiV1SpecialtytypesSpecialtyTypeIdDelete(specialtyTypeId: spec
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **specialtyTypeId** | [**UUID**](.md) |  | 
+ **languageCode** | **String** |  | [optional] 
+ **returnDefaultValue** | **Bool** |  | [optional] 
 
 ### Return type
 
-**Bool**
-
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apiV1SpecialtytypesSpecialtyTypeIdGet**
-```swift
-    open class func apiV1SpecialtytypesSpecialtyTypeIdGet(specialtyTypeId: UUID, languageCode: String? = nil, completion: @escaping (_ data: SpecialtyTypeViewModel?, _ error: Error?) -> Void)
-```
-
-Get specialtyType.
-
-Sample request:        GET /api/v1/SpecialtyTypes/1
-
-### Example 
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-let specialtyTypeId = 987 // UUID | 
-let languageCode = "languageCode_example" // String |  (optional) (default to "")
-
-// Get specialtyType.
-SpecialtyTypesAPI.apiV1SpecialtytypesSpecialtyTypeIdGet(specialtyTypeId: specialtyTypeId, languageCode: languageCode) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **specialtyTypeId** | [**UUID**](.md) |  | 
- **languageCode** | **String** |  | [optional] [default to &quot;&quot;]
-
-### Return type
-
-[**SpecialtyTypeViewModel**](SpecialtyTypeViewModel.md)
+[**SpecialtyTypeModel**](SpecialtyTypeModel.md)
 
 ### Authorization
 
@@ -282,18 +258,16 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **apiV1SpecialtytypesSpecialtyTypeIdPut**
+# **apiV2SpecialtytypesSpecialtyTypeIdMediasGet**
 ```swift
-    open class func apiV1SpecialtytypesSpecialtyTypeIdPut(specialtyTypeId: UUID, updateSpecialtyTypeCommand: UpdateSpecialtyTypeCommand? = nil, completion: @escaping (_ data: Bool?, _ error: Error?) -> Void)
+    open class func apiV2SpecialtytypesSpecialtyTypeIdMediasGet(specialtyTypeId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: MediasModel?, _ error: Error?) -> Void)
 ```
 
-Update specialtyType
-
-Sample request:        PUT /api/v1/SpecialtyTypes/1      {          \"name\": \"Dilated cardiomyopathy\",          \"description\": \"Dilated cardiomyopathy\"      }
+Get all SpecialtyTypeMedias.
 
 ### Example 
 ```swift
@@ -301,10 +275,14 @@ Sample request:        PUT /api/v1/SpecialtyTypes/1      {          \"name\": \"
 import CloudHospitalClient
 
 let specialtyTypeId = 987 // UUID | 
-let updateSpecialtyTypeCommand = UpdateSpecialtyTypeCommand(name: "name_example", slug: "slug_example", description: "description_example", marketingType: MarketingType(), specialtyCount: 123, hospitalSpecialtyCount: 123, serviceCount: 123, created: Date(), content: "content_example") // UpdateSpecialtyTypeCommand |  (optional)
+let id = 987 // UUID |  (optional)
+let mediaType = MediaType() // MediaType |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
 
-// Update specialtyType
-SpecialtyTypesAPI.apiV1SpecialtytypesSpecialtyTypeIdPut(specialtyTypeId: specialtyTypeId, updateSpecialtyTypeCommand: updateSpecialtyTypeCommand) { (response, error) in
+// Get all SpecialtyTypeMedias.
+SpecialtyTypesAPI.apiV2SpecialtytypesSpecialtyTypeIdMediasGet(specialtyTypeId: specialtyTypeId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -321,20 +299,74 @@ SpecialtyTypesAPI.apiV1SpecialtytypesSpecialtyTypeIdPut(specialtyTypeId: special
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **specialtyTypeId** | [**UUID**](.md) |  | 
- **updateSpecialtyTypeCommand** | [**UpdateSpecialtyTypeCommand**](UpdateSpecialtyTypeCommand.md) |  | [optional] 
+ **id** | [**UUID**](.md) |  | [optional] 
+ **mediaType** | [**MediaType**](.md) |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
 
 ### Return type
 
-**Bool**
+[**MediasModel**](MediasModel.md)
 
 ### Authorization
 
-[oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: text/plain, application/json, text/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGet**
+```swift
+    open class func apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGet(specialtyTypeId: UUID, mediaId: UUID, completion: @escaping (_ data: MediaModel?, _ error: Error?) -> Void)
+```
+
+Get SpecialtyTypeMedia.
+
+### Example 
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let specialtyTypeId = 987 // UUID | 
+let mediaId = 987 // UUID | 
+
+// Get SpecialtyTypeMedia.
+SpecialtyTypesAPI.apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGet(specialtyTypeId: specialtyTypeId, mediaId: mediaId) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **specialtyTypeId** | [**UUID**](.md) |  | 
+ **mediaId** | [**UUID**](.md) |  | 
+
+### Return type
+
+[**MediaModel**](MediaModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
