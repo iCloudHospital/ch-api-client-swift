@@ -11,4 +11,6 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/OpenAPITools/openapi-generator'
   s.summary = 'CloudHospitalClient Swift SDK'
   s.source_files = 'CloudHospitalClient/**/*.swift'
+  s.dependency 'AnyCodable-FlightSchool', '~> 0.6.1'
+  s.dependency 'Alamofire', '~> 5.4.3'
 end
