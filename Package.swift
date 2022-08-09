@@ -5,8 +5,8 @@ import PackageDescription
 let package = Package(
     name: "CloudHospitalClient",
     platforms: [
-        .iOS(.v10),
-        .macOS(.v10_12),
+        .iOS(.v14),
+        .macOS(.v11),
         .tvOS(.v10),
         .watchOS(.v3),
     ],
@@ -20,7 +20,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/Flight-School/AnyCodable", from: "0.6.1"),
-        .package(url: "https://github.com/Alamofire/Alamofire", from: "5.4.3"),
+        .package(url: "https://github.com/Alamofire/Alamofire", from: "4.9.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
