@@ -31,6 +31,7 @@ Class | Method | HTTP request | Description
 *AboutUsAPI* | [**apiV2AboutusSlugGet**](docs/AboutUsAPI.md#apiv2aboutusslugget) | **GET** /api/v2/aboutus/{slug} | 
 *AccreditationsAPI* | [**apiV2AccreditationsAccreditationIdGet**](docs/AccreditationsAPI.md#apiv2accreditationsaccreditationidget) | **GET** /api/v2/accreditations/{accreditationId} | Get Accreditation.
 *AccreditationsAPI* | [**apiV2AccreditationsGet**](docs/AccreditationsAPI.md#apiv2accreditationsget) | **GET** /api/v2/accreditations | Get all Accreditations.
+*AppVersionAPI* | [**apiV2AppversionPlatformGet**](docs/AppVersionAPI.md#apiv2appversionplatformget) | **GET** /api/v2/appversion/{platform} | 
 *ArticlesAPI* | [**apiV2ArticlesArticleIdContributorsContributorIdGet**](docs/ArticlesAPI.md#apiv2articlesarticleidcontributorscontributoridget) | **GET** /api/v2/articles/{articleId}/contributors/{contributorId} | Get ArticleContributor.
 *ArticlesAPI* | [**apiV2ArticlesArticleIdContributorsGet**](docs/ArticlesAPI.md#apiv2articlesarticleidcontributorsget) | **GET** /api/v2/articles/{articleId}/contributors | GetAll ArticleContributors.
 *ArticlesAPI* | [**apiV2ArticlesArticleIdGet**](docs/ArticlesAPI.md#apiv2articlesarticleidget) | **GET** /api/v2/articles/{articleId} | Get Article.
@@ -202,6 +203,7 @@ Class | Method | HTTP request | Description
  - [AccreditationModel](docs/AccreditationModel.md)
  - [AccreditationsModel](docs/AccreditationsModel.md)
  - [AdminMessageModel](docs/AdminMessageModel.md)
+ - [AppVersionModel](docs/AppVersionModel.md)
  - [ArticleContributorItemModel](docs/ArticleContributorItemModel.md)
  - [ArticleContributorModel](docs/ArticleContributorModel.md)
  - [ArticleContributorsModel](docs/ArticleContributorsModel.md)
@@ -340,6 +342,7 @@ Class | Method | HTTP request | Description
  - [PlanItemModel](docs/PlanItemModel.md)
  - [PlanModel](docs/PlanModel.md)
  - [PlansModel](docs/PlansModel.md)
+ - [Platform](docs/Platform.md)
  - [ProblemDetails](docs/ProblemDetails.md)
  - [Procedure](docs/Procedure.md)
  - [RecurringInterval](docs/RecurringInterval.md)
