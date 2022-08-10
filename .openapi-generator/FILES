@@ -188,7 +188,6 @@ CloudHospitalClient/Classes/OpenAPIs/Models/PlanItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/PlanModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/PlansModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Platform.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/ProblemDetails.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Procedure.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/RecurringInterval.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/RefundPolicy.swift
@@ -412,7 +411,6 @@ docs/PlanModel.md
 docs/PlansAPI.md
 docs/PlansModel.md
 docs/Platform.md
-docs/ProblemDetails.md
 docs/Procedure.md
 docs/ProfilesAPI.md
 docs/RecurringInterval.md

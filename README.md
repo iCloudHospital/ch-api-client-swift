@@ -344,7 +344,6 @@ Class | Method | HTTP request | Description
  - [PlanModel](docs/PlanModel.md)
  - [PlansModel](docs/PlansModel.md)
  - [Platform](docs/Platform.md)
- - [ProblemDetails](docs/ProblemDetails.md)
  - [Procedure](docs/Procedure.md)
  - [RecurringInterval](docs/RecurringInterval.md)
  - [RefundPolicy](docs/RefundPolicy.md)
