@@ -159,7 +159,6 @@ CloudHospitalClient/Classes/OpenAPIs/Models/HospitalSpecialtyModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalSpecialtySimpleItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalsModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalsSimpleModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/InlineObject.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/InviteSendBirdGroupChannelCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/LanguageItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/LanguageModel.swift
@@ -377,7 +376,6 @@ docs/HospitalsAPI.md
 docs/HospitalsModel.md
 docs/HospitalsSimpleModel.md
 docs/ImagesAPI.md
-docs/InlineObject.md
 docs/InviteSendBirdGroupChannelCommand.md
 docs/LanguageItemModel.md
 docs/LanguageModel.md

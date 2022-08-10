@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -62,7 +62,7 @@ This endpoint does not need any parameter.
 
 Delete chatUser.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -106,7 +106,7 @@ This endpoint does not need any parameter.
 
 Get all chatUsers.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 
 Create a chatUser.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 
 Update chatUser.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -246,7 +246,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -258,7 +258,7 @@ Name | Type | Description  | Notes
 
 Get chatUser.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -282,7 +282,7 @@ ChatUsersAPI.apiV2ChatusersUserIdGet(userId: userId) { (response, error) in
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userId** | [**UUID**](.md) |  | 
+ **userId** | **UUID** |  | 
 
 ### Return type
 

@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct DoctorAffiliationItemModel: Codable {
+public struct DoctorAffiliationItemModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var languageCode: String?
@@ -44,5 +46,43 @@ public struct DoctorAffiliationItemModel: Codable {
         self.order = order
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case languageCode
+        case hospitalId
+        case hospitalName
+        case hospitalSlug
+        case doctorId
+        case name
+        case slug
+        case confirmed
+        case photo
+        case photoThumbnail
+        case consultationEnabled
+        case consultationFee
+        case specialtiesSummerized
+        case order
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(languageCode, forKey: .languageCode)
+        try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
+        try container.encodeIfPresent(hospitalName, forKey: .hospitalName)
+        try container.encodeIfPresent(hospitalSlug, forKey: .hospitalSlug)
+        try container.encodeIfPresent(doctorId, forKey: .doctorId)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(slug, forKey: .slug)
+        try container.encodeIfPresent(confirmed, forKey: .confirmed)
+        try container.encodeIfPresent(photo, forKey: .photo)
+        try container.encodeIfPresent(photoThumbnail, forKey: .photoThumbnail)
+        try container.encodeIfPresent(consultationEnabled, forKey: .consultationEnabled)
+        try container.encodeIfPresent(consultationFee, forKey: .consultationFee)
+        try container.encodeIfPresent(specialtiesSummerized, forKey: .specialtiesSummerized)
+        try container.encodeIfPresent(order, forKey: .order)
+    }
 }
 

@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Get Language by code.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -64,7 +64,7 @@ No authorization required
 
 Get all Languages.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -94,7 +94,7 @@ LanguagesAPI.apiV2LanguagesGet(id: id, name: name, code: code, description: desc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **code** | **String** |  | [optional] 
  **description** | **String** |  | [optional] 
@@ -124,7 +124,7 @@ No authorization required
 
 Get Language.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -148,7 +148,7 @@ LanguagesAPI.apiV2LanguagesIdGet(id: id) { (response, error) in
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | 
+ **id** | **UUID** |  | 
 
 ### Return type
 

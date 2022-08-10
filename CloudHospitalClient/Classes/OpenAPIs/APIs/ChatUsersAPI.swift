@@ -6,29 +6,39 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class ChatUsersAPI {
+
     /**
 
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ChatUserModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ChatusersCurrentGet(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ChatUserModel, Error> {
-        return Future<ChatUserModel, Error>.init { promise in
-            apiV2ChatusersCurrentGetWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ChatusersCurrentGet() -> AnyPublisher<ChatUserModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ChatUserModel, Error> { promise in
+            requestTask = apiV2ChatusersCurrentGetWithRequestBuilder().execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v2/chatusers/current
@@ -38,36 +48,48 @@ open class ChatUsersAPI {
      - returns: RequestBuilder<ChatUserModel> 
      */
     open class func apiV2ChatusersCurrentGetWithRequestBuilder() -> RequestBuilder<ChatUserModel> {
-        let path = "/api/v2/chatusers/current"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        let localVariablePath = "/api/v2/chatusers/current"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Delete chatUser.
      
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Bool, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ChatusersDelete(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error>.init { promise in
-            apiV2ChatusersDeleteWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ChatusersDelete() -> AnyPublisher<Bool, Error> {
+        var requestTask: RequestTask?
+        return Future<Bool, Error> { promise in
+            requestTask = apiV2ChatusersDeleteWithRequestBuilder().execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Delete chatUser.
@@ -78,15 +100,21 @@ open class ChatUsersAPI {
      - returns: RequestBuilder<Bool> 
      */
     open class func apiV2ChatusersDeleteWithRequestBuilder() -> RequestBuilder<Bool> {
-        let path = "/api/v2/chatusers"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        let localVariablePath = "/api/v2/chatusers"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -97,22 +125,28 @@ open class ChatUsersAPI {
      - parameter userIds: (query)  (optional)
      - parameter nickname: (query)  (optional)
      - parameter nicknameStartswith: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ChatUsersModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ChatusersGet(limit: Int? = nil, token: String? = nil, userIds: String? = nil, nickname: String? = nil, nicknameStartswith: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ChatUsersModel, Error> {
-        return Future<ChatUsersModel, Error>.init { promise in
-            apiV2ChatusersGetWithRequestBuilder(limit: limit, token: token, userIds: userIds, nickname: nickname, nicknameStartswith: nicknameStartswith).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ChatusersGet(limit: Int? = nil, token: String? = nil, userIds: String? = nil, nickname: String? = nil, nicknameStartswith: String? = nil) -> AnyPublisher<ChatUsersModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ChatUsersModel, Error> { promise in
+            requestTask = apiV2ChatusersGetWithRequestBuilder(limit: limit, token: token, userIds: userIds, nickname: nickname, nicknameStartswith: nicknameStartswith).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all chatUsers.
@@ -128,44 +162,56 @@ open class ChatUsersAPI {
      - returns: RequestBuilder<ChatUsersModel> 
      */
     open class func apiV2ChatusersGetWithRequestBuilder(limit: Int? = nil, token: String? = nil, userIds: String? = nil, nickname: String? = nil, nicknameStartswith: String? = nil) -> RequestBuilder<ChatUsersModel> {
-        let path = "/api/v2/chatusers"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Limit": limit?.encodeToJSON(), 
-            "Token": token?.encodeToJSON(), 
-            "UserIds": userIds?.encodeToJSON(), 
-            "Nickname": nickname?.encodeToJSON(), 
-            "NicknameStartswith": nicknameStartswith?.encodeToJSON()
+        let localVariablePath = "/api/v2/chatusers"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Limit": limit?.encodeToJSON(),
+            "Token": token?.encodeToJSON(),
+            "UserIds": userIds?.encodeToJSON(),
+            "Nickname": nickname?.encodeToJSON(),
+            "NicknameStartswith": nicknameStartswith?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<ChatUsersModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ChatUsersModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Create a chatUser.
      
      - parameter createChatUserCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ChatUserModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ChatusersPost(createChatUserCommand: CreateChatUserCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ChatUserModel, Error> {
-        return Future<ChatUserModel, Error>.init { promise in
-            apiV2ChatusersPostWithRequestBuilder(createChatUserCommand: createChatUserCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ChatusersPost(createChatUserCommand: CreateChatUserCommand? = nil) -> AnyPublisher<ChatUserModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ChatUserModel, Error> { promise in
+            requestTask = apiV2ChatusersPostWithRequestBuilder(createChatUserCommand: createChatUserCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Create a chatUser.
@@ -177,37 +223,49 @@ open class ChatUsersAPI {
      - returns: RequestBuilder<ChatUserModel> 
      */
     open class func apiV2ChatusersPostWithRequestBuilder(createChatUserCommand: CreateChatUserCommand? = nil) -> RequestBuilder<ChatUserModel> {
-        let path = "/api/v2/chatusers"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createChatUserCommand)
+        let localVariablePath = "/api/v2/chatusers"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createChatUserCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Update chatUser.
      
      - parameter updateChatUserCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ChatUserModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ChatusersPut(updateChatUserCommand: UpdateChatUserCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ChatUserModel, Error> {
-        return Future<ChatUserModel, Error>.init { promise in
-            apiV2ChatusersPutWithRequestBuilder(updateChatUserCommand: updateChatUserCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ChatusersPut(updateChatUserCommand: UpdateChatUserCommand? = nil) -> AnyPublisher<ChatUserModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ChatUserModel, Error> { promise in
+            requestTask = apiV2ChatusersPutWithRequestBuilder(updateChatUserCommand: updateChatUserCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Update chatUser.
@@ -219,37 +277,49 @@ open class ChatUsersAPI {
      - returns: RequestBuilder<ChatUserModel> 
      */
     open class func apiV2ChatusersPutWithRequestBuilder(updateChatUserCommand: UpdateChatUserCommand? = nil) -> RequestBuilder<ChatUserModel> {
-        let path = "/api/v2/chatusers"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateChatUserCommand)
+        let localVariablePath = "/api/v2/chatusers"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateChatUserCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Get chatUser.
      
      - parameter userId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ChatUserModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ChatusersUserIdGet(userId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ChatUserModel, Error> {
-        return Future<ChatUserModel, Error>.init { promise in
-            apiV2ChatusersUserIdGetWithRequestBuilder(userId: userId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ChatusersUserIdGet(userId: UUID) -> AnyPublisher<ChatUserModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ChatUserModel, Error> { promise in
+            requestTask = apiV2ChatusersUserIdGetWithRequestBuilder(userId: userId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get chatUser.
@@ -261,18 +331,23 @@ open class ChatUsersAPI {
      - returns: RequestBuilder<ChatUserModel> 
      */
     open class func apiV2ChatusersUserIdGetWithRequestBuilder(userId: UUID) -> RequestBuilder<ChatUserModel> {
-        var path = "/api/v2/chatusers/{userId}"
+        var localVariablePath = "/api/v2/chatusers/{userId}"
         let userIdPreEscape = "\(APIHelper.mapValueToPathItem(userId))"
         let userIdPostEscape = userIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{userId}", with: userIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{userId}", with: userIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

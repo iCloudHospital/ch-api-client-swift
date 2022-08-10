@@ -6,31 +6,41 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class NotificationsAPI {
+
     /**
      Check notification.
      
      - parameter checkNotificationsCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Bool, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2NotificationsCheckPost(checkNotificationsCommand: CheckNotificationsCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error>.init { promise in
-            apiV2NotificationsCheckPostWithRequestBuilder(checkNotificationsCommand: checkNotificationsCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2NotificationsCheckPost(checkNotificationsCommand: CheckNotificationsCommand? = nil) -> AnyPublisher<Bool, Error> {
+        var requestTask: RequestTask?
+        return Future<Bool, Error> { promise in
+            requestTask = apiV2NotificationsCheckPostWithRequestBuilder(checkNotificationsCommand: checkNotificationsCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Check notification.
@@ -42,15 +52,21 @@ open class NotificationsAPI {
      - returns: RequestBuilder<Bool> 
      */
     open class func apiV2NotificationsCheckPostWithRequestBuilder(checkNotificationsCommand: CheckNotificationsCommand? = nil) -> RequestBuilder<Bool> {
-        let path = "/api/v2/notifications/check"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: checkNotificationsCommand)
+        let localVariablePath = "/api/v2/notifications/check"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: checkNotificationsCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -61,22 +77,28 @@ open class NotificationsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<NotificationsModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2NotificationsGet(notificationCode: NotificationCode? = nil, unreadCountOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<NotificationsModel, Error> {
-        return Future<NotificationsModel, Error>.init { promise in
-            apiV2NotificationsGetWithRequestBuilder(notificationCode: notificationCode, unreadCountOnly: unreadCountOnly, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2NotificationsGet(notificationCode: NotificationCode? = nil, unreadCountOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<NotificationsModel, Error> {
+        var requestTask: RequestTask?
+        return Future<NotificationsModel, Error> { promise in
+            requestTask = apiV2NotificationsGetWithRequestBuilder(notificationCode: notificationCode, unreadCountOnly: unreadCountOnly, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all notifications.
@@ -92,22 +114,27 @@ open class NotificationsAPI {
      - returns: RequestBuilder<NotificationsModel> 
      */
     open class func apiV2NotificationsGetWithRequestBuilder(notificationCode: NotificationCode? = nil, unreadCountOnly: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<NotificationsModel> {
-        let path = "/api/v2/notifications"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "NotificationCode": notificationCode?.encodeToJSON(), 
-            "UnreadCountOnly": unreadCountOnly?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        let localVariablePath = "/api/v2/notifications"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "NotificationCode": notificationCode?.encodeToJSON(),
+            "UnreadCountOnly": unreadCountOnly?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<NotificationsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<NotificationsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

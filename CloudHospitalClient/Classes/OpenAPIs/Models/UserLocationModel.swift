@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct UserLocationModel: Codable {
+public struct UserLocationModel: Codable, JSONEncodable, Hashable {
 
     public var latitude: Double?
     public var longitude: Double?
@@ -32,5 +34,31 @@ public struct UserLocationModel: Codable {
         self.locationType = locationType
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case latitude
+        case longitude
+        case country
+        case state
+        case county
+        case city
+        case zipCode
+        case address
+        case locationType
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(latitude, forKey: .latitude)
+        try container.encodeIfPresent(longitude, forKey: .longitude)
+        try container.encodeIfPresent(country, forKey: .country)
+        try container.encodeIfPresent(state, forKey: .state)
+        try container.encodeIfPresent(county, forKey: .county)
+        try container.encodeIfPresent(city, forKey: .city)
+        try container.encodeIfPresent(zipCode, forKey: .zipCode)
+        try container.encodeIfPresent(address, forKey: .address)
+        try container.encodeIfPresent(locationType, forKey: .locationType)
+    }
 }
 

@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct ArticleContributorModel: Codable {
+public struct ArticleContributorModel: Codable, JSONEncodable, Hashable {
 
     public var articleId: UUID?
     public var contributorId: UUID?
@@ -50,5 +52,49 @@ public struct ArticleContributorModel: Codable {
         self.localizedUrls = localizedUrls
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case articleId
+        case contributorId
+        case languageCode
+        case contributorName
+        case contributorSlug
+        case contributorConfirmed
+        case contributorEmail
+        case contributorPhoto
+        case contributorPhotoThumbnail
+        case type
+        case filter
+        case order
+        case auditableEntity
+        case contributorDescription
+        case contributorOverview
+        case contributorContent
+        case contributorSnsHandles
+        case localizedUrls
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(articleId, forKey: .articleId)
+        try container.encodeIfPresent(contributorId, forKey: .contributorId)
+        try container.encodeIfPresent(languageCode, forKey: .languageCode)
+        try container.encodeIfPresent(contributorName, forKey: .contributorName)
+        try container.encodeIfPresent(contributorSlug, forKey: .contributorSlug)
+        try container.encodeIfPresent(contributorConfirmed, forKey: .contributorConfirmed)
+        try container.encodeIfPresent(contributorEmail, forKey: .contributorEmail)
+        try container.encodeIfPresent(contributorPhoto, forKey: .contributorPhoto)
+        try container.encodeIfPresent(contributorPhotoThumbnail, forKey: .contributorPhotoThumbnail)
+        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(filter, forKey: .filter)
+        try container.encodeIfPresent(order, forKey: .order)
+        try container.encodeIfPresent(auditableEntity, forKey: .auditableEntity)
+        try container.encodeIfPresent(contributorDescription, forKey: .contributorDescription)
+        try container.encodeIfPresent(contributorOverview, forKey: .contributorOverview)
+        try container.encodeIfPresent(contributorContent, forKey: .contributorContent)
+        try container.encodeIfPresent(contributorSnsHandles, forKey: .contributorSnsHandles)
+        try container.encodeIfPresent(localizedUrls, forKey: .localizedUrls)
+    }
 }
 

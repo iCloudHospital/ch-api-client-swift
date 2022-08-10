@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct ServiceCategoryItemModel: Codable {
+public struct ServiceCategoryItemModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var name: String?
@@ -26,5 +28,25 @@ public struct ServiceCategoryItemModel: Codable {
         self.serviceCount = serviceCount
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case name
+        case normalizedName
+        case description
+        case order
+        case serviceCount
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(normalizedName, forKey: .normalizedName)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(order, forKey: .order)
+        try container.encodeIfPresent(serviceCount, forKey: .serviceCount)
+    }
 }
 

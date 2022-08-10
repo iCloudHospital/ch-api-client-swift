@@ -24,7 +24,7 @@ Method | HTTP request | Description
 
 Get ArticleContributor.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -49,8 +49,8 @@ ArticlesAPI.apiV2ArticlesArticleIdContributorsContributorIdGet(articleId: articl
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **articleId** | [**UUID**](.md) |  | 
- **contributorId** | [**UUID**](.md) |  | 
+ **articleId** | **UUID** |  | 
+ **contributorId** | **UUID** |  | 
 
 ### Return type
 
@@ -74,7 +74,7 @@ No authorization required
 
 GetAll ArticleContributors.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -109,9 +109,9 @@ ArticlesAPI.apiV2ArticlesArticleIdContributorsGet(articleId: articleId, articleN
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **articleId** | [**UUID**](.md) |  | 
+ **articleId** | **UUID** |  | 
  **articleName** | **String** |  | [optional] 
- **contributorId** | [**UUID**](.md) |  | [optional] 
+ **contributorId** | **UUID** |  | [optional] 
  **contributorName** | **String** |  | [optional] 
  **email** | **String** |  | [optional] 
  **website** | **String** |  | [optional] 
@@ -144,7 +144,7 @@ No authorization required
 
 Get Article.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -169,7 +169,7 @@ ArticlesAPI.apiV2ArticlesArticleIdGet(articleId: articleId, languageCode: langua
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **articleId** | [**UUID**](.md) |  | 
+ **articleId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
 
 ### Return type
@@ -194,7 +194,7 @@ No authorization required
 
 Get all ArticleMedias.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -223,8 +223,8 @@ ArticlesAPI.apiV2ArticlesArticleIdMediasGet(articleId: articleId, id: id, mediaT
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **articleId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **articleId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **mediaType** | [**MediaType**](.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -252,7 +252,7 @@ No authorization required
 
 Get ArticleMedia.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -277,8 +277,8 @@ ArticlesAPI.apiV2ArticlesArticleIdMediasMediaIdGet(articleId: articleId, mediaId
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **articleId** | [**UUID**](.md) |  | 
- **mediaId** | [**UUID**](.md) |  | 
+ **articleId** | **UUID** |  | 
+ **mediaId** | **UUID** |  | 
 
 ### Return type
 
@@ -302,7 +302,7 @@ No authorization required
 
 Get all ArticleSource.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -329,7 +329,7 @@ ArticlesAPI.apiV2ArticlesArticleIdSourcesGet(articleId: articleId, page: page, l
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **articleId** | [**UUID**](.md) |  | 
+ **articleId** | **UUID** |  | 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
@@ -356,7 +356,7 @@ No authorization required
 
 Get ArticleSource.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -381,8 +381,8 @@ ArticlesAPI.apiV2ArticlesArticleIdSourcesSourceIdGet(articleId: articleId, sourc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **articleId** | [**UUID**](.md) |  | 
- **sourceId** | [**UUID**](.md) |  | 
+ **articleId** | **UUID** |  | 
+ **sourceId** | **UUID** |  | 
 
 ### Return type
 
@@ -406,7 +406,7 @@ No authorization required
 
 GetAll ArticleTags.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -434,7 +434,7 @@ ArticlesAPI.apiV2ArticlesArticleIdTagsGet(articleId: articleId, tagId: tagId, pa
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **articleId** | [**UUID**](.md) |  | 
+ **articleId** | **UUID** |  | 
  **tagId** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -462,7 +462,7 @@ No authorization required
 
 Get ArticleTag.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -487,7 +487,7 @@ ArticlesAPI.apiV2ArticlesArticleIdTagsTagIdGet(articleId: articleId, tagId: tagI
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **articleId** | [**UUID**](.md) |  | 
+ **articleId** | **UUID** |  | 
  **tagId** | **String** |  | 
 
 ### Return type
@@ -512,7 +512,7 @@ No authorization required
 
 Get all Articles.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -554,19 +554,19 @@ ArticlesAPI.apiV2ArticlesGet(id: id, name: name, description: description, marke
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **description** | **String** |  | [optional] 
  **marketingType** | [**MarketingType**](.md) |  | [optional] 
- **userId** | [**UUID**](.md) |  | [optional] 
+ **userId** | **UUID** |  | [optional] 
  **userName** | **String** |  | [optional] 
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
- **countryId** | [**UUID**](.md) |  | [optional] 
+ **countryId** | **UUID** |  | [optional] 
  **tag** | **String** |  | [optional] 
- **exceptArticleId** | [**UUID**](.md) |  | [optional] 
- **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
- **contributorId** | [**UUID**](.md) |  | [optional] 
+ **exceptArticleId** | **UUID** |  | [optional] 
+ **exceptHospitalId** | **UUID** |  | [optional] 
+ **contributorId** | **UUID** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
  **returnDefaultValue** | **Bool** |  | [optional] 
@@ -596,7 +596,7 @@ No authorization required
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -605,6 +605,7 @@ let slug = "slug_example" // String |
 let languageCode = "languageCode_example" // String |  (optional)
 let returnDefaultValue = true // Bool |  (optional)
 
+// 
 ArticlesAPI.apiV2ArticlesSlugGet(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)

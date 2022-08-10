@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct PatientModel: Codable {
+public struct PatientModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var userName: String?
@@ -50,5 +52,49 @@ public struct PatientModel: Codable {
         self.membership = membership
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case userName
+        case firstName
+        case lastName
+        case fullName
+        case userType
+        case photo
+        case photoThumbnail
+        case timeZone
+        case auditableEntity
+        case phone
+        case email
+        case gender
+        case dateOfBirth
+        case communicationUserId
+        case languages
+        case locations
+        case membership
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(userName, forKey: .userName)
+        try container.encodeIfPresent(firstName, forKey: .firstName)
+        try container.encodeIfPresent(lastName, forKey: .lastName)
+        try container.encodeIfPresent(fullName, forKey: .fullName)
+        try container.encodeIfPresent(userType, forKey: .userType)
+        try container.encodeIfPresent(photo, forKey: .photo)
+        try container.encodeIfPresent(photoThumbnail, forKey: .photoThumbnail)
+        try container.encodeIfPresent(timeZone, forKey: .timeZone)
+        try container.encodeIfPresent(auditableEntity, forKey: .auditableEntity)
+        try container.encodeIfPresent(phone, forKey: .phone)
+        try container.encodeIfPresent(email, forKey: .email)
+        try container.encodeIfPresent(gender, forKey: .gender)
+        try container.encodeIfPresent(dateOfBirth, forKey: .dateOfBirth)
+        try container.encodeIfPresent(communicationUserId, forKey: .communicationUserId)
+        try container.encodeIfPresent(languages, forKey: .languages)
+        try container.encodeIfPresent(locations, forKey: .locations)
+        try container.encodeIfPresent(membership, forKey: .membership)
+    }
 }
 

@@ -6,31 +6,41 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class GroupChannelsAPI {
+
     /**
 
      - parameter channelUrl: (path)  
      - parameter inviteSendBirdGroupChannelCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SendBirdGroupChannelModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2GroupchannelsChannelUrlInvitePost(channelUrl: String, inviteSendBirdGroupChannelCommand: InviteSendBirdGroupChannelCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SendBirdGroupChannelModel, Error> {
-        return Future<SendBirdGroupChannelModel, Error>.init { promise in
-            apiV2GroupchannelsChannelUrlInvitePostWithRequestBuilder(channelUrl: channelUrl, inviteSendBirdGroupChannelCommand: inviteSendBirdGroupChannelCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2GroupchannelsChannelUrlInvitePost(channelUrl: String, inviteSendBirdGroupChannelCommand: InviteSendBirdGroupChannelCommand? = nil) -> AnyPublisher<SendBirdGroupChannelModel, Error> {
+        var requestTask: RequestTask?
+        return Future<SendBirdGroupChannelModel, Error> { promise in
+            requestTask = apiV2GroupchannelsChannelUrlInvitePostWithRequestBuilder(channelUrl: channelUrl, inviteSendBirdGroupChannelCommand: inviteSendBirdGroupChannelCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - POST /api/v2/groupchannels/{channelUrl}/invite
@@ -42,18 +52,24 @@ open class GroupChannelsAPI {
      - returns: RequestBuilder<SendBirdGroupChannelModel> 
      */
     open class func apiV2GroupchannelsChannelUrlInvitePostWithRequestBuilder(channelUrl: String, inviteSendBirdGroupChannelCommand: InviteSendBirdGroupChannelCommand? = nil) -> RequestBuilder<SendBirdGroupChannelModel> {
-        var path = "/api/v2/groupchannels/{channelUrl}/invite"
+        var localVariablePath = "/api/v2/groupchannels/{channelUrl}/invite"
         let channelUrlPreEscape = "\(APIHelper.mapValueToPathItem(channelUrl))"
         let channelUrlPostEscape = channelUrlPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{channelUrl}", with: channelUrlPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: inviteSendBirdGroupChannelCommand)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{channelUrl}", with: channelUrlPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: inviteSendBirdGroupChannelCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<SendBirdGroupChannelModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SendBirdGroupChannelModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -61,22 +77,28 @@ open class GroupChannelsAPI {
      - parameter dealId: (path)  
      - parameter hospitalId: (query)  (optional)
      - parameter isExternal: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<String, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2GroupchannelsDealDealIdGet(dealId: UUID, hospitalId: UUID? = nil, isExternal: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<String, Error> {
-        return Future<String, Error>.init { promise in
-            apiV2GroupchannelsDealDealIdGetWithRequestBuilder(dealId: dealId, hospitalId: hospitalId, isExternal: isExternal).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2GroupchannelsDealDealIdGet(dealId: UUID, hospitalId: UUID? = nil, isExternal: Bool? = nil) -> AnyPublisher<String, Error> {
+        var requestTask: RequestTask?
+        return Future<String, Error> { promise in
+            requestTask = apiV2GroupchannelsDealDealIdGetWithRequestBuilder(dealId: dealId, hospitalId: hospitalId, isExternal: isExternal).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v2/groupchannels/deal/{dealId}
@@ -89,22 +111,28 @@ open class GroupChannelsAPI {
      - returns: RequestBuilder<String> 
      */
     open class func apiV2GroupchannelsDealDealIdGetWithRequestBuilder(dealId: UUID, hospitalId: UUID? = nil, isExternal: Bool? = nil) -> RequestBuilder<String> {
-        var path = "/api/v2/groupchannels/deal/{dealId}"
+        var localVariablePath = "/api/v2/groupchannels/deal/{dealId}"
         let dealIdPreEscape = "\(APIHelper.mapValueToPathItem(dealId))"
         let dealIdPostEscape = dealIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{dealId}", with: dealIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "hospitalId": hospitalId?.encodeToJSON(), 
-            "isExternal": isExternal?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{dealId}", with: dealIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "hospitalId": hospitalId?.encodeToJSON(),
+            "isExternal": isExternal?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<String>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<String>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -112,22 +140,28 @@ open class GroupChannelsAPI {
      - parameter doctorId: (path)  
      - parameter hospitalId: (query)  (optional)
      - parameter isExternal: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<String, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2GroupchannelsDoctorDoctorIdGet(doctorId: UUID, hospitalId: UUID? = nil, isExternal: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<String, Error> {
-        return Future<String, Error>.init { promise in
-            apiV2GroupchannelsDoctorDoctorIdGetWithRequestBuilder(doctorId: doctorId, hospitalId: hospitalId, isExternal: isExternal).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2GroupchannelsDoctorDoctorIdGet(doctorId: UUID, hospitalId: UUID? = nil, isExternal: Bool? = nil) -> AnyPublisher<String, Error> {
+        var requestTask: RequestTask?
+        return Future<String, Error> { promise in
+            requestTask = apiV2GroupchannelsDoctorDoctorIdGetWithRequestBuilder(doctorId: doctorId, hospitalId: hospitalId, isExternal: isExternal).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v2/groupchannels/doctor/{doctorId}
@@ -140,44 +174,56 @@ open class GroupChannelsAPI {
      - returns: RequestBuilder<String> 
      */
     open class func apiV2GroupchannelsDoctorDoctorIdGetWithRequestBuilder(doctorId: UUID, hospitalId: UUID? = nil, isExternal: Bool? = nil) -> RequestBuilder<String> {
-        var path = "/api/v2/groupchannels/doctor/{doctorId}"
+        var localVariablePath = "/api/v2/groupchannels/doctor/{doctorId}"
         let doctorIdPreEscape = "\(APIHelper.mapValueToPathItem(doctorId))"
         let doctorIdPostEscape = doctorIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{doctorId}", with: doctorIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "hospitalId": hospitalId?.encodeToJSON(), 
-            "isExternal": isExternal?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{doctorId}", with: doctorIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "hospitalId": hospitalId?.encodeToJSON(),
+            "isExternal": isExternal?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<String>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<String>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
 
      - parameter hospitalId: (path)  
      - parameter isExternal: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<String, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2GroupchannelsHospitalHospitalIdGet(hospitalId: UUID, isExternal: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<String, Error> {
-        return Future<String, Error>.init { promise in
-            apiV2GroupchannelsHospitalHospitalIdGetWithRequestBuilder(hospitalId: hospitalId, isExternal: isExternal).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2GroupchannelsHospitalHospitalIdGet(hospitalId: UUID, isExternal: Bool? = nil) -> AnyPublisher<String, Error> {
+        var requestTask: RequestTask?
+        return Future<String, Error> { promise in
+            requestTask = apiV2GroupchannelsHospitalHospitalIdGetWithRequestBuilder(hospitalId: hospitalId, isExternal: isExternal).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - GET /api/v2/groupchannels/hospital/{hospitalId}
@@ -189,21 +235,26 @@ open class GroupChannelsAPI {
      - returns: RequestBuilder<String> 
      */
     open class func apiV2GroupchannelsHospitalHospitalIdGetWithRequestBuilder(hospitalId: UUID, isExternal: Bool? = nil) -> RequestBuilder<String> {
-        var path = "/api/v2/groupchannels/hospital/{hospitalId}"
+        var localVariablePath = "/api/v2/groupchannels/hospital/{hospitalId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "isExternal": isExternal?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "isExternal": isExternal?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<String>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<String>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

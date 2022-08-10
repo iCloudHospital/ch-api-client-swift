@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct FaqModel: Codable {
+public struct FaqModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var languageCode: String?
@@ -54,5 +56,53 @@ public struct FaqModel: Codable {
         self.localizedUrls = localizedUrls
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case languageCode
+        case name
+        case slug
+        case confirmed
+        case parentId
+        case order
+        case hospitalId
+        case hospitalName
+        case hospitalSlug
+        case hospitalWebsiteUrl
+        case faqCategoryId
+        case faqCategoryName
+        case faqTags
+        case medias
+        case auditableEntity
+        case description
+        case overview
+        case content
+        case localizedUrls
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(languageCode, forKey: .languageCode)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(slug, forKey: .slug)
+        try container.encodeIfPresent(confirmed, forKey: .confirmed)
+        try container.encodeIfPresent(parentId, forKey: .parentId)
+        try container.encodeIfPresent(order, forKey: .order)
+        try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
+        try container.encodeIfPresent(hospitalName, forKey: .hospitalName)
+        try container.encodeIfPresent(hospitalSlug, forKey: .hospitalSlug)
+        try container.encodeIfPresent(hospitalWebsiteUrl, forKey: .hospitalWebsiteUrl)
+        try container.encodeIfPresent(faqCategoryId, forKey: .faqCategoryId)
+        try container.encodeIfPresent(faqCategoryName, forKey: .faqCategoryName)
+        try container.encodeIfPresent(faqTags, forKey: .faqTags)
+        try container.encodeIfPresent(medias, forKey: .medias)
+        try container.encodeIfPresent(auditableEntity, forKey: .auditableEntity)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(overview, forKey: .overview)
+        try container.encodeIfPresent(content, forKey: .content)
+        try container.encodeIfPresent(localizedUrls, forKey: .localizedUrls)
+    }
 }
 

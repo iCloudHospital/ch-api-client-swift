@@ -315,7 +315,6 @@ Class | Method | HTTP request | Description
  - [HospitalSpecialtySimpleItemModel](docs/HospitalSpecialtySimpleItemModel.md)
  - [HospitalsModel](docs/HospitalsModel.md)
  - [HospitalsSimpleModel](docs/HospitalsSimpleModel.md)
- - [InlineObject](docs/InlineObject.md)
  - [InviteSendBirdGroupChannelCommand](docs/InviteSendBirdGroupChannelCommand.md)
  - [LanguageItemModel](docs/LanguageItemModel.md)
  - [LanguageModel](docs/LanguageModel.md)

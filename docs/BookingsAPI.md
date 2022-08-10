@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 Get booking.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -43,7 +43,7 @@ BookingsAPI.apiV2BookingsBookingIdGet(bookingId: bookingId, languageCode: langua
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bookingId** | [**UUID**](.md) |  | 
+ **bookingId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
 
 ### Return type
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 Pay booking.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -92,7 +92,7 @@ BookingsAPI.apiV2BookingsBookingIdPayPost(bookingId: bookingId) { (response, err
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bookingId** | [**UUID**](.md) |  | 
+ **bookingId** | **UUID** |  | 
 
 ### Return type
 
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 
 Update booking.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -141,7 +141,7 @@ BookingsAPI.apiV2BookingsBookingIdPut(bookingId: bookingId, updateBookingCommand
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bookingId** | [**UUID**](.md) |  | 
+ **bookingId** | **UUID** |  | 
  **updateBookingCommand** | [**UpdateBookingCommand**](UpdateBookingCommand.md) |  | [optional] 
 
 ### Return type
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 
 Get all bookings.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -205,14 +205,14 @@ BookingsAPI.apiV2BookingsGet(hospitalId: hospitalId, hospitalName: hospitalName,
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
- **dealId** | [**UUID**](.md) |  | [optional] 
+ **dealId** | **UUID** |  | [optional] 
  **dealName** | **String** |  | [optional] 
  **isOpen** | **Bool** |  | [optional] 
  **isCompleted** | **Bool** |  | [optional] 
  **status** | [**BookingStatus**](.md) |  | [optional] 
- **dealPackageId** | [**UUID**](.md) |  | [optional] 
+ **dealPackageId** | **UUID** |  | [optional] 
  **sortRequestDate** | [**SortingOrder**](.md) |  | [optional] 
  **sortConfirmedDateStart** | [**SortingOrder**](.md) |  | [optional] 
  **isExternal** | **Bool** |  | [optional] 
@@ -244,7 +244,7 @@ Name | Type | Description  | Notes
 
 Create booking.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -269,7 +269,7 @@ BookingsAPI.apiV2BookingsRequestIdPost(requestId: requestId, createBookingComman
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestId** | [**UUID**](.md) |  | 
+ **requestId** | **UUID** |  | 
  **createBookingCommand** | [**CreateBookingCommand**](CreateBookingCommand.md) |  | [optional] 
 
 ### Return type
@@ -282,7 +282,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

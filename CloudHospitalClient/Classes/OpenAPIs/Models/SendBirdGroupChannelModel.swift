@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct SendBirdGroupChannelModel: Codable {
+public struct SendBirdGroupChannelModel: Codable, JSONEncodable, Hashable {
 
     public var name: String?
     public var channelUrl: String?
@@ -54,7 +56,7 @@ public struct SendBirdGroupChannelModel: Codable {
         self.freeze = freeze
     }
 
-    public enum CodingKeys: String, CodingKey, CaseIterable { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case name
         case channelUrl = "channel_url"
         case coverUrl = "cover_url"
@@ -77,5 +79,30 @@ public struct SendBirdGroupChannelModel: Codable {
         case freeze
     }
 
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(channelUrl, forKey: .channelUrl)
+        try container.encodeIfPresent(coverUrl, forKey: .coverUrl)
+        try container.encodeIfPresent(customType, forKey: .customType)
+        try container.encodeIfPresent(unreadMessageCount, forKey: .unreadMessageCount)
+        try container.encodeIfPresent(data, forKey: .data)
+        try container.encodeIfPresent(isDistinct, forKey: .isDistinct)
+        try container.encodeIfPresent(isPublic, forKey: .isPublic)
+        try container.encodeIfPresent(isSuper, forKey: .isSuper)
+        try container.encodeIfPresent(isEphemeral, forKey: .isEphemeral)
+        try container.encodeIfPresent(isAccessCodeRequired, forKey: .isAccessCodeRequired)
+        try container.encodeIfPresent(hiddenState, forKey: .hiddenState)
+        try container.encodeIfPresent(memberCount, forKey: .memberCount)
+        try container.encodeIfPresent(joinedMemberCount, forKey: .joinedMemberCount)
+        try container.encodeIfPresent(members, forKey: .members)
+        try container.encodeIfPresent(operators, forKey: .operators)
+        try container.encodeIfPresent(maxLengthMessage, forKey: .maxLengthMessage)
+        try container.encodeIfPresent(lastMessage, forKey: .lastMessage)
+        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        try container.encodeIfPresent(freeze, forKey: .freeze)
+    }
 }
 

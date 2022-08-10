@@ -6,11 +6,15 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class TagsAPI {
+
     /**
      Get all Tags.
      
@@ -18,22 +22,28 @@ open class TagsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<TagsModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2TagsGet(tagId: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<TagsModel, Error> {
-        return Future<TagsModel, Error>.init { promise in
-            apiV2TagsGetWithRequestBuilder(tagId: tagId, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2TagsGet(tagId: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<TagsModel, Error> {
+        var requestTask: RequestTask?
+        return Future<TagsModel, Error> { promise in
+            requestTask = apiV2TagsGetWithRequestBuilder(tagId: tagId, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all Tags.
@@ -45,21 +55,27 @@ open class TagsAPI {
      - returns: RequestBuilder<TagsModel> 
      */
     open class func apiV2TagsGetWithRequestBuilder(tagId: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<TagsModel> {
-        let path = "/api/v2/tags"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "TagId": tagId?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        let localVariablePath = "/api/v2/tags"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "TagId": tagId?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<TagsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<TagsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -67,22 +83,28 @@ open class TagsAPI {
      
      - parameter tagId: (path)  
      - parameter releatedTags: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<TagModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2TagsTagIdGet(tagId: String, releatedTags: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<TagModel, Error> {
-        return Future<TagModel, Error>.init { promise in
-            apiV2TagsTagIdGetWithRequestBuilder(tagId: tagId, releatedTags: releatedTags).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2TagsTagIdGet(tagId: String, releatedTags: Bool? = nil) -> AnyPublisher<TagModel, Error> {
+        var requestTask: RequestTask?
+        return Future<TagModel, Error> { promise in
+            requestTask = apiV2TagsTagIdGetWithRequestBuilder(tagId: tagId, releatedTags: releatedTags).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get Tag.
@@ -92,21 +114,26 @@ open class TagsAPI {
      - returns: RequestBuilder<TagModel> 
      */
     open class func apiV2TagsTagIdGetWithRequestBuilder(tagId: String, releatedTags: Bool? = nil) -> RequestBuilder<TagModel> {
-        var path = "/api/v2/tags/{tagId}"
+        var localVariablePath = "/api/v2/tags/{tagId}"
         let tagIdPreEscape = "\(APIHelper.mapValueToPathItem(tagId))"
         let tagIdPostEscape = tagIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{tagId}", with: tagIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "releatedTags": releatedTags?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{tagId}", with: tagIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "releatedTags": releatedTags?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<TagModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<TagModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

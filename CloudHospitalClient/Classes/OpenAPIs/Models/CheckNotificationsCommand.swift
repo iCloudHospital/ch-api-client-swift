@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct CheckNotificationsCommand: Codable {
+public struct CheckNotificationsCommand: Codable, JSONEncodable, Hashable {
 
     public var notificationId: UUID?
     public var isDelete: Bool?
@@ -18,5 +20,17 @@ public struct CheckNotificationsCommand: Codable {
         self.isDelete = isDelete
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case notificationId
+        case isDelete
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(notificationId, forKey: .notificationId)
+        try container.encodeIfPresent(isDelete, forKey: .isDelete)
+    }
 }
 

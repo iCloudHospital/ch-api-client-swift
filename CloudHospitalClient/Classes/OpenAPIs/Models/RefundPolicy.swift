@@ -6,7 +6,9 @@
 //
 
 import Foundation
-
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 public enum RefundPolicy: String, Codable, CaseIterable {
     case nonRefundable = "NonRefundable"

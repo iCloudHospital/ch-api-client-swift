@@ -41,7 +41,7 @@ Method | HTTP request | Description
 
 Get all Hospitals.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -80,14 +80,14 @@ HospitalsAPI.apiV2HospitalsGet(hospitalId: hospitalId, name: name, countryId: co
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
- **countryId** | [**UUID**](.md) |  | [optional] 
+ **countryId** | **UUID** |  | [optional] 
  **created** | **Date** |  | [optional] 
  **marketingType** | [**MarketingType**](.md) |  | [optional] 
- **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
- **specialtyId** | [**UUID**](.md) |  | [optional] 
- **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
+ **specialtyTypeId** | **UUID** |  | [optional] 
+ **specialtyId** | **UUID** |  | [optional] 
+ **exceptHospitalId** | **UUID** |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
  **ids** | [**[UUID]**](UUID.md) |  | [optional] 
@@ -119,7 +119,7 @@ No authorization required
 
 Get HospitalAccreditation.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -144,8 +144,8 @@ HospitalsAPI.apiV2HospitalsHospitalIdAccreditationsAccreditationIdGet(hospitalId
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **accreditationId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
+ **accreditationId** | **UUID** |  | 
 
 ### Return type
 
@@ -169,7 +169,7 @@ No authorization required
 
 Get all HospitalAccreditations.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -199,9 +199,9 @@ HospitalsAPI.apiV2HospitalsHospitalIdAccreditationsGet(hospitalId: hospitalId, h
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
  **hospitalName** | **String** |  | [optional] 
- **accreditationId** | [**UUID**](.md) |  | [optional] 
+ **accreditationId** | **UUID** |  | [optional] 
  **accreditationName** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -229,7 +229,7 @@ No authorization required
 
 Get HospitalEquipment.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -254,8 +254,8 @@ HospitalsAPI.apiV2HospitalsHospitalIdEquipmentsEquipmentIdGet(hospitalId: hospit
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **equipmentId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
+ **equipmentId** | **UUID** |  | 
 
 ### Return type
 
@@ -279,7 +279,7 @@ No authorization required
 
 Get all EquipmentMedia.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -309,9 +309,9 @@ HospitalsAPI.apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasGet(hospitalId: 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **equipmentId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | 
+ **equipmentId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **mediaType** | [**MediaType**](.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -339,7 +339,7 @@ No authorization required
 
 Get EquipmentMedia.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -365,9 +365,9 @@ HospitalsAPI.apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasMediaIdGet(hospi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **equipmentId** | [**UUID**](.md) |  | 
- **mediaId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
+ **equipmentId** | **UUID** |  | 
+ **mediaId** | **UUID** |  | 
 
 ### Return type
 
@@ -391,7 +391,7 @@ No authorization required
 
 Get all HospitalEquipments.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -424,10 +424,10 @@ HospitalsAPI.apiV2HospitalsHospitalIdEquipmentsGet(hospitalId: hospitalId, id: i
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
- **hospitalId2** | [**UUID**](.md) |  | [optional] 
+ **hospitalId2** | **UUID** |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
  **description** | **String** |  | [optional] 
  **created** | **Date** |  | [optional] 
@@ -457,7 +457,7 @@ No authorization required
 
 Get HospitalEvaluation.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -482,8 +482,8 @@ HospitalsAPI.apiV2HospitalsHospitalIdEvaluationsEvaluationIdGet(hospitalId: hosp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **evaluationId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
+ **evaluationId** | **UUID** |  | 
 
 ### Return type
 
@@ -507,7 +507,7 @@ No authorization required
 
 Get all HospitalEvaluations.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -537,8 +537,8 @@ HospitalsAPI.apiV2HospitalsHospitalIdEvaluationsGet(hospitalId: hospitalId, id: 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **stars** | **Int** |  | [optional] 
  **page** | **Int** |  | [optional] 
@@ -567,7 +567,7 @@ No authorization required
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -576,6 +576,7 @@ let hospitalId = 987 // UUID |
 let languageCode = "languageCode_example" // String |  (optional)
 let returnDefaultValue = true // Bool |  (optional)
 
+// 
 HospitalsAPI.apiV2HospitalsHospitalIdGet(hospitalId: hospitalId, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)
@@ -592,7 +593,7 @@ HospitalsAPI.apiV2HospitalsHospitalIdGet(hospitalId: hospitalId, languageCode: l
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
  **returnDefaultValue** | **Bool** |  | [optional] 
 
@@ -618,7 +619,7 @@ No authorization required
 
 Get all HospitalHandles.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -648,8 +649,8 @@ HospitalsAPI.apiV2HospitalsHospitalIdHandlesGet(hospitalId: hospitalId, id: id, 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **snsType** | [**SnsType**](.md) |  | [optional] 
  **handle** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
@@ -678,7 +679,7 @@ No authorization required
 
 Get HospitalHandle.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -703,8 +704,8 @@ HospitalsAPI.apiV2HospitalsHospitalIdHandlesHandleIdGet(hospitalId: hospitalId, 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **handleId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
+ **handleId** | **UUID** |  | 
 
 ### Return type
 
@@ -728,7 +729,7 @@ No authorization required
 
 Get all HospitalMedias.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -757,8 +758,8 @@ HospitalsAPI.apiV2HospitalsHospitalIdMediasGet(hospitalId: hospitalId, id: id, m
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **mediaType** | [**MediaType**](.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -786,7 +787,7 @@ No authorization required
 
 Get HospitalMedia.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -811,8 +812,8 @@ HospitalsAPI.apiV2HospitalsHospitalIdMediasMediaIdGet(hospitalId: hospitalId, me
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **mediaId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
+ **mediaId** | **UUID** |  | 
 
 ### Return type
 
@@ -836,7 +837,7 @@ No authorization required
 
 Get all HospitalSpecialties.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -873,12 +874,12 @@ HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesGet(hospitalId: hospitalId, spec
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **specialtyId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | 
+ **specialtyId** | **UUID** |  | [optional] 
  **specialtyName** | **String** |  | [optional] 
- **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
+ **specialtyTypeId** | **UUID** |  | [optional] 
  **specialtyTypeName** | **String** |  | [optional] 
- **hospitalSpecialtyId** | [**UUID**](.md) |  | [optional] 
+ **hospitalSpecialtyId** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **slug** | **String** |  | [optional] 
  **marketingType** | [**MarketingType**](.md) |  | [optional] 
@@ -910,7 +911,7 @@ No authorization required
 
 Get all HospitalServiceMedias.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -940,9 +941,9 @@ HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasGet(hos
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **hospitalSpecialtyId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | 
+ **hospitalSpecialtyId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **mediaType** | [**MediaType**](.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -970,7 +971,7 @@ No authorization required
 
 Get HospitalServiceMedia.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -996,9 +997,9 @@ HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasMediaId
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **hospitalSpecialtyId** | [**UUID**](.md) |  | 
- **mediaId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
+ **hospitalSpecialtyId** | **UUID** |  | 
+ **mediaId** | **UUID** |  | 
 
 ### Return type
 
@@ -1022,7 +1023,7 @@ No authorization required
 
 Get all HospitalSpecialties.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -1059,12 +1060,12 @@ HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSimpleGet(hospitalId: hospitalId
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **specialtyId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | 
+ **specialtyId** | **UUID** |  | [optional] 
  **specialtyName** | **String** |  | [optional] 
- **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
+ **specialtyTypeId** | **UUID** |  | [optional] 
  **specialtyTypeName** | **String** |  | [optional] 
- **hospitalSpecialtyId** | [**UUID**](.md) |  | [optional] 
+ **hospitalSpecialtyId** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **slug** | **String** |  | [optional] 
  **marketingType** | [**MarketingType**](.md) |  | [optional] 
@@ -1096,7 +1097,7 @@ No authorization required
 
 Get HospitalSpecialty by slug.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -1122,7 +1123,7 @@ HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSlugGet(hospitalId: hospitalId, 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
  **slug** | **String** |  | 
  **languageCode** | **String** |  | [optional] 
 
@@ -1148,7 +1149,7 @@ No authorization required
 
 Get HospitalSpecialty.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -1174,8 +1175,8 @@ HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdGet(hospitalId: hospi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **specialtyId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
+ **specialtyId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
 
 ### Return type
@@ -1200,7 +1201,7 @@ No authorization required
 
 Get all HospitalServices.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -1237,12 +1238,12 @@ HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesGet(hospitalI
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **specialtyId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | 
+ **specialtyId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **slug** | **String** |  | [optional] 
- **serviceCategoryId** | [**UUID**](.md) |  | [optional] 
+ **serviceCategoryId** | **UUID** |  | [optional] 
  **marketingType** | [**MarketingType**](.md) |  | [optional] 
  **procedure** | [**Procedure**](.md) |  | [optional] 
  **created** | **Date** |  | [optional] 
@@ -1274,7 +1275,7 @@ No authorization required
 
 Get HospitalService.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -1302,9 +1303,9 @@ HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet(
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **specialtyId** | [**UUID**](.md) |  | 
- **serviceId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
+ **specialtyId** | **UUID** |  | 
+ **serviceId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
  **returnDefaultValue** | **Bool** |  | [optional] 
 
@@ -1330,7 +1331,7 @@ No authorization required
 
 Get all HospitalServiceMedias.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -1361,10 +1362,10 @@ HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMedi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **specialtyId** | [**UUID**](.md) |  | 
- **serviceId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | 
+ **specialtyId** | **UUID** |  | 
+ **serviceId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **mediaType** | [**MediaType**](.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -1392,7 +1393,7 @@ No authorization required
 
 Get HospitalServiceMedia.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -1419,10 +1420,10 @@ HospitalsAPI.apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMedi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **specialtyId** | [**UUID**](.md) |  | 
- **serviceId** | [**UUID**](.md) |  | 
- **mediaId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
+ **specialtyId** | **UUID** |  | 
+ **serviceId** | **UUID** |  | 
+ **mediaId** | **UUID** |  | 
 
 ### Return type
 
@@ -1446,7 +1447,7 @@ No authorization required
 
 Get all HospitalWorkingDays.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -1478,8 +1479,8 @@ HospitalsAPI.apiV2HospitalsHospitalIdWorkingdaysGet(hospitalId: hospitalId, id: 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **dayOfWeek** | **String** |  | [optional] 
  **timeFrom** | **Date** |  | [optional] 
  **timeTo** | **Date** |  | [optional] 
@@ -1510,7 +1511,7 @@ No authorization required
 
 Get HospitalWorkingDay.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -1535,8 +1536,8 @@ HospitalsAPI.apiV2HospitalsHospitalIdWorkingdaysWorkingDayIdGet(hospitalId: hosp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
- **workingDayId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
+ **workingDayId** | **UUID** |  | 
 
 ### Return type
 
@@ -1560,7 +1561,7 @@ No authorization required
 
 Get all Hospitals.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -1599,14 +1600,14 @@ HospitalsAPI.apiV2HospitalsSimpleGet(hospitalId: hospitalId, name: name, country
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
- **countryId** | [**UUID**](.md) |  | [optional] 
+ **countryId** | **UUID** |  | [optional] 
  **created** | **Date** |  | [optional] 
  **marketingType** | [**MarketingType**](.md) |  | [optional] 
- **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
- **specialtyId** | [**UUID**](.md) |  | [optional] 
- **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
+ **specialtyTypeId** | **UUID** |  | [optional] 
+ **specialtyId** | **UUID** |  | [optional] 
+ **exceptHospitalId** | **UUID** |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
  **ids** | [**[UUID]**](UUID.md) |  | [optional] 
@@ -1638,7 +1639,7 @@ No authorization required
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -1647,6 +1648,7 @@ let slug = "slug_example" // String |
 let languageCode = "languageCode_example" // String |  (optional)
 let returnDefaultValue = true // Bool |  (optional)
 
+// 
 HospitalsAPI.apiV2HospitalsSlugGet(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)

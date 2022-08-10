@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct BookingItemModel: Codable {
+public struct BookingItemModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var languageCode: String?
@@ -84,5 +86,83 @@ public struct BookingItemModel: Codable {
         self.isExternal = isExternal
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case languageCode
+        case patientId
+        case patientName
+        case patientPhoto
+        case firstName
+        case lastName
+        case email
+        case phone
+        case dateOfBirth
+        case gender
+        case comment
+        case hospitalId
+        case hospitalName
+        case hospitalSlug
+        case hospitalTimeZone
+        case dealId
+        case dealName
+        case dealSlug
+        case dealPackageId
+        case refundPolicy
+        case quantity
+        case approximateDateStart
+        case approximateDateEnd
+        case confirmedDateStart
+        case confirmedDateEnd
+        case fee
+        case applicationFee
+        case timeZone
+        case requestDate
+        case status
+        case rejectReason
+        case rejectComment
+        case isOpen
+        case isExternal
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(languageCode, forKey: .languageCode)
+        try container.encodeIfPresent(patientId, forKey: .patientId)
+        try container.encodeIfPresent(patientName, forKey: .patientName)
+        try container.encodeIfPresent(patientPhoto, forKey: .patientPhoto)
+        try container.encodeIfPresent(firstName, forKey: .firstName)
+        try container.encodeIfPresent(lastName, forKey: .lastName)
+        try container.encodeIfPresent(email, forKey: .email)
+        try container.encodeIfPresent(phone, forKey: .phone)
+        try container.encodeIfPresent(dateOfBirth, forKey: .dateOfBirth)
+        try container.encodeIfPresent(gender, forKey: .gender)
+        try container.encodeIfPresent(comment, forKey: .comment)
+        try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
+        try container.encodeIfPresent(hospitalName, forKey: .hospitalName)
+        try container.encodeIfPresent(hospitalSlug, forKey: .hospitalSlug)
+        try container.encodeIfPresent(hospitalTimeZone, forKey: .hospitalTimeZone)
+        try container.encodeIfPresent(dealId, forKey: .dealId)
+        try container.encodeIfPresent(dealName, forKey: .dealName)
+        try container.encodeIfPresent(dealSlug, forKey: .dealSlug)
+        try container.encodeIfPresent(dealPackageId, forKey: .dealPackageId)
+        try container.encodeIfPresent(refundPolicy, forKey: .refundPolicy)
+        try container.encodeIfPresent(quantity, forKey: .quantity)
+        try container.encodeIfPresent(approximateDateStart, forKey: .approximateDateStart)
+        try container.encodeIfPresent(approximateDateEnd, forKey: .approximateDateEnd)
+        try container.encodeIfPresent(confirmedDateStart, forKey: .confirmedDateStart)
+        try container.encodeIfPresent(confirmedDateEnd, forKey: .confirmedDateEnd)
+        try container.encodeIfPresent(fee, forKey: .fee)
+        try container.encodeIfPresent(applicationFee, forKey: .applicationFee)
+        try container.encodeIfPresent(timeZone, forKey: .timeZone)
+        try container.encodeIfPresent(requestDate, forKey: .requestDate)
+        try container.encodeIfPresent(status, forKey: .status)
+        try container.encodeIfPresent(rejectReason, forKey: .rejectReason)
+        try container.encodeIfPresent(rejectComment, forKey: .rejectComment)
+        try container.encodeIfPresent(isOpen, forKey: .isOpen)
+        try container.encodeIfPresent(isExternal, forKey: .isExternal)
+    }
 }
 

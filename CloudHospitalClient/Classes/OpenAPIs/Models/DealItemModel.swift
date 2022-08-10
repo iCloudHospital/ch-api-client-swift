@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct DealItemModel: Codable {
+public struct DealItemModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var languageCode: String?
@@ -46,5 +48,45 @@ public struct DealItemModel: Codable {
         self.auditableEntity = auditableEntity
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case languageCode
+        case name
+        case slug
+        case description
+        case confirmed
+        case hospitalId
+        case hospitalName
+        case hospitalSlug
+        case marketingType
+        case photo
+        case photoThumbnail
+        case lowestPrice
+        case dealServicesCount
+        case order
+        case auditableEntity
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(languageCode, forKey: .languageCode)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(slug, forKey: .slug)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(confirmed, forKey: .confirmed)
+        try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
+        try container.encodeIfPresent(hospitalName, forKey: .hospitalName)
+        try container.encodeIfPresent(hospitalSlug, forKey: .hospitalSlug)
+        try container.encodeIfPresent(marketingType, forKey: .marketingType)
+        try container.encodeIfPresent(photo, forKey: .photo)
+        try container.encodeIfPresent(photoThumbnail, forKey: .photoThumbnail)
+        try container.encodeIfPresent(lowestPrice, forKey: .lowestPrice)
+        try container.encodeIfPresent(dealServicesCount, forKey: .dealServicesCount)
+        try container.encodeIfPresent(order, forKey: .order)
+        try container.encodeIfPresent(auditableEntity, forKey: .auditableEntity)
+    }
 }
 

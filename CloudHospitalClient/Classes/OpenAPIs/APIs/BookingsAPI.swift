@@ -6,32 +6,42 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class BookingsAPI {
+
     /**
      Get booking.
      
      - parameter bookingId: (path)  
      - parameter languageCode: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<BookingModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2BookingsBookingIdGet(bookingId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<BookingModel, Error> {
-        return Future<BookingModel, Error>.init { promise in
-            apiV2BookingsBookingIdGetWithRequestBuilder(bookingId: bookingId, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2BookingsBookingIdGet(bookingId: UUID, languageCode: String? = nil) -> AnyPublisher<BookingModel, Error> {
+        var requestTask: RequestTask?
+        return Future<BookingModel, Error> { promise in
+            requestTask = apiV2BookingsBookingIdGetWithRequestBuilder(bookingId: bookingId, languageCode: languageCode).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get booking.
@@ -44,43 +54,55 @@ open class BookingsAPI {
      - returns: RequestBuilder<BookingModel> 
      */
     open class func apiV2BookingsBookingIdGetWithRequestBuilder(bookingId: UUID, languageCode: String? = nil) -> RequestBuilder<BookingModel> {
-        var path = "/api/v2/bookings/{bookingId}"
+        var localVariablePath = "/api/v2/bookings/{bookingId}"
         let bookingIdPreEscape = "\(APIHelper.mapValueToPathItem(bookingId))"
         let bookingIdPostEscape = bookingIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{bookingId}", with: bookingIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{bookingId}", with: bookingIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<BookingModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<BookingModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Pay booking.
      
      - parameter bookingId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<String, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2BookingsBookingIdPayPost(bookingId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<String, Error> {
-        return Future<String, Error>.init { promise in
-            apiV2BookingsBookingIdPayPostWithRequestBuilder(bookingId: bookingId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2BookingsBookingIdPayPost(bookingId: UUID) -> AnyPublisher<String, Error> {
+        var requestTask: RequestTask?
+        return Future<String, Error> { promise in
+            requestTask = apiV2BookingsBookingIdPayPostWithRequestBuilder(bookingId: bookingId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Pay booking.
@@ -92,18 +114,24 @@ open class BookingsAPI {
      - returns: RequestBuilder<String> 
      */
     open class func apiV2BookingsBookingIdPayPostWithRequestBuilder(bookingId: UUID) -> RequestBuilder<String> {
-        var path = "/api/v2/bookings/{bookingId}/pay"
+        var localVariablePath = "/api/v2/bookings/{bookingId}/pay"
         let bookingIdPreEscape = "\(APIHelper.mapValueToPathItem(bookingId))"
         let bookingIdPostEscape = bookingIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{bookingId}", with: bookingIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{bookingId}", with: bookingIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<String>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<String>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -111,22 +139,28 @@ open class BookingsAPI {
      
      - parameter bookingId: (path)  
      - parameter updateBookingCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<BookingModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2BookingsBookingIdPut(bookingId: UUID, updateBookingCommand: UpdateBookingCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<BookingModel, Error> {
-        return Future<BookingModel, Error>.init { promise in
-            apiV2BookingsBookingIdPutWithRequestBuilder(bookingId: bookingId, updateBookingCommand: updateBookingCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2BookingsBookingIdPut(bookingId: UUID, updateBookingCommand: UpdateBookingCommand? = nil) -> AnyPublisher<BookingModel, Error> {
+        var requestTask: RequestTask?
+        return Future<BookingModel, Error> { promise in
+            requestTask = apiV2BookingsBookingIdPutWithRequestBuilder(bookingId: bookingId, updateBookingCommand: updateBookingCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Update booking.
@@ -139,18 +173,24 @@ open class BookingsAPI {
      - returns: RequestBuilder<BookingModel> 
      */
     open class func apiV2BookingsBookingIdPutWithRequestBuilder(bookingId: UUID, updateBookingCommand: UpdateBookingCommand? = nil) -> RequestBuilder<BookingModel> {
-        var path = "/api/v2/bookings/{bookingId}"
+        var localVariablePath = "/api/v2/bookings/{bookingId}"
         let bookingIdPreEscape = "\(APIHelper.mapValueToPathItem(bookingId))"
         let bookingIdPostEscape = bookingIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{bookingId}", with: bookingIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateBookingCommand)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{bookingId}", with: bookingIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateBookingCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<BookingModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<BookingModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -172,22 +212,28 @@ open class BookingsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<BookingsModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2BookingsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, dealId: UUID? = nil, dealName: String? = nil, isOpen: Bool? = nil, isCompleted: Bool? = nil, status: BookingStatus? = nil, dealPackageId: UUID? = nil, sortRequestDate: SortingOrder? = nil, sortConfirmedDateStart: SortingOrder? = nil, isExternal: Bool? = nil, paymentEnabled: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<BookingsModel, Error> {
-        return Future<BookingsModel, Error>.init { promise in
-            apiV2BookingsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, dealId: dealId, dealName: dealName, isOpen: isOpen, isCompleted: isCompleted, status: status, dealPackageId: dealPackageId, sortRequestDate: sortRequestDate, sortConfirmedDateStart: sortConfirmedDateStart, isExternal: isExternal, paymentEnabled: paymentEnabled, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2BookingsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, dealId: UUID? = nil, dealName: String? = nil, isOpen: Bool? = nil, isCompleted: Bool? = nil, status: BookingStatus? = nil, dealPackageId: UUID? = nil, sortRequestDate: SortingOrder? = nil, sortConfirmedDateStart: SortingOrder? = nil, isExternal: Bool? = nil, paymentEnabled: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<BookingsModel, Error> {
+        var requestTask: RequestTask?
+        return Future<BookingsModel, Error> { promise in
+            requestTask = apiV2BookingsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, dealId: dealId, dealName: dealName, isOpen: isOpen, isCompleted: isCompleted, status: status, dealPackageId: dealPackageId, sortRequestDate: sortRequestDate, sortConfirmedDateStart: sortConfirmedDateStart, isExternal: isExternal, paymentEnabled: paymentEnabled, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all bookings.
@@ -214,33 +260,39 @@ open class BookingsAPI {
      - returns: RequestBuilder<BookingsModel> 
      */
     open class func apiV2BookingsGetWithRequestBuilder(hospitalId: UUID? = nil, hospitalName: String? = nil, dealId: UUID? = nil, dealName: String? = nil, isOpen: Bool? = nil, isCompleted: Bool? = nil, status: BookingStatus? = nil, dealPackageId: UUID? = nil, sortRequestDate: SortingOrder? = nil, sortConfirmedDateStart: SortingOrder? = nil, isExternal: Bool? = nil, paymentEnabled: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<BookingsModel> {
-        let path = "/api/v2/bookings"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "HospitalName": hospitalName?.encodeToJSON(), 
-            "DealId": dealId?.encodeToJSON(), 
-            "DealName": dealName?.encodeToJSON(), 
-            "IsOpen": isOpen?.encodeToJSON(), 
-            "IsCompleted": isCompleted?.encodeToJSON(), 
-            "Status": status?.encodeToJSON(), 
-            "DealPackageId": dealPackageId?.encodeToJSON(), 
-            "SortRequestDate": sortRequestDate?.encodeToJSON(), 
-            "SortConfirmedDateStart": sortConfirmedDateStart?.encodeToJSON(), 
-            "IsExternal": isExternal?.encodeToJSON(), 
-            "PaymentEnabled": paymentEnabled?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        let localVariablePath = "/api/v2/bookings"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "HospitalName": hospitalName?.encodeToJSON(),
+            "DealId": dealId?.encodeToJSON(),
+            "DealName": dealName?.encodeToJSON(),
+            "IsOpen": isOpen?.encodeToJSON(),
+            "IsCompleted": isCompleted?.encodeToJSON(),
+            "Status": status?.encodeToJSON(),
+            "DealPackageId": dealPackageId?.encodeToJSON(),
+            "SortRequestDate": sortRequestDate?.encodeToJSON(),
+            "SortConfirmedDateStart": sortConfirmedDateStart?.encodeToJSON(),
+            "IsExternal": isExternal?.encodeToJSON(),
+            "PaymentEnabled": paymentEnabled?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<BookingsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<BookingsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -248,22 +300,28 @@ open class BookingsAPI {
      
      - parameter requestId: (path)  
      - parameter createBookingCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<BookingModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2BookingsRequestIdPost(requestId: UUID, createBookingCommand: CreateBookingCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<BookingModel, Error> {
-        return Future<BookingModel, Error>.init { promise in
-            apiV2BookingsRequestIdPostWithRequestBuilder(requestId: requestId, createBookingCommand: createBookingCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2BookingsRequestIdPost(requestId: UUID, createBookingCommand: CreateBookingCommand? = nil) -> AnyPublisher<BookingModel, Error> {
+        var requestTask: RequestTask?
+        return Future<BookingModel, Error> { promise in
+            requestTask = apiV2BookingsRequestIdPostWithRequestBuilder(requestId: requestId, createBookingCommand: createBookingCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Create booking.
@@ -276,18 +334,23 @@ open class BookingsAPI {
      - returns: RequestBuilder<BookingModel> 
      */
     open class func apiV2BookingsRequestIdPostWithRequestBuilder(requestId: UUID, createBookingCommand: CreateBookingCommand? = nil) -> RequestBuilder<BookingModel> {
-        var path = "/api/v2/bookings/{requestId}"
+        var localVariablePath = "/api/v2/bookings/{requestId}"
         let requestIdPreEscape = "\(APIHelper.mapValueToPathItem(requestId))"
         let requestIdPostEscape = requestIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{requestId}", with: requestIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createBookingCommand)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{requestId}", with: requestIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createBookingCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<BookingModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<BookingModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

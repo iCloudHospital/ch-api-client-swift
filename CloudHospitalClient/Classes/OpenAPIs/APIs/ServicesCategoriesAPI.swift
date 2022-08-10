@@ -6,11 +6,15 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class ServicesCategoriesAPI {
+
     /**
      Get all ServiceCategories.
      
@@ -19,22 +23,28 @@ open class ServicesCategoriesAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ServiceCategoriesModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicescategoriesGet(id: UUID? = nil, name: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceCategoriesModel, Error> {
-        return Future<ServiceCategoriesModel, Error>.init { promise in
-            apiV2ServicescategoriesGetWithRequestBuilder(id: id, name: name, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ServicescategoriesGet(id: UUID? = nil, name: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<ServiceCategoriesModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ServiceCategoriesModel, Error> { promise in
+            requestTask = apiV2ServicescategoriesGetWithRequestBuilder(id: id, name: name, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all ServiceCategories.
@@ -47,44 +57,56 @@ open class ServicesCategoriesAPI {
      - returns: RequestBuilder<ServiceCategoriesModel> 
      */
     open class func apiV2ServicescategoriesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<ServiceCategoriesModel> {
-        let path = "/api/v2/servicescategories"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "Name": name?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        let localVariablePath = "/api/v2/servicescategories"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<ServiceCategoriesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ServiceCategoriesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Get ServiceCategory.
      
      - parameter serviceCategoryId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ServiceCategoryModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicescategoriesServiceCategoryIdGet(serviceCategoryId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceCategoryModel, Error> {
-        return Future<ServiceCategoryModel, Error>.init { promise in
-            apiV2ServicescategoriesServiceCategoryIdGetWithRequestBuilder(serviceCategoryId: serviceCategoryId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ServicescategoriesServiceCategoryIdGet(serviceCategoryId: UUID) -> AnyPublisher<ServiceCategoryModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ServiceCategoryModel, Error> { promise in
+            requestTask = apiV2ServicescategoriesServiceCategoryIdGetWithRequestBuilder(serviceCategoryId: serviceCategoryId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get ServiceCategory.
@@ -93,18 +115,23 @@ open class ServicesCategoriesAPI {
      - returns: RequestBuilder<ServiceCategoryModel> 
      */
     open class func apiV2ServicescategoriesServiceCategoryIdGetWithRequestBuilder(serviceCategoryId: UUID) -> RequestBuilder<ServiceCategoryModel> {
-        var path = "/api/v2/servicescategories/{serviceCategoryId}"
+        var localVariablePath = "/api/v2/servicescategories/{serviceCategoryId}"
         let serviceCategoryIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceCategoryId))"
         let serviceCategoryIdPostEscape = serviceCategoryIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{serviceCategoryId}", with: serviceCategoryIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceCategoryId}", with: serviceCategoryIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<ServiceCategoryModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ServiceCategoryModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct SubscriptionModel: Codable {
+public struct SubscriptionModel: Codable, JSONEncodable, Hashable {
 
     public var startDate: Date?
     public var endDate: Date?
@@ -20,5 +22,19 @@ public struct SubscriptionModel: Codable {
         self.status = status
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case startDate
+        case endDate
+        case status
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(startDate, forKey: .startDate)
+        try container.encodeIfPresent(endDate, forKey: .endDate)
+        try container.encodeIfPresent(status, forKey: .status)
+    }
 }
 

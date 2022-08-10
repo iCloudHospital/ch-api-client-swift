@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 Get all plans.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -45,7 +45,7 @@ PlansAPI.apiV2PlansGet(id: id, name: name, page: page, limit: limit, lastRetriev
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -73,7 +73,7 @@ No authorization required
 
 Get plan.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -97,7 +97,7 @@ PlansAPI.apiV2PlansPlanIdGet(planId: planId) { (response, error) in
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **planId** | [**UUID**](.md) |  | 
+ **planId** | **UUID** |  | 
 
 ### Return type
 
@@ -121,7 +121,7 @@ No authorization required
 
 Get all plan hospital.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -148,7 +148,7 @@ PlansAPI.apiV2PlansPlanIdHospitalsGet(planId: planId, page: page, limit: limit, 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **planId** | [**UUID**](.md) |  | 
+ **planId** | **UUID** |  | 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 
@@ -175,7 +175,7 @@ No authorization required
 
 Get plan hospital.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -200,8 +200,8 @@ PlansAPI.apiV2PlansPlanIdHospitalsHospitalIdGet(planId: planId, hospitalId: hosp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **planId** | [**UUID**](.md) |  | 
- **hospitalId** | [**UUID**](.md) |  | 
+ **planId** | **UUID** |  | 
+ **hospitalId** | **UUID** |  | 
 
 ### Return type
 

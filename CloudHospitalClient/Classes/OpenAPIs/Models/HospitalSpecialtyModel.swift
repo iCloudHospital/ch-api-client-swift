@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct HospitalSpecialtyModel: Codable {
+public struct HospitalSpecialtyModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var languageCode: String?
@@ -66,5 +68,65 @@ public struct HospitalSpecialtyModel: Codable {
         self.medias = medias
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case languageCode
+        case name
+        case slug
+        case confirmed
+        case order
+        case photo
+        case photoThumbnail
+        case background
+        case backgroundThumbnail
+        case servicesCount
+        case specialtyId
+        case specialtyName
+        case specialtyTypeId
+        case specialtyTypeName
+        case marketingType
+        case auditableEntity
+        case description
+        case overview
+        case content
+        case hospitalId
+        case hospitalName
+        case hospitalSlug
+        case customStyle
+        case localizedUrls
+        case medias
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(languageCode, forKey: .languageCode)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(slug, forKey: .slug)
+        try container.encodeIfPresent(confirmed, forKey: .confirmed)
+        try container.encodeIfPresent(order, forKey: .order)
+        try container.encodeIfPresent(photo, forKey: .photo)
+        try container.encodeIfPresent(photoThumbnail, forKey: .photoThumbnail)
+        try container.encodeIfPresent(background, forKey: .background)
+        try container.encodeIfPresent(backgroundThumbnail, forKey: .backgroundThumbnail)
+        try container.encodeIfPresent(servicesCount, forKey: .servicesCount)
+        try container.encodeIfPresent(specialtyId, forKey: .specialtyId)
+        try container.encodeIfPresent(specialtyName, forKey: .specialtyName)
+        try container.encodeIfPresent(specialtyTypeId, forKey: .specialtyTypeId)
+        try container.encodeIfPresent(specialtyTypeName, forKey: .specialtyTypeName)
+        try container.encodeIfPresent(marketingType, forKey: .marketingType)
+        try container.encodeIfPresent(auditableEntity, forKey: .auditableEntity)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(overview, forKey: .overview)
+        try container.encodeIfPresent(content, forKey: .content)
+        try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
+        try container.encodeIfPresent(hospitalName, forKey: .hospitalName)
+        try container.encodeIfPresent(hospitalSlug, forKey: .hospitalSlug)
+        try container.encodeIfPresent(customStyle, forKey: .customStyle)
+        try container.encodeIfPresent(localizedUrls, forKey: .localizedUrls)
+        try container.encodeIfPresent(medias, forKey: .medias)
+    }
 }
 

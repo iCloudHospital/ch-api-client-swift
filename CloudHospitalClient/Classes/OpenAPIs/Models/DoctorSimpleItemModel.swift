@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct DoctorSimpleItemModel: Codable {
+public struct DoctorSimpleItemModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var firstName: String?
@@ -22,5 +24,21 @@ public struct DoctorSimpleItemModel: Codable {
         self.fullname = fullname
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case firstName
+        case lastName
+        case fullname
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(firstName, forKey: .firstName)
+        try container.encodeIfPresent(lastName, forKey: .lastName)
+        try container.encodeIfPresent(fullname, forKey: .fullname)
+    }
 }
 

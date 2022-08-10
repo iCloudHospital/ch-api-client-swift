@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct ConsultationModel: Codable {
+public struct ConsultationModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var languageCode: String?
@@ -100,5 +102,99 @@ public struct ConsultationModel: Codable {
         self.statusChangeLogs = statusChangeLogs
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case languageCode
+        case consultationType
+        case patientId
+        case patientName
+        case patientPhoto
+        case firstName
+        case lastName
+        case email
+        case phone
+        case dateOfBirth
+        case gender
+        case comment
+        case hospitalId
+        case hospitalName
+        case hospitalSlug
+        case hospitalTimeZone
+        case doctorId
+        case doctorName
+        case doctorSlug
+        case dealId
+        case dealName
+        case dealSlug
+        case language
+        case isAccountHolder
+        case timeRange
+        case approximateDateStart
+        case approximateDateEnd
+        case confirmedDateStart
+        case confirmedDateEnd
+        case fee
+        case applicationFee
+        case timeZone
+        case requestDate
+        case domain
+        case status
+        case rejectReason
+        case isOpen
+        case paymentId
+        case paymentEnabled
+        case completionRate
+        case isExternal
+        case statusChangeLogs
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(languageCode, forKey: .languageCode)
+        try container.encodeIfPresent(consultationType, forKey: .consultationType)
+        try container.encodeIfPresent(patientId, forKey: .patientId)
+        try container.encodeIfPresent(patientName, forKey: .patientName)
+        try container.encodeIfPresent(patientPhoto, forKey: .patientPhoto)
+        try container.encodeIfPresent(firstName, forKey: .firstName)
+        try container.encodeIfPresent(lastName, forKey: .lastName)
+        try container.encodeIfPresent(email, forKey: .email)
+        try container.encodeIfPresent(phone, forKey: .phone)
+        try container.encodeIfPresent(dateOfBirth, forKey: .dateOfBirth)
+        try container.encodeIfPresent(gender, forKey: .gender)
+        try container.encodeIfPresent(comment, forKey: .comment)
+        try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
+        try container.encodeIfPresent(hospitalName, forKey: .hospitalName)
+        try container.encodeIfPresent(hospitalSlug, forKey: .hospitalSlug)
+        try container.encodeIfPresent(hospitalTimeZone, forKey: .hospitalTimeZone)
+        try container.encodeIfPresent(doctorId, forKey: .doctorId)
+        try container.encodeIfPresent(doctorName, forKey: .doctorName)
+        try container.encodeIfPresent(doctorSlug, forKey: .doctorSlug)
+        try container.encodeIfPresent(dealId, forKey: .dealId)
+        try container.encodeIfPresent(dealName, forKey: .dealName)
+        try container.encodeIfPresent(dealSlug, forKey: .dealSlug)
+        try container.encodeIfPresent(language, forKey: .language)
+        try container.encodeIfPresent(isAccountHolder, forKey: .isAccountHolder)
+        try container.encodeIfPresent(timeRange, forKey: .timeRange)
+        try container.encodeIfPresent(approximateDateStart, forKey: .approximateDateStart)
+        try container.encodeIfPresent(approximateDateEnd, forKey: .approximateDateEnd)
+        try container.encodeIfPresent(confirmedDateStart, forKey: .confirmedDateStart)
+        try container.encodeIfPresent(confirmedDateEnd, forKey: .confirmedDateEnd)
+        try container.encodeIfPresent(fee, forKey: .fee)
+        try container.encodeIfPresent(applicationFee, forKey: .applicationFee)
+        try container.encodeIfPresent(timeZone, forKey: .timeZone)
+        try container.encodeIfPresent(requestDate, forKey: .requestDate)
+        try container.encodeIfPresent(domain, forKey: .domain)
+        try container.encodeIfPresent(status, forKey: .status)
+        try container.encodeIfPresent(rejectReason, forKey: .rejectReason)
+        try container.encodeIfPresent(isOpen, forKey: .isOpen)
+        try container.encodeIfPresent(paymentId, forKey: .paymentId)
+        try container.encodeIfPresent(paymentEnabled, forKey: .paymentEnabled)
+        try container.encodeIfPresent(completionRate, forKey: .completionRate)
+        try container.encodeIfPresent(isExternal, forKey: .isExternal)
+        try container.encodeIfPresent(statusChangeLogs, forKey: .statusChangeLogs)
+    }
 }
 

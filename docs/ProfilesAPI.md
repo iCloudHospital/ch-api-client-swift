@@ -19,7 +19,7 @@ Change user's email on both Identity and Api.
 
 Sample request:        POST /api/v1/profiles/changeEmail      {          \"email\": \"user@example.com\"      }
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 Configm email.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -115,7 +115,7 @@ Name | Type | Description  | Notes
 
 Get Profile.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -159,12 +159,12 @@ This endpoint does not need any parameter.
 
 Update Profile.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
-let updateProfileCommand = UpdateProfileCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), languages: [{...}], locations: [{...}]) // UpdateProfileCommand |  (optional)
+let updateProfileCommand = UpdateProfileCommand(firstName: "firstName_example", lastName: "lastName_example", phone: "phone_example", photo: "photo_example", photoThumbnail: "photoThumbnail_example", gender: Gender(), dateOfBirth: Date(), languages: [UserLanguageModel(id: 123, language: "language_example")], locations: [UserLocationModel(latitude: 123, longitude: 123, country: "country_example", state: "state_example", county: "county_example", city: "city_example", zipCode: "zipCode_example", address: "address_example", locationType: UserLocationType())]) // UpdateProfileCommand |  (optional)
 
 // Update Profile.
 ProfilesAPI.apiV2ProfilesPut(updateProfileCommand: updateProfileCommand) { (response, error) in
@@ -195,7 +195,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

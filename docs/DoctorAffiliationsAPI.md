@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 Get all DoctorAffiliationMedias.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -47,8 +47,8 @@ DoctorAffiliationsAPI.apiV2DoctoraffiliationsDoctorAffiliationIdMediasGet(doctor
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **doctorAffiliationId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **doctorAffiliationId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **mediaType** | [**MediaType**](.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -76,7 +76,7 @@ No authorization required
 
 Get DoctorAffiliationMedia.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -101,8 +101,8 @@ DoctorAffiliationsAPI.apiV2DoctoraffiliationsDoctorAffiliationIdMediasMediaIdGet
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **doctorAffiliationId** | [**UUID**](.md) |  | 
- **mediaId** | [**UUID**](.md) |  | 
+ **doctorAffiliationId** | **UUID** |  | 
+ **mediaId** | **UUID** |  | 
 
 ### Return type
 
@@ -126,7 +126,7 @@ No authorization required
 
 Get all doctor affiliations.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -161,13 +161,13 @@ DoctorAffiliationsAPI.apiV2DoctoraffiliationsGet(hospitalId: hospitalId, hospita
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
- **doctorId** | [**UUID**](.md) |  | [optional] 
+ **doctorId** | **UUID** |  | [optional] 
  **doctorName** | **String** |  | [optional] 
  **doctorSlug** | **String** |  | [optional] 
- **specialtyId** | [**UUID**](.md) |  | [optional] 
- **exceptDoctorId** | [**UUID**](.md) |  | [optional] 
+ **specialtyId** | **UUID** |  | [optional] 
+ **exceptDoctorId** | **UUID** |  | [optional] 
  **consultationEnabled** | **Bool** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
@@ -196,7 +196,7 @@ No authorization required
 
 Get doctor affiliation.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -221,7 +221,7 @@ DoctorAffiliationsAPI.apiV2DoctoraffiliationsIdGet(id: id, languageCode: languag
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | 
+ **id** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
 
 ### Return type
@@ -246,7 +246,7 @@ No authorization required
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -254,6 +254,7 @@ import CloudHospitalClient
 let slug = "slug_example" // String | 
 let languageCode = "languageCode_example" // String |  (optional)
 
+// 
 DoctorAffiliationsAPI.apiV2DoctoraffiliationsSlugGet(slug: slug, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)

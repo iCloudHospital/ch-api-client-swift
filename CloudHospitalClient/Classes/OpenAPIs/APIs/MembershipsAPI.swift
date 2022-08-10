@@ -6,11 +6,15 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class MembershipsAPI {
+
     /**
      Get all memberships.
      
@@ -23,22 +27,28 @@ open class MembershipsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MembershipsModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2MembershipsGet(id: UUID? = nil, planId: UUID? = nil, planName: String? = nil, ownerId: UUID? = nil, ownerName: String? = nil, isActive: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MembershipsModel, Error> {
-        return Future<MembershipsModel, Error>.init { promise in
-            apiV2MembershipsGetWithRequestBuilder(id: id, planId: planId, planName: planName, ownerId: ownerId, ownerName: ownerName, isActive: isActive, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2MembershipsGet(id: UUID? = nil, planId: UUID? = nil, planName: String? = nil, ownerId: UUID? = nil, ownerName: String? = nil, isActive: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MembershipsModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MembershipsModel, Error> { promise in
+            requestTask = apiV2MembershipsGetWithRequestBuilder(id: id, planId: planId, planName: planName, ownerId: ownerId, ownerName: ownerName, isActive: isActive, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all memberships.
@@ -58,48 +68,60 @@ open class MembershipsAPI {
      - returns: RequestBuilder<MembershipsModel> 
      */
     open class func apiV2MembershipsGetWithRequestBuilder(id: UUID? = nil, planId: UUID? = nil, planName: String? = nil, ownerId: UUID? = nil, ownerName: String? = nil, isActive: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<MembershipsModel> {
-        let path = "/api/v2/memberships"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "PlanId": planId?.encodeToJSON(), 
-            "PlanName": planName?.encodeToJSON(), 
-            "OwnerId": ownerId?.encodeToJSON(), 
-            "OwnerName": ownerName?.encodeToJSON(), 
-            "IsActive": isActive?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        let localVariablePath = "/api/v2/memberships"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "PlanId": planId?.encodeToJSON(),
+            "PlanName": planName?.encodeToJSON(),
+            "OwnerId": ownerId?.encodeToJSON(),
+            "OwnerName": ownerName?.encodeToJSON(),
+            "IsActive": isActive?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<MembershipsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MembershipsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Get membership.
      
      - parameter membershipId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MembershipModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2MembershipsMembershipIdGet(membershipId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MembershipModel, Error> {
-        return Future<MembershipModel, Error>.init { promise in
-            apiV2MembershipsMembershipIdGetWithRequestBuilder(membershipId: membershipId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2MembershipsMembershipIdGet(membershipId: UUID) -> AnyPublisher<MembershipModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MembershipModel, Error> { promise in
+            requestTask = apiV2MembershipsMembershipIdGetWithRequestBuilder(membershipId: membershipId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get membership.
@@ -111,18 +133,24 @@ open class MembershipsAPI {
      - returns: RequestBuilder<MembershipModel> 
      */
     open class func apiV2MembershipsMembershipIdGetWithRequestBuilder(membershipId: UUID) -> RequestBuilder<MembershipModel> {
-        var path = "/api/v2/memberships/{membershipId}"
+        var localVariablePath = "/api/v2/memberships/{membershipId}"
         let membershipIdPreEscape = "\(APIHelper.mapValueToPathItem(membershipId))"
         let membershipIdPostEscape = membershipIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{membershipId}", with: membershipIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{membershipId}", with: membershipIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<MembershipModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MembershipModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -132,22 +160,28 @@ open class MembershipsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MembersModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2MembershipsMembershipIdMembersGet(membershipId: UUID, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MembersModel, Error> {
-        return Future<MembersModel, Error>.init { promise in
-            apiV2MembershipsMembershipIdMembersGetWithRequestBuilder(membershipId: membershipId, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2MembershipsMembershipIdMembersGet(membershipId: UUID, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MembersModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MembersModel, Error> { promise in
+            requestTask = apiV2MembershipsMembershipIdMembersGetWithRequestBuilder(membershipId: membershipId, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all members.
@@ -162,23 +196,28 @@ open class MembershipsAPI {
      - returns: RequestBuilder<MembersModel> 
      */
     open class func apiV2MembershipsMembershipIdMembersGetWithRequestBuilder(membershipId: UUID, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<MembersModel> {
-        var path = "/api/v2/memberships/{membershipId}/members"
+        var localVariablePath = "/api/v2/memberships/{membershipId}/members"
         let membershipIdPreEscape = "\(APIHelper.mapValueToPathItem(membershipId))"
         let membershipIdPostEscape = membershipIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{membershipId}", with: membershipIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{membershipId}", with: membershipIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<MembersModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MembersModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

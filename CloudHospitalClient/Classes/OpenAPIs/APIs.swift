@@ -6,42 +6,51 @@
 
 import Foundation
 
+// We reverted the change of CloudHospitalClientAPI to CloudHospitalClient introduced in https://github.com/OpenAPITools/openapi-generator/pull/9624
+// Because it was causing the following issue https://github.com/OpenAPITools/openapi-generator/issues/9953
+// If you are affected by this issue, please consider removing the following two lines,
+// By setting the option removeMigrationProjectNameClass to true in the generator
+@available(*, deprecated, renamed: "CloudHospitalClientAPI")
+public typealias CloudHospitalClient = CloudHospitalClientAPI
+
 open class CloudHospitalClientAPI {
     public static var basePath = "http://localhost"
+    public static var customHeaders: [String: String] = [:]
     public static var credential: URLCredential?
-    public static var customHeaders: [String:String] = [:]
     public static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
     public static var apiResponseQueue: DispatchQueue = .main
 }
 
 open class RequestBuilder<T> {
     var credential: URLCredential?
-    var headers: [String:String]
-    public let parameters: [String:Any]?
-    public let isBody: Bool
+    var headers: [String: String]
+    public let parameters: [String: Any]?
     public let method: String
     public let URLString: String
+    public let requestTask: RequestTask = RequestTask()
 
     /// Optional block to obtain a reference to the request's progress instance when available.
-    public var onProgressReady: ((Progress) -> ())?
+    public var onProgressReady: ((Progress) -> Void)?
 
-    required public init(method: String, URLString: String, parameters: [String:Any]?, isBody: Bool, headers: [String:String] = [:]) {
+    required public init(method: String, URLString: String, parameters: [String: Any]?, headers: [String: String] = [:]) {
         self.method = method
         self.URLString = URLString
         self.parameters = parameters
-        self.isBody = isBody
         self.headers = headers
 
         addHeaders(CloudHospitalClientAPI.customHeaders)
     }
 
-    open func addHeaders(_ aHeaders:[String:String]) {
+    open func addHeaders(_ aHeaders: [String: String]) {
         for (header, value) in aHeaders {
             headers[header] = value
         }
     }
 
-    open func execute(_ apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, Error>) -> Void) { }
+    @discardableResult
+    open func execute(_ apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue, _ completion: @escaping (_ result: Swift.Result<Response<T>, ErrorResponse>) -> Void) -> RequestTask {
+        return requestTask
+    }
 
     public func addHeader(name: String, value: String) -> Self {
         if !value.isEmpty {
@@ -51,12 +60,12 @@ open class RequestBuilder<T> {
     }
 
     open func addCredential() -> Self {
-        self.credential = CloudHospitalClientAPI.credential
+        credential = CloudHospitalClientAPI.credential
         return self
     }
 }
 
 public protocol RequestBuilderFactory {
     func getNonDecodableBuilder<T>() -> RequestBuilder<T>.Type
-    func getBuilder<T:Decodable>() -> RequestBuilder<T>.Type
+    func getBuilder<T: Decodable>() -> RequestBuilder<T>.Type
 }

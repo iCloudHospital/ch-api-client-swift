@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Get all HospitalServices.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -58,17 +58,17 @@ ServicesAPI.apiV2ServicesGet(id: id, name: name, slug: slug, hospitalId: hospita
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **slug** | **String** |  | [optional] 
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
  **hospitalSlug** | **String** |  | [optional] 
- **specialtyId** | [**UUID**](.md) |  | [optional] 
+ **specialtyId** | **UUID** |  | [optional] 
  **specialtyName** | **String** |  | [optional] 
- **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
+ **specialtyTypeId** | **UUID** |  | [optional] 
  **specialtyTypeName** | **String** |  | [optional] 
- **serviceCategoryId** | [**UUID**](.md) |  | [optional] 
+ **serviceCategoryId** | **UUID** |  | [optional] 
  **marketingType** | [**MarketingType**](.md) |  | [optional] 
  **procedure** | [**Procedure**](.md) |  | [optional] 
  **created** | **Date** |  | [optional] 
@@ -100,7 +100,7 @@ No authorization required
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -109,6 +109,7 @@ let serviceId = 987 // UUID |
 let languageCode = "languageCode_example" // String |  (optional)
 let returnDefaultValue = true // Bool |  (optional)
 
+// 
 ServicesAPI.apiV2ServicesServiceIdGet(serviceId: serviceId, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)
@@ -125,7 +126,7 @@ ServicesAPI.apiV2ServicesServiceIdGet(serviceId: serviceId, languageCode: langua
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **serviceId** | [**UUID**](.md) |  | 
+ **serviceId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
  **returnDefaultValue** | **Bool** |  | [optional] 
 
@@ -151,7 +152,7 @@ No authorization required
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -160,6 +161,7 @@ let slug = "slug_example" // String |
 let languageCode = "languageCode_example" // String |  (optional)
 let returnDefaultValue = true // Bool |  (optional)
 
+// 
 ServicesAPI.apiV2ServicesSlugGet(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)

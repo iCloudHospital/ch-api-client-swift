@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct MemberModel: Codable {
+public struct MemberModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var email: String?
@@ -28,5 +30,27 @@ public struct MemberModel: Codable {
         self.dateOfBirth = dateOfBirth
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case email
+        case firstName
+        case lastName
+        case fullName
+        case gender
+        case dateOfBirth
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(email, forKey: .email)
+        try container.encodeIfPresent(firstName, forKey: .firstName)
+        try container.encodeIfPresent(lastName, forKey: .lastName)
+        try container.encodeIfPresent(fullName, forKey: .fullName)
+        try container.encodeIfPresent(gender, forKey: .gender)
+        try container.encodeIfPresent(dateOfBirth, forKey: .dateOfBirth)
+    }
 }
 

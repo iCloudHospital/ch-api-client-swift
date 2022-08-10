@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 Get Contributor.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -44,7 +44,7 @@ ContributorsAPI.apiV2ContributorsContributorIdGet(contributorId: contributorId, 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contributorId** | [**UUID**](.md) |  | 
+ **contributorId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
  **returnDefaultValue** | **Bool** |  | [optional] 
 
@@ -70,7 +70,7 @@ No authorization required
 
 Get all ContributorHandles.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -101,9 +101,9 @@ ContributorsAPI.apiV2ContributorsContributorIdHandlesGet(contributorId: contribu
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contributorId** | [**UUID**](.md) |  | 
- **contributorId2** | [**UUID**](.md) |  | [optional] 
- **id** | [**UUID**](.md) |  | [optional] 
+ **contributorId** | **UUID** |  | 
+ **contributorId2** | **UUID** |  | [optional] 
+ **id** | **UUID** |  | [optional] 
  **snsType** | [**SnsType**](.md) |  | [optional] 
  **handle** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
@@ -132,7 +132,7 @@ No authorization required
 
 Get ContributorHandle.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -157,8 +157,8 @@ ContributorsAPI.apiV2ContributorsContributorIdHandlesHandleIdGet(contributorId: 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **contributorId** | [**UUID**](.md) |  | 
- **handleId** | [**UUID**](.md) |  | 
+ **contributorId** | **UUID** |  | 
+ **handleId** | **UUID** |  | 
 
 ### Return type
 
@@ -182,7 +182,7 @@ No authorization required
 
 Get all Contributors.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -217,11 +217,11 @@ ContributorsAPI.apiV2ContributorsGet(id: id, name: name, email: email, website: 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **email** | **String** |  | [optional] 
  **website** | **String** |  | [optional] 
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **interviewerOnly** | **Bool** |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
@@ -252,7 +252,7 @@ No authorization required
 
 Get Contributor by slug.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient

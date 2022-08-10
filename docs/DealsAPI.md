@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 Get deal.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -47,7 +47,7 @@ DealsAPI.apiV2DealsDealIdGet(dealId: dealId, languageCode: languageCode, returnD
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dealId** | [**UUID**](.md) |  | 
+ **dealId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
  **returnDefaultValue** | **Bool** |  | [optional] 
 
@@ -73,7 +73,7 @@ No authorization required
 
 Get all DealPackage.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -108,12 +108,12 @@ DealsAPI.apiV2DealsDealIdPackagesGet(dealId: dealId, relatedDealPackageId: relat
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dealId** | [**UUID**](.md) |  | 
- **relatedDealPackageId** | [**UUID**](.md) |  | [optional] 
+ **dealId** | **UUID** |  | 
+ **relatedDealPackageId** | **UUID** |  | [optional] 
  **dealName** | **String** |  | [optional] 
  **name** | **String** |  | [optional] 
- **countryId** | [**UUID**](.md) |  | [optional] 
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **countryId** | **UUID** |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
@@ -143,7 +143,7 @@ No authorization required
 
 Get DealPackage.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -169,8 +169,8 @@ DealsAPI.apiV2DealsDealIdPackagesPackageIdGet(dealId: dealId, packageId: package
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dealId** | [**UUID**](.md) |  | 
- **packageId** | [**UUID**](.md) |  | 
+ **dealId** | **UUID** |  | 
+ **packageId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
 
 ### Return type
@@ -195,7 +195,7 @@ No authorization required
 
 Get all DealService.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -223,7 +223,7 @@ DealsAPI.apiV2DealsDealIdServicesGet(dealId: dealId, languageCode: languageCode,
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dealId** | [**UUID**](.md) |  | 
+ **dealId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -251,7 +251,7 @@ No authorization required
 
 Get DealService.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -277,8 +277,8 @@ DealsAPI.apiV2DealsDealIdServicesServiceIdGet(dealId: dealId, serviceId: service
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dealId** | [**UUID**](.md) |  | 
- **serviceId** | [**UUID**](.md) |  | 
+ **dealId** | **UUID** |  | 
+ **serviceId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
 
 ### Return type
@@ -303,7 +303,7 @@ No authorization required
 
 Get all deals.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -348,20 +348,20 @@ DealsAPI.apiV2DealsGet(id: id, name: name, marketingType: marketingType, country
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **marketingType** | [**MarketingType**](.md) |  | [optional] 
- **countryId** | [**UUID**](.md) |  | [optional] 
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **countryId** | **UUID** |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
- **specialtyId** | [**UUID**](.md) |  | [optional] 
+ **specialtyId** | **UUID** |  | [optional] 
  **specialtyName** | **String** |  | [optional] 
- **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
+ **specialtyTypeId** | **UUID** |  | [optional] 
  **specialtyTypeName** | **String** |  | [optional] 
- **serviceId** | [**UUID**](.md) |  | [optional] 
+ **serviceId** | **UUID** |  | [optional] 
  **serviceName** | **String** |  | [optional] 
- **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
- **exceptDealId** | [**UUID**](.md) |  | [optional] 
+ **exceptHospitalId** | **UUID** |  | [optional] 
+ **exceptDealId** | **UUID** |  | [optional] 
  **ids** | [**[UUID]**](UUID.md) |  | [optional] 
  **serviceDuration** | **Int** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
@@ -393,7 +393,7 @@ No authorization required
 
 Get all deals.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -438,20 +438,20 @@ DealsAPI.apiV2DealsSimpleGet(id: id, name: name, marketingType: marketingType, c
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **marketingType** | [**MarketingType**](.md) |  | [optional] 
- **countryId** | [**UUID**](.md) |  | [optional] 
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **countryId** | **UUID** |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
- **specialtyId** | [**UUID**](.md) |  | [optional] 
+ **specialtyId** | **UUID** |  | [optional] 
  **specialtyName** | **String** |  | [optional] 
- **specialtyTypeId** | [**UUID**](.md) |  | [optional] 
+ **specialtyTypeId** | **UUID** |  | [optional] 
  **specialtyTypeName** | **String** |  | [optional] 
- **serviceId** | [**UUID**](.md) |  | [optional] 
+ **serviceId** | **UUID** |  | [optional] 
  **serviceName** | **String** |  | [optional] 
- **exceptHospitalId** | [**UUID**](.md) |  | [optional] 
- **exceptDealId** | [**UUID**](.md) |  | [optional] 
+ **exceptHospitalId** | **UUID** |  | [optional] 
+ **exceptDealId** | **UUID** |  | [optional] 
  **ids** | [**[UUID]**](UUID.md) |  | [optional] 
  **serviceDuration** | **Int** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
@@ -483,7 +483,7 @@ No authorization required
 
 Get deal by slug.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient

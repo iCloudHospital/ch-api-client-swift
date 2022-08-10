@@ -6,7 +6,9 @@
 //
 
 import Foundation
-
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 public enum Procedure: String, Codable, CaseIterable {
     case treatment = "Treatment"

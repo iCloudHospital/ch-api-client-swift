@@ -6,7 +6,9 @@
 //
 
 import Foundation
-
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 public enum NotificationCode: String, Codable, CaseIterable {
     case welcomeEmail = "WelcomeEmail"

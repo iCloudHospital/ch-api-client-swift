@@ -6,7 +6,9 @@
 //
 
 import Foundation
-
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 public enum ReviewType: String, Codable, CaseIterable {
     case photo = "Photo"

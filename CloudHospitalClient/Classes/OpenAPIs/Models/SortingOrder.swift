@@ -6,7 +6,9 @@
 //
 
 import Foundation
-
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 public enum SortingOrder: String, Codable, CaseIterable {
     case ascending = "Ascending"

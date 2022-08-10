@@ -6,11 +6,15 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class HospitalsAPI {
+
     /**
      Get all Hospitals.
      
@@ -30,22 +34,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalsModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalsModel, Error> {
-        return Future<HospitalsModel, Error>.init { promise in
-            apiV2HospitalsGetWithRequestBuilder(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<HospitalsModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalsModel, Error> { promise in
+            requestTask = apiV2HospitalsGetWithRequestBuilder(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all Hospitals.
@@ -69,33 +79,39 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalsModel> 
      */
     open class func apiV2HospitalsGetWithRequestBuilder(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalsModel> {
-        let path = "/api/v2/hospitals"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "Name": name?.encodeToJSON(), 
-            "CountryId": countryId?.encodeToJSON(), 
-            "Created": created?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "SpecialtyTypeId": specialtyTypeId?.encodeToJSON(), 
-            "SpecialtyId": specialtyId?.encodeToJSON(), 
-            "ExceptHospitalId": exceptHospitalId?.encodeToJSON(), 
-            "ShowHidden": showHidden?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "Ids": ids?.encodeToJSON(), 
-            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(), 
-            "PaymentEnabled": paymentEnabled?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        let localVariablePath = "/api/v2/hospitals"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "CountryId": countryId?.encodeToJSON(),
+            "Created": created?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "SpecialtyTypeId": specialtyTypeId?.encodeToJSON(),
+            "SpecialtyId": specialtyId?.encodeToJSON(),
+            "ExceptHospitalId": exceptHospitalId?.encodeToJSON(),
+            "ShowHidden": showHidden?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "Ids": ids?.encodeToJSON(),
+            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(),
+            "PaymentEnabled": paymentEnabled?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -103,22 +119,28 @@ open class HospitalsAPI {
      
      - parameter hospitalId: (path)  
      - parameter accreditationId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalAccreditationModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdAccreditationsAccreditationIdGet(hospitalId: UUID, accreditationId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalAccreditationModel, Error> {
-        return Future<HospitalAccreditationModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdAccreditationsAccreditationIdGetWithRequestBuilder(hospitalId: hospitalId, accreditationId: accreditationId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdAccreditationsAccreditationIdGet(hospitalId: UUID, accreditationId: UUID) -> AnyPublisher<HospitalAccreditationModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalAccreditationModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdAccreditationsAccreditationIdGetWithRequestBuilder(hospitalId: hospitalId, accreditationId: accreditationId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get HospitalAccreditation.
@@ -128,21 +150,27 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalAccreditationModel> 
      */
     open class func apiV2HospitalsHospitalIdAccreditationsAccreditationIdGetWithRequestBuilder(hospitalId: UUID, accreditationId: UUID) -> RequestBuilder<HospitalAccreditationModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/accreditations/{accreditationId}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/accreditations/{accreditationId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let accreditationIdPreEscape = "\(APIHelper.mapValueToPathItem(accreditationId))"
         let accreditationIdPostEscape = accreditationIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{accreditationId}", with: accreditationIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{accreditationId}", with: accreditationIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<HospitalAccreditationModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalAccreditationModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -155,22 +183,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalAccreditationsModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdAccreditationsGet(hospitalId: UUID, hospitalName: String? = nil, accreditationId: UUID? = nil, accreditationName: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalAccreditationsModel, Error> {
-        return Future<HospitalAccreditationsModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdAccreditationsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, accreditationId: accreditationId, accreditationName: accreditationName, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdAccreditationsGet(hospitalId: UUID, hospitalName: String? = nil, accreditationId: UUID? = nil, accreditationName: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<HospitalAccreditationsModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalAccreditationsModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdAccreditationsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, accreditationId: accreditationId, accreditationName: accreditationName, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all HospitalAccreditations.
@@ -185,26 +219,32 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalAccreditationsModel> 
      */
     open class func apiV2HospitalsHospitalIdAccreditationsGetWithRequestBuilder(hospitalId: UUID, hospitalName: String? = nil, accreditationId: UUID? = nil, accreditationName: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalAccreditationsModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/accreditations"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/accreditations"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "HospitalName": hospitalName?.encodeToJSON(), 
-            "AccreditationId": accreditationId?.encodeToJSON(), 
-            "AccreditationName": accreditationName?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "HospitalName": hospitalName?.encodeToJSON(),
+            "AccreditationId": accreditationId?.encodeToJSON(),
+            "AccreditationName": accreditationName?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalAccreditationsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalAccreditationsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -212,22 +252,28 @@ open class HospitalsAPI {
      
      - parameter hospitalId: (path)  
      - parameter equipmentId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalEquipmentModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdEquipmentsEquipmentIdGet(hospitalId: UUID, equipmentId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalEquipmentModel, Error> {
-        return Future<HospitalEquipmentModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdEquipmentsEquipmentIdGetWithRequestBuilder(hospitalId: hospitalId, equipmentId: equipmentId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdEquipmentsEquipmentIdGet(hospitalId: UUID, equipmentId: UUID) -> AnyPublisher<HospitalEquipmentModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalEquipmentModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdEquipmentsEquipmentIdGetWithRequestBuilder(hospitalId: hospitalId, equipmentId: equipmentId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get HospitalEquipment.
@@ -237,21 +283,27 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalEquipmentModel> 
      */
     open class func apiV2HospitalsHospitalIdEquipmentsEquipmentIdGetWithRequestBuilder(hospitalId: UUID, equipmentId: UUID) -> RequestBuilder<HospitalEquipmentModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/equipments/{equipmentId}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/equipments/{equipmentId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let equipmentIdPreEscape = "\(APIHelper.mapValueToPathItem(equipmentId))"
         let equipmentIdPostEscape = equipmentIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{equipmentId}", with: equipmentIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{equipmentId}", with: equipmentIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<HospitalEquipmentModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalEquipmentModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -264,22 +316,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediasModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasGet(hospitalId: UUID, equipmentId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediasModel, Error> {
-        return Future<MediasModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasGetWithRequestBuilder(hospitalId: hospitalId, equipmentId: equipmentId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasGet(hospitalId: UUID, equipmentId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MediasModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediasModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasGetWithRequestBuilder(hospitalId: hospitalId, equipmentId: equipmentId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all EquipmentMedia.
@@ -294,28 +352,34 @@ open class HospitalsAPI {
      - returns: RequestBuilder<MediasModel> 
      */
     open class func apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasGetWithRequestBuilder(hospitalId: UUID, equipmentId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<MediasModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/equipments/{equipmentId}/medias"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/equipments/{equipmentId}/medias"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let equipmentIdPreEscape = "\(APIHelper.mapValueToPathItem(equipmentId))"
         let equipmentIdPostEscape = equipmentIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{equipmentId}", with: equipmentIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "MediaType": mediaType?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{equipmentId}", with: equipmentIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "MediaType": mediaType?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -324,22 +388,28 @@ open class HospitalsAPI {
      - parameter hospitalId: (path)  
      - parameter equipmentId: (path)  
      - parameter mediaId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediaModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasMediaIdGet(hospitalId: UUID, equipmentId: UUID, mediaId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediaModel, Error> {
-        return Future<MediaModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasMediaIdGetWithRequestBuilder(hospitalId: hospitalId, equipmentId: equipmentId, mediaId: mediaId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasMediaIdGet(hospitalId: UUID, equipmentId: UUID, mediaId: UUID) -> AnyPublisher<MediaModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediaModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasMediaIdGetWithRequestBuilder(hospitalId: hospitalId, equipmentId: equipmentId, mediaId: mediaId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get EquipmentMedia.
@@ -350,24 +420,30 @@ open class HospitalsAPI {
      - returns: RequestBuilder<MediaModel> 
      */
     open class func apiV2HospitalsHospitalIdEquipmentsEquipmentIdMediasMediaIdGetWithRequestBuilder(hospitalId: UUID, equipmentId: UUID, mediaId: UUID) -> RequestBuilder<MediaModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/equipments/{equipmentId}/medias/{mediaId}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/equipments/{equipmentId}/medias/{mediaId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let equipmentIdPreEscape = "\(APIHelper.mapValueToPathItem(equipmentId))"
         let equipmentIdPostEscape = equipmentIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{equipmentId}", with: equipmentIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{equipmentId}", with: equipmentIdPostEscape, options: .literal, range: nil)
         let mediaIdPreEscape = "\(APIHelper.mapValueToPathItem(mediaId))"
         let mediaIdPostEscape = mediaIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -383,22 +459,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalEquipmentsModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdEquipmentsGet(hospitalId: UUID, id: UUID? = nil, name: String? = nil, hospitalId2: UUID? = nil, hospitalName: String? = nil, description: String? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalEquipmentsModel, Error> {
-        return Future<HospitalEquipmentsModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdEquipmentsGetWithRequestBuilder(hospitalId: hospitalId, id: id, name: name, hospitalId2: hospitalId2, hospitalName: hospitalName, description: description, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdEquipmentsGet(hospitalId: UUID, id: UUID? = nil, name: String? = nil, hospitalId2: UUID? = nil, hospitalName: String? = nil, description: String? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<HospitalEquipmentsModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalEquipmentsModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdEquipmentsGetWithRequestBuilder(hospitalId: hospitalId, id: id, name: name, hospitalId2: hospitalId2, hospitalName: hospitalName, description: description, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all HospitalEquipments.
@@ -416,29 +498,35 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalEquipmentsModel> 
      */
     open class func apiV2HospitalsHospitalIdEquipmentsGetWithRequestBuilder(hospitalId: UUID, id: UUID? = nil, name: String? = nil, hospitalId2: UUID? = nil, hospitalName: String? = nil, description: String? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalEquipmentsModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/equipments"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/equipments"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "Name": name?.encodeToJSON(), 
-            "HospitalId": hospitalId2?.encodeToJSON(), 
-            "HospitalName": hospitalName?.encodeToJSON(), 
-            "Description": description?.encodeToJSON(), 
-            "Created": created?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "HospitalId": hospitalId2?.encodeToJSON(),
+            "HospitalName": hospitalName?.encodeToJSON(),
+            "Description": description?.encodeToJSON(),
+            "Created": created?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalEquipmentsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalEquipmentsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -446,22 +534,28 @@ open class HospitalsAPI {
      
      - parameter hospitalId: (path)  
      - parameter evaluationId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalEvaluationModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdEvaluationsEvaluationIdGet(hospitalId: UUID, evaluationId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalEvaluationModel, Error> {
-        return Future<HospitalEvaluationModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdEvaluationsEvaluationIdGetWithRequestBuilder(hospitalId: hospitalId, evaluationId: evaluationId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdEvaluationsEvaluationIdGet(hospitalId: UUID, evaluationId: UUID) -> AnyPublisher<HospitalEvaluationModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalEvaluationModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdEvaluationsEvaluationIdGetWithRequestBuilder(hospitalId: hospitalId, evaluationId: evaluationId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get HospitalEvaluation.
@@ -471,21 +565,27 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalEvaluationModel> 
      */
     open class func apiV2HospitalsHospitalIdEvaluationsEvaluationIdGetWithRequestBuilder(hospitalId: UUID, evaluationId: UUID) -> RequestBuilder<HospitalEvaluationModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/evaluations/{evaluationId}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/evaluations/{evaluationId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let evaluationIdPreEscape = "\(APIHelper.mapValueToPathItem(evaluationId))"
         let evaluationIdPostEscape = evaluationIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{evaluationId}", with: evaluationIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{evaluationId}", with: evaluationIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<HospitalEvaluationModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalEvaluationModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -498,22 +598,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalEvaluationsModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdEvaluationsGet(hospitalId: UUID, id: UUID? = nil, name: String? = nil, stars: Int? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalEvaluationsModel, Error> {
-        return Future<HospitalEvaluationsModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdEvaluationsGetWithRequestBuilder(hospitalId: hospitalId, id: id, name: name, stars: stars, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdEvaluationsGet(hospitalId: UUID, id: UUID? = nil, name: String? = nil, stars: Int? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<HospitalEvaluationsModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalEvaluationsModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdEvaluationsGetWithRequestBuilder(hospitalId: hospitalId, id: id, name: name, stars: stars, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all HospitalEvaluations.
@@ -528,51 +634,65 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalEvaluationsModel> 
      */
     open class func apiV2HospitalsHospitalIdEvaluationsGetWithRequestBuilder(hospitalId: UUID, id: UUID? = nil, name: String? = nil, stars: Int? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalEvaluationsModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/evaluations"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/evaluations"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "Name": name?.encodeToJSON(), 
-            "Stars": stars?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "Stars": stars?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalEvaluationsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalEvaluationsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
-
+     
+     
      - parameter hospitalId: (path)  
      - parameter languageCode: (query)  (optional)
      - parameter returnDefaultValue: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdGet(hospitalId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalModel, Error> {
-        return Future<HospitalModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdGetWithRequestBuilder(hospitalId: hospitalId, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdGet(hospitalId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> AnyPublisher<HospitalModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdGetWithRequestBuilder(hospitalId: hospitalId, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
+     
      - GET /api/v2/hospitals/{hospitalId}
      - parameter hospitalId: (path)  
      - parameter languageCode: (query)  (optional)
@@ -580,22 +700,28 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalModel> 
      */
     open class func apiV2HospitalsHospitalIdGetWithRequestBuilder(hospitalId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> RequestBuilder<HospitalModel> {
-        var path = "/api/v2/hospitals/{hospitalId}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON(), 
-            "returnDefaultValue": returnDefaultValue?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
+            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -608,22 +734,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalSnsHandlesModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdHandlesGet(hospitalId: UUID, id: UUID? = nil, snsType: SnsType? = nil, handle: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalSnsHandlesModel, Error> {
-        return Future<HospitalSnsHandlesModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdHandlesGetWithRequestBuilder(hospitalId: hospitalId, id: id, snsType: snsType, handle: handle, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdHandlesGet(hospitalId: UUID, id: UUID? = nil, snsType: SnsType? = nil, handle: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<HospitalSnsHandlesModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalSnsHandlesModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdHandlesGetWithRequestBuilder(hospitalId: hospitalId, id: id, snsType: snsType, handle: handle, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all HospitalHandles.
@@ -638,26 +770,32 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalSnsHandlesModel> 
      */
     open class func apiV2HospitalsHospitalIdHandlesGetWithRequestBuilder(hospitalId: UUID, id: UUID? = nil, snsType: SnsType? = nil, handle: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalSnsHandlesModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/handles"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/handles"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "SnsType": snsType?.encodeToJSON(), 
-            "Handle": handle?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "SnsType": snsType?.encodeToJSON(),
+            "Handle": handle?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalSnsHandlesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalSnsHandlesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -665,22 +803,28 @@ open class HospitalsAPI {
      
      - parameter hospitalId: (path)  
      - parameter handleId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SnsHandleModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdHandlesHandleIdGet(hospitalId: UUID, handleId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SnsHandleModel, Error> {
-        return Future<SnsHandleModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdHandlesHandleIdGetWithRequestBuilder(hospitalId: hospitalId, handleId: handleId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdHandlesHandleIdGet(hospitalId: UUID, handleId: UUID) -> AnyPublisher<SnsHandleModel, Error> {
+        var requestTask: RequestTask?
+        return Future<SnsHandleModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdHandlesHandleIdGetWithRequestBuilder(hospitalId: hospitalId, handleId: handleId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get HospitalHandle.
@@ -690,21 +834,27 @@ open class HospitalsAPI {
      - returns: RequestBuilder<SnsHandleModel> 
      */
     open class func apiV2HospitalsHospitalIdHandlesHandleIdGetWithRequestBuilder(hospitalId: UUID, handleId: UUID) -> RequestBuilder<SnsHandleModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/handles/{handleId}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/handles/{handleId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let handleIdPreEscape = "\(APIHelper.mapValueToPathItem(handleId))"
         let handleIdPostEscape = handleIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{handleId}", with: handleIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{handleId}", with: handleIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<SnsHandleModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SnsHandleModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -716,22 +866,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediasModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdMediasGet(hospitalId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediasModel, Error> {
-        return Future<MediasModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdMediasGetWithRequestBuilder(hospitalId: hospitalId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdMediasGet(hospitalId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MediasModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediasModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdMediasGetWithRequestBuilder(hospitalId: hospitalId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all HospitalMedias.
@@ -745,25 +901,31 @@ open class HospitalsAPI {
      - returns: RequestBuilder<MediasModel> 
      */
     open class func apiV2HospitalsHospitalIdMediasGetWithRequestBuilder(hospitalId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<MediasModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/medias"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/medias"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "MediaType": mediaType?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "MediaType": mediaType?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -771,22 +933,28 @@ open class HospitalsAPI {
      
      - parameter hospitalId: (path)  
      - parameter mediaId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediaModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdMediasMediaIdGet(hospitalId: UUID, mediaId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediaModel, Error> {
-        return Future<MediaModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdMediasMediaIdGetWithRequestBuilder(hospitalId: hospitalId, mediaId: mediaId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdMediasMediaIdGet(hospitalId: UUID, mediaId: UUID) -> AnyPublisher<MediaModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediaModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdMediasMediaIdGetWithRequestBuilder(hospitalId: hospitalId, mediaId: mediaId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get HospitalMedia.
@@ -796,21 +964,27 @@ open class HospitalsAPI {
      - returns: RequestBuilder<MediaModel> 
      */
     open class func apiV2HospitalsHospitalIdMediasMediaIdGetWithRequestBuilder(hospitalId: UUID, mediaId: UUID) -> RequestBuilder<MediaModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/medias/{mediaId}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/medias/{mediaId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let mediaIdPreEscape = "\(APIHelper.mapValueToPathItem(mediaId))"
         let mediaIdPostEscape = mediaIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -830,22 +1004,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalSpecialtiesModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdSpecialtiesGet(hospitalId: UUID, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, hospitalSpecialtyId: UUID? = nil, name: String? = nil, slug: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalSpecialtiesModel, Error> {
-        return Future<HospitalSpecialtiesModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdSpecialtiesGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, hospitalSpecialtyId: hospitalSpecialtyId, name: name, slug: slug, marketingType: marketingType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdSpecialtiesGet(hospitalId: UUID, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, hospitalSpecialtyId: UUID? = nil, name: String? = nil, slug: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<HospitalSpecialtiesModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalSpecialtiesModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdSpecialtiesGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, hospitalSpecialtyId: hospitalSpecialtyId, name: name, slug: slug, marketingType: marketingType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all HospitalSpecialties.
@@ -867,33 +1047,39 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalSpecialtiesModel> 
      */
     open class func apiV2HospitalsHospitalIdSpecialtiesGetWithRequestBuilder(hospitalId: UUID, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, hospitalSpecialtyId: UUID? = nil, name: String? = nil, slug: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalSpecialtiesModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/specialties"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/specialties"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "SpecialtyId": specialtyId?.encodeToJSON(), 
-            "SpecialtyName": specialtyName?.encodeToJSON(), 
-            "SpecialtyTypeId": specialtyTypeId?.encodeToJSON(), 
-            "SpecialtyTypeName": specialtyTypeName?.encodeToJSON(), 
-            "HospitalSpecialtyId": hospitalSpecialtyId?.encodeToJSON(), 
-            "Name": name?.encodeToJSON(), 
-            "Slug": slug?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "ShowHidden": showHidden?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "SpecialtyId": specialtyId?.encodeToJSON(),
+            "SpecialtyName": specialtyName?.encodeToJSON(),
+            "SpecialtyTypeId": specialtyTypeId?.encodeToJSON(),
+            "SpecialtyTypeName": specialtyTypeName?.encodeToJSON(),
+            "HospitalSpecialtyId": hospitalSpecialtyId?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "Slug": slug?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "ShowHidden": showHidden?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalSpecialtiesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalSpecialtiesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -906,22 +1092,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediasModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasGet(hospitalId: UUID, hospitalSpecialtyId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediasModel, Error> {
-        return Future<MediasModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasGetWithRequestBuilder(hospitalId: hospitalId, hospitalSpecialtyId: hospitalSpecialtyId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasGet(hospitalId: UUID, hospitalSpecialtyId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MediasModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediasModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasGetWithRequestBuilder(hospitalId: hospitalId, hospitalSpecialtyId: hospitalSpecialtyId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all HospitalServiceMedias.
@@ -936,28 +1128,34 @@ open class HospitalsAPI {
      - returns: RequestBuilder<MediasModel> 
      */
     open class func apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasGetWithRequestBuilder(hospitalId: UUID, hospitalSpecialtyId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<MediasModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/specialties/{hospitalSpecialtyId}/medias"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/specialties/{hospitalSpecialtyId}/medias"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let hospitalSpecialtyIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalSpecialtyId))"
         let hospitalSpecialtyIdPostEscape = hospitalSpecialtyIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalSpecialtyId}", with: hospitalSpecialtyIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "MediaType": mediaType?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalSpecialtyId}", with: hospitalSpecialtyIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "MediaType": mediaType?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -966,22 +1164,28 @@ open class HospitalsAPI {
      - parameter hospitalId: (path)  
      - parameter hospitalSpecialtyId: (path)  
      - parameter mediaId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediaModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasMediaIdGet(hospitalId: UUID, hospitalSpecialtyId: UUID, mediaId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediaModel, Error> {
-        return Future<MediaModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasMediaIdGetWithRequestBuilder(hospitalId: hospitalId, hospitalSpecialtyId: hospitalSpecialtyId, mediaId: mediaId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasMediaIdGet(hospitalId: UUID, hospitalSpecialtyId: UUID, mediaId: UUID) -> AnyPublisher<MediaModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediaModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasMediaIdGetWithRequestBuilder(hospitalId: hospitalId, hospitalSpecialtyId: hospitalSpecialtyId, mediaId: mediaId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get HospitalServiceMedia.
@@ -992,24 +1196,30 @@ open class HospitalsAPI {
      - returns: RequestBuilder<MediaModel> 
      */
     open class func apiV2HospitalsHospitalIdSpecialtiesHospitalSpecialtyIdMediasMediaIdGetWithRequestBuilder(hospitalId: UUID, hospitalSpecialtyId: UUID, mediaId: UUID) -> RequestBuilder<MediaModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/specialties/{hospitalSpecialtyId}/medias/{mediaId}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/specialties/{hospitalSpecialtyId}/medias/{mediaId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let hospitalSpecialtyIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalSpecialtyId))"
         let hospitalSpecialtyIdPostEscape = hospitalSpecialtyIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalSpecialtyId}", with: hospitalSpecialtyIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalSpecialtyId}", with: hospitalSpecialtyIdPostEscape, options: .literal, range: nil)
         let mediaIdPreEscape = "\(APIHelper.mapValueToPathItem(mediaId))"
         let mediaIdPostEscape = mediaIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -1029,22 +1239,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalSpecialtiesSimpleModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdSpecialtiesSimpleGet(hospitalId: UUID, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, hospitalSpecialtyId: UUID? = nil, name: String? = nil, slug: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalSpecialtiesSimpleModel, Error> {
-        return Future<HospitalSpecialtiesSimpleModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdSpecialtiesSimpleGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, hospitalSpecialtyId: hospitalSpecialtyId, name: name, slug: slug, marketingType: marketingType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdSpecialtiesSimpleGet(hospitalId: UUID, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, hospitalSpecialtyId: UUID? = nil, name: String? = nil, slug: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<HospitalSpecialtiesSimpleModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalSpecialtiesSimpleModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdSpecialtiesSimpleGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, specialtyName: specialtyName, specialtyTypeId: specialtyTypeId, specialtyTypeName: specialtyTypeName, hospitalSpecialtyId: hospitalSpecialtyId, name: name, slug: slug, marketingType: marketingType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all HospitalSpecialties.
@@ -1066,33 +1282,39 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalSpecialtiesSimpleModel> 
      */
     open class func apiV2HospitalsHospitalIdSpecialtiesSimpleGetWithRequestBuilder(hospitalId: UUID, specialtyId: UUID? = nil, specialtyName: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, hospitalSpecialtyId: UUID? = nil, name: String? = nil, slug: String? = nil, marketingType: MarketingType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalSpecialtiesSimpleModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/specialties/simple"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/specialties/simple"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "SpecialtyId": specialtyId?.encodeToJSON(), 
-            "SpecialtyName": specialtyName?.encodeToJSON(), 
-            "SpecialtyTypeId": specialtyTypeId?.encodeToJSON(), 
-            "SpecialtyTypeName": specialtyTypeName?.encodeToJSON(), 
-            "HospitalSpecialtyId": hospitalSpecialtyId?.encodeToJSON(), 
-            "Name": name?.encodeToJSON(), 
-            "Slug": slug?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "ShowHidden": showHidden?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "SpecialtyId": specialtyId?.encodeToJSON(),
+            "SpecialtyName": specialtyName?.encodeToJSON(),
+            "SpecialtyTypeId": specialtyTypeId?.encodeToJSON(),
+            "SpecialtyTypeName": specialtyTypeName?.encodeToJSON(),
+            "HospitalSpecialtyId": hospitalSpecialtyId?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "Slug": slug?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "ShowHidden": showHidden?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalSpecialtiesSimpleModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalSpecialtiesSimpleModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -1101,22 +1323,28 @@ open class HospitalsAPI {
      - parameter hospitalId: (path)  
      - parameter slug: (path)  
      - parameter languageCode: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalSpecialtyModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdSpecialtiesSlugGet(hospitalId: UUID, slug: String, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalSpecialtyModel, Error> {
-        return Future<HospitalSpecialtyModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdSpecialtiesSlugGetWithRequestBuilder(hospitalId: hospitalId, slug: slug, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdSpecialtiesSlugGet(hospitalId: UUID, slug: String, languageCode: String? = nil) -> AnyPublisher<HospitalSpecialtyModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalSpecialtyModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdSpecialtiesSlugGetWithRequestBuilder(hospitalId: hospitalId, slug: slug, languageCode: languageCode).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get HospitalSpecialty by slug.
@@ -1127,24 +1355,30 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalSpecialtyModel> 
      */
     open class func apiV2HospitalsHospitalIdSpecialtiesSlugGetWithRequestBuilder(hospitalId: UUID, slug: String, languageCode: String? = nil) -> RequestBuilder<HospitalSpecialtyModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/specialties/{slug}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/specialties/{slug}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let slugPreEscape = "\(APIHelper.mapValueToPathItem(slug))"
         let slugPostEscape = slugPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{slug}", with: slugPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{slug}", with: slugPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalSpecialtyModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalSpecialtyModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -1153,22 +1387,28 @@ open class HospitalsAPI {
      - parameter hospitalId: (path)  
      - parameter specialtyId: (path)  
      - parameter languageCode: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalSpecialtyModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdGet(hospitalId: UUID, specialtyId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalSpecialtyModel, Error> {
-        return Future<HospitalSpecialtyModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdGet(hospitalId: UUID, specialtyId: UUID, languageCode: String? = nil) -> AnyPublisher<HospitalSpecialtyModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalSpecialtyModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, languageCode: languageCode).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get HospitalSpecialty.
@@ -1179,24 +1419,30 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalSpecialtyModel> 
      */
     open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdGetWithRequestBuilder(hospitalId: UUID, specialtyId: UUID, languageCode: String? = nil) -> RequestBuilder<HospitalSpecialtyModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/specialties/{specialtyId}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/specialties/{specialtyId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let specialtyIdPreEscape = "\(APIHelper.mapValueToPathItem(specialtyId))"
         let specialtyIdPostEscape = specialtyIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{specialtyId}", with: specialtyIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{specialtyId}", with: specialtyIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalSpecialtyModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalSpecialtyModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -1216,22 +1462,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalServicesModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesGet(hospitalId: UUID, specialtyId: UUID, id: UUID? = nil, name: String? = nil, slug: String? = nil, serviceCategoryId: UUID? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, created: Date? = nil, languageCode: String? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalServicesModel, Error> {
-        return Future<HospitalServicesModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, id: id, name: name, slug: slug, serviceCategoryId: serviceCategoryId, marketingType: marketingType, procedure: procedure, created: created, languageCode: languageCode, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesGet(hospitalId: UUID, specialtyId: UUID, id: UUID? = nil, name: String? = nil, slug: String? = nil, serviceCategoryId: UUID? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, created: Date? = nil, languageCode: String? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<HospitalServicesModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalServicesModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, id: id, name: name, slug: slug, serviceCategoryId: serviceCategoryId, marketingType: marketingType, procedure: procedure, created: created, languageCode: languageCode, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all HospitalServices.
@@ -1253,35 +1505,41 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalServicesModel> 
      */
     open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesGetWithRequestBuilder(hospitalId: UUID, specialtyId: UUID, id: UUID? = nil, name: String? = nil, slug: String? = nil, serviceCategoryId: UUID? = nil, marketingType: MarketingType? = nil, procedure: Procedure? = nil, created: Date? = nil, languageCode: String? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalServicesModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/specialties/{specialtyId}/services"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/specialties/{specialtyId}/services"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let specialtyIdPreEscape = "\(APIHelper.mapValueToPathItem(specialtyId))"
         let specialtyIdPostEscape = specialtyIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{specialtyId}", with: specialtyIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "Name": name?.encodeToJSON(), 
-            "Slug": slug?.encodeToJSON(), 
-            "ServiceCategoryId": serviceCategoryId?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "Procedure": procedure?.encodeToJSON(), 
-            "Created": created?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{specialtyId}", with: specialtyIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "Slug": slug?.encodeToJSON(),
+            "ServiceCategoryId": serviceCategoryId?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "Procedure": procedure?.encodeToJSON(),
+            "Created": created?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalServicesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalServicesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -1292,22 +1550,28 @@ open class HospitalsAPI {
      - parameter serviceId: (path)  
      - parameter languageCode: (query)  (optional)
      - parameter returnDefaultValue: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalServiceModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalServiceModel, Error> {
-        return Future<HospitalServiceModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> AnyPublisher<HospitalServiceModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalServiceModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get HospitalService.
@@ -1320,28 +1584,34 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalServiceModel> 
      */
     open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdGetWithRequestBuilder(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> RequestBuilder<HospitalServiceModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/specialties/{specialtyId}/services/{serviceId}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/specialties/{specialtyId}/services/{serviceId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let specialtyIdPreEscape = "\(APIHelper.mapValueToPathItem(specialtyId))"
         let specialtyIdPostEscape = specialtyIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{specialtyId}", with: specialtyIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{specialtyId}", with: specialtyIdPostEscape, options: .literal, range: nil)
         let serviceIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceId))"
         let serviceIdPostEscape = serviceIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{serviceId}", with: serviceIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON(), 
-            "returnDefaultValue": returnDefaultValue?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceId}", with: serviceIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
+            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalServiceModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalServiceModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -1355,22 +1625,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediasModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediasModel, Error> {
-        return Future<MediasModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MediasModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediasModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all HospitalServiceMedias.
@@ -1386,31 +1662,37 @@ open class HospitalsAPI {
      - returns: RequestBuilder<MediasModel> 
      */
     open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasGetWithRequestBuilder(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<MediasModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/specialties/{specialtyId}/services/{serviceId}/medias"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/specialties/{specialtyId}/services/{serviceId}/medias"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let specialtyIdPreEscape = "\(APIHelper.mapValueToPathItem(specialtyId))"
         let specialtyIdPostEscape = specialtyIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{specialtyId}", with: specialtyIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{specialtyId}", with: specialtyIdPostEscape, options: .literal, range: nil)
         let serviceIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceId))"
         let serviceIdPostEscape = serviceIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{serviceId}", with: serviceIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "MediaType": mediaType?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceId}", with: serviceIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "MediaType": mediaType?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -1420,22 +1702,28 @@ open class HospitalsAPI {
      - parameter specialtyId: (path)  
      - parameter serviceId: (path)  
      - parameter mediaId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediaModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasMediaIdGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, mediaId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediaModel, Error> {
-        return Future<MediaModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasMediaIdGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId, mediaId: mediaId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasMediaIdGet(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, mediaId: UUID) -> AnyPublisher<MediaModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediaModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasMediaIdGetWithRequestBuilder(hospitalId: hospitalId, specialtyId: specialtyId, serviceId: serviceId, mediaId: mediaId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get HospitalServiceMedia.
@@ -1447,27 +1735,33 @@ open class HospitalsAPI {
      - returns: RequestBuilder<MediaModel> 
      */
     open class func apiV2HospitalsHospitalIdSpecialtiesSpecialtyIdServicesServiceIdMediasMediaIdGetWithRequestBuilder(hospitalId: UUID, specialtyId: UUID, serviceId: UUID, mediaId: UUID) -> RequestBuilder<MediaModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/specialties/{specialtyId}/services/{serviceId}/medias/{mediaId}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/specialties/{specialtyId}/services/{serviceId}/medias/{mediaId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let specialtyIdPreEscape = "\(APIHelper.mapValueToPathItem(specialtyId))"
         let specialtyIdPostEscape = specialtyIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{specialtyId}", with: specialtyIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{specialtyId}", with: specialtyIdPostEscape, options: .literal, range: nil)
         let serviceIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceId))"
         let serviceIdPostEscape = serviceIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{serviceId}", with: serviceIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceId}", with: serviceIdPostEscape, options: .literal, range: nil)
         let mediaIdPreEscape = "\(APIHelper.mapValueToPathItem(mediaId))"
         let mediaIdPostEscape = mediaIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -1482,22 +1776,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<WorkingDaysModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdWorkingdaysGet(hospitalId: UUID, id: UUID? = nil, dayOfWeek: String? = nil, timeFrom: Date? = nil, timeTo: Date? = nil, checkHoliday: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<WorkingDaysModel, Error> {
-        return Future<WorkingDaysModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdWorkingdaysGetWithRequestBuilder(hospitalId: hospitalId, id: id, dayOfWeek: dayOfWeek, timeFrom: timeFrom, timeTo: timeTo, checkHoliday: checkHoliday, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdWorkingdaysGet(hospitalId: UUID, id: UUID? = nil, dayOfWeek: String? = nil, timeFrom: Date? = nil, timeTo: Date? = nil, checkHoliday: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<WorkingDaysModel, Error> {
+        var requestTask: RequestTask?
+        return Future<WorkingDaysModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdWorkingdaysGetWithRequestBuilder(hospitalId: hospitalId, id: id, dayOfWeek: dayOfWeek, timeFrom: timeFrom, timeTo: timeTo, checkHoliday: checkHoliday, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all HospitalWorkingDays.
@@ -1514,28 +1814,34 @@ open class HospitalsAPI {
      - returns: RequestBuilder<WorkingDaysModel> 
      */
     open class func apiV2HospitalsHospitalIdWorkingdaysGetWithRequestBuilder(hospitalId: UUID, id: UUID? = nil, dayOfWeek: String? = nil, timeFrom: Date? = nil, timeTo: Date? = nil, checkHoliday: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<WorkingDaysModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/workingdays"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/workingdays"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "DayOfWeek": dayOfWeek?.encodeToJSON(), 
-            "TimeFrom": timeFrom?.encodeToJSON(), 
-            "TimeTo": timeTo?.encodeToJSON(), 
-            "CheckHoliday": checkHoliday?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "DayOfWeek": dayOfWeek?.encodeToJSON(),
+            "TimeFrom": timeFrom?.encodeToJSON(),
+            "TimeTo": timeTo?.encodeToJSON(),
+            "CheckHoliday": checkHoliday?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<WorkingDaysModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<WorkingDaysModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -1543,22 +1849,28 @@ open class HospitalsAPI {
      
      - parameter hospitalId: (path)  
      - parameter workingDayId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<WorkingDayModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdWorkingdaysWorkingDayIdGet(hospitalId: UUID, workingDayId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<WorkingDayModel, Error> {
-        return Future<WorkingDayModel, Error>.init { promise in
-            apiV2HospitalsHospitalIdWorkingdaysWorkingDayIdGetWithRequestBuilder(hospitalId: hospitalId, workingDayId: workingDayId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdWorkingdaysWorkingDayIdGet(hospitalId: UUID, workingDayId: UUID) -> AnyPublisher<WorkingDayModel, Error> {
+        var requestTask: RequestTask?
+        return Future<WorkingDayModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdWorkingdaysWorkingDayIdGetWithRequestBuilder(hospitalId: hospitalId, workingDayId: workingDayId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get HospitalWorkingDay.
@@ -1568,21 +1880,27 @@ open class HospitalsAPI {
      - returns: RequestBuilder<WorkingDayModel> 
      */
     open class func apiV2HospitalsHospitalIdWorkingdaysWorkingDayIdGetWithRequestBuilder(hospitalId: UUID, workingDayId: UUID) -> RequestBuilder<WorkingDayModel> {
-        var path = "/api/v2/hospitals/{hospitalId}/workingdays/{workingDayId}"
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/workingdays/{workingDayId}"
         let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
         let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
         let workingDayIdPreEscape = "\(APIHelper.mapValueToPathItem(workingDayId))"
         let workingDayIdPostEscape = workingDayIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{workingDayId}", with: workingDayIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{workingDayId}", with: workingDayIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<WorkingDayModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<WorkingDayModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -1604,22 +1922,28 @@ open class HospitalsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalsSimpleModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsSimpleGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalsSimpleModel, Error> {
-        return Future<HospitalsSimpleModel, Error>.init { promise in
-            apiV2HospitalsSimpleGetWithRequestBuilder(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsSimpleGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<HospitalsSimpleModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalsSimpleModel, Error> { promise in
+            requestTask = apiV2HospitalsSimpleGetWithRequestBuilder(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all Hospitals.
@@ -1643,58 +1967,72 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalsSimpleModel> 
      */
     open class func apiV2HospitalsSimpleGetWithRequestBuilder(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalsSimpleModel> {
-        let path = "/api/v2/hospitals/simple"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "Name": name?.encodeToJSON(), 
-            "CountryId": countryId?.encodeToJSON(), 
-            "Created": created?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "SpecialtyTypeId": specialtyTypeId?.encodeToJSON(), 
-            "SpecialtyId": specialtyId?.encodeToJSON(), 
-            "ExceptHospitalId": exceptHospitalId?.encodeToJSON(), 
-            "ShowHidden": showHidden?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "Ids": ids?.encodeToJSON(), 
-            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(), 
-            "PaymentEnabled": paymentEnabled?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        let localVariablePath = "/api/v2/hospitals/simple"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "CountryId": countryId?.encodeToJSON(),
+            "Created": created?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "SpecialtyTypeId": specialtyTypeId?.encodeToJSON(),
+            "SpecialtyId": specialtyId?.encodeToJSON(),
+            "ExceptHospitalId": exceptHospitalId?.encodeToJSON(),
+            "ShowHidden": showHidden?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "Ids": ids?.encodeToJSON(),
+            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(),
+            "PaymentEnabled": paymentEnabled?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalsSimpleModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalsSimpleModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
-
+     
+     
      - parameter slug: (path)  
      - parameter languageCode: (query)  (optional)
      - parameter returnDefaultValue: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<HospitalModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<HospitalModel, Error> {
-        return Future<HospitalModel, Error>.init { promise in
-            apiV2HospitalsSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> AnyPublisher<HospitalModel, Error> {
+        var requestTask: RequestTask?
+        return Future<HospitalModel, Error> { promise in
+            requestTask = apiV2HospitalsSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
+     
      - GET /api/v2/hospitals/{slug}
      - parameter slug: (path)  
      - parameter languageCode: (query)  (optional)
@@ -1702,22 +2040,27 @@ open class HospitalsAPI {
      - returns: RequestBuilder<HospitalModel> 
      */
     open class func apiV2HospitalsSlugGetWithRequestBuilder(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> RequestBuilder<HospitalModel> {
-        var path = "/api/v2/hospitals/{slug}"
+        var localVariablePath = "/api/v2/hospitals/{slug}"
         let slugPreEscape = "\(APIHelper.mapValueToPathItem(slug))"
         let slugPostEscape = slugPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{slug}", with: slugPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON(), 
-            "returnDefaultValue": returnDefaultValue?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{slug}", with: slugPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
+            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<HospitalModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<HospitalModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

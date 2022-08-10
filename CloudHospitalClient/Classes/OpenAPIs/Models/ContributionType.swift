@@ -6,7 +6,9 @@
 //
 
 import Foundation
-
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 public enum ContributionType: String, Codable, CaseIterable {
     case reviewedBy = "ReviewedBy"

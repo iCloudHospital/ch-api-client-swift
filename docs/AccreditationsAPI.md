@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 Get Accreditation.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -39,7 +39,7 @@ AccreditationsAPI.apiV2AccreditationsAccreditationIdGet(accreditationId: accredi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **accreditationId** | [**UUID**](.md) |  | 
+ **accreditationId** | **UUID** |  | 
 
 ### Return type
 
@@ -63,7 +63,7 @@ No authorization required
 
 Get all Accreditations.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient

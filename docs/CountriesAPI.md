@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -27,6 +27,7 @@ let countryId = 987 // UUID |
 let languageCode = "languageCode_example" // String |  (optional)
 let returnDefaultValue = true // Bool |  (optional)
 
+// 
 CountriesAPI.apiV2CountriesCountryIdGet(countryId: countryId, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)
@@ -43,7 +44,7 @@ CountriesAPI.apiV2CountriesCountryIdGet(countryId: countryId, languageCode: lang
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **countryId** | [**UUID**](.md) |  | 
+ **countryId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
  **returnDefaultValue** | **Bool** |  | [optional] 
 
@@ -69,7 +70,7 @@ No authorization required
 
 Get all CountryMedias.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -98,8 +99,8 @@ CountriesAPI.apiV2CountriesCountryIdMediasGet(countryId: countryId, id: id, medi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **countryId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **countryId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **mediaType** | [**MediaType**](.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -127,7 +128,7 @@ No authorization required
 
 Get CountryMedia.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -152,8 +153,8 @@ CountriesAPI.apiV2CountriesCountryIdMediasMediaIdGet(countryId: countryId, media
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **countryId** | [**UUID**](.md) |  | 
- **mediaId** | [**UUID**](.md) |  | 
+ **countryId** | **UUID** |  | 
+ **mediaId** | **UUID** |  | 
 
 ### Return type
 
@@ -177,7 +178,7 @@ No authorization required
 
 Get all countries.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -210,7 +211,7 @@ CountriesAPI.apiV2CountriesGet(id: id, name: name, description: description, cre
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **description** | **String** |  | [optional] 
  **createdDate** | **Date** |  | [optional] 
@@ -243,7 +244,7 @@ No authorization required
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -252,6 +253,7 @@ let slug = "slug_example" // String |
 let languageCode = "languageCode_example" // String |  (optional)
 let returnDefaultValue = true // Bool |  (optional)
 
+// 
 CountriesAPI.apiV2CountriesSlugGet(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue) { (response, error) in
     guard error == nil else {
         print(error)

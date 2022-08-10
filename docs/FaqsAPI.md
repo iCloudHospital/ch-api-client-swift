@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 Get faq.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -45,7 +45,7 @@ FaqsAPI.apiV2FaqsFaqIdGet(faqId: faqId, languageCode: languageCode) { (response,
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **faqId** | [**UUID**](.md) |  | 
+ **faqId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
 
 ### Return type
@@ -70,7 +70,7 @@ No authorization required
 
 Get all FaqMedias.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -99,8 +99,8 @@ FaqsAPI.apiV2FaqsFaqIdMediasGet(faqId: faqId, id: id, mediaType: mediaType, page
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **faqId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **faqId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **mediaType** | [**MediaType**](.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -128,7 +128,7 @@ No authorization required
 
 Get FaqMedia.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -153,8 +153,8 @@ FaqsAPI.apiV2FaqsFaqIdMediasMediaIdGet(faqId: faqId, mediaId: mediaId) { (respon
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **faqId** | [**UUID**](.md) |  | 
- **mediaId** | [**UUID**](.md) |  | 
+ **faqId** | **UUID** |  | 
+ **mediaId** | **UUID** |  | 
 
 ### Return type
 
@@ -178,7 +178,7 @@ No authorization required
 
 GetAll FaqTags.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -206,7 +206,7 @@ FaqsAPI.apiV2FaqsFaqIdTagsGet(faqId: faqId, tagId: tagId, page: page, limit: lim
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **faqId** | [**UUID**](.md) |  | 
+ **faqId** | **UUID** |  | 
  **tagId** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -234,7 +234,7 @@ No authorization required
 
 Get FaqTag.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -259,7 +259,7 @@ FaqsAPI.apiV2FaqsFaqIdTagsTagIdGet(faqId: faqId, tagId: tagId) { (response, erro
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **faqId** | [**UUID**](.md) |  | 
+ **faqId** | **UUID** |  | 
  **tagId** | **String** |  | 
 
 ### Return type
@@ -284,7 +284,7 @@ No authorization required
 
 Get all Faqs.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -319,11 +319,11 @@ FaqsAPI.apiV2FaqsGet(id: id, name: name, slug: slug, categoryId: categoryId, hos
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **slug** | **String** |  | [optional] 
- **categoryId** | [**UUID**](.md) |  | [optional] 
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **categoryId** | **UUID** |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
@@ -354,7 +354,7 @@ No authorization required
 
 Get faq by slug.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient

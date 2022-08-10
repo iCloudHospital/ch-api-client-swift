@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct PagedListMetaData: Codable {
+public struct PagedListMetaData: Codable, JSONEncodable, Hashable {
 
     public var pageCount: Int?
     public var totalItemCount: Int?
@@ -34,5 +36,33 @@ public struct PagedListMetaData: Codable {
         self.lastItemOnPage = lastItemOnPage
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case pageCount
+        case totalItemCount
+        case pageNumber
+        case pageSize
+        case hasPreviousPage
+        case hasNextPage
+        case isFirstPage
+        case isLastPage
+        case firstItemOnPage
+        case lastItemOnPage
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(pageCount, forKey: .pageCount)
+        try container.encodeIfPresent(totalItemCount, forKey: .totalItemCount)
+        try container.encodeIfPresent(pageNumber, forKey: .pageNumber)
+        try container.encodeIfPresent(pageSize, forKey: .pageSize)
+        try container.encodeIfPresent(hasPreviousPage, forKey: .hasPreviousPage)
+        try container.encodeIfPresent(hasNextPage, forKey: .hasNextPage)
+        try container.encodeIfPresent(isFirstPage, forKey: .isFirstPage)
+        try container.encodeIfPresent(isLastPage, forKey: .isLastPage)
+        try container.encodeIfPresent(firstItemOnPage, forKey: .firstItemOnPage)
+        try container.encodeIfPresent(lastItemOnPage, forKey: .lastItemOnPage)
+    }
 }
 

@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct LocalizedUrlModel: Codable {
+public struct LocalizedUrlModel: Codable, JSONEncodable, Hashable {
 
     public var slug: String?
     public var languageCode: String?
@@ -18,5 +20,17 @@ public struct LocalizedUrlModel: Codable {
         self.languageCode = languageCode
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case slug
+        case languageCode
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(slug, forKey: .slug)
+        try container.encodeIfPresent(languageCode, forKey: .languageCode)
+    }
 }
 

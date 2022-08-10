@@ -6,30 +6,40 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class CommunicationsAPI {
+
     /**
      Delete CommunicationUser.
      
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Int, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2CommunicationsDelete(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Int, Error> {
-        return Future<Int, Error>.init { promise in
-            apiV2CommunicationsDeleteWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2CommunicationsDelete() -> AnyPublisher<Int, Error> {
+        var requestTask: RequestTask?
+        return Future<Int, Error> { promise in
+            requestTask = apiV2CommunicationsDeleteWithRequestBuilder().execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Delete CommunicationUser.
@@ -40,36 +50,48 @@ open class CommunicationsAPI {
      - returns: RequestBuilder<Int> 
      */
     open class func apiV2CommunicationsDeleteWithRequestBuilder() -> RequestBuilder<Int> {
-        let path = "/api/v2/communications"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        let localVariablePath = "/api/v2/communications"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<Int>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Int>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Get CommunicationUser.
      
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<CommunicationUserTokenModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2CommunicationsGet(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<CommunicationUserTokenModel, Error> {
-        return Future<CommunicationUserTokenModel, Error>.init { promise in
-            apiV2CommunicationsGetWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2CommunicationsGet() -> AnyPublisher<CommunicationUserTokenModel, Error> {
+        var requestTask: RequestTask?
+        return Future<CommunicationUserTokenModel, Error> { promise in
+            requestTask = apiV2CommunicationsGetWithRequestBuilder().execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get CommunicationUser.
@@ -80,36 +102,48 @@ open class CommunicationsAPI {
      - returns: RequestBuilder<CommunicationUserTokenModel> 
      */
     open class func apiV2CommunicationsGetWithRequestBuilder() -> RequestBuilder<CommunicationUserTokenModel> {
-        let path = "/api/v2/communications"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        let localVariablePath = "/api/v2/communications"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<CommunicationUserTokenModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<CommunicationUserTokenModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Revoke CommunicationUser.
      
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<CommunicationUserTokenModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2CommunicationsPut(apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<CommunicationUserTokenModel, Error> {
-        return Future<CommunicationUserTokenModel, Error>.init { promise in
-            apiV2CommunicationsPutWithRequestBuilder().execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2CommunicationsPut() -> AnyPublisher<CommunicationUserTokenModel, Error> {
+        var requestTask: RequestTask?
+        return Future<CommunicationUserTokenModel, Error> { promise in
+            requestTask = apiV2CommunicationsPutWithRequestBuilder().execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Revoke CommunicationUser.
@@ -120,15 +154,20 @@ open class CommunicationsAPI {
      - returns: RequestBuilder<CommunicationUserTokenModel> 
      */
     open class func apiV2CommunicationsPutWithRequestBuilder() -> RequestBuilder<CommunicationUserTokenModel> {
-        let path = "/api/v2/communications"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        let localVariablePath = "/api/v2/communications"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<CommunicationUserTokenModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<CommunicationUserTokenModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

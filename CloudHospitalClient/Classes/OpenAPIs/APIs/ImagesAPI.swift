@@ -6,30 +6,40 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class ImagesAPI {
+
     /**
 
      - parameter files: (form)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<[MediaModel], Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ImagesPost(files: [URL]? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<[MediaModel], Error> {
-        return Future<[MediaModel], Error>.init { promise in
-            apiV2ImagesPostWithRequestBuilder(files: files).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ImagesPost(files: [URL]? = nil) -> AnyPublisher<[MediaModel], Error> {
+        var requestTask: RequestTask?
+        return Future<[MediaModel], Error> { promise in
+            requestTask = apiV2ImagesPostWithRequestBuilder(files: files).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      - POST /api/v2/images
@@ -40,20 +50,25 @@ open class ImagesAPI {
      - returns: RequestBuilder<[MediaModel]> 
      */
     open class func apiV2ImagesPostWithRequestBuilder(files: [URL]? = nil) -> RequestBuilder<[MediaModel]> {
-        let path = "/api/v2/images"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let formParams: [String:Any?] = [
-            "files": files?.encodeToJSON()
+        let localVariablePath = "/api/v2/images"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableFormParams: [String: Any?] = [
+            "files": files?.encodeToJSON(),
         ]
 
-        let nonNullParameters = APIHelper.rejectNil(formParams)
-        let parameters = APIHelper.convertBoolToString(nonNullParameters)
-        
-        let url = URLComponents(string: URLString)
+        let localVariableNonNullParameters = APIHelper.rejectNil(localVariableFormParams)
+        let localVariableParameters = APIHelper.convertBoolToString(localVariableNonNullParameters)
 
-        let requestBuilder: RequestBuilder<[MediaModel]>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            "Content-Type": "multipart/form-data",
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<[MediaModel]>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

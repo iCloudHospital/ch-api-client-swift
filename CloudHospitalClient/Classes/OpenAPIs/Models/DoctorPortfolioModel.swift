@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct DoctorPortfolioModel: Codable {
+public struct DoctorPortfolioModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var doctorId: UUID?
@@ -28,5 +30,27 @@ public struct DoctorPortfolioModel: Codable {
         self.photoAfter = photoAfter
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case doctorId
+        case doctorName
+        case name
+        case description
+        case photoBefore
+        case photoAfter
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(doctorId, forKey: .doctorId)
+        try container.encodeIfPresent(doctorName, forKey: .doctorName)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(photoBefore, forKey: .photoBefore)
+        try container.encodeIfPresent(photoAfter, forKey: .photoAfter)
+    }
 }
 

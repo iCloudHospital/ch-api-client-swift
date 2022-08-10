@@ -6,11 +6,15 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class SpecialtyTypesAPI {
+
     /**
      Get all Departments.
      
@@ -28,22 +32,28 @@ open class SpecialtyTypesAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SpecialtyTypesModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2SpecialtytypesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, ids: [UUID]? = nil, specialtyTypeCategoryId: UUID? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypesModel, Error> {
-        return Future<SpecialtyTypesModel, Error>.init { promise in
-            apiV2SpecialtytypesGetWithRequestBuilder(id: id, name: name, description: description, marketingType: marketingType, hospitalId: hospitalId, created: created, ids: ids, specialtyTypeCategoryId: specialtyTypeCategoryId, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2SpecialtytypesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, ids: [UUID]? = nil, specialtyTypeCategoryId: UUID? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<SpecialtyTypesModel, Error> {
+        var requestTask: RequestTask?
+        return Future<SpecialtyTypesModel, Error> { promise in
+            requestTask = apiV2SpecialtytypesGetWithRequestBuilder(id: id, name: name, description: description, marketingType: marketingType, hospitalId: hospitalId, created: created, ids: ids, specialtyTypeCategoryId: specialtyTypeCategoryId, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all Departments.
@@ -65,31 +75,37 @@ open class SpecialtyTypesAPI {
      - returns: RequestBuilder<SpecialtyTypesModel> 
      */
     open class func apiV2SpecialtytypesGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, ids: [UUID]? = nil, specialtyTypeCategoryId: UUID? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<SpecialtyTypesModel> {
-        let path = "/api/v2/specialtytypes"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "Name": name?.encodeToJSON(), 
-            "Description": description?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "Created": created?.encodeToJSON(), 
-            "Ids": ids?.encodeToJSON(), 
-            "SpecialtyTypeCategoryId": specialtyTypeCategoryId?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "ShowHidden": showHidden?.encodeToJSON(), 
-            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        let localVariablePath = "/api/v2/specialtytypes"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "Description": description?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "Created": created?.encodeToJSON(),
+            "Ids": ids?.encodeToJSON(),
+            "SpecialtyTypeCategoryId": specialtyTypeCategoryId?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "ShowHidden": showHidden?.encodeToJSON(),
+            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<SpecialtyTypesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SpecialtyTypesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -109,22 +125,28 @@ open class SpecialtyTypesAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SpecialtyTypesSimpleModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2SpecialtytypesSimpleGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, ids: [UUID]? = nil, specialtyTypeCategoryId: UUID? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypesSimpleModel, Error> {
-        return Future<SpecialtyTypesSimpleModel, Error>.init { promise in
-            apiV2SpecialtytypesSimpleGetWithRequestBuilder(id: id, name: name, description: description, marketingType: marketingType, hospitalId: hospitalId, created: created, ids: ids, specialtyTypeCategoryId: specialtyTypeCategoryId, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2SpecialtytypesSimpleGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, ids: [UUID]? = nil, specialtyTypeCategoryId: UUID? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<SpecialtyTypesSimpleModel, Error> {
+        var requestTask: RequestTask?
+        return Future<SpecialtyTypesSimpleModel, Error> { promise in
+            requestTask = apiV2SpecialtytypesSimpleGetWithRequestBuilder(id: id, name: name, description: description, marketingType: marketingType, hospitalId: hospitalId, created: created, ids: ids, specialtyTypeCategoryId: specialtyTypeCategoryId, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all Hospitals.
@@ -146,56 +168,70 @@ open class SpecialtyTypesAPI {
      - returns: RequestBuilder<SpecialtyTypesSimpleModel> 
      */
     open class func apiV2SpecialtytypesSimpleGetWithRequestBuilder(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, ids: [UUID]? = nil, specialtyTypeCategoryId: UUID? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<SpecialtyTypesSimpleModel> {
-        let path = "/api/v2/specialtytypes/simple"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "Name": name?.encodeToJSON(), 
-            "Description": description?.encodeToJSON(), 
-            "MarketingType": marketingType?.encodeToJSON(), 
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "Created": created?.encodeToJSON(), 
-            "Ids": ids?.encodeToJSON(), 
-            "SpecialtyTypeCategoryId": specialtyTypeCategoryId?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "ShowHidden": showHidden?.encodeToJSON(), 
-            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        let localVariablePath = "/api/v2/specialtytypes/simple"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "Name": name?.encodeToJSON(),
+            "Description": description?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "Created": created?.encodeToJSON(),
+            "Ids": ids?.encodeToJSON(),
+            "SpecialtyTypeCategoryId": specialtyTypeCategoryId?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "ShowHidden": showHidden?.encodeToJSON(),
+            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<SpecialtyTypesSimpleModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SpecialtyTypesSimpleModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
-
+     
+     
      - parameter slug: (path)  
      - parameter languageCode: (query)  (optional)
      - parameter returnDefaultValue: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SpecialtyTypeModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2SpecialtytypesSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypeModel, Error> {
-        return Future<SpecialtyTypeModel, Error>.init { promise in
-            apiV2SpecialtytypesSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2SpecialtytypesSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> AnyPublisher<SpecialtyTypeModel, Error> {
+        var requestTask: RequestTask?
+        return Future<SpecialtyTypeModel, Error> { promise in
+            requestTask = apiV2SpecialtytypesSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
+     
      - GET /api/v2/specialtytypes/{slug}
      - parameter slug: (path)  
      - parameter languageCode: (query)  (optional)
@@ -203,47 +239,61 @@ open class SpecialtyTypesAPI {
      - returns: RequestBuilder<SpecialtyTypeModel> 
      */
     open class func apiV2SpecialtytypesSlugGetWithRequestBuilder(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> RequestBuilder<SpecialtyTypeModel> {
-        var path = "/api/v2/specialtytypes/{slug}"
+        var localVariablePath = "/api/v2/specialtytypes/{slug}"
         let slugPreEscape = "\(APIHelper.mapValueToPathItem(slug))"
         let slugPostEscape = slugPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{slug}", with: slugPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON(), 
-            "returnDefaultValue": returnDefaultValue?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{slug}", with: slugPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
+            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<SpecialtyTypeModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SpecialtyTypeModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
-
+     
+     
      - parameter specialtyTypeId: (path)  
      - parameter languageCode: (query)  (optional)
      - parameter returnDefaultValue: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<SpecialtyTypeModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2SpecialtytypesSpecialtyTypeIdGet(specialtyTypeId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<SpecialtyTypeModel, Error> {
-        return Future<SpecialtyTypeModel, Error>.init { promise in
-            apiV2SpecialtytypesSpecialtyTypeIdGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2SpecialtytypesSpecialtyTypeIdGet(specialtyTypeId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> AnyPublisher<SpecialtyTypeModel, Error> {
+        var requestTask: RequestTask?
+        return Future<SpecialtyTypeModel, Error> { promise in
+            requestTask = apiV2SpecialtytypesSpecialtyTypeIdGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
+     
      - GET /api/v2/specialtytypes/{specialtyTypeId}
      - parameter specialtyTypeId: (path)  
      - parameter languageCode: (query)  (optional)
@@ -251,22 +301,28 @@ open class SpecialtyTypesAPI {
      - returns: RequestBuilder<SpecialtyTypeModel> 
      */
     open class func apiV2SpecialtytypesSpecialtyTypeIdGetWithRequestBuilder(specialtyTypeId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> RequestBuilder<SpecialtyTypeModel> {
-        var path = "/api/v2/specialtytypes/{specialtyTypeId}"
+        var localVariablePath = "/api/v2/specialtytypes/{specialtyTypeId}"
         let specialtyTypeIdPreEscape = "\(APIHelper.mapValueToPathItem(specialtyTypeId))"
         let specialtyTypeIdPostEscape = specialtyTypeIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{specialtyTypeId}", with: specialtyTypeIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON(), 
-            "returnDefaultValue": returnDefaultValue?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{specialtyTypeId}", with: specialtyTypeIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
+            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<SpecialtyTypeModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<SpecialtyTypeModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -278,22 +334,28 @@ open class SpecialtyTypesAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediasModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2SpecialtytypesSpecialtyTypeIdMediasGet(specialtyTypeId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediasModel, Error> {
-        return Future<MediasModel, Error>.init { promise in
-            apiV2SpecialtytypesSpecialtyTypeIdMediasGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2SpecialtytypesSpecialtyTypeIdMediasGet(specialtyTypeId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MediasModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediasModel, Error> { promise in
+            requestTask = apiV2SpecialtytypesSpecialtyTypeIdMediasGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all SpecialtyTypeMedias.
@@ -307,25 +369,31 @@ open class SpecialtyTypesAPI {
      - returns: RequestBuilder<MediasModel> 
      */
     open class func apiV2SpecialtytypesSpecialtyTypeIdMediasGetWithRequestBuilder(specialtyTypeId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<MediasModel> {
-        var path = "/api/v2/specialtytypes/{specialtyTypeId}/medias"
+        var localVariablePath = "/api/v2/specialtytypes/{specialtyTypeId}/medias"
         let specialtyTypeIdPreEscape = "\(APIHelper.mapValueToPathItem(specialtyTypeId))"
         let specialtyTypeIdPostEscape = specialtyTypeIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{specialtyTypeId}", with: specialtyTypeIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "MediaType": mediaType?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{specialtyTypeId}", with: specialtyTypeIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "MediaType": mediaType?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -333,22 +401,28 @@ open class SpecialtyTypesAPI {
      
      - parameter specialtyTypeId: (path)  
      - parameter mediaId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediaModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGet(specialtyTypeId: UUID, mediaId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediaModel, Error> {
-        return Future<MediaModel, Error>.init { promise in
-            apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, mediaId: mediaId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGet(specialtyTypeId: UUID, mediaId: UUID) -> AnyPublisher<MediaModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediaModel, Error> { promise in
+            requestTask = apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, mediaId: mediaId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get SpecialtyTypeMedia.
@@ -358,21 +432,26 @@ open class SpecialtyTypesAPI {
      - returns: RequestBuilder<MediaModel> 
      */
     open class func apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGetWithRequestBuilder(specialtyTypeId: UUID, mediaId: UUID) -> RequestBuilder<MediaModel> {
-        var path = "/api/v2/specialtytypes/{specialtyTypeId}/medias/{mediaId}"
+        var localVariablePath = "/api/v2/specialtytypes/{specialtyTypeId}/medias/{mediaId}"
         let specialtyTypeIdPreEscape = "\(APIHelper.mapValueToPathItem(specialtyTypeId))"
         let specialtyTypeIdPostEscape = specialtyTypeIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{specialtyTypeId}", with: specialtyTypeIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{specialtyTypeId}", with: specialtyTypeIdPostEscape, options: .literal, range: nil)
         let mediaIdPreEscape = "\(APIHelper.mapValueToPathItem(mediaId))"
         let mediaIdPostEscape = mediaIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

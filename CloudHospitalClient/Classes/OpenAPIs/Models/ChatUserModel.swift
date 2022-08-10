@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct ChatUserModel: Codable {
+public struct ChatUserModel: Codable, JSONEncodable, Hashable {
 
     public var id: String?
     public var nickname: String?
@@ -32,5 +34,31 @@ public struct ChatUserModel: Codable {
         self.lastSeenAt = lastSeenAt
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case nickname
+        case profileUrl
+        case accessToken
+        case isActive
+        case isOnline
+        case discoveryKeys
+        case createdAt
+        case lastSeenAt
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(nickname, forKey: .nickname)
+        try container.encodeIfPresent(profileUrl, forKey: .profileUrl)
+        try container.encodeIfPresent(accessToken, forKey: .accessToken)
+        try container.encodeIfPresent(isActive, forKey: .isActive)
+        try container.encodeIfPresent(isOnline, forKey: .isOnline)
+        try container.encodeIfPresent(discoveryKeys, forKey: .discoveryKeys)
+        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        try container.encodeIfPresent(lastSeenAt, forKey: .lastSeenAt)
+    }
 }
 

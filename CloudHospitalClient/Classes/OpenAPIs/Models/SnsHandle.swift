@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct SnsHandle: Codable {
+public struct SnsHandle: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var snsType: SnsType?
@@ -20,5 +22,19 @@ public struct SnsHandle: Codable {
         self.handle = handle
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case snsType
+        case handle
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(snsType, forKey: .snsType)
+        try container.encodeIfPresent(handle, forKey: .handle)
+    }
 }
 

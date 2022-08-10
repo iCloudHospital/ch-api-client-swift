@@ -6,11 +6,15 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class ServiceReviewsAPI {
+
     /**
      Get all ServiceReviews.
      
@@ -29,22 +33,28 @@ open class ServiceReviewsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ServiceReviewsModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsGet(id: UUID? = nil, hospitalId: UUID? = nil, serviceId: UUID? = nil, serviceName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, gender: Gender? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceReviewsModel, Error> {
-        return Future<ServiceReviewsModel, Error>.init { promise in
-            apiV2ServicereviewsGetWithRequestBuilder(id: id, hospitalId: hospitalId, serviceId: serviceId, serviceName: serviceName, patientId: patientId, patientName: patientName, gender: gender, recommended: recommended, rate: rate, reviewType: reviewType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ServicereviewsGet(id: UUID? = nil, hospitalId: UUID? = nil, serviceId: UUID? = nil, serviceName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, gender: Gender? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<ServiceReviewsModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ServiceReviewsModel, Error> { promise in
+            requestTask = apiV2ServicereviewsGetWithRequestBuilder(id: id, hospitalId: hospitalId, serviceId: serviceId, serviceName: serviceName, patientId: patientId, patientName: patientName, gender: gender, recommended: recommended, rate: rate, reviewType: reviewType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all ServiceReviews.
@@ -67,54 +77,66 @@ open class ServiceReviewsAPI {
      - returns: RequestBuilder<ServiceReviewsModel> 
      */
     open class func apiV2ServicereviewsGetWithRequestBuilder(id: UUID? = nil, hospitalId: UUID? = nil, serviceId: UUID? = nil, serviceName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, gender: Gender? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<ServiceReviewsModel> {
-        let path = "/api/v2/servicereviews"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "ServiceId": serviceId?.encodeToJSON(), 
-            "ServiceName": serviceName?.encodeToJSON(), 
-            "PatientId": patientId?.encodeToJSON(), 
-            "PatientName": patientName?.encodeToJSON(), 
-            "Gender": gender?.encodeToJSON(), 
-            "Recommended": recommended?.encodeToJSON(), 
-            "Rate": rate?.encodeToJSON(), 
-            "ReviewType": reviewType?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "ShowHidden": showHidden?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        let localVariablePath = "/api/v2/servicereviews"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "ServiceId": serviceId?.encodeToJSON(),
+            "ServiceName": serviceName?.encodeToJSON(),
+            "PatientId": patientId?.encodeToJSON(),
+            "PatientName": patientName?.encodeToJSON(),
+            "Gender": gender?.encodeToJSON(),
+            "Recommended": recommended?.encodeToJSON(),
+            "Rate": rate?.encodeToJSON(),
+            "ReviewType": reviewType?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "ShowHidden": showHidden?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<ServiceReviewsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ServiceReviewsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Create a ServiceReview.
      
      - parameter createServiceReviewCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ServiceReviewModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsPost(createServiceReviewCommand: CreateServiceReviewCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceReviewModel, Error> {
-        return Future<ServiceReviewModel, Error>.init { promise in
-            apiV2ServicereviewsPostWithRequestBuilder(createServiceReviewCommand: createServiceReviewCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ServicereviewsPost(createServiceReviewCommand: CreateServiceReviewCommand? = nil) -> AnyPublisher<ServiceReviewModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ServiceReviewModel, Error> { promise in
+            requestTask = apiV2ServicereviewsPostWithRequestBuilder(createServiceReviewCommand: createServiceReviewCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Create a ServiceReview.
@@ -126,37 +148,49 @@ open class ServiceReviewsAPI {
      - returns: RequestBuilder<ServiceReviewModel> 
      */
     open class func apiV2ServicereviewsPostWithRequestBuilder(createServiceReviewCommand: CreateServiceReviewCommand? = nil) -> RequestBuilder<ServiceReviewModel> {
-        let path = "/api/v2/servicereviews"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createServiceReviewCommand)
+        let localVariablePath = "/api/v2/servicereviews"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createServiceReviewCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<ServiceReviewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ServiceReviewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Delete ServiceReview.
      
      - parameter serviceReviewId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Bool, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdDelete(serviceReviewId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error>.init { promise in
-            apiV2ServicereviewsServiceReviewIdDeleteWithRequestBuilder(serviceReviewId: serviceReviewId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ServicereviewsServiceReviewIdDelete(serviceReviewId: UUID) -> AnyPublisher<Bool, Error> {
+        var requestTask: RequestTask?
+        return Future<Bool, Error> { promise in
+            requestTask = apiV2ServicereviewsServiceReviewIdDeleteWithRequestBuilder(serviceReviewId: serviceReviewId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Delete ServiceReview.
@@ -168,63 +202,83 @@ open class ServiceReviewsAPI {
      - returns: RequestBuilder<Bool> 
      */
     open class func apiV2ServicereviewsServiceReviewIdDeleteWithRequestBuilder(serviceReviewId: UUID) -> RequestBuilder<Bool> {
-        var path = "/api/v2/servicereviews/{serviceReviewId}"
+        var localVariablePath = "/api/v2/servicereviews/{serviceReviewId}"
         let serviceReviewIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceReviewId))"
         let serviceReviewIdPostEscape = serviceReviewIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
-
+     
+     
      - parameter serviceReviewId: (path)  
      - parameter languageCode: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ServiceReviewModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdGet(serviceReviewId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceReviewModel, Error> {
-        return Future<ServiceReviewModel, Error>.init { promise in
-            apiV2ServicereviewsServiceReviewIdGetWithRequestBuilder(serviceReviewId: serviceReviewId, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ServicereviewsServiceReviewIdGet(serviceReviewId: UUID, languageCode: String? = nil) -> AnyPublisher<ServiceReviewModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ServiceReviewModel, Error> { promise in
+            requestTask = apiV2ServicereviewsServiceReviewIdGetWithRequestBuilder(serviceReviewId: serviceReviewId, languageCode: languageCode).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
+     
      - GET /api/v2/servicereviews/{serviceReviewId}
      - parameter serviceReviewId: (path)  
      - parameter languageCode: (query)  (optional)
      - returns: RequestBuilder<ServiceReviewModel> 
      */
     open class func apiV2ServicereviewsServiceReviewIdGetWithRequestBuilder(serviceReviewId: UUID, languageCode: String? = nil) -> RequestBuilder<ServiceReviewModel> {
-        var path = "/api/v2/servicereviews/{serviceReviewId}"
+        var localVariablePath = "/api/v2/servicereviews/{serviceReviewId}"
         let serviceReviewIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceReviewId))"
         let serviceReviewIdPostEscape = serviceReviewIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<ServiceReviewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ServiceReviewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -236,22 +290,28 @@ open class ServiceReviewsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediasModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdMediasGet(serviceReviewId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediasModel, Error> {
-        return Future<MediasModel, Error>.init { promise in
-            apiV2ServicereviewsServiceReviewIdMediasGetWithRequestBuilder(serviceReviewId: serviceReviewId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ServicereviewsServiceReviewIdMediasGet(serviceReviewId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MediasModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediasModel, Error> { promise in
+            requestTask = apiV2ServicereviewsServiceReviewIdMediasGetWithRequestBuilder(serviceReviewId: serviceReviewId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all ServiceReviewMedias.
@@ -265,25 +325,31 @@ open class ServiceReviewsAPI {
      - returns: RequestBuilder<MediasModel> 
      */
     open class func apiV2ServicereviewsServiceReviewIdMediasGetWithRequestBuilder(serviceReviewId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<MediasModel> {
-        var path = "/api/v2/servicereviews/{serviceReviewId}/medias"
+        var localVariablePath = "/api/v2/servicereviews/{serviceReviewId}/medias"
         let serviceReviewIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceReviewId))"
         let serviceReviewIdPostEscape = serviceReviewIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(), 
-            "MediaType": mediaType?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Id": id?.encodeToJSON(),
+            "MediaType": mediaType?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -291,22 +357,28 @@ open class ServiceReviewsAPI {
      
      - parameter serviceReviewId: (path)  
      - parameter mediaId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Bool, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdDelete(serviceReviewId: UUID, mediaId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error>.init { promise in
-            apiV2ServicereviewsServiceReviewIdMediasMediaIdDeleteWithRequestBuilder(serviceReviewId: serviceReviewId, mediaId: mediaId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdDelete(serviceReviewId: UUID, mediaId: UUID) -> AnyPublisher<Bool, Error> {
+        var requestTask: RequestTask?
+        return Future<Bool, Error> { promise in
+            requestTask = apiV2ServicereviewsServiceReviewIdMediasMediaIdDeleteWithRequestBuilder(serviceReviewId: serviceReviewId, mediaId: mediaId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Delete ServiceReviewMedia
@@ -319,21 +391,27 @@ open class ServiceReviewsAPI {
      - returns: RequestBuilder<Bool> 
      */
     open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdDeleteWithRequestBuilder(serviceReviewId: UUID, mediaId: UUID) -> RequestBuilder<Bool> {
-        var path = "/api/v2/servicereviews/{serviceReviewId}/medias/{mediaId}"
+        var localVariablePath = "/api/v2/servicereviews/{serviceReviewId}/medias/{mediaId}"
         let serviceReviewIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceReviewId))"
         let serviceReviewIdPostEscape = serviceReviewIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
         let mediaIdPreEscape = "\(APIHelper.mapValueToPathItem(mediaId))"
         let mediaIdPostEscape = mediaIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -341,22 +419,28 @@ open class ServiceReviewsAPI {
      
      - parameter serviceReviewId: (path)  
      - parameter mediaId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediaModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdGet(serviceReviewId: UUID, mediaId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediaModel, Error> {
-        return Future<MediaModel, Error>.init { promise in
-            apiV2ServicereviewsServiceReviewIdMediasMediaIdGetWithRequestBuilder(serviceReviewId: serviceReviewId, mediaId: mediaId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdGet(serviceReviewId: UUID, mediaId: UUID) -> AnyPublisher<MediaModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediaModel, Error> { promise in
+            requestTask = apiV2ServicereviewsServiceReviewIdMediasMediaIdGetWithRequestBuilder(serviceReviewId: serviceReviewId, mediaId: mediaId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get ServiceReviewMedia.
@@ -366,21 +450,27 @@ open class ServiceReviewsAPI {
      - returns: RequestBuilder<MediaModel> 
      */
     open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdGetWithRequestBuilder(serviceReviewId: UUID, mediaId: UUID) -> RequestBuilder<MediaModel> {
-        var path = "/api/v2/servicereviews/{serviceReviewId}/medias/{mediaId}"
+        var localVariablePath = "/api/v2/servicereviews/{serviceReviewId}/medias/{mediaId}"
         let serviceReviewIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceReviewId))"
         let serviceReviewIdPostEscape = serviceReviewIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
         let mediaIdPreEscape = "\(APIHelper.mapValueToPathItem(mediaId))"
         let mediaIdPostEscape = mediaIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -389,22 +479,28 @@ open class ServiceReviewsAPI {
      - parameter serviceReviewId: (path)  
      - parameter mediaId: (path)  
      - parameter updateMediaCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediaModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdPut(serviceReviewId: UUID, mediaId: UUID, updateMediaCommand: UpdateMediaCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediaModel, Error> {
-        return Future<MediaModel, Error>.init { promise in
-            apiV2ServicereviewsServiceReviewIdMediasMediaIdPutWithRequestBuilder(serviceReviewId: serviceReviewId, mediaId: mediaId, updateMediaCommand: updateMediaCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdPut(serviceReviewId: UUID, mediaId: UUID, updateMediaCommand: UpdateMediaCommand? = nil) -> AnyPublisher<MediaModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediaModel, Error> { promise in
+            requestTask = apiV2ServicereviewsServiceReviewIdMediasMediaIdPutWithRequestBuilder(serviceReviewId: serviceReviewId, mediaId: mediaId, updateMediaCommand: updateMediaCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Update ServiceReviewMedia.
@@ -418,21 +514,27 @@ open class ServiceReviewsAPI {
      - returns: RequestBuilder<MediaModel> 
      */
     open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdPutWithRequestBuilder(serviceReviewId: UUID, mediaId: UUID, updateMediaCommand: UpdateMediaCommand? = nil) -> RequestBuilder<MediaModel> {
-        var path = "/api/v2/servicereviews/{serviceReviewId}/medias/{mediaId}"
+        var localVariablePath = "/api/v2/servicereviews/{serviceReviewId}/medias/{mediaId}"
         let serviceReviewIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceReviewId))"
         let serviceReviewIdPostEscape = serviceReviewIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
         let mediaIdPreEscape = "\(APIHelper.mapValueToPathItem(mediaId))"
         let mediaIdPostEscape = mediaIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateMediaCommand)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{mediaId}", with: mediaIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateMediaCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -440,22 +542,28 @@ open class ServiceReviewsAPI {
      
      - parameter serviceReviewId: (path)  
      - parameter createMediaCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<MediaModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdMediasPost(serviceReviewId: UUID, createMediaCommand: CreateMediaCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<MediaModel, Error> {
-        return Future<MediaModel, Error>.init { promise in
-            apiV2ServicereviewsServiceReviewIdMediasPostWithRequestBuilder(serviceReviewId: serviceReviewId, createMediaCommand: createMediaCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ServicereviewsServiceReviewIdMediasPost(serviceReviewId: UUID, createMediaCommand: CreateMediaCommand? = nil) -> AnyPublisher<MediaModel, Error> {
+        var requestTask: RequestTask?
+        return Future<MediaModel, Error> { promise in
+            requestTask = apiV2ServicereviewsServiceReviewIdMediasPostWithRequestBuilder(serviceReviewId: serviceReviewId, createMediaCommand: createMediaCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Create ServiceReviewMedia.
@@ -468,18 +576,24 @@ open class ServiceReviewsAPI {
      - returns: RequestBuilder<MediaModel> 
      */
     open class func apiV2ServicereviewsServiceReviewIdMediasPostWithRequestBuilder(serviceReviewId: UUID, createMediaCommand: CreateMediaCommand? = nil) -> RequestBuilder<MediaModel> {
-        var path = "/api/v2/servicereviews/{serviceReviewId}/medias"
+        var localVariablePath = "/api/v2/servicereviews/{serviceReviewId}/medias"
         let serviceReviewIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceReviewId))"
         let serviceReviewIdPostEscape = serviceReviewIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createMediaCommand)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createMediaCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -487,22 +601,28 @@ open class ServiceReviewsAPI {
      
      - parameter serviceReviewId: (path)  
      - parameter updateServiceReviewCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ServiceReviewModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdPut(serviceReviewId: UUID, updateServiceReviewCommand: UpdateServiceReviewCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ServiceReviewModel, Error> {
-        return Future<ServiceReviewModel, Error>.init { promise in
-            apiV2ServicereviewsServiceReviewIdPutWithRequestBuilder(serviceReviewId: serviceReviewId, updateServiceReviewCommand: updateServiceReviewCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ServicereviewsServiceReviewIdPut(serviceReviewId: UUID, updateServiceReviewCommand: UpdateServiceReviewCommand? = nil) -> AnyPublisher<ServiceReviewModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ServiceReviewModel, Error> { promise in
+            requestTask = apiV2ServicereviewsServiceReviewIdPutWithRequestBuilder(serviceReviewId: serviceReviewId, updateServiceReviewCommand: updateServiceReviewCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Update ServiceReview.
@@ -515,18 +635,23 @@ open class ServiceReviewsAPI {
      - returns: RequestBuilder<ServiceReviewModel> 
      */
     open class func apiV2ServicereviewsServiceReviewIdPutWithRequestBuilder(serviceReviewId: UUID, updateServiceReviewCommand: UpdateServiceReviewCommand? = nil) -> RequestBuilder<ServiceReviewModel> {
-        var path = "/api/v2/servicereviews/{serviceReviewId}"
+        var localVariablePath = "/api/v2/servicereviews/{serviceReviewId}"
         let serviceReviewIdPreEscape = "\(APIHelper.mapValueToPathItem(serviceReviewId))"
         let serviceReviewIdPostEscape = serviceReviewIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateServiceReviewCommand)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{serviceReviewId}", with: serviceReviewIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateServiceReviewCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<ServiceReviewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ServiceReviewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

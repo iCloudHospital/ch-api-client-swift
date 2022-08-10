@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: text/plain, application/json, text/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -91,8 +91,8 @@ GroupChannelsAPI.apiV2GroupchannelsDealDealIdGet(dealId: dealId, hospitalId: hos
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dealId** | [**UUID**](.md) |  | 
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **dealId** | **UUID** |  | 
+ **hospitalId** | **UUID** |  | [optional] 
  **isExternal** | **Bool** |  | [optional] 
 
 ### Return type
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -142,8 +142,8 @@ GroupChannelsAPI.apiV2GroupchannelsDoctorDoctorIdGet(doctorId: doctorId, hospita
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **doctorId** | [**UUID**](.md) |  | 
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **doctorId** | **UUID** |  | 
+ **hospitalId** | **UUID** |  | [optional] 
  **isExternal** | **Bool** |  | [optional] 
 
 ### Return type
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -192,7 +192,7 @@ GroupChannelsAPI.apiV2GroupchannelsHospitalHospitalIdGet(hospitalId: hospitalId,
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | 
+ **hospitalId** | **UUID** |  | 
  **isExternal** | **Bool** |  | [optional] 
 
 ### Return type

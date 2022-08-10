@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct TagItemModel: Codable {
+public struct TagItemModel: Codable, JSONEncodable, Hashable {
 
     public var tagId: String?
     public var normalizedTagId: String?
@@ -22,5 +24,21 @@ public struct TagItemModel: Codable {
         self.youtubeTagsCount = youtubeTagsCount
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case tagId
+        case normalizedTagId
+        case articleTagsCount
+        case youtubeTagsCount
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(tagId, forKey: .tagId)
+        try container.encodeIfPresent(normalizedTagId, forKey: .normalizedTagId)
+        try container.encodeIfPresent(articleTagsCount, forKey: .articleTagsCount)
+        try container.encodeIfPresent(youtubeTagsCount, forKey: .youtubeTagsCount)
+    }
 }
 

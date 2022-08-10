@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct PlanItemModel: Codable {
+public struct PlanItemModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var name: String?
@@ -30,5 +32,29 @@ public struct PlanItemModel: Codable {
         self.order = order
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case name
+        case memberLimit
+        case unitPrice
+        case stripePriceId
+        case interval
+        case isActive
+        case order
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(memberLimit, forKey: .memberLimit)
+        try container.encodeIfPresent(unitPrice, forKey: .unitPrice)
+        try container.encodeIfPresent(stripePriceId, forKey: .stripePriceId)
+        try container.encodeIfPresent(interval, forKey: .interval)
+        try container.encodeIfPresent(isActive, forKey: .isActive)
+        try container.encodeIfPresent(order, forKey: .order)
+    }
 }
 

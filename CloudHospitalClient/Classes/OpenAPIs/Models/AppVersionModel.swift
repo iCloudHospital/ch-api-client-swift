@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct AppVersionModel: Codable {
+public struct AppVersionModel: Codable, JSONEncodable, Hashable {
 
     public var platform: Platform?
     public var latestVersion: String?
@@ -22,5 +24,21 @@ public struct AppVersionModel: Codable {
         self.committedDate = committedDate
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case platform
+        case latestVersion
+        case minimumVersion
+        case committedDate
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(platform, forKey: .platform)
+        try container.encodeIfPresent(latestVersion, forKey: .latestVersion)
+        try container.encodeIfPresent(minimumVersion, forKey: .minimumVersion)
+        try container.encodeIfPresent(committedDate, forKey: .committedDate)
+    }
 }
 

@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 Get consultation.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -43,7 +43,7 @@ ConsultationsAPI.apiV2ConsultationsConsultationIdGet(consultationId: consultatio
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **consultationId** | [**UUID**](.md) |  | 
+ **consultationId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
 
 ### Return type
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 Pay consultation.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -92,7 +92,7 @@ ConsultationsAPI.apiV2ConsultationsConsultationIdPayPost(consultationId: consult
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **consultationId** | [**UUID**](.md) |  | 
+ **consultationId** | **UUID** |  | 
 
 ### Return type
 
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 
 Update consultation.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -141,7 +141,7 @@ ConsultationsAPI.apiV2ConsultationsConsultationIdPut(consultationId: consultatio
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **consultationId** | [**UUID**](.md) |  | 
+ **consultationId** | **UUID** |  | 
  **updateConsultationCommand** | [**UpdateConsultationCommand**](UpdateConsultationCommand.md) |  | [optional] 
 
 ### Return type
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 
 Get all consultations.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -203,11 +203,11 @@ ConsultationsAPI.apiV2ConsultationsGet(hospitalId: hospitalId, hospitalName: hos
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
- **doctorId** | [**UUID**](.md) |  | [optional] 
+ **doctorId** | **UUID** |  | [optional] 
  **doctorName** | **String** |  | [optional] 
- **dealId** | [**UUID**](.md) |  | [optional] 
+ **dealId** | **UUID** |  | [optional] 
  **dealName** | **String** |  | [optional] 
  **isOpen** | **Bool** |  | [optional] 
  **isCompleted** | **Bool** |  | [optional] 
@@ -240,13 +240,13 @@ Name | Type | Description  | Notes
 
 Create consultation.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
 
 let requestId = 987 // UUID | 
-let createConsultationCommand = CreateConsultationCommand(consultationType: ConsultationType(), hospitalId: 123, specialtyId: 123, doctorId: 123, dealId: 123, language: "language_example", isAccountHolder: false, firstName: "firstName_example", lastName: "lastName_example", email: "email_example", phone: "phone_example", dateOfBirth: Date(), gender: ConsultationType(), comment: "comment_example", timeRange: "timeRange_example", approximateDateStart: Date(), approximateDateEnd: Date(), timeZone: "timeZone_example", isExternal: false) // CreateConsultationCommand |  (optional)
+let createConsultationCommand = CreateConsultationCommand(consultationType: ConsultationType(), hospitalId: 123, specialtyId: 123, doctorId: 123, dealId: 123, language: "language_example", isAccountHolder: false, firstName: "firstName_example", lastName: "lastName_example", email: "email_example", phone: "phone_example", dateOfBirth: Date(), gender: Gender(), comment: "comment_example", timeRange: "timeRange_example", approximateDateStart: Date(), approximateDateEnd: Date(), timeZone: "timeZone_example", isExternal: false) // CreateConsultationCommand |  (optional)
 
 // Create consultation.
 ConsultationsAPI.apiV2ConsultationsRequestIdPost(requestId: requestId, createConsultationCommand: createConsultationCommand) { (response, error) in
@@ -265,7 +265,7 @@ ConsultationsAPI.apiV2ConsultationsRequestIdPost(requestId: requestId, createCon
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **requestId** | [**UUID**](.md) |  | 
+ **requestId** | **UUID** |  | 
  **createConsultationCommand** | [**CreateConsultationCommand**](CreateConsultationCommand.md) |  | [optional] 
 
 ### Return type
@@ -278,7 +278,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

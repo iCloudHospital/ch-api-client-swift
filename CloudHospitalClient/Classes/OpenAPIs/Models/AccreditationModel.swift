@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct AccreditationModel: Codable {
+public struct AccreditationModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var name: String?
@@ -22,5 +24,21 @@ public struct AccreditationModel: Codable {
         self.country = country
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case name
+        case logo
+        case country
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(logo, forKey: .logo)
+        try container.encodeIfPresent(country, forKey: .country)
+    }
 }
 

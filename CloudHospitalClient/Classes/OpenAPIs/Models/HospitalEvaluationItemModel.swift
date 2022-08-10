@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct HospitalEvaluationItemModel: Codable {
+public struct HospitalEvaluationItemModel: Codable, JSONEncodable, Hashable {
 
     public var name: String?
     public var stars: Int?
@@ -18,5 +20,17 @@ public struct HospitalEvaluationItemModel: Codable {
         self.stars = stars
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case name
+        case stars
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(stars, forKey: .stars)
+    }
 }
 

@@ -6,31 +6,41 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class PatientsAPI {
+
     /**
      Delete Patient.
      
      - parameter patientId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<Bool, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2PatientsPatientIdDelete(patientId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error>.init { promise in
-            apiV2PatientsPatientIdDeleteWithRequestBuilder(patientId: patientId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2PatientsPatientIdDelete(patientId: UUID) -> AnyPublisher<Bool, Error> {
+        var requestTask: RequestTask?
+        return Future<Bool, Error> { promise in
+            requestTask = apiV2PatientsPatientIdDeleteWithRequestBuilder(patientId: patientId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Delete Patient.
@@ -42,40 +52,52 @@ open class PatientsAPI {
      - returns: RequestBuilder<Bool> 
      */
     open class func apiV2PatientsPatientIdDeleteWithRequestBuilder(patientId: UUID) -> RequestBuilder<Bool> {
-        var path = "/api/v2/patients/{patientId}"
+        var localVariablePath = "/api/v2/patients/{patientId}"
         let patientIdPreEscape = "\(APIHelper.mapValueToPathItem(patientId))"
         let patientIdPostEscape = patientIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{patientId}", with: patientIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{patientId}", with: patientIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Get Patient.
      
      - parameter patientId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<PatientModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2PatientsPatientIdGet(patientId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<PatientModel, Error> {
-        return Future<PatientModel, Error>.init { promise in
-            apiV2PatientsPatientIdGetWithRequestBuilder(patientId: patientId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2PatientsPatientIdGet(patientId: UUID) -> AnyPublisher<PatientModel, Error> {
+        var requestTask: RequestTask?
+        return Future<PatientModel, Error> { promise in
+            requestTask = apiV2PatientsPatientIdGetWithRequestBuilder(patientId: patientId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get Patient.
@@ -87,18 +109,24 @@ open class PatientsAPI {
      - returns: RequestBuilder<PatientModel> 
      */
     open class func apiV2PatientsPatientIdGetWithRequestBuilder(patientId: UUID) -> RequestBuilder<PatientModel> {
-        var path = "/api/v2/patients/{patientId}"
+        var localVariablePath = "/api/v2/patients/{patientId}"
         let patientIdPreEscape = "\(APIHelper.mapValueToPathItem(patientId))"
         let patientIdPostEscape = patientIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{patientId}", with: patientIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{patientId}", with: patientIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<PatientModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PatientModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -106,22 +134,28 @@ open class PatientsAPI {
      
      - parameter patientId: (path)  
      - parameter updatePatientCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<PatientModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2PatientsPatientIdPut(patientId: UUID, updatePatientCommand: UpdatePatientCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<PatientModel, Error> {
-        return Future<PatientModel, Error>.init { promise in
-            apiV2PatientsPatientIdPutWithRequestBuilder(patientId: patientId, updatePatientCommand: updatePatientCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2PatientsPatientIdPut(patientId: UUID, updatePatientCommand: UpdatePatientCommand? = nil) -> AnyPublisher<PatientModel, Error> {
+        var requestTask: RequestTask?
+        return Future<PatientModel, Error> { promise in
+            requestTask = apiV2PatientsPatientIdPutWithRequestBuilder(patientId: patientId, updatePatientCommand: updatePatientCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Update Patient.
@@ -134,40 +168,52 @@ open class PatientsAPI {
      - returns: RequestBuilder<PatientModel> 
      */
     open class func apiV2PatientsPatientIdPutWithRequestBuilder(patientId: UUID, updatePatientCommand: UpdatePatientCommand? = nil) -> RequestBuilder<PatientModel> {
-        var path = "/api/v2/patients/{patientId}"
+        var localVariablePath = "/api/v2/patients/{patientId}"
         let patientIdPreEscape = "\(APIHelper.mapValueToPathItem(patientId))"
         let patientIdPostEscape = patientIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{patientId}", with: patientIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updatePatientCommand)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{patientId}", with: patientIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updatePatientCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<PatientModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PatientModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Create a Patient.
      
      - parameter createPatientCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<PatientModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2PatientsPost(createPatientCommand: CreatePatientCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<PatientModel, Error> {
-        return Future<PatientModel, Error>.init { promise in
-            apiV2PatientsPostWithRequestBuilder(createPatientCommand: createPatientCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2PatientsPost(createPatientCommand: CreatePatientCommand? = nil) -> AnyPublisher<PatientModel, Error> {
+        var requestTask: RequestTask?
+        return Future<PatientModel, Error> { promise in
+            requestTask = apiV2PatientsPostWithRequestBuilder(createPatientCommand: createPatientCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Create a Patient.
@@ -179,15 +225,20 @@ open class PatientsAPI {
      - returns: RequestBuilder<PatientModel> 
      */
     open class func apiV2PatientsPostWithRequestBuilder(createPatientCommand: CreatePatientCommand? = nil) -> RequestBuilder<PatientModel> {
-        let path = "/api/v2/patients"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createPatientCommand)
+        let localVariablePath = "/api/v2/patients"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createPatientCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<PatientModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<PatientModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

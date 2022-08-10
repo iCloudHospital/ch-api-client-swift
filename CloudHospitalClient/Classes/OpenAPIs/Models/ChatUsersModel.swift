@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct ChatUsersModel: Codable {
+public struct ChatUsersModel: Codable, JSONEncodable, Hashable {
 
     public var users: [ChatUserModel]?
     public var next: String?
@@ -18,5 +20,17 @@ public struct ChatUsersModel: Codable {
         self.next = next
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case users
+        case next
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(users, forKey: .users)
+        try container.encodeIfPresent(next, forKey: .next)
+    }
 }
 

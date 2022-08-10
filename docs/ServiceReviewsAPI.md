@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 Get all ServiceReviews.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -61,11 +61,11 @@ ServiceReviewsAPI.apiV2ServicereviewsGet(id: id, hospitalId: hospitalId, service
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
- **hospitalId** | [**UUID**](.md) |  | [optional] 
- **serviceId** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
+ **serviceId** | **UUID** |  | [optional] 
  **serviceName** | **String** |  | [optional] 
- **patientId** | [**UUID**](.md) |  | [optional] 
+ **patientId** | **UUID** |  | [optional] 
  **patientName** | **String** |  | [optional] 
  **gender** | [**Gender**](.md) |  | [optional] 
  **recommended** | **Bool** |  | [optional] 
@@ -99,7 +99,7 @@ No authorization required
 
 Create a ServiceReview.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 Delete ServiceReview.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -171,7 +171,7 @@ ServiceReviewsAPI.apiV2ServicereviewsServiceReviewIdDelete(serviceReviewId: serv
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **serviceReviewId** | [**UUID**](.md) |  | 
+ **serviceReviewId** | **UUID** |  | 
 
 ### Return type
 
@@ -195,7 +195,7 @@ Name | Type | Description  | Notes
 
 
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -203,6 +203,7 @@ import CloudHospitalClient
 let serviceReviewId = 987 // UUID | 
 let languageCode = "languageCode_example" // String |  (optional)
 
+// 
 ServiceReviewsAPI.apiV2ServicereviewsServiceReviewIdGet(serviceReviewId: serviceReviewId, languageCode: languageCode) { (response, error) in
     guard error == nil else {
         print(error)
@@ -219,7 +220,7 @@ ServiceReviewsAPI.apiV2ServicereviewsServiceReviewIdGet(serviceReviewId: service
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **serviceReviewId** | [**UUID**](.md) |  | 
+ **serviceReviewId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
 
 ### Return type
@@ -244,7 +245,7 @@ No authorization required
 
 Get all ServiceReviewMedias.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -273,8 +274,8 @@ ServiceReviewsAPI.apiV2ServicereviewsServiceReviewIdMediasGet(serviceReviewId: s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **serviceReviewId** | [**UUID**](.md) |  | 
- **id** | [**UUID**](.md) |  | [optional] 
+ **serviceReviewId** | **UUID** |  | 
+ **id** | **UUID** |  | [optional] 
  **mediaType** | [**MediaType**](.md) |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -302,7 +303,7 @@ No authorization required
 
 Delete ServiceReviewMedia
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -327,8 +328,8 @@ ServiceReviewsAPI.apiV2ServicereviewsServiceReviewIdMediasMediaIdDelete(serviceR
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **serviceReviewId** | [**UUID**](.md) |  | 
- **mediaId** | [**UUID**](.md) |  | 
+ **serviceReviewId** | **UUID** |  | 
+ **mediaId** | **UUID** |  | 
 
 ### Return type
 
@@ -352,7 +353,7 @@ Name | Type | Description  | Notes
 
 Get ServiceReviewMedia.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -377,8 +378,8 @@ ServiceReviewsAPI.apiV2ServicereviewsServiceReviewIdMediasMediaIdGet(serviceRevi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **serviceReviewId** | [**UUID**](.md) |  | 
- **mediaId** | [**UUID**](.md) |  | 
+ **serviceReviewId** | **UUID** |  | 
+ **mediaId** | **UUID** |  | 
 
 ### Return type
 
@@ -402,7 +403,7 @@ No authorization required
 
 Update ServiceReviewMedia.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -428,8 +429,8 @@ ServiceReviewsAPI.apiV2ServicereviewsServiceReviewIdMediasMediaIdPut(serviceRevi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **serviceReviewId** | [**UUID**](.md) |  | 
- **mediaId** | [**UUID**](.md) |  | 
+ **serviceReviewId** | **UUID** |  | 
+ **mediaId** | **UUID** |  | 
  **updateMediaCommand** | [**UpdateMediaCommand**](UpdateMediaCommand.md) |  | [optional] 
 
 ### Return type
@@ -442,7 +443,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -454,7 +455,7 @@ Name | Type | Description  | Notes
 
 Create ServiceReviewMedia.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -479,7 +480,7 @@ ServiceReviewsAPI.apiV2ServicereviewsServiceReviewIdMediasPost(serviceReviewId: 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **serviceReviewId** | [**UUID**](.md) |  | 
+ **serviceReviewId** | **UUID** |  | 
  **createMediaCommand** | [**CreateMediaCommand**](CreateMediaCommand.md) |  | [optional] 
 
 ### Return type
@@ -492,7 +493,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -504,7 +505,7 @@ Name | Type | Description  | Notes
 
 Update ServiceReview.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -529,7 +530,7 @@ ServiceReviewsAPI.apiV2ServicereviewsServiceReviewIdPut(serviceReviewId: service
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **serviceReviewId** | [**UUID**](.md) |  | 
+ **serviceReviewId** | **UUID** |  | 
  **updateServiceReviewCommand** | [**UpdateServiceReviewCommand**](UpdateServiceReviewCommand.md) |  | [optional] 
 
 ### Return type
@@ -542,7 +543,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/*+json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

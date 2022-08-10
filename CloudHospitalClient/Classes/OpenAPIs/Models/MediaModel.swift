@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct MediaModel: Codable {
+public struct MediaModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var mediaType: MediaType?
@@ -26,5 +28,25 @@ public struct MediaModel: Codable {
         self.order = order
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case mediaType
+        case url
+        case thumbnailUrl
+        case description
+        case order
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(mediaType, forKey: .mediaType)
+        try container.encodeIfPresent(url, forKey: .url)
+        try container.encodeIfPresent(thumbnailUrl, forKey: .thumbnailUrl)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(order, forKey: .order)
+    }
 }
 

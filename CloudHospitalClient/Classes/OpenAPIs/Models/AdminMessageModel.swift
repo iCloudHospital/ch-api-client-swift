@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct AdminMessageModel: Codable {
+public struct AdminMessageModel: Codable, JSONEncodable, Hashable {
 
     public var messageId: Int64?
     public var type: String?
@@ -34,7 +36,7 @@ public struct AdminMessageModel: Codable {
         self.updatedAt = updatedAt
     }
 
-    public enum CodingKeys: String, CodingKey, CaseIterable { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case messageId = "message_id"
         case type
         case customType = "custom_type"
@@ -47,5 +49,20 @@ public struct AdminMessageModel: Codable {
         case updatedAt = "updated_at"
     }
 
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(messageId, forKey: .messageId)
+        try container.encodeIfPresent(type, forKey: .type)
+        try container.encodeIfPresent(customType, forKey: .customType)
+        try container.encodeIfPresent(channelUrl, forKey: .channelUrl)
+        try container.encodeIfPresent(mentionType, forKey: .mentionType)
+        try container.encodeIfPresent(isRemoved, forKey: .isRemoved)
+        try container.encodeIfPresent(message, forKey: .message)
+        try container.encodeIfPresent(data, forKey: .data)
+        try container.encodeIfPresent(createdAt, forKey: .createdAt)
+        try container.encodeIfPresent(updatedAt, forKey: .updatedAt)
+    }
 }
 

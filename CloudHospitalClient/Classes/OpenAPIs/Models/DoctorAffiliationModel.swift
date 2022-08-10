@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct DoctorAffiliationModel: Codable {
+public struct DoctorAffiliationModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var languageCode: String?
@@ -60,5 +62,59 @@ public struct DoctorAffiliationModel: Codable {
         self.medias = medias
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case languageCode
+        case hospitalId
+        case hospitalName
+        case hospitalSlug
+        case doctorId
+        case name
+        case slug
+        case confirmed
+        case photo
+        case photoThumbnail
+        case consultationEnabled
+        case consultationFee
+        case specialtiesSummerized
+        case order
+        case description
+        case overview
+        case content
+        case background
+        case backgroundThumbnail
+        case customStyle
+        case localizedUrls
+        case medias
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(languageCode, forKey: .languageCode)
+        try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
+        try container.encodeIfPresent(hospitalName, forKey: .hospitalName)
+        try container.encodeIfPresent(hospitalSlug, forKey: .hospitalSlug)
+        try container.encodeIfPresent(doctorId, forKey: .doctorId)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(slug, forKey: .slug)
+        try container.encodeIfPresent(confirmed, forKey: .confirmed)
+        try container.encodeIfPresent(photo, forKey: .photo)
+        try container.encodeIfPresent(photoThumbnail, forKey: .photoThumbnail)
+        try container.encodeIfPresent(consultationEnabled, forKey: .consultationEnabled)
+        try container.encodeIfPresent(consultationFee, forKey: .consultationFee)
+        try container.encodeIfPresent(specialtiesSummerized, forKey: .specialtiesSummerized)
+        try container.encodeIfPresent(order, forKey: .order)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(overview, forKey: .overview)
+        try container.encodeIfPresent(content, forKey: .content)
+        try container.encodeIfPresent(background, forKey: .background)
+        try container.encodeIfPresent(backgroundThumbnail, forKey: .backgroundThumbnail)
+        try container.encodeIfPresent(customStyle, forKey: .customStyle)
+        try container.encodeIfPresent(localizedUrls, forKey: .localizedUrls)
+        try container.encodeIfPresent(medias, forKey: .medias)
+    }
 }
 

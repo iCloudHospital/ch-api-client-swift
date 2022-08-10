@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct ConsultationChangeLogModel: Codable {
+public struct ConsultationChangeLogModel: Codable, JSONEncodable, Hashable {
 
     public var status: ConsultationStatus?
     public var actorId: UUID?
@@ -22,5 +24,21 @@ public struct ConsultationChangeLogModel: Codable {
         self.actorName = actorName
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case status
+        case actorId
+        case createdDate
+        case actorName
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(status, forKey: .status)
+        try container.encodeIfPresent(actorId, forKey: .actorId)
+        try container.encodeIfPresent(createdDate, forKey: .createdDate)
+        try container.encodeIfPresent(actorName, forKey: .actorName)
+    }
 }
 

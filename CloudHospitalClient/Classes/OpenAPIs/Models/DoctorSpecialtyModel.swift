@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct DoctorSpecialtyModel: Codable {
+public struct DoctorSpecialtyModel: Codable, JSONEncodable, Hashable {
 
     public var languageCode: String?
     public var specialtyId: UUID?
@@ -28,5 +30,27 @@ public struct DoctorSpecialtyModel: Codable {
         self.specialtyTyeSlug = specialtyTyeSlug
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case languageCode
+        case specialtyId
+        case specialtyName
+        case specialtySlug
+        case order
+        case specialtyTypeName
+        case specialtyTyeSlug
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(languageCode, forKey: .languageCode)
+        try container.encodeIfPresent(specialtyId, forKey: .specialtyId)
+        try container.encodeIfPresent(specialtyName, forKey: .specialtyName)
+        try container.encodeIfPresent(specialtySlug, forKey: .specialtySlug)
+        try container.encodeIfPresent(order, forKey: .order)
+        try container.encodeIfPresent(specialtyTypeName, forKey: .specialtyTypeName)
+        try container.encodeIfPresent(specialtyTyeSlug, forKey: .specialtyTyeSlug)
+    }
 }
 

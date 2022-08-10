@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct NotificationsModel: Codable {
+public struct NotificationsModel: Codable, JSONEncodable, Hashable {
 
     public var items: [NotificationModel]?
     public var metaData: PagedListMetaData?
@@ -20,5 +22,19 @@ public struct NotificationsModel: Codable {
         self.unreadCount = unreadCount
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case items
+        case metaData
+        case unreadCount
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(items, forKey: .items)
+        try container.encodeIfPresent(metaData, forKey: .metaData)
+        try container.encodeIfPresent(unreadCount, forKey: .unreadCount)
+    }
 }
 

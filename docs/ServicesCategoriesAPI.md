@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 Get all ServiceCategories.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -43,7 +43,7 @@ ServicesCategoriesAPI.apiV2ServicescategoriesGet(id: id, name: name, page: page,
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
@@ -71,7 +71,7 @@ No authorization required
 
 Get ServiceCategory.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -95,7 +95,7 @@ ServicesCategoriesAPI.apiV2ServicescategoriesServiceCategoryIdGet(serviceCategor
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **serviceCategoryId** | [**UUID**](.md) |  | 
+ **serviceCategoryId** | **UUID** |  | 
 
 ### Return type
 

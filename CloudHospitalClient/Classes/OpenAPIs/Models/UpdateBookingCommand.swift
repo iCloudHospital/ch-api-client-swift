@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct UpdateBookingCommand: Codable {
+public struct UpdateBookingCommand: Codable, JSONEncodable, Hashable {
 
     public var quantity: Int?
     public var firstName: String?
@@ -36,5 +38,35 @@ public struct UpdateBookingCommand: Codable {
         self.timeZone = timeZone
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case quantity
+        case firstName
+        case lastName
+        case email
+        case phone
+        case dateOfBirth
+        case gender
+        case approximateDateStart
+        case approximateDateEnd
+        case comment
+        case timeZone
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(quantity, forKey: .quantity)
+        try container.encodeIfPresent(firstName, forKey: .firstName)
+        try container.encodeIfPresent(lastName, forKey: .lastName)
+        try container.encodeIfPresent(email, forKey: .email)
+        try container.encodeIfPresent(phone, forKey: .phone)
+        try container.encodeIfPresent(dateOfBirth, forKey: .dateOfBirth)
+        try container.encodeIfPresent(gender, forKey: .gender)
+        try container.encodeIfPresent(approximateDateStart, forKey: .approximateDateStart)
+        try container.encodeIfPresent(approximateDateEnd, forKey: .approximateDateEnd)
+        try container.encodeIfPresent(comment, forKey: .comment)
+        try container.encodeIfPresent(timeZone, forKey: .timeZone)
+    }
 }
 

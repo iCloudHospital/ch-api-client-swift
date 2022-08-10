@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Get FaqCategory.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -41,7 +41,7 @@ FaqCategoriesAPI.apiV2FaqcategoriesFaqCategoryIdGet(faqCategoryId: faqCategoryId
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **faqCategoryId** | [**UUID**](.md) |  | 
+ **faqCategoryId** | **UUID** |  | 
  **languageCode** | **String** |  | [optional] 
 
 ### Return type
@@ -66,7 +66,7 @@ No authorization required
 
 Get all FaqCategories.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -100,10 +100,10 @@ FaqCategoriesAPI.apiV2FaqcategoriesGet(id: id, parentId: parentId, name: name, h
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
- **parentId** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
+ **parentId** | **UUID** |  | [optional] 
  **name** | **String** |  | [optional] 
- **hospitalId** | [**UUID**](.md) |  | [optional] 
+ **hospitalId** | **UUID** |  | [optional] 
  **hospitalName** | **String** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
@@ -134,7 +134,7 @@ No authorization required
 
 Get FaqCategory by slug.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient

@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct SendBirdGroupChannelMember: Codable {
+public struct SendBirdGroupChannelMember: Codable, JSONEncodable, Hashable {
 
     public var userId: String?
     public var nickname: String?
@@ -34,7 +36,7 @@ public struct SendBirdGroupChannelMember: Codable {
         self.metadata = metadata
     }
 
-    public enum CodingKeys: String, CodingKey, CaseIterable { 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
         case userId = "user_id"
         case nickname
         case profileUrl = "profile_url"
@@ -47,5 +49,20 @@ public struct SendBirdGroupChannelMember: Codable {
         case metadata
     }
 
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(userId, forKey: .userId)
+        try container.encodeIfPresent(nickname, forKey: .nickname)
+        try container.encodeIfPresent(profileUrl, forKey: .profileUrl)
+        try container.encodeIfPresent(isActive, forKey: .isActive)
+        try container.encodeIfPresent(isOnline, forKey: .isOnline)
+        try container.encodeIfPresent(friendDiscoveryKey, forKey: .friendDiscoveryKey)
+        try container.encodeIfPresent(lastSeenAt, forKey: .lastSeenAt)
+        try container.encodeIfPresent(state, forKey: .state)
+        try container.encodeIfPresent(role, forKey: .role)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+    }
 }
 

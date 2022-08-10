@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct AuditableEntity: Codable {
+public struct AuditableEntity: Codable, JSONEncodable, Hashable {
 
     public var createdBy: UUID?
     public var updatedBy: UUID?
@@ -30,5 +32,29 @@ public struct AuditableEntity: Codable {
         self.isDeleted = isDeleted
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case createdBy
+        case updatedBy
+        case deletedBy
+        case createdDate
+        case updatedDate
+        case deletedDate
+        case isHidden
+        case isDeleted
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(createdBy, forKey: .createdBy)
+        try container.encodeIfPresent(updatedBy, forKey: .updatedBy)
+        try container.encodeIfPresent(deletedBy, forKey: .deletedBy)
+        try container.encodeIfPresent(createdDate, forKey: .createdDate)
+        try container.encodeIfPresent(updatedDate, forKey: .updatedDate)
+        try container.encodeIfPresent(deletedDate, forKey: .deletedDate)
+        try container.encodeIfPresent(isHidden, forKey: .isHidden)
+        try container.encodeIfPresent(isDeleted, forKey: .isDeleted)
+    }
 }
 

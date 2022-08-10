@@ -6,7 +6,9 @@
 //
 
 import Foundation
-
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 public enum BookingStatus: String, Codable, CaseIterable {
     case new = "New"

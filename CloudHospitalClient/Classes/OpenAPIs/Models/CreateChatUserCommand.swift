@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct CreateChatUserCommand: Codable {
+public struct CreateChatUserCommand: Codable, JSONEncodable, Hashable {
 
     public var nickname: String?
     public var profileUrl: String?
@@ -24,5 +26,23 @@ public struct CreateChatUserCommand: Codable {
         self.hospitalId = hospitalId
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case nickname
+        case profileUrl
+        case issueAccessToken
+        case discoveryKeys
+        case hospitalId
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(nickname, forKey: .nickname)
+        try container.encodeIfPresent(profileUrl, forKey: .profileUrl)
+        try container.encodeIfPresent(issueAccessToken, forKey: .issueAccessToken)
+        try container.encodeIfPresent(discoveryKeys, forKey: .discoveryKeys)
+        try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
+    }
 }
 

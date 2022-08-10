@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct UpdateProfileCommand: Codable {
+public struct UpdateProfileCommand: Codable, JSONEncodable, Hashable {
 
     public var firstName: String?
     public var lastName: String?
@@ -32,5 +34,31 @@ public struct UpdateProfileCommand: Codable {
         self.locations = locations
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case firstName
+        case lastName
+        case phone
+        case photo
+        case photoThumbnail
+        case gender
+        case dateOfBirth
+        case languages
+        case locations
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(firstName, forKey: .firstName)
+        try container.encodeIfPresent(lastName, forKey: .lastName)
+        try container.encodeIfPresent(phone, forKey: .phone)
+        try container.encodeIfPresent(photo, forKey: .photo)
+        try container.encodeIfPresent(photoThumbnail, forKey: .photoThumbnail)
+        try container.encodeIfPresent(gender, forKey: .gender)
+        try container.encodeIfPresent(dateOfBirth, forKey: .dateOfBirth)
+        try container.encodeIfPresent(languages, forKey: .languages)
+        try container.encodeIfPresent(locations, forKey: .locations)
+    }
 }
 

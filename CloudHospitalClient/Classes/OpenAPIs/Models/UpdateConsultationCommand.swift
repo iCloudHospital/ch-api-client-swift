@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct UpdateConsultationCommand: Codable {
+public struct UpdateConsultationCommand: Codable, JSONEncodable, Hashable {
 
     public var specialtyId: UUID?
     public var doctorId: UUID?
@@ -44,5 +46,43 @@ public struct UpdateConsultationCommand: Codable {
         self.timeZone = timeZone
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case specialtyId
+        case doctorId
+        case language
+        case isAccountHolder
+        case firstName
+        case lastName
+        case email
+        case phone
+        case dateOfBirth
+        case gender
+        case comment
+        case timeRange
+        case approximateDateStart
+        case approximateDateEnd
+        case timeZone
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(specialtyId, forKey: .specialtyId)
+        try container.encodeIfPresent(doctorId, forKey: .doctorId)
+        try container.encodeIfPresent(language, forKey: .language)
+        try container.encodeIfPresent(isAccountHolder, forKey: .isAccountHolder)
+        try container.encodeIfPresent(firstName, forKey: .firstName)
+        try container.encodeIfPresent(lastName, forKey: .lastName)
+        try container.encodeIfPresent(email, forKey: .email)
+        try container.encodeIfPresent(phone, forKey: .phone)
+        try container.encodeIfPresent(dateOfBirth, forKey: .dateOfBirth)
+        try container.encodeIfPresent(gender, forKey: .gender)
+        try container.encodeIfPresent(comment, forKey: .comment)
+        try container.encodeIfPresent(timeRange, forKey: .timeRange)
+        try container.encodeIfPresent(approximateDateStart, forKey: .approximateDateStart)
+        try container.encodeIfPresent(approximateDateEnd, forKey: .approximateDateEnd)
+        try container.encodeIfPresent(timeZone, forKey: .timeZone)
+    }
 }
 

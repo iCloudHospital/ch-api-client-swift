@@ -6,32 +6,42 @@
 //
 
 import Foundation
+#if canImport(Combine)
 import Combine
-
-
+#endif
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
 open class ConsultationsAPI {
+
     /**
      Get consultation.
      
      - parameter consultationId: (path)  
      - parameter languageCode: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ConsultationModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ConsultationsConsultationIdGet(consultationId: UUID, languageCode: String? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ConsultationModel, Error> {
-        return Future<ConsultationModel, Error>.init { promise in
-            apiV2ConsultationsConsultationIdGetWithRequestBuilder(consultationId: consultationId, languageCode: languageCode).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ConsultationsConsultationIdGet(consultationId: UUID, languageCode: String? = nil) -> AnyPublisher<ConsultationModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ConsultationModel, Error> { promise in
+            requestTask = apiV2ConsultationsConsultationIdGetWithRequestBuilder(consultationId: consultationId, languageCode: languageCode).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get consultation.
@@ -44,43 +54,55 @@ open class ConsultationsAPI {
      - returns: RequestBuilder<ConsultationModel> 
      */
     open class func apiV2ConsultationsConsultationIdGetWithRequestBuilder(consultationId: UUID, languageCode: String? = nil) -> RequestBuilder<ConsultationModel> {
-        var path = "/api/v2/consultations/{consultationId}"
+        var localVariablePath = "/api/v2/consultations/{consultationId}"
         let consultationIdPreEscape = "\(APIHelper.mapValueToPathItem(consultationId))"
         let consultationIdPostEscape = consultationIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{consultationId}", with: consultationIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON()
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{consultationId}", with: consultationIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<ConsultationModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ConsultationModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
      Pay consultation.
      
      - parameter consultationId: (path)  
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<String, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ConsultationsConsultationIdPayPost(consultationId: UUID, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<String, Error> {
-        return Future<String, Error>.init { promise in
-            apiV2ConsultationsConsultationIdPayPostWithRequestBuilder(consultationId: consultationId).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ConsultationsConsultationIdPayPost(consultationId: UUID) -> AnyPublisher<String, Error> {
+        var requestTask: RequestTask?
+        return Future<String, Error> { promise in
+            requestTask = apiV2ConsultationsConsultationIdPayPostWithRequestBuilder(consultationId: consultationId).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Pay consultation.
@@ -92,18 +114,24 @@ open class ConsultationsAPI {
      - returns: RequestBuilder<String> 
      */
     open class func apiV2ConsultationsConsultationIdPayPostWithRequestBuilder(consultationId: UUID) -> RequestBuilder<String> {
-        var path = "/api/v2/consultations/{consultationId}/pay"
+        var localVariablePath = "/api/v2/consultations/{consultationId}/pay"
         let consultationIdPreEscape = "\(APIHelper.mapValueToPathItem(consultationId))"
         let consultationIdPostEscape = consultationIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{consultationId}", with: consultationIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        let url = URLComponents(string: URLString)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{consultationId}", with: consultationIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
 
-        let requestBuilder: RequestBuilder<String>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<String>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -111,22 +139,28 @@ open class ConsultationsAPI {
      
      - parameter consultationId: (path)  
      - parameter updateConsultationCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ConsultationModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ConsultationsConsultationIdPut(consultationId: UUID, updateConsultationCommand: UpdateConsultationCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ConsultationModel, Error> {
-        return Future<ConsultationModel, Error>.init { promise in
-            apiV2ConsultationsConsultationIdPutWithRequestBuilder(consultationId: consultationId, updateConsultationCommand: updateConsultationCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ConsultationsConsultationIdPut(consultationId: UUID, updateConsultationCommand: UpdateConsultationCommand? = nil) -> AnyPublisher<ConsultationModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ConsultationModel, Error> { promise in
+            requestTask = apiV2ConsultationsConsultationIdPutWithRequestBuilder(consultationId: consultationId, updateConsultationCommand: updateConsultationCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Update consultation.
@@ -139,18 +173,24 @@ open class ConsultationsAPI {
      - returns: RequestBuilder<ConsultationModel> 
      */
     open class func apiV2ConsultationsConsultationIdPutWithRequestBuilder(consultationId: UUID, updateConsultationCommand: UpdateConsultationCommand? = nil) -> RequestBuilder<ConsultationModel> {
-        var path = "/api/v2/consultations/{consultationId}"
+        var localVariablePath = "/api/v2/consultations/{consultationId}"
         let consultationIdPreEscape = "\(APIHelper.mapValueToPathItem(consultationId))"
         let consultationIdPostEscape = consultationIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{consultationId}", with: consultationIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateConsultationCommand)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{consultationId}", with: consultationIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: updateConsultationCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<ConsultationModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ConsultationModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -170,22 +210,28 @@ open class ConsultationsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ConsultationsModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ConsultationsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, dealId: UUID? = nil, dealName: String? = nil, isOpen: Bool? = nil, isCompleted: Bool? = nil, status: ConsultationStatus? = nil, consultationType: ConsultationType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ConsultationsModel, Error> {
-        return Future<ConsultationsModel, Error>.init { promise in
-            apiV2ConsultationsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, doctorId: doctorId, doctorName: doctorName, dealId: dealId, dealName: dealName, isOpen: isOpen, isCompleted: isCompleted, status: status, consultationType: consultationType, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ConsultationsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, dealId: UUID? = nil, dealName: String? = nil, isOpen: Bool? = nil, isCompleted: Bool? = nil, status: ConsultationStatus? = nil, consultationType: ConsultationType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<ConsultationsModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ConsultationsModel, Error> { promise in
+            requestTask = apiV2ConsultationsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, doctorId: doctorId, doctorName: doctorName, dealId: dealId, dealName: dealName, isOpen: isOpen, isCompleted: isCompleted, status: status, consultationType: consultationType, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Get all consultations.
@@ -210,31 +256,37 @@ open class ConsultationsAPI {
      - returns: RequestBuilder<ConsultationsModel> 
      */
     open class func apiV2ConsultationsGetWithRequestBuilder(hospitalId: UUID? = nil, hospitalName: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, dealId: UUID? = nil, dealName: String? = nil, isOpen: Bool? = nil, isCompleted: Bool? = nil, status: ConsultationStatus? = nil, consultationType: ConsultationType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<ConsultationsModel> {
-        let path = "/api/v2/consultations"
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters: [String:Any]? = nil
-        
-        var url = URLComponents(string: URLString)
-        url?.queryItems = APIHelper.mapValuesToQueryItems([
-            "HospitalId": hospitalId?.encodeToJSON(), 
-            "HospitalName": hospitalName?.encodeToJSON(), 
-            "DoctorId": doctorId?.encodeToJSON(), 
-            "DoctorName": doctorName?.encodeToJSON(), 
-            "DealId": dealId?.encodeToJSON(), 
-            "DealName": dealName?.encodeToJSON(), 
-            "IsOpen": isOpen?.encodeToJSON(), 
-            "IsCompleted": isCompleted?.encodeToJSON(), 
-            "Status": status?.encodeToJSON(), 
-            "ConsultationType": consultationType?.encodeToJSON(), 
-            "LanguageCode": languageCode?.encodeToJSON(), 
-            "page": page?.encodeToJSON(), 
-            "limit": limit?.encodeToJSON(), 
-            "lastRetrieved": lastRetrieved?.encodeToJSON()
+        let localVariablePath = "/api/v2/consultations"
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "HospitalId": hospitalId?.encodeToJSON(),
+            "HospitalName": hospitalName?.encodeToJSON(),
+            "DoctorId": doctorId?.encodeToJSON(),
+            "DoctorName": doctorName?.encodeToJSON(),
+            "DealId": dealId?.encodeToJSON(),
+            "DealName": dealName?.encodeToJSON(),
+            "IsOpen": isOpen?.encodeToJSON(),
+            "IsCompleted": isCompleted?.encodeToJSON(),
+            "Status": status?.encodeToJSON(),
+            "ConsultationType": consultationType?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
         ])
 
-        let requestBuilder: RequestBuilder<ConsultationsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ConsultationsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
 
     /**
@@ -242,22 +294,28 @@ open class ConsultationsAPI {
      
      - parameter requestId: (path)  
      - parameter createConsultationCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
      - returns: AnyPublisher<ConsultationModel, Error>
      */
-    @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ConsultationsRequestIdPost(requestId: UUID, createConsultationCommand: CreateConsultationCommand? = nil, apiResponseQueue: DispatchQueue = CloudHospitalClientAPI.apiResponseQueue) -> AnyPublisher<ConsultationModel, Error> {
-        return Future<ConsultationModel, Error>.init { promise in
-            apiV2ConsultationsRequestIdPostWithRequestBuilder(requestId: requestId, createConsultationCommand: createConsultationCommand).execute(apiResponseQueue) { result -> Void in
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2ConsultationsRequestIdPost(requestId: UUID, createConsultationCommand: CreateConsultationCommand? = nil) -> AnyPublisher<ConsultationModel, Error> {
+        var requestTask: RequestTask?
+        return Future<ConsultationModel, Error> { promise in
+            requestTask = apiV2ConsultationsRequestIdPostWithRequestBuilder(requestId: requestId, createConsultationCommand: createConsultationCommand).execute { result in
                 switch result {
                 case let .success(response):
-                    promise(.success(response.body!))
+                    promise(.success(response.body))
                 case let .failure(error):
                     promise(.failure(error))
                 }
             }
-        }.eraseToAnyPublisher()
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
     }
+    #endif
 
     /**
      Create consultation.
@@ -270,18 +328,23 @@ open class ConsultationsAPI {
      - returns: RequestBuilder<ConsultationModel> 
      */
     open class func apiV2ConsultationsRequestIdPostWithRequestBuilder(requestId: UUID, createConsultationCommand: CreateConsultationCommand? = nil) -> RequestBuilder<ConsultationModel> {
-        var path = "/api/v2/consultations/{requestId}"
+        var localVariablePath = "/api/v2/consultations/{requestId}"
         let requestIdPreEscape = "\(APIHelper.mapValueToPathItem(requestId))"
         let requestIdPostEscape = requestIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        path = path.replacingOccurrences(of: "{requestId}", with: requestIdPostEscape, options: .literal, range: nil)
-        let URLString = CloudHospitalClientAPI.basePath + path
-        let parameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createConsultationCommand)
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{requestId}", with: requestIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: createConsultationCommand)
 
-        let url = URLComponents(string: URLString)
+        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
 
-        let requestBuilder: RequestBuilder<ConsultationModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
 
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true)
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<ConsultationModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }
-
 }

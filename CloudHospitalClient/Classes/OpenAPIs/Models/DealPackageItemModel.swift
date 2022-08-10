@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct DealPackageItemModel: Codable {
+public struct DealPackageItemModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var languageCode: String?
@@ -40,5 +42,39 @@ public struct DealPackageItemModel: Codable {
         self.auditableEntity = auditableEntity
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case languageCode
+        case dealId
+        case dealName
+        case dealSlug
+        case hospitalId
+        case hospitalName
+        case hospitalSlug
+        case additionalServices
+        case refundPolicy
+        case bonus
+        case price
+        case auditableEntity
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(languageCode, forKey: .languageCode)
+        try container.encodeIfPresent(dealId, forKey: .dealId)
+        try container.encodeIfPresent(dealName, forKey: .dealName)
+        try container.encodeIfPresent(dealSlug, forKey: .dealSlug)
+        try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
+        try container.encodeIfPresent(hospitalName, forKey: .hospitalName)
+        try container.encodeIfPresent(hospitalSlug, forKey: .hospitalSlug)
+        try container.encodeIfPresent(additionalServices, forKey: .additionalServices)
+        try container.encodeIfPresent(refundPolicy, forKey: .refundPolicy)
+        try container.encodeIfPresent(bonus, forKey: .bonus)
+        try container.encodeIfPresent(price, forKey: .price)
+        try container.encodeIfPresent(auditableEntity, forKey: .auditableEntity)
+    }
 }
 

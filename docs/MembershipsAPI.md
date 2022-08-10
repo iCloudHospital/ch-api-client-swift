@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 Get all memberships.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -48,10 +48,10 @@ MembershipsAPI.apiV2MembershipsGet(id: id, planId: planId, planName: planName, o
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md) |  | [optional] 
- **planId** | [**UUID**](.md) |  | [optional] 
+ **id** | **UUID** |  | [optional] 
+ **planId** | **UUID** |  | [optional] 
  **planName** | **String** |  | [optional] 
- **ownerId** | [**UUID**](.md) |  | [optional] 
+ **ownerId** | **UUID** |  | [optional] 
  **ownerName** | **String** |  | [optional] 
  **isActive** | **Bool** |  | [optional] 
  **page** | **Int** |  | [optional] 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 Get membership.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -104,7 +104,7 @@ MembershipsAPI.apiV2MembershipsMembershipIdGet(membershipId: membershipId) { (re
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **membershipId** | [**UUID**](.md) |  | 
+ **membershipId** | **UUID** |  | 
 
 ### Return type
 
@@ -128,7 +128,7 @@ Name | Type | Description  | Notes
 
 Get all members.
 
-### Example 
+### Example
 ```swift
 // The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
 import CloudHospitalClient
@@ -155,7 +155,7 @@ MembershipsAPI.apiV2MembershipsMembershipIdMembersGet(membershipId: membershipId
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **membershipId** | [**UUID**](.md) |  | 
+ **membershipId** | **UUID** |  | 
  **page** | **Int** |  | [optional] 
  **limit** | **Int** |  | [optional] 
  **lastRetrieved** | **Date** |  | [optional] 

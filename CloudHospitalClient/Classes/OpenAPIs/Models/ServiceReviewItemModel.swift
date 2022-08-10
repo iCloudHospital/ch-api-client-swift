@@ -6,9 +6,11 @@
 //
 
 import Foundation
+#if canImport(AnyCodable)
+import AnyCodable
+#endif
 
-
-public struct ServiceReviewItemModel: Codable {
+public struct ServiceReviewItemModel: Codable, JSONEncodable, Hashable {
 
     public var id: UUID?
     public var languageCode: String?
@@ -56,5 +58,55 @@ public struct ServiceReviewItemModel: Codable {
         self.auditableEntity = auditableEntity
     }
 
+    public enum CodingKeys: String, CodingKey, CaseIterable {
+        case id
+        case languageCode
+        case name
+        case slug
+        case description
+        case overview
+        case content
+        case confirmed
+        case serviceId
+        case serviceName
+        case serviceSlug
+        case hospitalId
+        case patientId
+        case patientName
+        case patientPhoto
+        case createdDate
+        case recommended
+        case rate
+        case reviewType
+        case medias
+        case auditableEntity
+    }
+
+    // Encodable protocol methods
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(languageCode, forKey: .languageCode)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(slug, forKey: .slug)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(overview, forKey: .overview)
+        try container.encodeIfPresent(content, forKey: .content)
+        try container.encodeIfPresent(confirmed, forKey: .confirmed)
+        try container.encodeIfPresent(serviceId, forKey: .serviceId)
+        try container.encodeIfPresent(serviceName, forKey: .serviceName)
+        try container.encodeIfPresent(serviceSlug, forKey: .serviceSlug)
+        try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
+        try container.encodeIfPresent(patientId, forKey: .patientId)
+        try container.encodeIfPresent(patientName, forKey: .patientName)
+        try container.encodeIfPresent(patientPhoto, forKey: .patientPhoto)
+        try container.encodeIfPresent(createdDate, forKey: .createdDate)
+        try container.encodeIfPresent(recommended, forKey: .recommended)
+        try container.encodeIfPresent(rate, forKey: .rate)
+        try container.encodeIfPresent(reviewType, forKey: .reviewType)
+        try container.encodeIfPresent(medias, forKey: .medias)
+        try container.encodeIfPresent(auditableEntity, forKey: .auditableEntity)
+    }
 }
 
