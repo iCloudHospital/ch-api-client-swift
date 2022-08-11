@@ -17,6 +17,7 @@ public struct ContributorModel: Codable, JSONEncodable, Hashable {
     public var name: String?
     public var slug: String?
     public var confirmed: Bool?
+    public var description: String?
     public var hospitalId: UUID?
     public var hospitalName: String?
     public var hospitalSlug: String?
@@ -26,18 +27,18 @@ public struct ContributorModel: Codable, JSONEncodable, Hashable {
     public var photoThumbnail: String?
     public var order: Int?
     public var auditableEntity: AuditableEntity?
-    public var description: String?
     public var overview: String?
     public var content: String?
     public var snsHandles: [SnsHandle]?
     public var localizedUrls: [LocalizedUrlModel]?
 
-    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, hospitalWebsiteUrl: String? = nil, email: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, order: Int? = nil, auditableEntity: AuditableEntity? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, snsHandles: [SnsHandle]? = nil, localizedUrls: [LocalizedUrlModel]? = nil) {
+    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, description: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, hospitalWebsiteUrl: String? = nil, email: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, order: Int? = nil, auditableEntity: AuditableEntity? = nil, overview: String? = nil, content: String? = nil, snsHandles: [SnsHandle]? = nil, localizedUrls: [LocalizedUrlModel]? = nil) {
         self.id = id
         self.languageCode = languageCode
         self.name = name
         self.slug = slug
         self.confirmed = confirmed
+        self.description = description
         self.hospitalId = hospitalId
         self.hospitalName = hospitalName
         self.hospitalSlug = hospitalSlug
@@ -47,7 +48,6 @@ public struct ContributorModel: Codable, JSONEncodable, Hashable {
         self.photoThumbnail = photoThumbnail
         self.order = order
         self.auditableEntity = auditableEntity
-        self.description = description
         self.overview = overview
         self.content = content
         self.snsHandles = snsHandles
@@ -60,6 +60,7 @@ public struct ContributorModel: Codable, JSONEncodable, Hashable {
         case name
         case slug
         case confirmed
+        case description
         case hospitalId
         case hospitalName
         case hospitalSlug
@@ -69,7 +70,6 @@ public struct ContributorModel: Codable, JSONEncodable, Hashable {
         case photoThumbnail
         case order
         case auditableEntity
-        case description
         case overview
         case content
         case snsHandles
@@ -85,6 +85,7 @@ public struct ContributorModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(slug, forKey: .slug)
         try container.encodeIfPresent(confirmed, forKey: .confirmed)
+        try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
         try container.encodeIfPresent(hospitalName, forKey: .hospitalName)
         try container.encodeIfPresent(hospitalSlug, forKey: .hospitalSlug)
@@ -94,7 +95,6 @@ public struct ContributorModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(photoThumbnail, forKey: .photoThumbnail)
         try container.encodeIfPresent(order, forKey: .order)
         try container.encodeIfPresent(auditableEntity, forKey: .auditableEntity)
-        try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(overview, forKey: .overview)
         try container.encodeIfPresent(content, forKey: .content)
         try container.encodeIfPresent(snsHandles, forKey: .snsHandles)

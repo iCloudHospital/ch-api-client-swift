@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **name** | **String** |  | [optional] [readonly] 
 **slug** | **String** |  | [optional] [readonly] 
 **confirmed** | **Bool** |  | [optional] [readonly] 
+**description** | **String** |  | [optional] [readonly] 
 **hospitalId** | **UUID** |  | [optional] 
 **hospitalName** | **String** |  | [optional] [readonly] 
 **hospitalSlug** | **String** |  | [optional] [readonly] 

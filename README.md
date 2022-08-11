@@ -80,6 +80,12 @@ Class | Method | HTTP request | Description
 *DealsAPI* | [**apiV2DealsGet**](docs/DealsAPI.md#apiv2dealsget) | **GET** /api/v2/deals | Get all deals.
 *DealsAPI* | [**apiV2DealsSimpleGet**](docs/DealsAPI.md#apiv2dealssimpleget) | **GET** /api/v2/deals/simple | Get all deals.
 *DealsAPI* | [**apiV2DealsSlugGet**](docs/DealsAPI.md#apiv2dealsslugget) | **GET** /api/v2/deals/{slug} | Get deal by slug.
+*DevicesAPI* | [**apiV2DevicesGet**](docs/DevicesAPI.md#apiv2devicesget) | **GET** /api/v2/devices | Get all devices.
+*DevicesAPI* | [**apiV2DevicesIdDelete**](docs/DevicesAPI.md#apiv2devicesiddelete) | **DELETE** /api/v2/devices/{id} | Delete device.
+*DevicesAPI* | [**apiV2DevicesIdGet**](docs/DevicesAPI.md#apiv2devicesidget) | **GET** /api/v2/devices/{id} | Get device.
+*DevicesAPI* | [**apiV2DevicesIdLoginsPost**](docs/DevicesAPI.md#apiv2devicesidloginspost) | **POST** /api/v2/devices/{id}/logins | Create device login.
+*DevicesAPI* | [**apiV2DevicesIdPut**](docs/DevicesAPI.md#apiv2devicesidput) | **PUT** /api/v2/devices/{id} | Update device.
+*DevicesAPI* | [**apiV2DevicesPost**](docs/DevicesAPI.md#apiv2devicespost) | **POST** /api/v2/devices | Create device.
 *DoctorAffiliationsAPI* | [**apiV2DoctoraffiliationsDoctorAffiliationIdMediasGet**](docs/DoctorAffiliationsAPI.md#apiv2doctoraffiliationsdoctoraffiliationidmediasget) | **GET** /api/v2/doctoraffiliations/{doctorAffiliationId}/medias | Get all DoctorAffiliationMedias.
 *DoctorAffiliationsAPI* | [**apiV2DoctoraffiliationsDoctorAffiliationIdMediasMediaIdGet**](docs/DoctorAffiliationsAPI.md#apiv2doctoraffiliationsdoctoraffiliationidmediasmediaidget) | **GET** /api/v2/doctoraffiliations/{doctorAffiliationId}/medias/{mediaId} | Get DoctorAffiliationMedia.
 *DoctorAffiliationsAPI* | [**apiV2DoctoraffiliationsGet**](docs/DoctorAffiliationsAPI.md#apiv2doctoraffiliationsget) | **GET** /api/v2/doctoraffiliations | Get all doctor affiliations.
@@ -244,6 +250,8 @@ Class | Method | HTTP request | Description
  - [CreateBookingCommand](docs/CreateBookingCommand.md)
  - [CreateChatUserCommand](docs/CreateChatUserCommand.md)
  - [CreateConsultationCommand](docs/CreateConsultationCommand.md)
+ - [CreateDeviceCommand](docs/CreateDeviceCommand.md)
+ - [CreateDeviceLoginCommand](docs/CreateDeviceLoginCommand.md)
  - [CreateMediaCommand](docs/CreateMediaCommand.md)
  - [CreatePatientCommand](docs/CreatePatientCommand.md)
  - [CreateServiceReviewCommand](docs/CreateServiceReviewCommand.md)
@@ -258,6 +266,9 @@ Class | Method | HTTP request | Description
  - [DealServicesModel](docs/DealServicesModel.md)
  - [DealsModel](docs/DealsModel.md)
  - [DealsSimpleModel](docs/DealsSimpleModel.md)
+ - [DeviceItemModel](docs/DeviceItemModel.md)
+ - [DeviceModel](docs/DeviceModel.md)
+ - [DevicesModel](docs/DevicesModel.md)
  - [DoctorAffiliationItemModel](docs/DoctorAffiliationItemModel.md)
  - [DoctorAffiliationModel](docs/DoctorAffiliationModel.md)
  - [DoctorAffiliationsModel](docs/DoctorAffiliationsModel.md)
@@ -379,6 +390,7 @@ Class | Method | HTTP request | Description
  - [UpdateBookingCommand](docs/UpdateBookingCommand.md)
  - [UpdateChatUserCommand](docs/UpdateChatUserCommand.md)
  - [UpdateConsultationCommand](docs/UpdateConsultationCommand.md)
+ - [UpdateDeviceCommand](docs/UpdateDeviceCommand.md)
  - [UpdateMediaCommand](docs/UpdateMediaCommand.md)
  - [UpdatePatientCommand](docs/UpdatePatientCommand.md)
  - [UpdateProfileCommand](docs/UpdateProfileCommand.md)

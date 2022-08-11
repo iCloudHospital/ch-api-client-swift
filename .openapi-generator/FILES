@@ -14,6 +14,7 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/ConsultationsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ContributorsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/CountriesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DealsAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/DevicesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorAffiliationsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/FaqCategoriesAPI.swift
@@ -88,6 +89,8 @@ CloudHospitalClient/Classes/OpenAPIs/Models/CountryModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateBookingCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateChatUserCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateConsultationCommand.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/CreateDeviceCommand.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/CreateDeviceLoginCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateMediaCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreatePatientCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateServiceReviewCommand.swift
@@ -102,6 +105,9 @@ CloudHospitalClient/Classes/OpenAPIs/Models/DealServiceModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealServicesModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealsModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealsSimpleModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/DeviceItemModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/DeviceModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/DevicesModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorAffiliationItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorAffiliationModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorAffiliationsModel.swift
@@ -223,6 +229,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/TagsModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateBookingCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateChatUserCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateConsultationCommand.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/UpdateDeviceCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateMediaCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdatePatientCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UpdateProfileCommand.swift
@@ -297,6 +304,8 @@ docs/CountryModel.md
 docs/CreateBookingCommand.md
 docs/CreateChatUserCommand.md
 docs/CreateConsultationCommand.md
+docs/CreateDeviceCommand.md
+docs/CreateDeviceLoginCommand.md
 docs/CreateMediaCommand.md
 docs/CreatePatientCommand.md
 docs/CreateServiceReviewCommand.md
@@ -312,6 +321,10 @@ docs/DealServicesModel.md
 docs/DealsAPI.md
 docs/DealsModel.md
 docs/DealsSimpleModel.md
+docs/DeviceItemModel.md
+docs/DeviceModel.md
+docs/DevicesAPI.md
+docs/DevicesModel.md
 docs/DoctorAffiliationItemModel.md
 docs/DoctorAffiliationModel.md
 docs/DoctorAffiliationsAPI.md
@@ -452,6 +465,7 @@ docs/TagsModel.md
 docs/UpdateBookingCommand.md
 docs/UpdateChatUserCommand.md
 docs/UpdateConsultationCommand.md
+docs/UpdateDeviceCommand.md
 docs/UpdateMediaCommand.md
 docs/UpdatePatientCommand.md
 docs/UpdateProfileCommand.md
