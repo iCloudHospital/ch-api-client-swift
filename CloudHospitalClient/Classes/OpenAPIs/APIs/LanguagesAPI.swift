@@ -16,7 +16,7 @@ import AnyCodable
 open class LanguagesAPI {
 
     /**
-     Get Language by code.
+     Get Language.
      
      - parameter code: (path)  
      - returns: AnyPublisher<LanguageModel, Error>
@@ -43,7 +43,7 @@ open class LanguagesAPI {
     #endif
 
     /**
-     Get Language by code.
+     Get Language.
      - GET /api/v2/languages/{code}
      - parameter code: (path)  
      - returns: RequestBuilder<LanguageModel> 
@@ -137,60 +137,6 @@ open class LanguagesAPI {
         let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
 
         let localVariableRequestBuilder: RequestBuilder<LanguagesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
-
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
-    }
-
-    /**
-     Get Language.
-     
-     - parameter id: (path)  
-     - returns: AnyPublisher<LanguageModel, Error>
-     */
-    #if canImport(Combine)
-    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2LanguagesIdGet(id: UUID) -> AnyPublisher<LanguageModel, Error> {
-        var requestTask: RequestTask?
-        return Future<LanguageModel, Error> { promise in
-            requestTask = apiV2LanguagesIdGetWithRequestBuilder(id: id).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
-                }
-            }
-        }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
-    }
-    #endif
-
-    /**
-     Get Language.
-     - GET /api/v2/languages/{id}
-     - parameter id: (path)  
-     - returns: RequestBuilder<LanguageModel> 
-     */
-    open class func apiV2LanguagesIdGetWithRequestBuilder(id: UUID) -> RequestBuilder<LanguageModel> {
-        var localVariablePath = "/api/v2/languages/{id}"
-        let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
-        let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
-        localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
-        let localVariableParameters: [String: Any]? = nil
-
-        let localVariableUrlComponents = URLComponents(string: localVariableURLString)
-
-        let localVariableNillableHeaders: [String: Any?] = [
-            :
-        ]
-
-        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
-
-        let localVariableRequestBuilder: RequestBuilder<LanguageModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
         return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
     }

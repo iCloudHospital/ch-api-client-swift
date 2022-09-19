@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 # **apiV2SpecialtiesGet**
 ```swift
-    open class func apiV2SpecialtiesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, specialtyTypeId: UUID? = nil, hospitalId: UUID? = nil, created: Date? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: SpecialtiesModel?, _ error: Error?) -> Void)
+    open class func apiV2SpecialtiesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, specialtyTypeId: UUID? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: SpecialtiesModel?, _ error: Error?) -> Void)
 ```
 
 Get all Specialties.
@@ -28,6 +28,7 @@ let id = 987 // UUID |  (optional)
 let name = "name_example" // String |  (optional)
 let description = "description_example" // String |  (optional)
 let specialtyTypeId = 987 // UUID |  (optional)
+let marketingType = MarketingType() // MarketingType |  (optional)
 let hospitalId = 987 // UUID |  (optional)
 let created = Date() // Date |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
@@ -38,7 +39,7 @@ let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 
 // Get all Specialties.
-SpecialtiesAPI.apiV2SpecialtiesGet(id: id, name: name, description: description, specialtyTypeId: specialtyTypeId, hospitalId: hospitalId, created: created, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+SpecialtiesAPI.apiV2SpecialtiesGet(id: id, name: name, description: description, specialtyTypeId: specialtyTypeId, marketingType: marketingType, hospitalId: hospitalId, created: created, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -58,6 +59,7 @@ Name | Type | Description  | Notes
  **name** | **String** |  | [optional] 
  **description** | **String** |  | [optional] 
  **specialtyTypeId** | **UUID** |  | [optional] 
+ **marketingType** | [**MarketingType**](.md) |  | [optional] 
  **hospitalId** | **UUID** |  | [optional] 
  **created** | **Date** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
@@ -84,7 +86,7 @@ No authorization required
 
 # **apiV2SpecialtiesSimpleGet**
 ```swift
-    open class func apiV2SpecialtiesSimpleGet(id: UUID? = nil, name: String? = nil, description: String? = nil, specialtyTypeId: UUID? = nil, hospitalId: UUID? = nil, created: Date? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: SpecialtiesSimpleModel?, _ error: Error?) -> Void)
+    open class func apiV2SpecialtiesSimpleGet(id: UUID? = nil, name: String? = nil, description: String? = nil, specialtyTypeId: UUID? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: SpecialtiesSimpleModel?, _ error: Error?) -> Void)
 ```
 
 Get all Specialties Simple.
@@ -98,6 +100,7 @@ let id = 987 // UUID |  (optional)
 let name = "name_example" // String |  (optional)
 let description = "description_example" // String |  (optional)
 let specialtyTypeId = 987 // UUID |  (optional)
+let marketingType = MarketingType() // MarketingType |  (optional)
 let hospitalId = 987 // UUID |  (optional)
 let created = Date() // Date |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
@@ -108,7 +111,7 @@ let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 
 // Get all Specialties Simple.
-SpecialtiesAPI.apiV2SpecialtiesSimpleGet(id: id, name: name, description: description, specialtyTypeId: specialtyTypeId, hospitalId: hospitalId, created: created, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+SpecialtiesAPI.apiV2SpecialtiesSimpleGet(id: id, name: name, description: description, specialtyTypeId: specialtyTypeId, marketingType: marketingType, hospitalId: hospitalId, created: created, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -128,6 +131,7 @@ Name | Type | Description  | Notes
  **name** | **String** |  | [optional] 
  **description** | **String** |  | [optional] 
  **specialtyTypeId** | **UUID** |  | [optional] 
+ **marketingType** | [**MarketingType**](.md) |  | [optional] 
  **hospitalId** | **UUID** |  | [optional] 
  **created** | **Date** |  | [optional] 
  **languageCode** | **String** |  | [optional] 

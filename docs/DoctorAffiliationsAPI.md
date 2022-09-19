@@ -121,7 +121,7 @@ No authorization required
 
 # **apiV2DoctoraffiliationsGet**
 ```swift
-    open class func apiV2DoctoraffiliationsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, doctorSlug: String? = nil, specialtyId: UUID? = nil, exceptDoctorId: UUID? = nil, consultationEnabled: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: DoctorAffiliationsModel?, _ error: Error?) -> Void)
+    open class func apiV2DoctoraffiliationsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, doctorSlug: String? = nil, specialtyId: UUID? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, exceptDoctorId: UUID? = nil, consultationEnabled: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: DoctorAffiliationsModel?, _ error: Error?) -> Void)
 ```
 
 Get all doctor affiliations.
@@ -137,6 +137,8 @@ let doctorId = 987 // UUID |  (optional)
 let doctorName = "doctorName_example" // String |  (optional)
 let doctorSlug = "doctorSlug_example" // String |  (optional)
 let specialtyId = 987 // UUID |  (optional)
+let marketingType = MarketingType() // MarketingType |  (optional)
+let countryId = 987 // UUID |  (optional)
 let exceptDoctorId = 987 // UUID |  (optional)
 let consultationEnabled = true // Bool |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
@@ -145,7 +147,7 @@ let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 
 // Get all doctor affiliations.
-DoctorAffiliationsAPI.apiV2DoctoraffiliationsGet(hospitalId: hospitalId, hospitalName: hospitalName, doctorId: doctorId, doctorName: doctorName, doctorSlug: doctorSlug, specialtyId: specialtyId, exceptDoctorId: exceptDoctorId, consultationEnabled: consultationEnabled, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+DoctorAffiliationsAPI.apiV2DoctoraffiliationsGet(hospitalId: hospitalId, hospitalName: hospitalName, doctorId: doctorId, doctorName: doctorName, doctorSlug: doctorSlug, specialtyId: specialtyId, marketingType: marketingType, countryId: countryId, exceptDoctorId: exceptDoctorId, consultationEnabled: consultationEnabled, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -167,6 +169,8 @@ Name | Type | Description  | Notes
  **doctorName** | **String** |  | [optional] 
  **doctorSlug** | **String** |  | [optional] 
  **specialtyId** | **UUID** |  | [optional] 
+ **marketingType** | [**MarketingType**](.md) |  | [optional] 
+ **countryId** | **UUID** |  | [optional] 
  **exceptDoctorId** | **UUID** |  | [optional] 
  **consultationEnabled** | **Bool** |  | [optional] 
  **languageCode** | **String** |  | [optional] 

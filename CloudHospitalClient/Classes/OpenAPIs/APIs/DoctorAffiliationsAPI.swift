@@ -154,6 +154,8 @@ open class DoctorAffiliationsAPI {
      - parameter doctorName: (query)  (optional)
      - parameter doctorSlug: (query)  (optional)
      - parameter specialtyId: (query)  (optional)
+     - parameter marketingType: (query)  (optional)
+     - parameter countryId: (query)  (optional)
      - parameter exceptDoctorId: (query)  (optional)
      - parameter consultationEnabled: (query)  (optional)
      - parameter languageCode: (query)  (optional)
@@ -164,10 +166,10 @@ open class DoctorAffiliationsAPI {
      */
     #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctoraffiliationsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, doctorSlug: String? = nil, specialtyId: UUID? = nil, exceptDoctorId: UUID? = nil, consultationEnabled: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<DoctorAffiliationsModel, Error> {
+    open class func apiV2DoctoraffiliationsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, doctorSlug: String? = nil, specialtyId: UUID? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, exceptDoctorId: UUID? = nil, consultationEnabled: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<DoctorAffiliationsModel, Error> {
         var requestTask: RequestTask?
         return Future<DoctorAffiliationsModel, Error> { promise in
-            requestTask = apiV2DoctoraffiliationsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, doctorId: doctorId, doctorName: doctorName, doctorSlug: doctorSlug, specialtyId: specialtyId, exceptDoctorId: exceptDoctorId, consultationEnabled: consultationEnabled, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
+            requestTask = apiV2DoctoraffiliationsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, doctorId: doctorId, doctorName: doctorName, doctorSlug: doctorSlug, specialtyId: specialtyId, marketingType: marketingType, countryId: countryId, exceptDoctorId: exceptDoctorId, consultationEnabled: consultationEnabled, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body))
@@ -192,6 +194,8 @@ open class DoctorAffiliationsAPI {
      - parameter doctorName: (query)  (optional)
      - parameter doctorSlug: (query)  (optional)
      - parameter specialtyId: (query)  (optional)
+     - parameter marketingType: (query)  (optional)
+     - parameter countryId: (query)  (optional)
      - parameter exceptDoctorId: (query)  (optional)
      - parameter consultationEnabled: (query)  (optional)
      - parameter languageCode: (query)  (optional)
@@ -200,7 +204,7 @@ open class DoctorAffiliationsAPI {
      - parameter lastRetrieved: (query)  (optional)
      - returns: RequestBuilder<DoctorAffiliationsModel> 
      */
-    open class func apiV2DoctoraffiliationsGetWithRequestBuilder(hospitalId: UUID? = nil, hospitalName: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, doctorSlug: String? = nil, specialtyId: UUID? = nil, exceptDoctorId: UUID? = nil, consultationEnabled: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<DoctorAffiliationsModel> {
+    open class func apiV2DoctoraffiliationsGetWithRequestBuilder(hospitalId: UUID? = nil, hospitalName: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, doctorSlug: String? = nil, specialtyId: UUID? = nil, marketingType: MarketingType? = nil, countryId: UUID? = nil, exceptDoctorId: UUID? = nil, consultationEnabled: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<DoctorAffiliationsModel> {
         let localVariablePath = "/api/v2/doctoraffiliations"
         let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -213,6 +217,8 @@ open class DoctorAffiliationsAPI {
             "DoctorName": doctorName?.encodeToJSON(),
             "DoctorSlug": doctorSlug?.encodeToJSON(),
             "SpecialtyId": specialtyId?.encodeToJSON(),
+            "MarketingType": marketingType?.encodeToJSON(),
+            "CountryId": countryId?.encodeToJSON(),
             "ExceptDoctorId": exceptDoctorId?.encodeToJSON(),
             "ConsultationEnabled": consultationEnabled?.encodeToJSON(),
             "LanguageCode": languageCode?.encodeToJSON(),

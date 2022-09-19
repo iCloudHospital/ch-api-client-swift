@@ -17,6 +17,8 @@ public struct DoctorAffiliationModel: Codable, JSONEncodable, Hashable {
     public var hospitalId: UUID?
     public var hospitalName: String?
     public var hospitalSlug: String?
+    public var countryId: UUID?
+    public var marketingType: MarketingType?
     public var doctorId: UUID?
     public var name: String?
     public var slug: String?
@@ -25,6 +27,8 @@ public struct DoctorAffiliationModel: Codable, JSONEncodable, Hashable {
     public var photoThumbnail: String?
     public var consultationEnabled: Bool?
     public var consultationFee: Double?
+    public var startPracticeDate: Date?
+    public var yearOfExperience: Double?
     public var specialtiesSummerized: String?
     public var order: Int?
     public var description: String?
@@ -36,12 +40,14 @@ public struct DoctorAffiliationModel: Codable, JSONEncodable, Hashable {
     public var localizedUrls: [LocalizedUrlModel]?
     public var medias: [MediaModel]?
 
-    public init(id: UUID? = nil, languageCode: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, doctorId: UUID? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, photo: String? = nil, photoThumbnail: String? = nil, consultationEnabled: Bool? = nil, consultationFee: Double? = nil, specialtiesSummerized: String? = nil, order: Int? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, background: String? = nil, backgroundThumbnail: String? = nil, customStyle: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil, medias: [MediaModel]? = nil) {
+    public init(id: UUID? = nil, languageCode: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, countryId: UUID? = nil, marketingType: MarketingType? = nil, doctorId: UUID? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, photo: String? = nil, photoThumbnail: String? = nil, consultationEnabled: Bool? = nil, consultationFee: Double? = nil, startPracticeDate: Date? = nil, yearOfExperience: Double? = nil, specialtiesSummerized: String? = nil, order: Int? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, background: String? = nil, backgroundThumbnail: String? = nil, customStyle: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil, medias: [MediaModel]? = nil) {
         self.id = id
         self.languageCode = languageCode
         self.hospitalId = hospitalId
         self.hospitalName = hospitalName
         self.hospitalSlug = hospitalSlug
+        self.countryId = countryId
+        self.marketingType = marketingType
         self.doctorId = doctorId
         self.name = name
         self.slug = slug
@@ -50,6 +56,8 @@ public struct DoctorAffiliationModel: Codable, JSONEncodable, Hashable {
         self.photoThumbnail = photoThumbnail
         self.consultationEnabled = consultationEnabled
         self.consultationFee = consultationFee
+        self.startPracticeDate = startPracticeDate
+        self.yearOfExperience = yearOfExperience
         self.specialtiesSummerized = specialtiesSummerized
         self.order = order
         self.description = description
@@ -68,6 +76,8 @@ public struct DoctorAffiliationModel: Codable, JSONEncodable, Hashable {
         case hospitalId
         case hospitalName
         case hospitalSlug
+        case countryId
+        case marketingType
         case doctorId
         case name
         case slug
@@ -76,6 +86,8 @@ public struct DoctorAffiliationModel: Codable, JSONEncodable, Hashable {
         case photoThumbnail
         case consultationEnabled
         case consultationFee
+        case startPracticeDate
+        case yearOfExperience
         case specialtiesSummerized
         case order
         case description
@@ -97,6 +109,8 @@ public struct DoctorAffiliationModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
         try container.encodeIfPresent(hospitalName, forKey: .hospitalName)
         try container.encodeIfPresent(hospitalSlug, forKey: .hospitalSlug)
+        try container.encodeIfPresent(countryId, forKey: .countryId)
+        try container.encodeIfPresent(marketingType, forKey: .marketingType)
         try container.encodeIfPresent(doctorId, forKey: .doctorId)
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(slug, forKey: .slug)
@@ -105,6 +119,8 @@ public struct DoctorAffiliationModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(photoThumbnail, forKey: .photoThumbnail)
         try container.encodeIfPresent(consultationEnabled, forKey: .consultationEnabled)
         try container.encodeIfPresent(consultationFee, forKey: .consultationFee)
+        try container.encodeIfPresent(startPracticeDate, forKey: .startPracticeDate)
+        try container.encodeIfPresent(yearOfExperience, forKey: .yearOfExperience)
         try container.encodeIfPresent(specialtiesSummerized, forKey: .specialtiesSummerized)
         try container.encodeIfPresent(order, forKey: .order)
         try container.encodeIfPresent(description, forKey: .description)

@@ -4,9 +4,8 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**apiV2LanguagesCodeGet**](LanguagesAPI.md#apiv2languagescodeget) | **GET** /api/v2/languages/{code} | Get Language by code.
+[**apiV2LanguagesCodeGet**](LanguagesAPI.md#apiv2languagescodeget) | **GET** /api/v2/languages/{code} | Get Language.
 [**apiV2LanguagesGet**](LanguagesAPI.md#apiv2languagesget) | **GET** /api/v2/languages | Get all Languages.
-[**apiV2LanguagesIdGet**](LanguagesAPI.md#apiv2languagesidget) | **GET** /api/v2/languages/{id} | Get Language.
 
 
 # **apiV2LanguagesCodeGet**
@@ -14,7 +13,7 @@ Method | HTTP request | Description
     open class func apiV2LanguagesCodeGet(code: String, completion: @escaping (_ data: LanguageModel?, _ error: Error?) -> Void)
 ```
 
-Get Language by code.
+Get Language.
 
 ### Example
 ```swift
@@ -23,7 +22,7 @@ import CloudHospitalClient
 
 let code = "code_example" // String | 
 
-// Get Language by code.
+// Get Language.
 LanguagesAPI.apiV2LanguagesCodeGet(code: code) { (response, error) in
     guard error == nil else {
         print(error)
@@ -105,54 +104,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**LanguagesModel**](LanguagesModel.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **apiV2LanguagesIdGet**
-```swift
-    open class func apiV2LanguagesIdGet(id: UUID, completion: @escaping (_ data: LanguageModel?, _ error: Error?) -> Void)
-```
-
-Get Language.
-
-### Example
-```swift
-// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
-import CloudHospitalClient
-
-let id = 987 // UUID | 
-
-// Get Language.
-LanguagesAPI.apiV2LanguagesIdGet(id: id) { (response, error) in
-    guard error == nil else {
-        print(error)
-        return
-    }
-
-    if (response) {
-        dump(response)
-    }
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **UUID** |  | 
-
-### Return type
-
-[**LanguageModel**](LanguageModel.md)
 
 ### Authorization
 

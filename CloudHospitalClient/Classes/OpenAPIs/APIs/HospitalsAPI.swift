@@ -858,6 +858,205 @@ open class HospitalsAPI {
     }
 
     /**
+
+     - parameter hospitalId: (path)  
+     - parameter name: (query)  (optional)
+     - parameter slug: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
+     - parameter showHidden: (query)  (optional)
+     - parameter page: (query)  (optional)
+     - parameter limit: (query)  (optional)
+     - parameter lastRetrieved: (query)  (optional)
+     - returns: AnyPublisher<LandingsModel, Error>
+     */
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdLandingsGet(hospitalId: UUID, name: String? = nil, slug: String? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<LandingsModel, Error> {
+        var requestTask: RequestTask?
+        return Future<LandingsModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdLandingsGetWithRequestBuilder(hospitalId: hospitalId, name: name, slug: slug, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
+    }
+    #endif
+
+    /**
+     - GET /api/v2/hospitals/{hospitalId}/landings
+     - parameter hospitalId: (path)  
+     - parameter name: (query)  (optional)
+     - parameter slug: (query)  (optional)
+     - parameter languageCode: (query)  (optional)
+     - parameter showHidden: (query)  (optional)
+     - parameter page: (query)  (optional)
+     - parameter limit: (query)  (optional)
+     - parameter lastRetrieved: (query)  (optional)
+     - returns: RequestBuilder<LandingsModel> 
+     */
+    open class func apiV2HospitalsHospitalIdLandingsGetWithRequestBuilder(hospitalId: UUID, name: String? = nil, slug: String? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<LandingsModel> {
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/landings"
+        let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
+        let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "Name": name?.encodeToJSON(),
+            "Slug": slug?.encodeToJSON(),
+            "LanguageCode": languageCode?.encodeToJSON(),
+            "ShowHidden": showHidden?.encodeToJSON(),
+            "page": page?.encodeToJSON(),
+            "limit": limit?.encodeToJSON(),
+            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<LandingsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+
+     - parameter hospitalId: (path)  
+     - parameter landingId: (path)  
+     - parameter languageCode: (query)  (optional)
+     - returns: AnyPublisher<LandingModel, Error>
+     */
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdLandingsLandingIdGet(hospitalId: UUID, landingId: UUID, languageCode: String? = nil) -> AnyPublisher<LandingModel, Error> {
+        var requestTask: RequestTask?
+        return Future<LandingModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdLandingsLandingIdGetWithRequestBuilder(hospitalId: hospitalId, landingId: landingId, languageCode: languageCode).execute { result in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
+    }
+    #endif
+
+    /**
+     - GET /api/v2/hospitals/{hospitalId}/landings/{landingId}
+     - parameter hospitalId: (path)  
+     - parameter landingId: (path)  
+     - parameter languageCode: (query)  (optional)
+     - returns: RequestBuilder<LandingModel> 
+     */
+    open class func apiV2HospitalsHospitalIdLandingsLandingIdGetWithRequestBuilder(hospitalId: UUID, landingId: UUID, languageCode: String? = nil) -> RequestBuilder<LandingModel> {
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/landings/{landingId}"
+        let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
+        let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let landingIdPreEscape = "\(APIHelper.mapValueToPathItem(landingId))"
+        let landingIdPostEscape = landingIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{landingId}", with: landingIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<LandingModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
+
+     - parameter slug: (path)  
+     - parameter hospitalId: (path)  
+     - parameter languageCode: (query)  (optional)
+     - returns: AnyPublisher<LandingModel, Error>
+     */
+    #if canImport(Combine)
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func apiV2HospitalsHospitalIdLandingsSlugGet(slug: String, hospitalId: String, languageCode: String? = nil) -> AnyPublisher<LandingModel, Error> {
+        var requestTask: RequestTask?
+        return Future<LandingModel, Error> { promise in
+            requestTask = apiV2HospitalsHospitalIdLandingsSlugGetWithRequestBuilder(slug: slug, hospitalId: hospitalId, languageCode: languageCode).execute { result in
+                switch result {
+                case let .success(response):
+                    promise(.success(response.body))
+                case let .failure(error):
+                    promise(.failure(error))
+                }
+            }
+        }
+        .handleEvents(receiveCancel: {
+            requestTask?.cancel()
+        })
+        .eraseToAnyPublisher()
+    }
+    #endif
+
+    /**
+     - GET /api/v2/hospitals/{hospitalId}/landings/{slug}
+     - parameter slug: (path)  
+     - parameter hospitalId: (path)  
+     - parameter languageCode: (query)  (optional)
+     - returns: RequestBuilder<LandingModel> 
+     */
+    open class func apiV2HospitalsHospitalIdLandingsSlugGetWithRequestBuilder(slug: String, hospitalId: String, languageCode: String? = nil) -> RequestBuilder<LandingModel> {
+        var localVariablePath = "/api/v2/hospitals/{hospitalId}/landings/{slug}"
+        let slugPreEscape = "\(APIHelper.mapValueToPathItem(slug))"
+        let slugPostEscape = slugPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{slug}", with: slugPostEscape, options: .literal, range: nil)
+        let hospitalIdPreEscape = "\(APIHelper.mapValueToPathItem(hospitalId))"
+        let hospitalIdPostEscape = hospitalIdPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
+        localVariablePath = localVariablePath.replacingOccurrences(of: "{hospitalId}", with: hospitalIdPostEscape, options: .literal, range: nil)
+        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableParameters: [String: Any]? = nil
+
+        var localVariableUrlComponents = URLComponents(string: localVariableURLString)
+        localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
+            "languageCode": languageCode?.encodeToJSON(),
+        ])
+
+        let localVariableNillableHeaders: [String: Any?] = [
+            :
+        ]
+
+        let localVariableHeaderParameters = APIHelper.rejectNilHeaders(localVariableNillableHeaders)
+
+        let localVariableRequestBuilder: RequestBuilder<LandingModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
+
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+    }
+
+    /**
      Get all HospitalMedias.
      
      - parameter hospitalId: (path)  

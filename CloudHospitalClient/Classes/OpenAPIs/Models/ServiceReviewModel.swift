@@ -24,6 +24,7 @@ public struct ServiceReviewModel: Codable, JSONEncodable, Hashable {
     public var serviceName: String?
     public var serviceSlug: String?
     public var hospitalId: UUID?
+    public var hospitalSpecialtyId: UUID?
     public var patientId: UUID?
     public var patientName: String?
     public var patientPhoto: String?
@@ -34,7 +35,7 @@ public struct ServiceReviewModel: Codable, JSONEncodable, Hashable {
     public var medias: [MediaModel]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, confirmed: Bool? = nil, serviceId: UUID? = nil, serviceName: String? = nil, serviceSlug: String? = nil, hospitalId: UUID? = nil, patientId: UUID? = nil, patientName: String? = nil, patientPhoto: String? = nil, createdDate: Date? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, medias: [MediaModel]? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, confirmed: Bool? = nil, serviceId: UUID? = nil, serviceName: String? = nil, serviceSlug: String? = nil, hospitalId: UUID? = nil, hospitalSpecialtyId: UUID? = nil, patientId: UUID? = nil, patientName: String? = nil, patientPhoto: String? = nil, createdDate: Date? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, medias: [MediaModel]? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.languageCode = languageCode
         self.name = name
@@ -47,6 +48,7 @@ public struct ServiceReviewModel: Codable, JSONEncodable, Hashable {
         self.serviceName = serviceName
         self.serviceSlug = serviceSlug
         self.hospitalId = hospitalId
+        self.hospitalSpecialtyId = hospitalSpecialtyId
         self.patientId = patientId
         self.patientName = patientName
         self.patientPhoto = patientPhoto
@@ -71,6 +73,7 @@ public struct ServiceReviewModel: Codable, JSONEncodable, Hashable {
         case serviceName
         case serviceSlug
         case hospitalId
+        case hospitalSpecialtyId
         case patientId
         case patientName
         case patientPhoto
@@ -98,6 +101,7 @@ public struct ServiceReviewModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(serviceName, forKey: .serviceName)
         try container.encodeIfPresent(serviceSlug, forKey: .serviceSlug)
         try container.encodeIfPresent(hospitalId, forKey: .hospitalId)
+        try container.encodeIfPresent(hospitalSpecialtyId, forKey: .hospitalSpecialtyId)
         try container.encodeIfPresent(patientId, forKey: .patientId)
         try container.encodeIfPresent(patientName, forKey: .patientName)
         try container.encodeIfPresent(patientPhoto, forKey: .patientPhoto)

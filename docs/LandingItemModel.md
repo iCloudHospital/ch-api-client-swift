@@ -1,4 +1,4 @@
-# ArticleItemModel
+# LandingItemModel
 
 ## Properties
 Name | Type | Description | Notes
@@ -7,21 +7,10 @@ Name | Type | Description | Notes
 **languageCode** | **String** |  | [optional] 
 **name** | **String** |  | [optional] [readonly] 
 **slug** | **String** |  | [optional] [readonly] 
-**description** | **String** |  | [optional] [readonly] 
 **confirmed** | **Bool** |  | [optional] [readonly] 
-**marketingType** | [**MarketingType**](MarketingType.md) |  | [optional] 
-**userId** | **UUID** |  | [optional] 
-**userName** | **String** |  | [optional] 
-**hospitalId** | **UUID** |  | [optional] 
-**hospitalName** | **String** |  | [optional] [readonly] 
-**hospitalSlug** | **String** |  | [optional] [readonly] 
-**youtubeUrl** | **String** |  | [optional] 
+**order** | **Int** |  | [optional] 
 **photo** | **String** |  | [optional] 
 **photoThumbnail** | **String** |  | [optional] 
-**background** | **String** |  | [optional] 
-**backgroundThumbnail** | **String** |  | [optional] 
-**articleTags** | [ArticleTagItemModel] |  | [optional] 
-**medias** | [MediaModel] |  | [optional] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

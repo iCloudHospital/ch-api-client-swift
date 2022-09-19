@@ -25,6 +25,10 @@ public struct ArticleModel: Codable, JSONEncodable, Hashable {
     public var hospitalName: String?
     public var hospitalSlug: String?
     public var youtubeUrl: String?
+    public var photo: String?
+    public var photoThumbnail: String?
+    public var background: String?
+    public var backgroundThumbnail: String?
     public var articleTags: [ArticleTagItemModel]?
     public var medias: [MediaModel]?
     public var auditableEntity: AuditableEntity?
@@ -32,7 +36,7 @@ public struct ArticleModel: Codable, JSONEncodable, Hashable {
     public var content: String?
     public var localizedUrls: [LocalizedUrlModel]?
 
-    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, confirmed: Bool? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, userName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, youtubeUrl: String? = nil, articleTags: [ArticleTagItemModel]? = nil, medias: [MediaModel]? = nil, auditableEntity: AuditableEntity? = nil, overview: String? = nil, content: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil) {
+    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, description: String? = nil, confirmed: Bool? = nil, marketingType: MarketingType? = nil, userId: UUID? = nil, userName: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, youtubeUrl: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, background: String? = nil, backgroundThumbnail: String? = nil, articleTags: [ArticleTagItemModel]? = nil, medias: [MediaModel]? = nil, auditableEntity: AuditableEntity? = nil, overview: String? = nil, content: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil) {
         self.id = id
         self.languageCode = languageCode
         self.name = name
@@ -46,6 +50,10 @@ public struct ArticleModel: Codable, JSONEncodable, Hashable {
         self.hospitalName = hospitalName
         self.hospitalSlug = hospitalSlug
         self.youtubeUrl = youtubeUrl
+        self.photo = photo
+        self.photoThumbnail = photoThumbnail
+        self.background = background
+        self.backgroundThumbnail = backgroundThumbnail
         self.articleTags = articleTags
         self.medias = medias
         self.auditableEntity = auditableEntity
@@ -68,6 +76,10 @@ public struct ArticleModel: Codable, JSONEncodable, Hashable {
         case hospitalName
         case hospitalSlug
         case youtubeUrl
+        case photo
+        case photoThumbnail
+        case background
+        case backgroundThumbnail
         case articleTags
         case medias
         case auditableEntity
@@ -93,6 +105,10 @@ public struct ArticleModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(hospitalName, forKey: .hospitalName)
         try container.encodeIfPresent(hospitalSlug, forKey: .hospitalSlug)
         try container.encodeIfPresent(youtubeUrl, forKey: .youtubeUrl)
+        try container.encodeIfPresent(photo, forKey: .photo)
+        try container.encodeIfPresent(photoThumbnail, forKey: .photoThumbnail)
+        try container.encodeIfPresent(background, forKey: .background)
+        try container.encodeIfPresent(backgroundThumbnail, forKey: .backgroundThumbnail)
         try container.encodeIfPresent(articleTags, forKey: .articleTags)
         try container.encodeIfPresent(medias, forKey: .medias)
         try container.encodeIfPresent(auditableEntity, forKey: .auditableEntity)

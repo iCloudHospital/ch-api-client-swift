@@ -132,6 +132,9 @@ Class | Method | HTTP request | Description
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidget) | **GET** /api/v2/hospitals/{hospitalId} | 
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdHandlesGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidhandlesget) | **GET** /api/v2/hospitals/{hospitalId}/handles | Get all HospitalHandles.
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdHandlesHandleIdGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidhandleshandleidget) | **GET** /api/v2/hospitals/{hospitalId}/handles/{handleId} | Get HospitalHandle.
+*HospitalsAPI* | [**apiV2HospitalsHospitalIdLandingsGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidlandingsget) | **GET** /api/v2/hospitals/{hospitalId}/landings | 
+*HospitalsAPI* | [**apiV2HospitalsHospitalIdLandingsLandingIdGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidlandingslandingidget) | **GET** /api/v2/hospitals/{hospitalId}/landings/{landingId} | 
+*HospitalsAPI* | [**apiV2HospitalsHospitalIdLandingsSlugGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidlandingsslugget) | **GET** /api/v2/hospitals/{hospitalId}/landings/{slug} | 
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdMediasGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidmediasget) | **GET** /api/v2/hospitals/{hospitalId}/medias | Get all HospitalMedias.
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdMediasMediaIdGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidmediasmediaidget) | **GET** /api/v2/hospitals/{hospitalId}/medias/{mediaId} | Get HospitalMedia.
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdSpecialtiesGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidspecialtiesget) | **GET** /api/v2/hospitals/{hospitalId}/specialties | Get all HospitalSpecialties.
@@ -149,9 +152,8 @@ Class | Method | HTTP request | Description
 *HospitalsAPI* | [**apiV2HospitalsSimpleGet**](docs/HospitalsAPI.md#apiv2hospitalssimpleget) | **GET** /api/v2/hospitals/simple | Get all Hospitals.
 *HospitalsAPI* | [**apiV2HospitalsSlugGet**](docs/HospitalsAPI.md#apiv2hospitalsslugget) | **GET** /api/v2/hospitals/{slug} | 
 *ImagesAPI* | [**apiV2ImagesPost**](docs/ImagesAPI.md#apiv2imagespost) | **POST** /api/v2/images | 
-*LanguagesAPI* | [**apiV2LanguagesCodeGet**](docs/LanguagesAPI.md#apiv2languagescodeget) | **GET** /api/v2/languages/{code} | Get Language by code.
+*LanguagesAPI* | [**apiV2LanguagesCodeGet**](docs/LanguagesAPI.md#apiv2languagescodeget) | **GET** /api/v2/languages/{code} | Get Language.
 *LanguagesAPI* | [**apiV2LanguagesGet**](docs/LanguagesAPI.md#apiv2languagesget) | **GET** /api/v2/languages | Get all Languages.
-*LanguagesAPI* | [**apiV2LanguagesIdGet**](docs/LanguagesAPI.md#apiv2languagesidget) | **GET** /api/v2/languages/{id} | Get Language.
 *MembershipsAPI* | [**apiV2MembershipsGet**](docs/MembershipsAPI.md#apiv2membershipsget) | **GET** /api/v2/memberships | Get all memberships.
 *MembershipsAPI* | [**apiV2MembershipsMembershipIdGet**](docs/MembershipsAPI.md#apiv2membershipsmembershipidget) | **GET** /api/v2/memberships/{membershipId} | Get membership.
 *MembershipsAPI* | [**apiV2MembershipsMembershipIdMembersGet**](docs/MembershipsAPI.md#apiv2membershipsmembershipidmembersget) | **GET** /api/v2/memberships/{membershipId}/members | Get all members.
@@ -327,6 +329,9 @@ Class | Method | HTTP request | Description
  - [HospitalsModel](docs/HospitalsModel.md)
  - [HospitalsSimpleModel](docs/HospitalsSimpleModel.md)
  - [InviteSendBirdGroupChannelCommand](docs/InviteSendBirdGroupChannelCommand.md)
+ - [LandingItemModel](docs/LandingItemModel.md)
+ - [LandingModel](docs/LandingModel.md)
+ - [LandingsModel](docs/LandingsModel.md)
  - [LanguageItemModel](docs/LanguageItemModel.md)
  - [LanguageModel](docs/LanguageModel.md)
  - [LanguagesModel](docs/LanguagesModel.md)

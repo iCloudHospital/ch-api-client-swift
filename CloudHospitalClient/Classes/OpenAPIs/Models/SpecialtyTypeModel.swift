@@ -17,6 +17,10 @@ public struct SpecialtyTypeModel: Codable, JSONEncodable, Hashable {
     public var name: String?
     public var slug: String?
     public var confirmed: Bool?
+    public var photo: String?
+    public var photoThumbnail: String?
+    public var background: String?
+    public var backgroundThumbnail: String?
     public var description: String?
     public var marketingType: MarketingType?
     public var specialtiesCount: Int?
@@ -25,12 +29,16 @@ public struct SpecialtyTypeModel: Codable, JSONEncodable, Hashable {
     public var content: String?
     public var localizedUrls: [LocalizedUrlModel]?
 
-    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, description: String? = nil, marketingType: MarketingType? = nil, specialtiesCount: Int? = nil, medias: [MediaModel]? = nil, auditableEntity: AuditableEntity? = nil, content: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil) {
+    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, photo: String? = nil, photoThumbnail: String? = nil, background: String? = nil, backgroundThumbnail: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, specialtiesCount: Int? = nil, medias: [MediaModel]? = nil, auditableEntity: AuditableEntity? = nil, content: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil) {
         self.id = id
         self.languageCode = languageCode
         self.name = name
         self.slug = slug
         self.confirmed = confirmed
+        self.photo = photo
+        self.photoThumbnail = photoThumbnail
+        self.background = background
+        self.backgroundThumbnail = backgroundThumbnail
         self.description = description
         self.marketingType = marketingType
         self.specialtiesCount = specialtiesCount
@@ -46,6 +54,10 @@ public struct SpecialtyTypeModel: Codable, JSONEncodable, Hashable {
         case name
         case slug
         case confirmed
+        case photo
+        case photoThumbnail
+        case background
+        case backgroundThumbnail
         case description
         case marketingType
         case specialtiesCount
@@ -64,6 +76,10 @@ public struct SpecialtyTypeModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(name, forKey: .name)
         try container.encodeIfPresent(slug, forKey: .slug)
         try container.encodeIfPresent(confirmed, forKey: .confirmed)
+        try container.encodeIfPresent(photo, forKey: .photo)
+        try container.encodeIfPresent(photoThumbnail, forKey: .photoThumbnail)
+        try container.encodeIfPresent(background, forKey: .background)
+        try container.encodeIfPresent(backgroundThumbnail, forKey: .backgroundThumbnail)
         try container.encodeIfPresent(description, forKey: .description)
         try container.encodeIfPresent(marketingType, forKey: .marketingType)
         try container.encodeIfPresent(specialtiesCount, forKey: .specialtiesCount)

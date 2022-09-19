@@ -20,6 +20,7 @@ open class ServiceReviewsAPI {
      
      - parameter id: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
+     - parameter hospitalSpecialtyId: (query)  (optional)
      - parameter serviceId: (query)  (optional)
      - parameter serviceName: (query)  (optional)
      - parameter patientId: (query)  (optional)
@@ -37,10 +38,10 @@ open class ServiceReviewsAPI {
      */
     #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsGet(id: UUID? = nil, hospitalId: UUID? = nil, serviceId: UUID? = nil, serviceName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, gender: Gender? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<ServiceReviewsModel, Error> {
+    open class func apiV2ServicereviewsGet(id: UUID? = nil, hospitalId: UUID? = nil, hospitalSpecialtyId: UUID? = nil, serviceId: UUID? = nil, serviceName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, gender: Gender? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<ServiceReviewsModel, Error> {
         var requestTask: RequestTask?
         return Future<ServiceReviewsModel, Error> { promise in
-            requestTask = apiV2ServicereviewsGetWithRequestBuilder(id: id, hospitalId: hospitalId, serviceId: serviceId, serviceName: serviceName, patientId: patientId, patientName: patientName, gender: gender, recommended: recommended, rate: rate, reviewType: reviewType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
+            requestTask = apiV2ServicereviewsGetWithRequestBuilder(id: id, hospitalId: hospitalId, hospitalSpecialtyId: hospitalSpecialtyId, serviceId: serviceId, serviceName: serviceName, patientId: patientId, patientName: patientName, gender: gender, recommended: recommended, rate: rate, reviewType: reviewType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
                 switch result {
                 case let .success(response):
                     promise(.success(response.body))
@@ -61,6 +62,7 @@ open class ServiceReviewsAPI {
      - GET /api/v2/servicereviews
      - parameter id: (query)  (optional)
      - parameter hospitalId: (query)  (optional)
+     - parameter hospitalSpecialtyId: (query)  (optional)
      - parameter serviceId: (query)  (optional)
      - parameter serviceName: (query)  (optional)
      - parameter patientId: (query)  (optional)
@@ -76,7 +78,7 @@ open class ServiceReviewsAPI {
      - parameter lastRetrieved: (query)  (optional)
      - returns: RequestBuilder<ServiceReviewsModel> 
      */
-    open class func apiV2ServicereviewsGetWithRequestBuilder(id: UUID? = nil, hospitalId: UUID? = nil, serviceId: UUID? = nil, serviceName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, gender: Gender? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<ServiceReviewsModel> {
+    open class func apiV2ServicereviewsGetWithRequestBuilder(id: UUID? = nil, hospitalId: UUID? = nil, hospitalSpecialtyId: UUID? = nil, serviceId: UUID? = nil, serviceName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, gender: Gender? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<ServiceReviewsModel> {
         let localVariablePath = "/api/v2/servicereviews"
         let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -85,6 +87,7 @@ open class ServiceReviewsAPI {
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
             "Id": id?.encodeToJSON(),
             "HospitalId": hospitalId?.encodeToJSON(),
+            "HospitalSpecialtyId": hospitalSpecialtyId?.encodeToJSON(),
             "ServiceId": serviceId?.encodeToJSON(),
             "ServiceName": serviceName?.encodeToJSON(),
             "PatientId": patientId?.encodeToJSON(),

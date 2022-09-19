@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **hospitalId** | **UUID** |  | [optional] 
 **hospitalName** | **String** |  | [optional] [readonly] 
 **hospitalSlug** | **String** |  | [optional] [readonly] 
+**countryId** | **UUID** |  | [optional] [readonly] 
+**marketingType** | [**MarketingType**](MarketingType.md) |  | [optional] 
 **doctorId** | **UUID** |  | [optional] 
 **name** | **String** |  | [optional] [readonly] 
 **slug** | **String** |  | [optional] [readonly] 
@@ -16,6 +18,8 @@ Name | Type | Description | Notes
 **photoThumbnail** | **String** |  | [optional] 
 **consultationEnabled** | **Bool** |  | [optional] 
 **consultationFee** | **Double** |  | [optional] 
+**startPracticeDate** | **Date** |  | [optional] 
+**yearOfExperience** | **Double** |  | [optional] [readonly] 
 **specialtiesSummerized** | **String** |  | [optional] [readonly] 
 **order** | **Int** |  | [optional] 
 

@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 # **apiV2ServicereviewsGet**
 ```swift
-    open class func apiV2ServicereviewsGet(id: UUID? = nil, hospitalId: UUID? = nil, serviceId: UUID? = nil, serviceName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, gender: Gender? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: ServiceReviewsModel?, _ error: Error?) -> Void)
+    open class func apiV2ServicereviewsGet(id: UUID? = nil, hospitalId: UUID? = nil, hospitalSpecialtyId: UUID? = nil, serviceId: UUID? = nil, serviceName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, gender: Gender? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: ServiceReviewsModel?, _ error: Error?) -> Void)
 ```
 
 Get all ServiceReviews.
@@ -30,6 +30,7 @@ import CloudHospitalClient
 
 let id = 987 // UUID |  (optional)
 let hospitalId = 987 // UUID |  (optional)
+let hospitalSpecialtyId = 987 // UUID |  (optional)
 let serviceId = 987 // UUID |  (optional)
 let serviceName = "serviceName_example" // String |  (optional)
 let patientId = 987 // UUID |  (optional)
@@ -45,7 +46,7 @@ let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 
 // Get all ServiceReviews.
-ServiceReviewsAPI.apiV2ServicereviewsGet(id: id, hospitalId: hospitalId, serviceId: serviceId, serviceName: serviceName, patientId: patientId, patientName: patientName, gender: gender, recommended: recommended, rate: rate, reviewType: reviewType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+ServiceReviewsAPI.apiV2ServicereviewsGet(id: id, hospitalId: hospitalId, hospitalSpecialtyId: hospitalSpecialtyId, serviceId: serviceId, serviceName: serviceName, patientId: patientId, patientName: patientName, gender: gender, recommended: recommended, rate: rate, reviewType: reviewType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -63,6 +64,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **UUID** |  | [optional] 
  **hospitalId** | **UUID** |  | [optional] 
+ **hospitalSpecialtyId** | **UUID** |  | [optional] 
  **serviceId** | **UUID** |  | [optional] 
  **serviceName** | **String** |  | [optional] 
  **patientId** | **UUID** |  | [optional] 
