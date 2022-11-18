@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
 **content** | **String** |  | [optional] [readonly] 
 **localizedUrls** | [LocalizedUrlModel] |  | [optional] [readonly] 
+**customStyle** | **String** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **hospitalId** | **UUID** |  | [optional] 
 **hospitalName** | **String** |  | [optional] [readonly] 
 **hospitalSlug** | **String** |  | [optional] [readonly] 
+**hospitalLogo** | **String** |  | [optional] [readonly] 
 **youtubeUrl** | **String** |  | [optional] 
 **photo** | **String** |  | [optional] 
 **photoThumbnail** | **String** |  | [optional] 

@@ -37,6 +37,7 @@ Name | Type | Description | Notes
 **hospitalSnsHandles** | [SnsHandle] |  | [optional] 
 **languages** | [HospitalLanguageItemModel] |  | [optional] 
 **awards** | [AwardModel] |  | [optional] 
+**consultationOption** | [**HospitalConsultationOptionModel**](HospitalConsultationOptionModel.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

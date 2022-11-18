@@ -17,10 +17,14 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/DealsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DevicesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorAffiliationsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/DoctorsAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/ExternalAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/FaqCategoriesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/FaqsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/GroupChannelsAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/HeaderNavigationsAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/HospitalLanguagesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/HospitalsAPI.swift
+CloudHospitalClient/Classes/OpenAPIs/APIs/HospitalsConsultationTimetablesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ImagesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/LanguagesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/MembershipsAPI.swift
@@ -76,6 +80,10 @@ CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationChangeLogModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationStatus.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationTimetableDateModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationTimetableModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationTimetableStatus.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationTimetableTimeSlotModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ConsultationsModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ContributionType.swift
@@ -94,6 +102,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/CreateDeviceLoginCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateMediaCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreatePatientCommand.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/CreateServiceReviewCommand.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/DayOfWeek.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealItemSimpleModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DealModel.swift
@@ -131,6 +140,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/DoctorSpecialtyItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorSpecialtyModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorsModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/DoctorsSimpleModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/FacebookUserDataDeletionResponseModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoriesModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoryItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqCategoryModel.swift
@@ -141,9 +151,11 @@ CloudHospitalClient/Classes/OpenAPIs/Models/FaqTagModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqTagsModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/FaqsModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/Gender.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/HeaderNavigationItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalAccreditationItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalAccreditationModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalAccreditationsModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/HospitalConsultationOptionModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalEquipmentItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalEquipmentModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalEquipmentsModel.swift
@@ -152,6 +164,7 @@ CloudHospitalClient/Classes/OpenAPIs/Models/HospitalEvaluationModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalEvaluationsModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalLanguageItemModel.swift
+CloudHospitalClient/Classes/OpenAPIs/Models/HospitalLanguagesModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalServiceItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/HospitalServiceModel.swift
@@ -291,6 +304,10 @@ docs/ConsultationChangeLogModel.md
 docs/ConsultationItemModel.md
 docs/ConsultationModel.md
 docs/ConsultationStatus.md
+docs/ConsultationTimetableDateModel.md
+docs/ConsultationTimetableModel.md
+docs/ConsultationTimetableStatus.md
+docs/ConsultationTimetableTimeSlotModel.md
 docs/ConsultationType.md
 docs/ConsultationsAPI.md
 docs/ConsultationsModel.md
@@ -312,6 +329,7 @@ docs/CreateDeviceLoginCommand.md
 docs/CreateMediaCommand.md
 docs/CreatePatientCommand.md
 docs/CreateServiceReviewCommand.md
+docs/DayOfWeek.md
 docs/DealItemModel.md
 docs/DealItemSimpleModel.md
 docs/DealModel.md
@@ -353,6 +371,8 @@ docs/DoctorSpecialtyModel.md
 docs/DoctorsAPI.md
 docs/DoctorsModel.md
 docs/DoctorsSimpleModel.md
+docs/ExternalAPI.md
+docs/FacebookUserDataDeletionResponseModel.md
 docs/FaqCategoriesAPI.md
 docs/FaqCategoriesModel.md
 docs/FaqCategoryItemModel.md
@@ -366,9 +386,12 @@ docs/FaqsAPI.md
 docs/FaqsModel.md
 docs/Gender.md
 docs/GroupChannelsAPI.md
+docs/HeaderNavigationItemModel.md
+docs/HeaderNavigationsAPI.md
 docs/HospitalAccreditationItemModel.md
 docs/HospitalAccreditationModel.md
 docs/HospitalAccreditationsModel.md
+docs/HospitalConsultationOptionModel.md
 docs/HospitalEquipmentItemModel.md
 docs/HospitalEquipmentModel.md
 docs/HospitalEquipmentsModel.md
@@ -377,6 +400,8 @@ docs/HospitalEvaluationModel.md
 docs/HospitalEvaluationsModel.md
 docs/HospitalItemModel.md
 docs/HospitalLanguageItemModel.md
+docs/HospitalLanguagesAPI.md
+docs/HospitalLanguagesModel.md
 docs/HospitalModel.md
 docs/HospitalServiceItemModel.md
 docs/HospitalServiceModel.md
@@ -389,6 +414,7 @@ docs/HospitalSpecialtyItemModel.md
 docs/HospitalSpecialtyModel.md
 docs/HospitalSpecialtySimpleItemModel.md
 docs/HospitalsAPI.md
+docs/HospitalsConsultationTimetablesAPI.md
 docs/HospitalsModel.md
 docs/HospitalsSimpleModel.md
 docs/ImagesAPI.md

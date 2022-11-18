@@ -1,12 +1,12 @@
 {
   "name": "ch-api-client-swift",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "description": "Openapi generated swift client for CloudHospital",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "openapi-generator-cli version-manager set 6.0.1 && openapi-generator-cli generate -g swift5 --additional-properties=projectName=CloudHospitalClient,podVersion=1.8.5,responseAs=Combine --library alamofire -o . -i https://api-int.icloudhospital.com/swagger/v2/swagger.json",
-    "build-identity": "openapi-generator-cli version-manager set 6.0.1 && openapi-generator-cli generate -g swift5 --additional-properties=projectName=CloudHospitalClient,podVersion=1.8.5,responseAs=Combine --library alamofire -o . -i https://identity-int.icloudhospital.com/swagger/v1/swagger.json",
+    "build": "openapi-generator-cli version-manager set 6.0.1 && openapi-generator-cli generate -g swift5 --additional-properties=projectName=CloudHospitalClient,podVersion=1.8.6,responseAs=Combine --library alamofire -o . -i https://api-int.icloudhospital.com/swagger/v2/swagger.json",
+    "build-identity": "openapi-generator-cli version-manager set 6.0.1 && openapi-generator-cli generate -g swift5 --additional-properties=projectName=CloudHospitalClient,podVersion=1.8.6,responseAs=Combine --library alamofire -o . -i https://identity-int.icloudhospital.com/swagger/v1/swagger.json",
     "deploy": "pod trunk push CloudHospitalClient.podspec --allow-warnings "
   },
   "repository": {
@@ -18,7 +18,7 @@
     "swift",
     "client"
   ],
-  "author": "hyounoosung@gmail.com",
+  "author": "hyounoosung@icloudhospital.com",
   "license": "ISC",
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.1"

@@ -106,6 +106,7 @@ Class | Method | HTTP request | Description
 *DoctorsAPI* | [**apiV2DoctorsDoctorIdSpecialtiesSpecialtyIdGet**](docs/DoctorsAPI.md#apiv2doctorsdoctoridspecialtiesspecialtyidget) | **GET** /api/v2/doctors/{doctorId}/specialties/{specialtyId} | Get DoctorSpecialty
 *DoctorsAPI* | [**apiV2DoctorsGet**](docs/DoctorsAPI.md#apiv2doctorsget) | **GET** /api/v2/doctors | Get all Doctors.
 *DoctorsAPI* | [**apiV2DoctorsSimpleGet**](docs/DoctorsAPI.md#apiv2doctorssimpleget) | **GET** /api/v2/doctors/simple | Get all Doctors.
+*ExternalAPI* | [**apiV2ExternalFacebookDeleteuserdataPost**](docs/ExternalAPI.md#apiv2externalfacebookdeleteuserdatapost) | **POST** /api/v2/external/facebook/deleteuserdata | Callback for Facebook user data deletion
 *FaqCategoriesAPI* | [**apiV2FaqcategoriesFaqCategoryIdGet**](docs/FaqCategoriesAPI.md#apiv2faqcategoriesfaqcategoryidget) | **GET** /api/v2/faqcategories/{faqCategoryId} | Get FaqCategory.
 *FaqCategoriesAPI* | [**apiV2FaqcategoriesGet**](docs/FaqCategoriesAPI.md#apiv2faqcategoriesget) | **GET** /api/v2/faqcategories | Get all FaqCategories.
 *FaqCategoriesAPI* | [**apiV2FaqcategoriesSlugGet**](docs/FaqCategoriesAPI.md#apiv2faqcategoriesslugget) | **GET** /api/v2/faqcategories/{slug} | Get FaqCategory by slug.
@@ -120,6 +121,8 @@ Class | Method | HTTP request | Description
 *GroupChannelsAPI* | [**apiV2GroupchannelsDealDealIdGet**](docs/GroupChannelsAPI.md#apiv2groupchannelsdealdealidget) | **GET** /api/v2/groupchannels/deal/{dealId} | 
 *GroupChannelsAPI* | [**apiV2GroupchannelsDoctorDoctorIdGet**](docs/GroupChannelsAPI.md#apiv2groupchannelsdoctordoctoridget) | **GET** /api/v2/groupchannels/doctor/{doctorId} | 
 *GroupChannelsAPI* | [**apiV2GroupchannelsHospitalHospitalIdGet**](docs/GroupChannelsAPI.md#apiv2groupchannelshospitalhospitalidget) | **GET** /api/v2/groupchannels/hospital/{hospitalId} | 
+*HeaderNavigationsAPI* | [**apiV2HeadernavigationsLanguageCodeGet**](docs/HeaderNavigationsAPI.md#apiv2headernavigationslanguagecodeget) | **GET** /api/v2/headernavigations/{languageCode} | Get all HeaderNavigationItems
+*HospitalLanguagesAPI* | [**apiV2HospitalsHospitalIdLanguagesGet**](docs/HospitalLanguagesAPI.md#apiv2hospitalshospitalidlanguagesget) | **GET** /api/v2/hospitals/{hospitalId}/languages | Get hospitalLanguages
 *HospitalsAPI* | [**apiV2HospitalsGet**](docs/HospitalsAPI.md#apiv2hospitalsget) | **GET** /api/v2/hospitals | Get all Hospitals.
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdAccreditationsAccreditationIdGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidaccreditationsaccreditationidget) | **GET** /api/v2/hospitals/{hospitalId}/accreditations/{accreditationId} | Get HospitalAccreditation.
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdAccreditationsGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidaccreditationsget) | **GET** /api/v2/hospitals/{hospitalId}/accreditations | Get all HospitalAccreditations.
@@ -151,6 +154,7 @@ Class | Method | HTTP request | Description
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdWorkingdaysWorkingDayIdGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidworkingdaysworkingdayidget) | **GET** /api/v2/hospitals/{hospitalId}/workingdays/{workingDayId} | Get HospitalWorkingDay.
 *HospitalsAPI* | [**apiV2HospitalsSimpleGet**](docs/HospitalsAPI.md#apiv2hospitalssimpleget) | **GET** /api/v2/hospitals/simple | Get all Hospitals.
 *HospitalsAPI* | [**apiV2HospitalsSlugGet**](docs/HospitalsAPI.md#apiv2hospitalsslugget) | **GET** /api/v2/hospitals/{slug} | 
+*HospitalsConsultationTimetablesAPI* | [**apiV2HospitalsHospitalIdConsultationtimetablesGet**](docs/HospitalsConsultationTimetablesAPI.md#apiv2hospitalshospitalidconsultationtimetablesget) | **GET** /api/v2/hospitals/{hospitalId}/consultationtimetables | Get hospital consultation timetables by hospitalId
 *ImagesAPI* | [**apiV2ImagesPost**](docs/ImagesAPI.md#apiv2imagespost) | **POST** /api/v2/images | 
 *LanguagesAPI* | [**apiV2LanguagesCodeGet**](docs/LanguagesAPI.md#apiv2languagescodeget) | **GET** /api/v2/languages/{code} | Get Language.
 *LanguagesAPI* | [**apiV2LanguagesGet**](docs/LanguagesAPI.md#apiv2languagesget) | **GET** /api/v2/languages | Get all Languages.
@@ -239,6 +243,10 @@ Class | Method | HTTP request | Description
  - [ConsultationItemModel](docs/ConsultationItemModel.md)
  - [ConsultationModel](docs/ConsultationModel.md)
  - [ConsultationStatus](docs/ConsultationStatus.md)
+ - [ConsultationTimetableDateModel](docs/ConsultationTimetableDateModel.md)
+ - [ConsultationTimetableModel](docs/ConsultationTimetableModel.md)
+ - [ConsultationTimetableStatus](docs/ConsultationTimetableStatus.md)
+ - [ConsultationTimetableTimeSlotModel](docs/ConsultationTimetableTimeSlotModel.md)
  - [ConsultationType](docs/ConsultationType.md)
  - [ConsultationsModel](docs/ConsultationsModel.md)
  - [ContributionType](docs/ContributionType.md)
@@ -257,6 +265,7 @@ Class | Method | HTTP request | Description
  - [CreateMediaCommand](docs/CreateMediaCommand.md)
  - [CreatePatientCommand](docs/CreatePatientCommand.md)
  - [CreateServiceReviewCommand](docs/CreateServiceReviewCommand.md)
+ - [DayOfWeek](docs/DayOfWeek.md)
  - [DealItemModel](docs/DealItemModel.md)
  - [DealItemSimpleModel](docs/DealItemSimpleModel.md)
  - [DealModel](docs/DealModel.md)
@@ -294,6 +303,7 @@ Class | Method | HTTP request | Description
  - [DoctorSpecialtyModel](docs/DoctorSpecialtyModel.md)
  - [DoctorsModel](docs/DoctorsModel.md)
  - [DoctorsSimpleModel](docs/DoctorsSimpleModel.md)
+ - [FacebookUserDataDeletionResponseModel](docs/FacebookUserDataDeletionResponseModel.md)
  - [FaqCategoriesModel](docs/FaqCategoriesModel.md)
  - [FaqCategoryItemModel](docs/FaqCategoryItemModel.md)
  - [FaqCategoryModel](docs/FaqCategoryModel.md)
@@ -304,9 +314,11 @@ Class | Method | HTTP request | Description
  - [FaqTagsModel](docs/FaqTagsModel.md)
  - [FaqsModel](docs/FaqsModel.md)
  - [Gender](docs/Gender.md)
+ - [HeaderNavigationItemModel](docs/HeaderNavigationItemModel.md)
  - [HospitalAccreditationItemModel](docs/HospitalAccreditationItemModel.md)
  - [HospitalAccreditationModel](docs/HospitalAccreditationModel.md)
  - [HospitalAccreditationsModel](docs/HospitalAccreditationsModel.md)
+ - [HospitalConsultationOptionModel](docs/HospitalConsultationOptionModel.md)
  - [HospitalEquipmentItemModel](docs/HospitalEquipmentItemModel.md)
  - [HospitalEquipmentModel](docs/HospitalEquipmentModel.md)
  - [HospitalEquipmentsModel](docs/HospitalEquipmentsModel.md)
@@ -315,6 +327,7 @@ Class | Method | HTTP request | Description
  - [HospitalEvaluationsModel](docs/HospitalEvaluationsModel.md)
  - [HospitalItemModel](docs/HospitalItemModel.md)
  - [HospitalLanguageItemModel](docs/HospitalLanguageItemModel.md)
+ - [HospitalLanguagesModel](docs/HospitalLanguagesModel.md)
  - [HospitalModel](docs/HospitalModel.md)
  - [HospitalServiceItemModel](docs/HospitalServiceItemModel.md)
  - [HospitalServiceModel](docs/HospitalServiceModel.md)

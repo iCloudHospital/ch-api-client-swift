@@ -30,8 +30,9 @@ public struct SpecialtyModel: Codable, JSONEncodable, Hashable {
     public var overview: String?
     public var content: String?
     public var localizedUrls: [LocalizedUrlModel]?
+    public var customStyle: String?
 
-    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, photo: String? = nil, photoThumbnail: String? = nil, background: String? = nil, backgroundThumbnail: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, marketingType: MarketingType? = nil, medias: [MediaModel]? = nil, auditableEntity: AuditableEntity? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil) {
+    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, photo: String? = nil, photoThumbnail: String? = nil, background: String? = nil, backgroundThumbnail: String? = nil, specialtyTypeId: UUID? = nil, specialtyTypeName: String? = nil, marketingType: MarketingType? = nil, medias: [MediaModel]? = nil, auditableEntity: AuditableEntity? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil, customStyle: String? = nil) {
         self.id = id
         self.languageCode = languageCode
         self.name = name
@@ -50,6 +51,7 @@ public struct SpecialtyModel: Codable, JSONEncodable, Hashable {
         self.overview = overview
         self.content = content
         self.localizedUrls = localizedUrls
+        self.customStyle = customStyle
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -71,6 +73,7 @@ public struct SpecialtyModel: Codable, JSONEncodable, Hashable {
         case overview
         case content
         case localizedUrls
+        case customStyle
     }
 
     // Encodable protocol methods
@@ -95,6 +98,7 @@ public struct SpecialtyModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(overview, forKey: .overview)
         try container.encodeIfPresent(content, forKey: .content)
         try container.encodeIfPresent(localizedUrls, forKey: .localizedUrls)
+        try container.encodeIfPresent(customStyle, forKey: .customStyle)
     }
 }
 

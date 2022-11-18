@@ -32,8 +32,9 @@ public struct FaqModel: Codable, JSONEncodable, Hashable {
     public var overview: String?
     public var content: String?
     public var localizedUrls: [LocalizedUrlModel]?
+    public var customStyle: String?
 
-    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, parentId: UUID? = nil, order: Int? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, hospitalWebsiteUrl: String? = nil, faqCategoryId: UUID? = nil, faqCategoryName: String? = nil, faqTags: [FaqTagItemModel]? = nil, medias: [MediaModel]? = nil, auditableEntity: AuditableEntity? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil) {
+    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, parentId: UUID? = nil, order: Int? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, hospitalWebsiteUrl: String? = nil, faqCategoryId: UUID? = nil, faqCategoryName: String? = nil, faqTags: [FaqTagItemModel]? = nil, medias: [MediaModel]? = nil, auditableEntity: AuditableEntity? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil, customStyle: String? = nil) {
         self.id = id
         self.languageCode = languageCode
         self.name = name
@@ -54,6 +55,7 @@ public struct FaqModel: Codable, JSONEncodable, Hashable {
         self.overview = overview
         self.content = content
         self.localizedUrls = localizedUrls
+        self.customStyle = customStyle
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -77,6 +79,7 @@ public struct FaqModel: Codable, JSONEncodable, Hashable {
         case overview
         case content
         case localizedUrls
+        case customStyle
     }
 
     // Encodable protocol methods
@@ -103,6 +106,7 @@ public struct FaqModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(overview, forKey: .overview)
         try container.encodeIfPresent(content, forKey: .content)
         try container.encodeIfPresent(localizedUrls, forKey: .localizedUrls)
+        try container.encodeIfPresent(customStyle, forKey: .customStyle)
     }
 }
 

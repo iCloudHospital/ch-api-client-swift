@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **UUID** |  | [optional] 
 **code** | **String** |  | [optional] 
 **name** | **String** |  | [optional] 
+**localizedName** | **String** |  | [optional] 
 **description** | **String** |  | [optional] 
 **published** | **Bool** |  | [optional] 
 **order** | **Int** |  | [optional] 

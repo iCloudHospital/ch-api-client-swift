@@ -46,8 +46,9 @@ public struct HospitalModel: Codable, JSONEncodable, Hashable {
     public var hospitalSnsHandles: [SnsHandle]?
     public var languages: [HospitalLanguageItemModel]?
     public var awards: [AwardModel]?
+    public var consultationOption: HospitalConsultationOptionModel?
 
-    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, logo: String? = nil, marketingType: MarketingType? = nil, consultationEnabled: Bool? = nil, consultationFee: Double? = nil, timeZone: String? = nil, websiteUrl: String? = nil, paymentEnabled: Bool? = nil, countryId: UUID? = nil, specialtiesSummerized: String? = nil, accreditations: [HospitalAccreditationItemModel]? = nil, medias: [MediaModel]? = nil, location: LocationModel? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil, bedsCount: Int? = nil, operationsPerYear: Int? = nil, foundationYear: Int? = nil, medicalStaffCount: Int? = nil, doctorCount: Int? = nil, contactTel: String? = nil, contactEmail: String? = nil, customStyle: String? = nil, evaluations: [HospitalEvaluationItemModel]? = nil, hospitalWorkingDays: [WorkingDay]? = nil, hospitalSnsHandles: [SnsHandle]? = nil, languages: [HospitalLanguageItemModel]? = nil, awards: [AwardModel]? = nil) {
+    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, logo: String? = nil, marketingType: MarketingType? = nil, consultationEnabled: Bool? = nil, consultationFee: Double? = nil, timeZone: String? = nil, websiteUrl: String? = nil, paymentEnabled: Bool? = nil, countryId: UUID? = nil, specialtiesSummerized: String? = nil, accreditations: [HospitalAccreditationItemModel]? = nil, medias: [MediaModel]? = nil, location: LocationModel? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil, bedsCount: Int? = nil, operationsPerYear: Int? = nil, foundationYear: Int? = nil, medicalStaffCount: Int? = nil, doctorCount: Int? = nil, contactTel: String? = nil, contactEmail: String? = nil, customStyle: String? = nil, evaluations: [HospitalEvaluationItemModel]? = nil, hospitalWorkingDays: [WorkingDay]? = nil, hospitalSnsHandles: [SnsHandle]? = nil, languages: [HospitalLanguageItemModel]? = nil, awards: [AwardModel]? = nil, consultationOption: HospitalConsultationOptionModel? = nil) {
         self.id = id
         self.languageCode = languageCode
         self.name = name
@@ -82,6 +83,7 @@ public struct HospitalModel: Codable, JSONEncodable, Hashable {
         self.hospitalSnsHandles = hospitalSnsHandles
         self.languages = languages
         self.awards = awards
+        self.consultationOption = consultationOption
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -119,6 +121,7 @@ public struct HospitalModel: Codable, JSONEncodable, Hashable {
         case hospitalSnsHandles
         case languages
         case awards
+        case consultationOption
     }
 
     // Encodable protocol methods
@@ -159,6 +162,7 @@ public struct HospitalModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(hospitalSnsHandles, forKey: .hospitalSnsHandles)
         try container.encodeIfPresent(languages, forKey: .languages)
         try container.encodeIfPresent(awards, forKey: .awards)
+        try container.encodeIfPresent(consultationOption, forKey: .consultationOption)
     }
 }
 
