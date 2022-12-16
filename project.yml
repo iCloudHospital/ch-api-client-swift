@@ -7,7 +7,7 @@ targets:
     sources: [CloudHospitalClient]
     info:
       path: ./Info.plist
-      version: 1.8.7
+      version: 8
     settings:
       APPLICATION_EXTENSION_API_ONLY: true
     scheme: {}
