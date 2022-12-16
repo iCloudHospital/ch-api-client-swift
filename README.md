@@ -122,7 +122,6 @@ Class | Method | HTTP request | Description
 *GroupChannelsAPI* | [**apiV2GroupchannelsDoctorDoctorIdGet**](docs/GroupChannelsAPI.md#apiv2groupchannelsdoctordoctoridget) | **GET** /api/v2/groupchannels/doctor/{doctorId} | 
 *GroupChannelsAPI* | [**apiV2GroupchannelsHospitalHospitalIdGet**](docs/GroupChannelsAPI.md#apiv2groupchannelshospitalhospitalidget) | **GET** /api/v2/groupchannels/hospital/{hospitalId} | 
 *HeaderNavigationsAPI* | [**apiV2HeadernavigationsLanguageCodeGet**](docs/HeaderNavigationsAPI.md#apiv2headernavigationslanguagecodeget) | **GET** /api/v2/headernavigations/{languageCode} | Get all HeaderNavigationItems
-*HospitalLanguagesAPI* | [**apiV2HospitalsHospitalIdLanguagesGet**](docs/HospitalLanguagesAPI.md#apiv2hospitalshospitalidlanguagesget) | **GET** /api/v2/hospitals/{hospitalId}/languages | Get hospitalLanguages
 *HospitalsAPI* | [**apiV2HospitalsGet**](docs/HospitalsAPI.md#apiv2hospitalsget) | **GET** /api/v2/hospitals | Get all Hospitals.
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdAccreditationsAccreditationIdGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidaccreditationsaccreditationidget) | **GET** /api/v2/hospitals/{hospitalId}/accreditations/{accreditationId} | Get HospitalAccreditation.
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdAccreditationsGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidaccreditationsget) | **GET** /api/v2/hospitals/{hospitalId}/accreditations | Get all HospitalAccreditations.
@@ -138,6 +137,7 @@ Class | Method | HTTP request | Description
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdLandingsGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidlandingsget) | **GET** /api/v2/hospitals/{hospitalId}/landings | 
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdLandingsLandingIdGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidlandingslandingidget) | **GET** /api/v2/hospitals/{hospitalId}/landings/{landingId} | 
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdLandingsSlugGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidlandingsslugget) | **GET** /api/v2/hospitals/{hospitalId}/landings/{slug} | 
+*HospitalsAPI* | [**apiV2HospitalsHospitalIdLanguagesGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidlanguagesget) | **GET** /api/v2/hospitals/{hospitalId}/languages | Get hospitalLanguages
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdMediasGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidmediasget) | **GET** /api/v2/hospitals/{hospitalId}/medias | Get all HospitalMedias.
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdMediasMediaIdGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidmediasmediaidget) | **GET** /api/v2/hospitals/{hospitalId}/medias/{mediaId} | Get HospitalMedia.
 *HospitalsAPI* | [**apiV2HospitalsHospitalIdSpecialtiesGet**](docs/HospitalsAPI.md#apiv2hospitalshospitalidspecialtiesget) | **GET** /api/v2/hospitals/{hospitalId}/specialties | Get all HospitalSpecialties.
@@ -417,7 +417,6 @@ Class | Method | HTTP request | Description
  - [UserLocationModel](docs/UserLocationModel.md)
  - [UserLocationType](docs/UserLocationType.md)
  - [UserModel](docs/UserModel.md)
- - [WorkingDay](docs/WorkingDay.md)
  - [WorkingDayItemModel](docs/WorkingDayItemModel.md)
  - [WorkingDayModel](docs/WorkingDayModel.md)
  - [WorkingDaysModel](docs/WorkingDaysModel.md)

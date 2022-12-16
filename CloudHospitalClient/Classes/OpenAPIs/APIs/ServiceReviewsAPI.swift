@@ -85,22 +85,22 @@ open class ServiceReviewsAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(),
-            "HospitalId": hospitalId?.encodeToJSON(),
-            "HospitalSpecialtyId": hospitalSpecialtyId?.encodeToJSON(),
-            "ServiceId": serviceId?.encodeToJSON(),
-            "ServiceName": serviceName?.encodeToJSON(),
-            "PatientId": patientId?.encodeToJSON(),
-            "PatientName": patientName?.encodeToJSON(),
-            "Gender": gender?.encodeToJSON(),
-            "Recommended": recommended?.encodeToJSON(),
-            "Rate": rate?.encodeToJSON(),
-            "ReviewType": reviewType?.encodeToJSON(),
-            "LanguageCode": languageCode?.encodeToJSON(),
-            "ShowHidden": showHidden?.encodeToJSON(),
-            "page": page?.encodeToJSON(),
-            "limit": limit?.encodeToJSON(),
-            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "Id": (wrappedValue: id?.encodeToJSON(), isExplode: true),
+            "HospitalId": (wrappedValue: hospitalId?.encodeToJSON(), isExplode: true),
+            "HospitalSpecialtyId": (wrappedValue: hospitalSpecialtyId?.encodeToJSON(), isExplode: true),
+            "ServiceId": (wrappedValue: serviceId?.encodeToJSON(), isExplode: true),
+            "ServiceName": (wrappedValue: serviceName?.encodeToJSON(), isExplode: true),
+            "PatientId": (wrappedValue: patientId?.encodeToJSON(), isExplode: true),
+            "PatientName": (wrappedValue: patientName?.encodeToJSON(), isExplode: true),
+            "Gender": (wrappedValue: gender?.encodeToJSON(), isExplode: true),
+            "Recommended": (wrappedValue: recommended?.encodeToJSON(), isExplode: true),
+            "Rate": (wrappedValue: rate?.encodeToJSON(), isExplode: true),
+            "ReviewType": (wrappedValue: reviewType?.encodeToJSON(), isExplode: true),
+            "LanguageCode": (wrappedValue: languageCode?.encodeToJSON(), isExplode: true),
+            "ShowHidden": (wrappedValue: showHidden?.encodeToJSON(), isExplode: true),
+            "page": (wrappedValue: page?.encodeToJSON(), isExplode: true),
+            "limit": (wrappedValue: limit?.encodeToJSON(), isExplode: true),
+            "lastRetrieved": (wrappedValue: lastRetrieved?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -111,7 +111,7 @@ open class ServiceReviewsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ServiceReviewsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 
     /**
@@ -165,7 +165,7 @@ open class ServiceReviewsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ServiceReviewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -222,7 +222,7 @@ open class ServiceReviewsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -270,7 +270,7 @@ open class ServiceReviewsAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON(),
+            "languageCode": (wrappedValue: languageCode?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -281,7 +281,7 @@ open class ServiceReviewsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ServiceReviewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 
     /**
@@ -337,11 +337,11 @@ open class ServiceReviewsAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(),
-            "MediaType": mediaType?.encodeToJSON(),
-            "page": page?.encodeToJSON(),
-            "limit": limit?.encodeToJSON(),
-            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "Id": (wrappedValue: id?.encodeToJSON(), isExplode: true),
+            "MediaType": (wrappedValue: mediaType?.encodeToJSON(), isExplode: true),
+            "page": (wrappedValue: page?.encodeToJSON(), isExplode: true),
+            "limit": (wrappedValue: limit?.encodeToJSON(), isExplode: true),
+            "lastRetrieved": (wrappedValue: lastRetrieved?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -352,7 +352,7 @@ open class ServiceReviewsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MediasModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 
     /**
@@ -414,7 +414,7 @@ open class ServiceReviewsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -473,7 +473,7 @@ open class ServiceReviewsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 
     /**
@@ -537,7 +537,7 @@ open class ServiceReviewsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -596,7 +596,7 @@ open class ServiceReviewsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<MediaModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -655,6 +655,6 @@ open class ServiceReviewsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ServiceReviewModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 }

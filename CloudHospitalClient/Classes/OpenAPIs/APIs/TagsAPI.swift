@@ -61,10 +61,10 @@ open class TagsAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "TagId": tagId?.encodeToJSON(),
-            "page": page?.encodeToJSON(),
-            "limit": limit?.encodeToJSON(),
-            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "TagId": (wrappedValue: tagId?.encodeToJSON(), isExplode: true),
+            "page": (wrappedValue: page?.encodeToJSON(), isExplode: true),
+            "limit": (wrappedValue: limit?.encodeToJSON(), isExplode: true),
+            "lastRetrieved": (wrappedValue: lastRetrieved?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -75,7 +75,7 @@ open class TagsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TagsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 
     /**
@@ -123,7 +123,7 @@ open class TagsAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "releatedTags": releatedTags?.encodeToJSON(),
+            "releatedTags": (wrappedValue: releatedTags?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -134,6 +134,6 @@ open class TagsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<TagModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 }

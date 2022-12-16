@@ -9,11 +9,11 @@ Name | Type | Description | Notes
 **slug** | **String** |  | [optional] [readonly] 
 **confirmed** | **Bool** |  | [optional] [readonly] 
 **logo** | **String** |  | [optional] 
+**localizedUrls** | [LocalizedUrlModel] |  | [optional] [readonly] 
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
 **description** | **String** |  | [optional] [readonly] 
 **overview** | **String** |  | [optional] [readonly] 
 **content** | **String** |  | [optional] [readonly] 
-**localizedUrls** | [LocalizedUrlModel] |  | [optional] [readonly] 
 **customStyle** | **String** |  | [optional] 
 **medias** | [MediaModel] |  | [optional] 
 

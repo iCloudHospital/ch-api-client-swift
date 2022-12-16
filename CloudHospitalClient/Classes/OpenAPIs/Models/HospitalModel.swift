@@ -42,13 +42,13 @@ public struct HospitalModel: Codable, JSONEncodable, Hashable {
     public var contactEmail: String?
     public var customStyle: String?
     public var evaluations: [HospitalEvaluationItemModel]?
-    public var hospitalWorkingDays: [WorkingDay]?
-    public var hospitalSnsHandles: [SnsHandle]?
+    public var hospitalWorkingDays: [WorkingDayModel]?
+    public var hospitalSnsHandles: [SnsHandleModel]?
     public var languages: [HospitalLanguageItemModel]?
     public var awards: [AwardModel]?
     public var consultationOption: HospitalConsultationOptionModel?
 
-    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, logo: String? = nil, marketingType: MarketingType? = nil, consultationEnabled: Bool? = nil, consultationFee: Double? = nil, timeZone: String? = nil, websiteUrl: String? = nil, paymentEnabled: Bool? = nil, countryId: UUID? = nil, specialtiesSummerized: String? = nil, accreditations: [HospitalAccreditationItemModel]? = nil, medias: [MediaModel]? = nil, location: LocationModel? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil, bedsCount: Int? = nil, operationsPerYear: Int? = nil, foundationYear: Int? = nil, medicalStaffCount: Int? = nil, doctorCount: Int? = nil, contactTel: String? = nil, contactEmail: String? = nil, customStyle: String? = nil, evaluations: [HospitalEvaluationItemModel]? = nil, hospitalWorkingDays: [WorkingDay]? = nil, hospitalSnsHandles: [SnsHandle]? = nil, languages: [HospitalLanguageItemModel]? = nil, awards: [AwardModel]? = nil, consultationOption: HospitalConsultationOptionModel? = nil) {
+    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, logo: String? = nil, marketingType: MarketingType? = nil, consultationEnabled: Bool? = nil, consultationFee: Double? = nil, timeZone: String? = nil, websiteUrl: String? = nil, paymentEnabled: Bool? = nil, countryId: UUID? = nil, specialtiesSummerized: String? = nil, accreditations: [HospitalAccreditationItemModel]? = nil, medias: [MediaModel]? = nil, location: LocationModel? = nil, description: String? = nil, overview: String? = nil, content: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil, bedsCount: Int? = nil, operationsPerYear: Int? = nil, foundationYear: Int? = nil, medicalStaffCount: Int? = nil, doctorCount: Int? = nil, contactTel: String? = nil, contactEmail: String? = nil, customStyle: String? = nil, evaluations: [HospitalEvaluationItemModel]? = nil, hospitalWorkingDays: [WorkingDayModel]? = nil, hospitalSnsHandles: [SnsHandleModel]? = nil, languages: [HospitalLanguageItemModel]? = nil, awards: [AwardModel]? = nil, consultationOption: HospitalConsultationOptionModel? = nil) {
         self.id = id
         self.languageCode = languageCode
         self.name = name

@@ -62,7 +62,7 @@ open class ChatUsersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -114,7 +114,7 @@ open class ChatUsersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "DELETE", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -168,11 +168,11 @@ open class ChatUsersAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Limit": limit?.encodeToJSON(),
-            "Token": token?.encodeToJSON(),
-            "UserIds": userIds?.encodeToJSON(),
-            "Nickname": nickname?.encodeToJSON(),
-            "NicknameStartswith": nicknameStartswith?.encodeToJSON(),
+            "Limit": (wrappedValue: limit?.encodeToJSON(), isExplode: true),
+            "Token": (wrappedValue: token?.encodeToJSON(), isExplode: true),
+            "UserIds": (wrappedValue: userIds?.encodeToJSON(), isExplode: true),
+            "Nickname": (wrappedValue: nickname?.encodeToJSON(), isExplode: true),
+            "NicknameStartswith": (wrappedValue: nicknameStartswith?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -183,7 +183,7 @@ open class ChatUsersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ChatUsersModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -237,7 +237,7 @@ open class ChatUsersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -291,7 +291,7 @@ open class ChatUsersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -348,6 +348,6 @@ open class ChatUsersAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ChatUserModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 }

@@ -66,7 +66,7 @@ open class NotificationsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<Bool>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -120,11 +120,11 @@ open class NotificationsAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "NotificationCode": notificationCode?.encodeToJSON(),
-            "UnreadCountOnly": unreadCountOnly?.encodeToJSON(),
-            "page": page?.encodeToJSON(),
-            "limit": limit?.encodeToJSON(),
-            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "NotificationCode": (wrappedValue: notificationCode?.encodeToJSON(), isExplode: true),
+            "UnreadCountOnly": (wrappedValue: unreadCountOnly?.encodeToJSON(), isExplode: true),
+            "page": (wrappedValue: page?.encodeToJSON(), isExplode: true),
+            "limit": (wrappedValue: limit?.encodeToJSON(), isExplode: true),
+            "lastRetrieved": (wrappedValue: lastRetrieved?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -135,6 +135,6 @@ open class NotificationsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<NotificationsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 }

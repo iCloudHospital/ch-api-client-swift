@@ -28,10 +28,10 @@ public struct ArticleContributorModel: Codable, JSONEncodable, Hashable {
     public var contributorDescription: String?
     public var contributorOverview: String?
     public var contributorContent: String?
-    public var contributorSnsHandles: [SnsHandle]?
+    public var contributorSnsHandles: [SnsHandleModel]?
     public var localizedUrls: [LocalizedUrlModel]?
 
-    public init(articleId: UUID? = nil, contributorId: UUID? = nil, languageCode: String? = nil, contributorName: String? = nil, contributorSlug: String? = nil, contributorConfirmed: Bool? = nil, contributorEmail: String? = nil, contributorPhoto: String? = nil, contributorPhotoThumbnail: String? = nil, type: ContributionType? = nil, filter: String? = nil, order: Int? = nil, auditableEntity: AuditableEntity? = nil, contributorDescription: String? = nil, contributorOverview: String? = nil, contributorContent: String? = nil, contributorSnsHandles: [SnsHandle]? = nil, localizedUrls: [LocalizedUrlModel]? = nil) {
+    public init(articleId: UUID? = nil, contributorId: UUID? = nil, languageCode: String? = nil, contributorName: String? = nil, contributorSlug: String? = nil, contributorConfirmed: Bool? = nil, contributorEmail: String? = nil, contributorPhoto: String? = nil, contributorPhotoThumbnail: String? = nil, type: ContributionType? = nil, filter: String? = nil, order: Int? = nil, auditableEntity: AuditableEntity? = nil, contributorDescription: String? = nil, contributorOverview: String? = nil, contributorContent: String? = nil, contributorSnsHandles: [SnsHandleModel]? = nil, localizedUrls: [LocalizedUrlModel]? = nil) {
         self.articleId = articleId
         self.contributorId = contributorId
         self.languageCode = languageCode

@@ -91,25 +91,25 @@ open class ServicesAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(),
-            "Name": name?.encodeToJSON(),
-            "Slug": slug?.encodeToJSON(),
-            "HospitalId": hospitalId?.encodeToJSON(),
-            "HospitalName": hospitalName?.encodeToJSON(),
-            "HospitalSlug": hospitalSlug?.encodeToJSON(),
-            "SpecialtyId": specialtyId?.encodeToJSON(),
-            "SpecialtyName": specialtyName?.encodeToJSON(),
-            "SpecialtyTypeId": specialtyTypeId?.encodeToJSON(),
-            "SpecialtyTypeName": specialtyTypeName?.encodeToJSON(),
-            "ServiceCategoryId": serviceCategoryId?.encodeToJSON(),
-            "MarketingType": marketingType?.encodeToJSON(),
-            "Procedure": procedure?.encodeToJSON(),
-            "Created": created?.encodeToJSON(),
-            "LanguageCode": languageCode?.encodeToJSON(),
-            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(),
-            "page": page?.encodeToJSON(),
-            "limit": limit?.encodeToJSON(),
-            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "Id": (wrappedValue: id?.encodeToJSON(), isExplode: true),
+            "Name": (wrappedValue: name?.encodeToJSON(), isExplode: true),
+            "Slug": (wrappedValue: slug?.encodeToJSON(), isExplode: true),
+            "HospitalId": (wrappedValue: hospitalId?.encodeToJSON(), isExplode: true),
+            "HospitalName": (wrappedValue: hospitalName?.encodeToJSON(), isExplode: true),
+            "HospitalSlug": (wrappedValue: hospitalSlug?.encodeToJSON(), isExplode: true),
+            "SpecialtyId": (wrappedValue: specialtyId?.encodeToJSON(), isExplode: true),
+            "SpecialtyName": (wrappedValue: specialtyName?.encodeToJSON(), isExplode: true),
+            "SpecialtyTypeId": (wrappedValue: specialtyTypeId?.encodeToJSON(), isExplode: true),
+            "SpecialtyTypeName": (wrappedValue: specialtyTypeName?.encodeToJSON(), isExplode: true),
+            "ServiceCategoryId": (wrappedValue: serviceCategoryId?.encodeToJSON(), isExplode: true),
+            "MarketingType": (wrappedValue: marketingType?.encodeToJSON(), isExplode: true),
+            "Procedure": (wrappedValue: procedure?.encodeToJSON(), isExplode: true),
+            "Created": (wrappedValue: created?.encodeToJSON(), isExplode: true),
+            "LanguageCode": (wrappedValue: languageCode?.encodeToJSON(), isExplode: true),
+            "ReturnDefaultValue": (wrappedValue: returnDefaultValue?.encodeToJSON(), isExplode: true),
+            "page": (wrappedValue: page?.encodeToJSON(), isExplode: true),
+            "limit": (wrappedValue: limit?.encodeToJSON(), isExplode: true),
+            "lastRetrieved": (wrappedValue: lastRetrieved?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -120,7 +120,7 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<HospitalServicesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 
     /**
@@ -170,8 +170,8 @@ open class ServicesAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON(),
-            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
+            "languageCode": (wrappedValue: languageCode?.encodeToJSON(), isExplode: true),
+            "returnDefaultValue": (wrappedValue: returnDefaultValue?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -182,7 +182,7 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<HospitalServiceModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 
     /**
@@ -232,8 +232,8 @@ open class ServicesAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON(),
-            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
+            "languageCode": (wrappedValue: languageCode?.encodeToJSON(), isExplode: true),
+            "returnDefaultValue": (wrappedValue: returnDefaultValue?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -244,6 +244,6 @@ open class ServicesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<HospitalServiceModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 }

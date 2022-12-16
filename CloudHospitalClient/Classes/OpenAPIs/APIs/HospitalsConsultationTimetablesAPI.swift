@@ -69,10 +69,10 @@ open class HospitalsConsultationTimetablesAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Year": year?.encodeToJSON(),
-            "Month": month?.encodeToJSON(),
-            "TimeZone": timeZone?.encodeToJSON(),
-            "ConsultationIdExcluded": consultationIdExcluded?.encodeToJSON(),
+            "Year": (wrappedValue: year?.encodeToJSON(), isExplode: true),
+            "Month": (wrappedValue: month?.encodeToJSON(), isExplode: true),
+            "TimeZone": (wrappedValue: timeZone?.encodeToJSON(), isExplode: true),
+            "ConsultationIdExcluded": (wrappedValue: consultationIdExcluded?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -83,6 +83,6 @@ open class HospitalsConsultationTimetablesAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ConsultationTimetableModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 }

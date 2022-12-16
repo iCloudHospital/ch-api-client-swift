@@ -62,8 +62,8 @@ open class ContributorsAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON(),
-            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
+            "languageCode": (wrappedValue: languageCode?.encodeToJSON(), isExplode: true),
+            "returnDefaultValue": (wrappedValue: returnDefaultValue?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -74,7 +74,7 @@ open class ContributorsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ContributorModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 
     /**
@@ -134,13 +134,13 @@ open class ContributorsAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "ContributorId": contributorId2?.encodeToJSON(),
-            "Id": id?.encodeToJSON(),
-            "SnsType": snsType?.encodeToJSON(),
-            "Handle": handle?.encodeToJSON(),
-            "page": page?.encodeToJSON(),
-            "limit": limit?.encodeToJSON(),
-            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "ContributorId": (wrappedValue: contributorId2?.encodeToJSON(), isExplode: true),
+            "Id": (wrappedValue: id?.encodeToJSON(), isExplode: true),
+            "SnsType": (wrappedValue: snsType?.encodeToJSON(), isExplode: true),
+            "Handle": (wrappedValue: handle?.encodeToJSON(), isExplode: true),
+            "page": (wrappedValue: page?.encodeToJSON(), isExplode: true),
+            "limit": (wrappedValue: limit?.encodeToJSON(), isExplode: true),
+            "lastRetrieved": (wrappedValue: lastRetrieved?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -151,7 +151,7 @@ open class ContributorsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ContributorSnsHandlesModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 
     /**
@@ -210,7 +210,7 @@ open class ContributorsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<SnsHandleModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 
     /**
@@ -275,18 +275,18 @@ open class ContributorsAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "Id": id?.encodeToJSON(),
-            "Name": name?.encodeToJSON(),
-            "Email": email?.encodeToJSON(),
-            "Website": website?.encodeToJSON(),
-            "HospitalId": hospitalId?.encodeToJSON(),
-            "InterviewerOnly": interviewerOnly?.encodeToJSON(),
-            "ShowHidden": showHidden?.encodeToJSON(),
-            "LanguageCode": languageCode?.encodeToJSON(),
-            "ReturnDefaultValue": returnDefaultValue?.encodeToJSON(),
-            "page": page?.encodeToJSON(),
-            "limit": limit?.encodeToJSON(),
-            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "Id": (wrappedValue: id?.encodeToJSON(), isExplode: true),
+            "Name": (wrappedValue: name?.encodeToJSON(), isExplode: true),
+            "Email": (wrappedValue: email?.encodeToJSON(), isExplode: true),
+            "Website": (wrappedValue: website?.encodeToJSON(), isExplode: true),
+            "HospitalId": (wrappedValue: hospitalId?.encodeToJSON(), isExplode: true),
+            "InterviewerOnly": (wrappedValue: interviewerOnly?.encodeToJSON(), isExplode: true),
+            "ShowHidden": (wrappedValue: showHidden?.encodeToJSON(), isExplode: true),
+            "LanguageCode": (wrappedValue: languageCode?.encodeToJSON(), isExplode: true),
+            "ReturnDefaultValue": (wrappedValue: returnDefaultValue?.encodeToJSON(), isExplode: true),
+            "page": (wrappedValue: page?.encodeToJSON(), isExplode: true),
+            "limit": (wrappedValue: limit?.encodeToJSON(), isExplode: true),
+            "lastRetrieved": (wrappedValue: lastRetrieved?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -297,7 +297,7 @@ open class ContributorsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ContributorsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 
     /**
@@ -347,8 +347,8 @@ open class ContributorsAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON(),
-            "returnDefaultValue": returnDefaultValue?.encodeToJSON(),
+            "languageCode": (wrappedValue: languageCode?.encodeToJSON(), isExplode: true),
+            "returnDefaultValue": (wrappedValue: returnDefaultValue?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -359,6 +359,6 @@ open class ContributorsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<ContributorModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: false)
     }
 }

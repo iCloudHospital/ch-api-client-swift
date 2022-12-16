@@ -19,6 +19,7 @@ Method | HTTP request | Description
 [**apiV2HospitalsHospitalIdLandingsGet**](HospitalsAPI.md#apiv2hospitalshospitalidlandingsget) | **GET** /api/v2/hospitals/{hospitalId}/landings | 
 [**apiV2HospitalsHospitalIdLandingsLandingIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidlandingslandingidget) | **GET** /api/v2/hospitals/{hospitalId}/landings/{landingId} | 
 [**apiV2HospitalsHospitalIdLandingsSlugGet**](HospitalsAPI.md#apiv2hospitalshospitalidlandingsslugget) | **GET** /api/v2/hospitals/{hospitalId}/landings/{slug} | 
+[**apiV2HospitalsHospitalIdLanguagesGet**](HospitalsAPI.md#apiv2hospitalshospitalidlanguagesget) | **GET** /api/v2/hospitals/{hospitalId}/languages | Get hospitalLanguages
 [**apiV2HospitalsHospitalIdMediasGet**](HospitalsAPI.md#apiv2hospitalshospitalidmediasget) | **GET** /api/v2/hospitals/{hospitalId}/medias | Get all HospitalMedias.
 [**apiV2HospitalsHospitalIdMediasMediaIdGet**](HospitalsAPI.md#apiv2hospitalshospitalidmediasmediaidget) | **GET** /api/v2/hospitals/{hospitalId}/medias/{mediaId} | Get HospitalMedia.
 [**apiV2HospitalsHospitalIdSpecialtiesGet**](HospitalsAPI.md#apiv2hospitalshospitalidspecialtiesget) | **GET** /api/v2/hospitals/{hospitalId}/specialties | Get all HospitalSpecialties.
@@ -876,6 +877,62 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**LandingModel**](LandingModel.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **apiV2HospitalsHospitalIdLanguagesGet**
+```swift
+    open class func apiV2HospitalsHospitalIdLanguagesGet(hospitalId: UUID, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalLanguagesModel?, _ error: Error?) -> Void)
+```
+
+Get hospitalLanguages
+
+### Example
+```swift
+// The following code samples are still beta. For any issue, please report via http://github.com/OpenAPITools/openapi-generator/issues/new
+import CloudHospitalClient
+
+let hospitalId = 987 // UUID | 
+let showHidden = true // Bool |  (optional)
+let page = 987 // Int |  (optional)
+let limit = 987 // Int |  (optional)
+let lastRetrieved = Date() // Date |  (optional)
+
+// Get hospitalLanguages
+HospitalsAPI.apiV2HospitalsHospitalIdLanguagesGet(hospitalId: hospitalId, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+    guard error == nil else {
+        print(error)
+        return
+    }
+
+    if (response) {
+        dump(response)
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hospitalId** | **UUID** |  | 
+ **showHidden** | **Bool** |  | [optional] 
+ **page** | **Int** |  | [optional] 
+ **limit** | **Int** |  | [optional] 
+ **lastRetrieved** | **Date** |  | [optional] 
+
+### Return type
+
+[**HospitalLanguagesModel**](HospitalLanguagesModel.md)
 
 ### Authorization
 

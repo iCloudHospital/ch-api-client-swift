@@ -17,13 +17,15 @@ public struct HospitalLanguageItemModel: Codable, JSONEncodable, Hashable {
     public var localizedName: String?
     public var published: Bool?
     public var order: Int?
+    public var isPrimary: Bool?
 
-    public init(code: String? = nil, name: String? = nil, localizedName: String? = nil, published: Bool? = nil, order: Int? = nil) {
+    public init(code: String? = nil, name: String? = nil, localizedName: String? = nil, published: Bool? = nil, order: Int? = nil, isPrimary: Bool? = nil) {
         self.code = code
         self.name = name
         self.localizedName = localizedName
         self.published = published
         self.order = order
+        self.isPrimary = isPrimary
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
@@ -32,6 +34,7 @@ public struct HospitalLanguageItemModel: Codable, JSONEncodable, Hashable {
         case localizedName
         case published
         case order
+        case isPrimary
     }
 
     // Encodable protocol methods
@@ -43,6 +46,7 @@ public struct HospitalLanguageItemModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(localizedName, forKey: .localizedName)
         try container.encodeIfPresent(published, forKey: .published)
         try container.encodeIfPresent(order, forKey: .order)
+        try container.encodeIfPresent(isPrimary, forKey: .isPrimary)
     }
 }
 

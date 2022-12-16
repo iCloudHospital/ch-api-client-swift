@@ -1,4 +1,5 @@
 .gitignore
+.swiftformat
 Cartfile
 CloudHospitalClient.podspec
 CloudHospitalClient/Classes/OpenAPIs/APIHelper.swift
@@ -22,7 +23,6 @@ CloudHospitalClient/Classes/OpenAPIs/APIs/FaqCategoriesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/FaqsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/GroupChannelsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/HeaderNavigationsAPI.swift
-CloudHospitalClient/Classes/OpenAPIs/APIs/HospitalLanguagesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/HospitalsAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/HospitalsConsultationTimetablesAPI.swift
 CloudHospitalClient/Classes/OpenAPIs/APIs/ImagesAPI.swift
@@ -254,7 +254,6 @@ CloudHospitalClient/Classes/OpenAPIs/Models/UserLanguageModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UserLocationModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UserLocationType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/UserModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/WorkingDay.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/WorkingDayItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/WorkingDayModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/WorkingDaysModel.swift
@@ -400,7 +399,6 @@ docs/HospitalEvaluationModel.md
 docs/HospitalEvaluationsModel.md
 docs/HospitalItemModel.md
 docs/HospitalLanguageItemModel.md
-docs/HospitalLanguagesAPI.md
 docs/HospitalLanguagesModel.md
 docs/HospitalModel.md
 docs/HospitalServiceItemModel.md
@@ -506,7 +504,6 @@ docs/UserLanguageModel.md
 docs/UserLocationModel.md
 docs/UserLocationType.md
 docs/UserModel.md
-docs/WorkingDay.md
 docs/WorkingDayItemModel.md
 docs/WorkingDayModel.md
 docs/WorkingDaysModel.md

@@ -18,15 +18,17 @@ public struct CountryItemModel: Codable, JSONEncodable, Hashable {
     public var slug: String?
     public var confirmed: Bool?
     public var logo: String?
+    public var localizedUrls: [LocalizedUrlModel]?
     public var auditableEntity: AuditableEntity?
 
-    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, logo: String? = nil, auditableEntity: AuditableEntity? = nil) {
+    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, logo: String? = nil, localizedUrls: [LocalizedUrlModel]? = nil, auditableEntity: AuditableEntity? = nil) {
         self.id = id
         self.languageCode = languageCode
         self.name = name
         self.slug = slug
         self.confirmed = confirmed
         self.logo = logo
+        self.localizedUrls = localizedUrls
         self.auditableEntity = auditableEntity
     }
 
@@ -37,6 +39,7 @@ public struct CountryItemModel: Codable, JSONEncodable, Hashable {
         case slug
         case confirmed
         case logo
+        case localizedUrls
         case auditableEntity
     }
 
@@ -50,6 +53,7 @@ public struct CountryItemModel: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(slug, forKey: .slug)
         try container.encodeIfPresent(confirmed, forKey: .confirmed)
         try container.encodeIfPresent(logo, forKey: .logo)
+        try container.encodeIfPresent(localizedUrls, forKey: .localizedUrls)
         try container.encodeIfPresent(auditableEntity, forKey: .auditableEntity)
     }
 }

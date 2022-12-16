@@ -12,20 +12,17 @@ import AnyCodable
 
 public struct RegisterViewModel: Codable, JSONEncodable, Hashable {
 
-    public var userName: String?
     public var email: String
     public var password: String
     public var confirmPassword: String?
 
-    public init(userName: String? = nil, email: String, password: String, confirmPassword: String? = nil) {
-        self.userName = userName
+    public init(email: String, password: String, confirmPassword: String? = nil) {
         self.email = email
         self.password = password
         self.confirmPassword = confirmPassword
     }
 
     public enum CodingKeys: String, CodingKey, CaseIterable {
-        case userName
         case email
         case password
         case confirmPassword
@@ -35,7 +32,6 @@ public struct RegisterViewModel: Codable, JSONEncodable, Hashable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(userName, forKey: .userName)
         try container.encode(email, forKey: .email)
         try container.encode(password, forKey: .password)
         try container.encodeIfPresent(confirmPassword, forKey: .confirmPassword)

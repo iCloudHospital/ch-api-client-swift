@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.12'
   s.tvos.deployment_target = '10.0'
   s.watchos.deployment_target = '3.0'
-  s.version = '1.8.6'
+  s.version = '1.8.7'
   s.source = { :git => 'https://github.com/icloudhospital/ch-api-client-swift.git', :tag => s.version.to_s }
   s.authors = 'OpenAPI Generator'
   s.license = 'Proprietary'

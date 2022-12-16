@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **contributorDescription** | **String** |  | [optional] [readonly] 
 **contributorOverview** | **String** |  | [optional] [readonly] 
 **contributorContent** | **String** |  | [optional] [readonly] 
-**contributorSnsHandles** | [SnsHandle] |  | [optional] 
+**contributorSnsHandles** | [SnsHandleModel] |  | [optional] 
 **localizedUrls** | [LocalizedUrlModel] |  | [optional] [readonly] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -63,7 +63,7 @@ open class BookingsAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "languageCode": languageCode?.encodeToJSON(),
+            "languageCode": (wrappedValue: languageCode?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -74,7 +74,7 @@ open class BookingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BookingModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -131,7 +131,7 @@ open class BookingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<String>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -190,7 +190,7 @@ open class BookingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BookingModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "PUT", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -266,22 +266,22 @@ open class BookingsAPI {
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)
         localVariableUrlComponents?.queryItems = APIHelper.mapValuesToQueryItems([
-            "HospitalId": hospitalId?.encodeToJSON(),
-            "HospitalName": hospitalName?.encodeToJSON(),
-            "DealId": dealId?.encodeToJSON(),
-            "DealName": dealName?.encodeToJSON(),
-            "IsOpen": isOpen?.encodeToJSON(),
-            "IsCompleted": isCompleted?.encodeToJSON(),
-            "Status": status?.encodeToJSON(),
-            "DealPackageId": dealPackageId?.encodeToJSON(),
-            "SortRequestDate": sortRequestDate?.encodeToJSON(),
-            "SortConfirmedDateStart": sortConfirmedDateStart?.encodeToJSON(),
-            "IsExternal": isExternal?.encodeToJSON(),
-            "PaymentEnabled": paymentEnabled?.encodeToJSON(),
-            "LanguageCode": languageCode?.encodeToJSON(),
-            "page": page?.encodeToJSON(),
-            "limit": limit?.encodeToJSON(),
-            "lastRetrieved": lastRetrieved?.encodeToJSON(),
+            "HospitalId": (wrappedValue: hospitalId?.encodeToJSON(), isExplode: true),
+            "HospitalName": (wrappedValue: hospitalName?.encodeToJSON(), isExplode: true),
+            "DealId": (wrappedValue: dealId?.encodeToJSON(), isExplode: true),
+            "DealName": (wrappedValue: dealName?.encodeToJSON(), isExplode: true),
+            "IsOpen": (wrappedValue: isOpen?.encodeToJSON(), isExplode: true),
+            "IsCompleted": (wrappedValue: isCompleted?.encodeToJSON(), isExplode: true),
+            "Status": (wrappedValue: status?.encodeToJSON(), isExplode: true),
+            "DealPackageId": (wrappedValue: dealPackageId?.encodeToJSON(), isExplode: true),
+            "SortRequestDate": (wrappedValue: sortRequestDate?.encodeToJSON(), isExplode: true),
+            "SortConfirmedDateStart": (wrappedValue: sortConfirmedDateStart?.encodeToJSON(), isExplode: true),
+            "IsExternal": (wrappedValue: isExternal?.encodeToJSON(), isExplode: true),
+            "PaymentEnabled": (wrappedValue: paymentEnabled?.encodeToJSON(), isExplode: true),
+            "LanguageCode": (wrappedValue: languageCode?.encodeToJSON(), isExplode: true),
+            "page": (wrappedValue: page?.encodeToJSON(), isExplode: true),
+            "limit": (wrappedValue: limit?.encodeToJSON(), isExplode: true),
+            "lastRetrieved": (wrappedValue: lastRetrieved?.encodeToJSON(), isExplode: true),
         ])
 
         let localVariableNillableHeaders: [String: Any?] = [
@@ -292,7 +292,7 @@ open class BookingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BookingsModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "GET", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 
     /**
@@ -351,6 +351,6 @@ open class BookingsAPI {
 
         let localVariableRequestBuilder: RequestBuilder<BookingModel>.Type = CloudHospitalClientAPI.requestBuilderFactory.getBuilder()
 
-        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters)
+        return localVariableRequestBuilder.init(method: "POST", URLString: (localVariableUrlComponents?.string ?? localVariableURLString), parameters: localVariableParameters, headers: localVariableHeaderParameters, requiresAuthentication: true)
     }
 }
