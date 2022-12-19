@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -18,28 +15,33 @@ open class AccountsAPI {
     /**
 
      - parameter changeEmailModel: (body)  (optional)
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AccountsChangeEmailPost(changeEmailModel: ChangeEmailModel? = nil) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AccountsChangeEmailPostWithRequestBuilder(changeEmailModel: changeEmailModel).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AccountsChangeEmailPost(changeEmailModel: ChangeEmailModel? = nil) async throws {
+        let requestBuilder = apiV1AccountsChangeEmailPostWithRequestBuilder(changeEmailModel: changeEmailModel)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v1/accounts/changeEmail
@@ -70,28 +72,33 @@ open class AccountsAPI {
     /**
 
      - parameter setPasswordRequestModel: (body)  (optional)
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AccountsChangePasswordPost(setPasswordRequestModel: SetPasswordRequestModel? = nil) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AccountsChangePasswordPostWithRequestBuilder(setPasswordRequestModel: setPasswordRequestModel).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AccountsChangePasswordPost(setPasswordRequestModel: SetPasswordRequestModel? = nil) async throws {
+        let requestBuilder = apiV1AccountsChangePasswordPostWithRequestBuilder(setPasswordRequestModel: setPasswordRequestModel)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v1/accounts/changePassword
@@ -122,28 +129,33 @@ open class AccountsAPI {
     /**
 
      - parameter confirmEmailModel: (body)  (optional)
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AccountsConfirmEmailPost(confirmEmailModel: ConfirmEmailModel? = nil) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AccountsConfirmEmailPostWithRequestBuilder(confirmEmailModel: confirmEmailModel).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AccountsConfirmEmailPost(confirmEmailModel: ConfirmEmailModel? = nil) async throws {
+        let requestBuilder = apiV1AccountsConfirmEmailPostWithRequestBuilder(confirmEmailModel: confirmEmailModel)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v1/accounts/confirmEmail
@@ -173,28 +185,33 @@ open class AccountsAPI {
 
     /**
 
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AccountsDelete() -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AccountsDeleteWithRequestBuilder().execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AccountsDelete() async throws {
+        let requestBuilder = apiV1AccountsDeleteWithRequestBuilder()
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - DELETE /api/v1/accounts
@@ -224,28 +241,33 @@ open class AccountsAPI {
     /**
 
      - parameter forgotPasswordViewModel: (body)  (optional)
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AccountsForgotPasswordPost(forgotPasswordViewModel: ForgotPasswordViewModel? = nil) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AccountsForgotPasswordPostWithRequestBuilder(forgotPasswordViewModel: forgotPasswordViewModel).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AccountsForgotPasswordPost(forgotPasswordViewModel: ForgotPasswordViewModel? = nil) async throws {
+        let requestBuilder = apiV1AccountsForgotPasswordPostWithRequestBuilder(forgotPasswordViewModel: forgotPasswordViewModel)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v1/accounts/forgotPassword
@@ -272,28 +294,33 @@ open class AccountsAPI {
 
     /**
 
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AccountsGet() -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AccountsGetWithRequestBuilder().execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AccountsGet() async throws {
+        let requestBuilder = apiV1AccountsGetWithRequestBuilder()
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - GET /api/v1/accounts
@@ -323,28 +350,33 @@ open class AccountsAPI {
     /**
 
      - parameter registerViewModel: (body)  (optional)
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AccountsPost(registerViewModel: RegisterViewModel? = nil) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AccountsPostWithRequestBuilder(registerViewModel: registerViewModel).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AccountsPost(registerViewModel: RegisterViewModel? = nil) async throws {
+        let requestBuilder = apiV1AccountsPostWithRequestBuilder(registerViewModel: registerViewModel)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v1/accounts
@@ -372,28 +404,33 @@ open class AccountsAPI {
     /**
 
      - parameter resetPasswordViewModel: (body)  (optional)
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AccountsResetPasswordPost(resetPasswordViewModel: ResetPasswordViewModel? = nil) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AccountsResetPasswordPostWithRequestBuilder(resetPasswordViewModel: resetPasswordViewModel).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AccountsResetPasswordPost(resetPasswordViewModel: ResetPasswordViewModel? = nil) async throws {
+        let requestBuilder = apiV1AccountsResetPasswordPostWithRequestBuilder(resetPasswordViewModel: resetPasswordViewModel)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v1/accounts/resetPassword
@@ -420,28 +457,33 @@ open class AccountsAPI {
 
     /**
 
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AccountsSendVerificationEmailPost() -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AccountsSendVerificationEmailPostWithRequestBuilder().execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AccountsSendVerificationEmailPost() async throws {
+        let requestBuilder = apiV1AccountsSendVerificationEmailPostWithRequestBuilder()
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v1/accounts/sendVerificationEmail

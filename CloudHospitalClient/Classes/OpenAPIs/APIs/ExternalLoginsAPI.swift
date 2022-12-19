@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -18,28 +15,33 @@ open class ExternalLoginsAPI {
     /**
 
      - parameter externalLoginInfo: (body)  (optional)
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ExternalLoginsDelete(externalLoginInfo: ExternalLoginInfo? = nil) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1ExternalLoginsDeleteWithRequestBuilder(externalLoginInfo: externalLoginInfo).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1ExternalLoginsDelete(externalLoginInfo: ExternalLoginInfo? = nil) async throws {
+        let requestBuilder = apiV1ExternalLoginsDeleteWithRequestBuilder(externalLoginInfo: externalLoginInfo)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - DELETE /api/v1/externalLogins
@@ -69,28 +71,33 @@ open class ExternalLoginsAPI {
 
     /**
 
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ExternalLoginsGet() -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1ExternalLoginsGetWithRequestBuilder().execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1ExternalLoginsGet() async throws {
+        let requestBuilder = apiV1ExternalLoginsGetWithRequestBuilder()
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - GET /api/v1/externalLogins
@@ -120,28 +127,33 @@ open class ExternalLoginsAPI {
     /**
 
      - parameter externalLoginInfo: (body)  (optional)
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ExternalLoginsPost(externalLoginInfo: ExternalLoginInfo? = nil) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1ExternalLoginsPostWithRequestBuilder(externalLoginInfo: externalLoginInfo).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1ExternalLoginsPost(externalLoginInfo: ExternalLoginInfo? = nil) async throws {
+        let requestBuilder = apiV1ExternalLoginsPostWithRequestBuilder(externalLoginInfo: externalLoginInfo)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v1/externalLogins
@@ -173,28 +185,33 @@ open class ExternalLoginsAPI {
 
      - parameter provider: (path)  
      - parameter key: (path)  
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ExternalLoginsProviderKeyDelete(provider: String, key: String) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1ExternalLoginsProviderKeyDeleteWithRequestBuilder(provider: provider, key: key).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1ExternalLoginsProviderKeyDelete(provider: String, key: String) async throws {
+        let requestBuilder = apiV1ExternalLoginsProviderKeyDeleteWithRequestBuilder(provider: provider, key: key)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - DELETE /api/v1/externalLogins/{provider}/{key}
@@ -230,28 +247,33 @@ open class ExternalLoginsAPI {
 
      - parameter provider: (path)  
      - parameter key: (path)  
-     - returns: AnyPublisher<ExternalLoginListViewModel, Error>
+     - returns: ExternalLoginListViewModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1ExternalLoginsProviderKeyGet(provider: String, key: String) -> AnyPublisher<ExternalLoginListViewModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ExternalLoginListViewModel, Error> { promise in
-            requestTask = apiV1ExternalLoginsProviderKeyGetWithRequestBuilder(provider: provider, key: key).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1ExternalLoginsProviderKeyGet(provider: String, key: String) async throws -> ExternalLoginListViewModel {
+        let requestBuilder = apiV1ExternalLoginsProviderKeyGetWithRequestBuilder(provider: provider, key: key)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - GET /api/v1/externalLogins/{provider}/{key}
@@ -287,28 +309,33 @@ open class ExternalLoginsAPI {
 
      - parameter apiVersion: (query)  (optional)
      - parameter facebookUserDataDeletionRequestModel: (body)  (optional)
-     - returns: AnyPublisher<FacebookUserDataDeletionResponseModel, Error>
+     - returns: FacebookUserDataDeletionResponseModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func facebookPatch(apiVersion: String? = nil, facebookUserDataDeletionRequestModel: FacebookUserDataDeletionRequestModel? = nil) -> AnyPublisher<FacebookUserDataDeletionResponseModel, Error> {
-        var requestTask: RequestTask?
-        return Future<FacebookUserDataDeletionResponseModel, Error> { promise in
-            requestTask = facebookPatchWithRequestBuilder(apiVersion: apiVersion, facebookUserDataDeletionRequestModel: facebookUserDataDeletionRequestModel).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func facebookPatch(apiVersion: String? = nil, facebookUserDataDeletionRequestModel: FacebookUserDataDeletionRequestModel? = nil) async throws -> FacebookUserDataDeletionResponseModel {
+        let requestBuilder = facebookPatchWithRequestBuilder(apiVersion: apiVersion, facebookUserDataDeletionRequestModel: facebookUserDataDeletionRequestModel)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - PATCH /facebook

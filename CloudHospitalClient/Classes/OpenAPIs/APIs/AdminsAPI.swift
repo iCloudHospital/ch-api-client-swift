@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -18,28 +15,33 @@ open class AdminsAPI {
     /**
 
      - parameter changeUserEmailModel: (body)  (optional)
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AdminsChangeUserEmailPost(changeUserEmailModel: ChangeUserEmailModel? = nil) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AdminsChangeUserEmailPostWithRequestBuilder(changeUserEmailModel: changeUserEmailModel).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AdminsChangeUserEmailPost(changeUserEmailModel: ChangeUserEmailModel? = nil) async throws {
+        let requestBuilder = apiV1AdminsChangeUserEmailPostWithRequestBuilder(changeUserEmailModel: changeUserEmailModel)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v1/admins/changeUserEmail
@@ -70,28 +72,33 @@ open class AdminsAPI {
     /**
 
      - parameter registerUserViewModel: (body)  (optional)
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AdminsCreateUserPost(registerUserViewModel: RegisterUserViewModel? = nil) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AdminsCreateUserPostWithRequestBuilder(registerUserViewModel: registerUserViewModel).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AdminsCreateUserPost(registerUserViewModel: RegisterUserViewModel? = nil) async throws {
+        let requestBuilder = apiV1AdminsCreateUserPostWithRequestBuilder(registerUserViewModel: registerUserViewModel)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v1/admins/createUser
@@ -122,28 +129,33 @@ open class AdminsAPI {
     /**
 
      - parameter id: (path)  
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AdminsDeleteUserForceIdDelete(id: String) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AdminsDeleteUserForceIdDeleteWithRequestBuilder(id: id).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AdminsDeleteUserForceIdDelete(id: String) async throws {
+        let requestBuilder = apiV1AdminsDeleteUserForceIdDeleteWithRequestBuilder(id: id)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - DELETE /api/v1/admins/deleteUserForce/{id}
@@ -177,28 +189,33 @@ open class AdminsAPI {
     /**
 
      - parameter id: (path)  
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AdminsDeleteUserIdDelete(id: String) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AdminsDeleteUserIdDeleteWithRequestBuilder(id: id).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AdminsDeleteUserIdDelete(id: String) async throws {
+        let requestBuilder = apiV1AdminsDeleteUserIdDeleteWithRequestBuilder(id: id)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - DELETE /api/v1/admins/deleteUser/{id}
@@ -232,28 +249,33 @@ open class AdminsAPI {
     /**
 
      - parameter id: (path)  
-     - returns: AnyPublisher<Void, Error>
+     - returns: Void
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV1AdminsReactivateUserIdPost(id: String) -> AnyPublisher<Void, Error> {
-        var requestTask: RequestTask?
-        return Future<Void, Error> { promise in
-            requestTask = apiV1AdminsReactivateUserIdPostWithRequestBuilder(id: id).execute { result in
-                switch result {
-                case .success:
-                    promise(.success(()))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV1AdminsReactivateUserIdPost(id: String) async throws {
+        let requestBuilder = apiV1AdminsReactivateUserIdPostWithRequestBuilder(id: id)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case .success:
+                        continuation.resume(returning: ())
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v1/admins/reactivateUser/{id}
