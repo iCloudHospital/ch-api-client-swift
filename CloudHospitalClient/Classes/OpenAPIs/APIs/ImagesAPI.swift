@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -18,28 +15,33 @@ open class ImagesAPI {
     /**
 
      - parameter files: (form)  (optional)
-     - returns: AnyPublisher<[MediaModel], Error>
+     - returns: [MediaModel]
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ImagesPost(files: [URL]? = nil) -> AnyPublisher<[MediaModel], Error> {
-        var requestTask: RequestTask?
-        return Future<[MediaModel], Error> { promise in
-            requestTask = apiV2ImagesPostWithRequestBuilder(files: files).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ImagesPost(files: [URL]? = nil) async throws -> [MediaModel] {
+        let requestBuilder = apiV2ImagesPostWithRequestBuilder(files: files)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v2/images

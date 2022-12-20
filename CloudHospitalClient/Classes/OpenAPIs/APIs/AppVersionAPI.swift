@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -18,28 +15,33 @@ open class AppVersionAPI {
     /**
 
      - parameter platform: (path)  
-     - returns: AnyPublisher<AppVersionModel, Error>
+     - returns: AppVersionModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2AppversionPlatformGet(platform: Platform) -> AnyPublisher<AppVersionModel, Error> {
-        var requestTask: RequestTask?
-        return Future<AppVersionModel, Error> { promise in
-            requestTask = apiV2AppversionPlatformGetWithRequestBuilder(platform: platform).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2AppversionPlatformGet(platform: Platform) async throws -> AppVersionModel {
+        let requestBuilder = apiV2AppversionPlatformGetWithRequestBuilder(platform: platform)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - GET /api/v2/appversion/{platform}

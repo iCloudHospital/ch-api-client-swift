@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -19,28 +16,33 @@ open class ProfilesAPI {
      Change user's email on both Identity and Api.
      
      - parameter changeEmailCommand: (body)  (optional)
-     - returns: AnyPublisher<Bool, Error>
+     - returns: Bool
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ProfilesChangeemailPost(changeEmailCommand: ChangeEmailCommand? = nil) -> AnyPublisher<Bool, Error> {
-        var requestTask: RequestTask?
-        return Future<Bool, Error> { promise in
-            requestTask = apiV2ProfilesChangeemailPostWithRequestBuilder(changeEmailCommand: changeEmailCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ProfilesChangeemailPost(changeEmailCommand: ChangeEmailCommand? = nil) async throws -> Bool {
+        let requestBuilder = apiV2ProfilesChangeemailPostWithRequestBuilder(changeEmailCommand: changeEmailCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Change user's email on both Identity and Api.
@@ -74,28 +76,33 @@ open class ProfilesAPI {
      Configm email.
      
      - parameter confirmEmailCommand: (body)  (optional)
-     - returns: AnyPublisher<Bool, Error>
+     - returns: Bool
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ProfilesConfirmemailPost(confirmEmailCommand: ConfirmEmailCommand? = nil) -> AnyPublisher<Bool, Error> {
-        var requestTask: RequestTask?
-        return Future<Bool, Error> { promise in
-            requestTask = apiV2ProfilesConfirmemailPostWithRequestBuilder(confirmEmailCommand: confirmEmailCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ProfilesConfirmemailPost(confirmEmailCommand: ConfirmEmailCommand? = nil) async throws -> Bool {
+        let requestBuilder = apiV2ProfilesConfirmemailPostWithRequestBuilder(confirmEmailCommand: confirmEmailCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Configm email.
@@ -127,28 +134,33 @@ open class ProfilesAPI {
     /**
      Get Profile.
      
-     - returns: AnyPublisher<UserModel, Error>
+     - returns: UserModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ProfilesGet() -> AnyPublisher<UserModel, Error> {
-        var requestTask: RequestTask?
-        return Future<UserModel, Error> { promise in
-            requestTask = apiV2ProfilesGetWithRequestBuilder().execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ProfilesGet() async throws -> UserModel {
+        let requestBuilder = apiV2ProfilesGetWithRequestBuilder()
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get Profile.
@@ -180,28 +192,33 @@ open class ProfilesAPI {
      Update Profile.
      
      - parameter updateProfileCommand: (body)  (optional)
-     - returns: AnyPublisher<UserModel, Error>
+     - returns: UserModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ProfilesPut(updateProfileCommand: UpdateProfileCommand? = nil) -> AnyPublisher<UserModel, Error> {
-        var requestTask: RequestTask?
-        return Future<UserModel, Error> { promise in
-            requestTask = apiV2ProfilesPutWithRequestBuilder(updateProfileCommand: updateProfileCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ProfilesPut(updateProfileCommand: UpdateProfileCommand? = nil) async throws -> UserModel {
+        let requestBuilder = apiV2ProfilesPutWithRequestBuilder(updateProfileCommand: updateProfileCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Update Profile.

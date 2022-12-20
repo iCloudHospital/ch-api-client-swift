@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -27,28 +24,33 @@ open class MembershipsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<MembershipsModel, Error>
+     - returns: MembershipsModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2MembershipsGet(id: UUID? = nil, planId: UUID? = nil, planName: String? = nil, ownerId: UUID? = nil, ownerName: String? = nil, isActive: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MembershipsModel, Error> {
-        var requestTask: RequestTask?
-        return Future<MembershipsModel, Error> { promise in
-            requestTask = apiV2MembershipsGetWithRequestBuilder(id: id, planId: planId, planName: planName, ownerId: ownerId, ownerName: ownerName, isActive: isActive, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2MembershipsGet(id: UUID? = nil, planId: UUID? = nil, planName: String? = nil, ownerId: UUID? = nil, ownerName: String? = nil, isActive: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> MembershipsModel {
+        let requestBuilder = apiV2MembershipsGetWithRequestBuilder(id: id, planId: planId, planName: planName, ownerId: ownerId, ownerName: ownerName, isActive: isActive, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all memberships.
@@ -100,28 +102,33 @@ open class MembershipsAPI {
      Get membership.
      
      - parameter membershipId: (path)  
-     - returns: AnyPublisher<MembershipModel, Error>
+     - returns: MembershipModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2MembershipsMembershipIdGet(membershipId: UUID) -> AnyPublisher<MembershipModel, Error> {
-        var requestTask: RequestTask?
-        return Future<MembershipModel, Error> { promise in
-            requestTask = apiV2MembershipsMembershipIdGetWithRequestBuilder(membershipId: membershipId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2MembershipsMembershipIdGet(membershipId: UUID) async throws -> MembershipModel {
+        let requestBuilder = apiV2MembershipsMembershipIdGetWithRequestBuilder(membershipId: membershipId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get membership.
@@ -160,28 +167,33 @@ open class MembershipsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<MembersModel, Error>
+     - returns: MembersModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2MembershipsMembershipIdMembersGet(membershipId: UUID, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MembersModel, Error> {
-        var requestTask: RequestTask?
-        return Future<MembersModel, Error> { promise in
-            requestTask = apiV2MembershipsMembershipIdMembersGetWithRequestBuilder(membershipId: membershipId, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2MembershipsMembershipIdMembersGet(membershipId: UUID, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> MembersModel {
+        let requestBuilder = apiV2MembershipsMembershipIdMembersGetWithRequestBuilder(membershipId: membershipId, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all members.

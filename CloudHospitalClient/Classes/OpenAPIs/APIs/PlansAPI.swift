@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -23,28 +20,33 @@ open class PlansAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<PlansModel, Error>
+     - returns: PlansModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2PlansGet(id: UUID? = nil, name: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<PlansModel, Error> {
-        var requestTask: RequestTask?
-        return Future<PlansModel, Error> { promise in
-            requestTask = apiV2PlansGetWithRequestBuilder(id: id, name: name, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2PlansGet(id: UUID? = nil, name: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> PlansModel {
+        let requestBuilder = apiV2PlansGetWithRequestBuilder(id: id, name: name, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all plans.
@@ -85,28 +87,33 @@ open class PlansAPI {
      Get plan.
      
      - parameter planId: (path)  
-     - returns: AnyPublisher<PlanModel, Error>
+     - returns: PlanModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2PlansPlanIdGet(planId: UUID) -> AnyPublisher<PlanModel, Error> {
-        var requestTask: RequestTask?
-        return Future<PlanModel, Error> { promise in
-            requestTask = apiV2PlansPlanIdGetWithRequestBuilder(planId: planId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2PlansPlanIdGet(planId: UUID) async throws -> PlanModel {
+        let requestBuilder = apiV2PlansPlanIdGetWithRequestBuilder(planId: planId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get plan.
@@ -142,28 +149,33 @@ open class PlansAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<PlanHospitalsModel, Error>
+     - returns: PlanHospitalsModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2PlansPlanIdHospitalsGet(planId: UUID, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<PlanHospitalsModel, Error> {
-        var requestTask: RequestTask?
-        return Future<PlanHospitalsModel, Error> { promise in
-            requestTask = apiV2PlansPlanIdHospitalsGetWithRequestBuilder(planId: planId, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2PlansPlanIdHospitalsGet(planId: UUID, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> PlanHospitalsModel {
+        let requestBuilder = apiV2PlansPlanIdHospitalsGetWithRequestBuilder(planId: planId, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all plan hospital.
@@ -205,28 +217,33 @@ open class PlansAPI {
      
      - parameter planId: (path)  
      - parameter hospitalId: (path)  
-     - returns: AnyPublisher<PlanHospitalModel, Error>
+     - returns: PlanHospitalModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2PlansPlanIdHospitalsHospitalIdGet(planId: UUID, hospitalId: UUID) -> AnyPublisher<PlanHospitalModel, Error> {
-        var requestTask: RequestTask?
-        return Future<PlanHospitalModel, Error> { promise in
-            requestTask = apiV2PlansPlanIdHospitalsHospitalIdGetWithRequestBuilder(planId: planId, hospitalId: hospitalId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2PlansPlanIdHospitalsHospitalIdGet(planId: UUID, hospitalId: UUID) async throws -> PlanHospitalModel {
+        let requestBuilder = apiV2PlansPlanIdHospitalsHospitalIdGetWithRequestBuilder(planId: planId, hospitalId: hospitalId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get plan hospital.

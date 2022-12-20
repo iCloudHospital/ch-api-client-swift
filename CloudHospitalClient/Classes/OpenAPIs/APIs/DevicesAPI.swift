@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -27,28 +24,33 @@ open class DevicesAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<DevicesModel, Error>
+     - returns: DevicesModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DevicesGet(id: UUID? = nil, token: String? = nil, platform: Platform? = nil, appAlert: Bool? = nil, eventAlert: Bool? = nil, noticeAlert: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<DevicesModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DevicesModel, Error> { promise in
-            requestTask = apiV2DevicesGetWithRequestBuilder(id: id, token: token, platform: platform, appAlert: appAlert, eventAlert: eventAlert, noticeAlert: noticeAlert, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DevicesGet(id: UUID? = nil, token: String? = nil, platform: Platform? = nil, appAlert: Bool? = nil, eventAlert: Bool? = nil, noticeAlert: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> DevicesModel {
+        let requestBuilder = apiV2DevicesGetWithRequestBuilder(id: id, token: token, platform: platform, appAlert: appAlert, eventAlert: eventAlert, noticeAlert: noticeAlert, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all devices.
@@ -100,28 +102,33 @@ open class DevicesAPI {
      Delete device.
      
      - parameter id: (path)  
-     - returns: AnyPublisher<Bool, Error>
+     - returns: Bool
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DevicesIdDelete(id: UUID) -> AnyPublisher<Bool, Error> {
-        var requestTask: RequestTask?
-        return Future<Bool, Error> { promise in
-            requestTask = apiV2DevicesIdDeleteWithRequestBuilder(id: id).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DevicesIdDelete(id: UUID) async throws -> Bool {
+        let requestBuilder = apiV2DevicesIdDeleteWithRequestBuilder(id: id)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Delete device.
@@ -157,28 +164,33 @@ open class DevicesAPI {
      Get device.
      
      - parameter id: (path)  
-     - returns: AnyPublisher<DeviceModel, Error>
+     - returns: DeviceModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DevicesIdGet(id: UUID) -> AnyPublisher<DeviceModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DeviceModel, Error> { promise in
-            requestTask = apiV2DevicesIdGetWithRequestBuilder(id: id).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DevicesIdGet(id: UUID) async throws -> DeviceModel {
+        let requestBuilder = apiV2DevicesIdGetWithRequestBuilder(id: id)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get device.
@@ -215,28 +227,33 @@ open class DevicesAPI {
      
      - parameter id: (path)  
      - parameter createDeviceLoginCommand: (body)  (optional)
-     - returns: AnyPublisher<UUID, Error>
+     - returns: UUID
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DevicesIdLoginsPost(id: UUID, createDeviceLoginCommand: CreateDeviceLoginCommand? = nil) -> AnyPublisher<UUID, Error> {
-        var requestTask: RequestTask?
-        return Future<UUID, Error> { promise in
-            requestTask = apiV2DevicesIdLoginsPostWithRequestBuilder(id: id, createDeviceLoginCommand: createDeviceLoginCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DevicesIdLoginsPost(id: UUID, createDeviceLoginCommand: CreateDeviceLoginCommand? = nil) async throws -> UUID {
+        let requestBuilder = apiV2DevicesIdLoginsPostWithRequestBuilder(id: id, createDeviceLoginCommand: createDeviceLoginCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Create device login.
@@ -274,28 +291,33 @@ open class DevicesAPI {
      
      - parameter id: (path)  
      - parameter updateDeviceCommand: (body)  (optional)
-     - returns: AnyPublisher<Bool, Error>
+     - returns: Bool
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DevicesIdPut(id: UUID, updateDeviceCommand: UpdateDeviceCommand? = nil) -> AnyPublisher<Bool, Error> {
-        var requestTask: RequestTask?
-        return Future<Bool, Error> { promise in
-            requestTask = apiV2DevicesIdPutWithRequestBuilder(id: id, updateDeviceCommand: updateDeviceCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DevicesIdPut(id: UUID, updateDeviceCommand: UpdateDeviceCommand? = nil) async throws -> Bool {
+        let requestBuilder = apiV2DevicesIdPutWithRequestBuilder(id: id, updateDeviceCommand: updateDeviceCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Update device.
@@ -332,28 +354,33 @@ open class DevicesAPI {
      Create device.
      
      - parameter createDeviceCommand: (body)  (optional)
-     - returns: AnyPublisher<DeviceModel, Error>
+     - returns: DeviceModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DevicesPost(createDeviceCommand: CreateDeviceCommand? = nil) -> AnyPublisher<DeviceModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DeviceModel, Error> { promise in
-            requestTask = apiV2DevicesPostWithRequestBuilder(createDeviceCommand: createDeviceCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DevicesPost(createDeviceCommand: CreateDeviceCommand? = nil) async throws -> DeviceModel {
+        let requestBuilder = apiV2DevicesPostWithRequestBuilder(createDeviceCommand: createDeviceCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Create device.

@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -23,28 +20,33 @@ open class HospitalsConsultationTimetablesAPI {
      - parameter month: (query)  (optional)
      - parameter timeZone: (query)  (optional)
      - parameter consultationIdExcluded: (query)  (optional)
-     - returns: AnyPublisher<ConsultationTimetableModel, Error>
+     - returns: ConsultationTimetableModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsHospitalIdConsultationtimetablesGet(hospitalId: UUID, year: Int? = nil, month: Int? = nil, timeZone: String? = nil, consultationIdExcluded: UUID? = nil) -> AnyPublisher<ConsultationTimetableModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ConsultationTimetableModel, Error> { promise in
-            requestTask = apiV2HospitalsHospitalIdConsultationtimetablesGetWithRequestBuilder(hospitalId: hospitalId, year: year, month: month, timeZone: timeZone, consultationIdExcluded: consultationIdExcluded).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2HospitalsHospitalIdConsultationtimetablesGet(hospitalId: UUID, year: Int? = nil, month: Int? = nil, timeZone: String? = nil, consultationIdExcluded: UUID? = nil) async throws -> ConsultationTimetableModel {
+        let requestBuilder = apiV2HospitalsHospitalIdConsultationtimetablesGetWithRequestBuilder(hospitalId: hospitalId, year: year, month: month, timeZone: timeZone, consultationIdExcluded: consultationIdExcluded)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get hospital consultation timetables by hospitalId

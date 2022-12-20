@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -21,28 +18,33 @@ open class ContributorsAPI {
      - parameter contributorId: (path)  
      - parameter languageCode: (query)  (optional)
      - parameter returnDefaultValue: (query)  (optional)
-     - returns: AnyPublisher<ContributorModel, Error>
+     - returns: ContributorModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ContributorsContributorIdGet(contributorId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> AnyPublisher<ContributorModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ContributorModel, Error> { promise in
-            requestTask = apiV2ContributorsContributorIdGetWithRequestBuilder(contributorId: contributorId, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ContributorsContributorIdGet(contributorId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) async throws -> ContributorModel {
+        let requestBuilder = apiV2ContributorsContributorIdGetWithRequestBuilder(contributorId: contributorId, languageCode: languageCode, returnDefaultValue: returnDefaultValue)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get Contributor.
@@ -88,28 +90,33 @@ open class ContributorsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<ContributorSnsHandlesModel, Error>
+     - returns: ContributorSnsHandlesModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ContributorsContributorIdHandlesGet(contributorId: UUID, contributorId2: UUID? = nil, id: UUID? = nil, snsType: SnsType? = nil, handle: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<ContributorSnsHandlesModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ContributorSnsHandlesModel, Error> { promise in
-            requestTask = apiV2ContributorsContributorIdHandlesGetWithRequestBuilder(contributorId: contributorId, contributorId2: contributorId2, id: id, snsType: snsType, handle: handle, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ContributorsContributorIdHandlesGet(contributorId: UUID, contributorId2: UUID? = nil, id: UUID? = nil, snsType: SnsType? = nil, handle: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> ContributorSnsHandlesModel {
+        let requestBuilder = apiV2ContributorsContributorIdHandlesGetWithRequestBuilder(contributorId: contributorId, contributorId2: contributorId2, id: id, snsType: snsType, handle: handle, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all ContributorHandles.
@@ -159,28 +166,33 @@ open class ContributorsAPI {
      
      - parameter contributorId: (path)  
      - parameter handleId: (path)  
-     - returns: AnyPublisher<SnsHandleModel, Error>
+     - returns: SnsHandleModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ContributorsContributorIdHandlesHandleIdGet(contributorId: UUID, handleId: UUID) -> AnyPublisher<SnsHandleModel, Error> {
-        var requestTask: RequestTask?
-        return Future<SnsHandleModel, Error> { promise in
-            requestTask = apiV2ContributorsContributorIdHandlesHandleIdGetWithRequestBuilder(contributorId: contributorId, handleId: handleId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ContributorsContributorIdHandlesHandleIdGet(contributorId: UUID, handleId: UUID) async throws -> SnsHandleModel {
+        let requestBuilder = apiV2ContributorsContributorIdHandlesHandleIdGetWithRequestBuilder(contributorId: contributorId, handleId: handleId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get ContributorHandle.
@@ -228,28 +240,33 @@ open class ContributorsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<ContributorsModel, Error>
+     - returns: ContributorsModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ContributorsGet(id: UUID? = nil, name: String? = nil, email: String? = nil, website: String? = nil, hospitalId: UUID? = nil, interviewerOnly: Bool? = nil, showHidden: Bool? = nil, languageCode: String? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<ContributorsModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ContributorsModel, Error> { promise in
-            requestTask = apiV2ContributorsGetWithRequestBuilder(id: id, name: name, email: email, website: website, hospitalId: hospitalId, interviewerOnly: interviewerOnly, showHidden: showHidden, languageCode: languageCode, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ContributorsGet(id: UUID? = nil, name: String? = nil, email: String? = nil, website: String? = nil, hospitalId: UUID? = nil, interviewerOnly: Bool? = nil, showHidden: Bool? = nil, languageCode: String? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> ContributorsModel {
+        let requestBuilder = apiV2ContributorsGetWithRequestBuilder(id: id, name: name, email: email, website: website, hospitalId: hospitalId, interviewerOnly: interviewerOnly, showHidden: showHidden, languageCode: languageCode, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all Contributors.
@@ -306,28 +323,33 @@ open class ContributorsAPI {
      - parameter slug: (path)  
      - parameter languageCode: (query)  (optional)
      - parameter returnDefaultValue: (query)  (optional)
-     - returns: AnyPublisher<ContributorModel, Error>
+     - returns: ContributorModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ContributorsSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> AnyPublisher<ContributorModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ContributorModel, Error> { promise in
-            requestTask = apiV2ContributorsSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ContributorsSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil) async throws -> ContributorModel {
+        let requestBuilder = apiV2ContributorsSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get Contributor by slug.
