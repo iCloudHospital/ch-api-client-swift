@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -28,28 +25,33 @@ open class AboutUsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<AboutUsPagesModel, Error>
+     - returns: AboutUsPagesModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2AboutusGet(hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, name: String? = nil, languageCode: String? = nil, returnDefaultValue: Bool? = nil, confirmed: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<AboutUsPagesModel, Error> {
-        var requestTask: RequestTask?
-        return Future<AboutUsPagesModel, Error> { promise in
-            requestTask = apiV2AboutusGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, hospitalSlug: hospitalSlug, name: name, languageCode: languageCode, returnDefaultValue: returnDefaultValue, confirmed: confirmed, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2AboutusGet(hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, name: String? = nil, languageCode: String? = nil, returnDefaultValue: Bool? = nil, confirmed: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> AboutUsPagesModel {
+        let requestBuilder = apiV2AboutusGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, hospitalSlug: hospitalSlug, name: name, languageCode: languageCode, returnDefaultValue: returnDefaultValue, confirmed: confirmed, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all AboutUsList.
@@ -102,28 +104,33 @@ open class AboutUsAPI {
      - parameter hospitalId: (path)  
      - parameter languageCode: (query)  (optional)
      - parameter returnDefaultValue: (query)  (optional)
-     - returns: AnyPublisher<AboutUsPageModel, Error>
+     - returns: AboutUsPageModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2AboutusHospitalIdGet(hospitalId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> AnyPublisher<AboutUsPageModel, Error> {
-        var requestTask: RequestTask?
-        return Future<AboutUsPageModel, Error> { promise in
-            requestTask = apiV2AboutusHospitalIdGetWithRequestBuilder(hospitalId: hospitalId, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2AboutusHospitalIdGet(hospitalId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) async throws -> AboutUsPageModel {
+        let requestBuilder = apiV2AboutusHospitalIdGetWithRequestBuilder(hospitalId: hospitalId, languageCode: languageCode, returnDefaultValue: returnDefaultValue)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get AboutUs.
@@ -164,28 +171,33 @@ open class AboutUsAPI {
      - parameter slug: (path)  
      - parameter languageCode: (query)  (optional)
      - parameter returnDefaultValue: (query)  (optional)
-     - returns: AnyPublisher<AboutUsPageModel, Error>
+     - returns: AboutUsPageModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2AboutusSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> AnyPublisher<AboutUsPageModel, Error> {
-        var requestTask: RequestTask?
-        return Future<AboutUsPageModel, Error> { promise in
-            requestTask = apiV2AboutusSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2AboutusSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil) async throws -> AboutUsPageModel {
+        let requestBuilder = apiV2AboutusSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      

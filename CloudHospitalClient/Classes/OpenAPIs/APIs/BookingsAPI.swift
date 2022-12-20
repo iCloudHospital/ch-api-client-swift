@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -20,28 +17,33 @@ open class BookingsAPI {
      
      - parameter bookingId: (path)  
      - parameter languageCode: (query)  (optional)
-     - returns: AnyPublisher<BookingModel, Error>
+     - returns: BookingModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2BookingsBookingIdGet(bookingId: UUID, languageCode: String? = nil) -> AnyPublisher<BookingModel, Error> {
-        var requestTask: RequestTask?
-        return Future<BookingModel, Error> { promise in
-            requestTask = apiV2BookingsBookingIdGetWithRequestBuilder(bookingId: bookingId, languageCode: languageCode).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2BookingsBookingIdGet(bookingId: UUID, languageCode: String? = nil) async throws -> BookingModel {
+        let requestBuilder = apiV2BookingsBookingIdGetWithRequestBuilder(bookingId: bookingId, languageCode: languageCode)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get booking.
@@ -81,28 +83,33 @@ open class BookingsAPI {
      Pay booking.
      
      - parameter bookingId: (path)  
-     - returns: AnyPublisher<String, Error>
+     - returns: String
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2BookingsBookingIdPayPost(bookingId: UUID) -> AnyPublisher<String, Error> {
-        var requestTask: RequestTask?
-        return Future<String, Error> { promise in
-            requestTask = apiV2BookingsBookingIdPayPostWithRequestBuilder(bookingId: bookingId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2BookingsBookingIdPayPost(bookingId: UUID) async throws -> String {
+        let requestBuilder = apiV2BookingsBookingIdPayPostWithRequestBuilder(bookingId: bookingId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Pay booking.
@@ -139,28 +146,33 @@ open class BookingsAPI {
      
      - parameter bookingId: (path)  
      - parameter updateBookingCommand: (body)  (optional)
-     - returns: AnyPublisher<BookingModel, Error>
+     - returns: BookingModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2BookingsBookingIdPut(bookingId: UUID, updateBookingCommand: UpdateBookingCommand? = nil) -> AnyPublisher<BookingModel, Error> {
-        var requestTask: RequestTask?
-        return Future<BookingModel, Error> { promise in
-            requestTask = apiV2BookingsBookingIdPutWithRequestBuilder(bookingId: bookingId, updateBookingCommand: updateBookingCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2BookingsBookingIdPut(bookingId: UUID, updateBookingCommand: UpdateBookingCommand? = nil) async throws -> BookingModel {
+        let requestBuilder = apiV2BookingsBookingIdPutWithRequestBuilder(bookingId: bookingId, updateBookingCommand: updateBookingCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Update booking.
@@ -212,28 +224,33 @@ open class BookingsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<BookingsModel, Error>
+     - returns: BookingsModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2BookingsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, dealId: UUID? = nil, dealName: String? = nil, isOpen: Bool? = nil, isCompleted: Bool? = nil, status: BookingStatus? = nil, dealPackageId: UUID? = nil, sortRequestDate: SortingOrder? = nil, sortConfirmedDateStart: SortingOrder? = nil, isExternal: Bool? = nil, paymentEnabled: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<BookingsModel, Error> {
-        var requestTask: RequestTask?
-        return Future<BookingsModel, Error> { promise in
-            requestTask = apiV2BookingsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, dealId: dealId, dealName: dealName, isOpen: isOpen, isCompleted: isCompleted, status: status, dealPackageId: dealPackageId, sortRequestDate: sortRequestDate, sortConfirmedDateStart: sortConfirmedDateStart, isExternal: isExternal, paymentEnabled: paymentEnabled, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2BookingsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, dealId: UUID? = nil, dealName: String? = nil, isOpen: Bool? = nil, isCompleted: Bool? = nil, status: BookingStatus? = nil, dealPackageId: UUID? = nil, sortRequestDate: SortingOrder? = nil, sortConfirmedDateStart: SortingOrder? = nil, isExternal: Bool? = nil, paymentEnabled: Bool? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> BookingsModel {
+        let requestBuilder = apiV2BookingsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, dealId: dealId, dealName: dealName, isOpen: isOpen, isCompleted: isCompleted, status: status, dealPackageId: dealPackageId, sortRequestDate: sortRequestDate, sortConfirmedDateStart: sortConfirmedDateStart, isExternal: isExternal, paymentEnabled: paymentEnabled, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all bookings.
@@ -300,28 +317,33 @@ open class BookingsAPI {
      
      - parameter requestId: (path)  
      - parameter createBookingCommand: (body)  (optional)
-     - returns: AnyPublisher<BookingModel, Error>
+     - returns: BookingModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2BookingsRequestIdPost(requestId: UUID, createBookingCommand: CreateBookingCommand? = nil) -> AnyPublisher<BookingModel, Error> {
-        var requestTask: RequestTask?
-        return Future<BookingModel, Error> { promise in
-            requestTask = apiV2BookingsRequestIdPostWithRequestBuilder(requestId: requestId, createBookingCommand: createBookingCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2BookingsRequestIdPost(requestId: UUID, createBookingCommand: CreateBookingCommand? = nil) async throws -> BookingModel {
+        let requestBuilder = apiV2BookingsRequestIdPostWithRequestBuilder(requestId: requestId, createBookingCommand: createBookingCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Create booking.

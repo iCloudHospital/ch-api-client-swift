@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -19,28 +16,33 @@ open class LanguagesAPI {
      Get Language.
      
      - parameter code: (path)  
-     - returns: AnyPublisher<LanguageModel, Error>
+     - returns: LanguageModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2LanguagesCodeGet(code: String) -> AnyPublisher<LanguageModel, Error> {
-        var requestTask: RequestTask?
-        return Future<LanguageModel, Error> { promise in
-            requestTask = apiV2LanguagesCodeGetWithRequestBuilder(code: code).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2LanguagesCodeGet(code: String) async throws -> LanguageModel {
+        let requestBuilder = apiV2LanguagesCodeGetWithRequestBuilder(code: code)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get Language.
@@ -79,28 +81,33 @@ open class LanguagesAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<LanguagesModel, Error>
+     - returns: LanguagesModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2LanguagesGet(id: UUID? = nil, name: String? = nil, code: String? = nil, description: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<LanguagesModel, Error> {
-        var requestTask: RequestTask?
-        return Future<LanguagesModel, Error> { promise in
-            requestTask = apiV2LanguagesGetWithRequestBuilder(id: id, name: name, code: code, description: description, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2LanguagesGet(id: UUID? = nil, name: String? = nil, code: String? = nil, description: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> LanguagesModel {
+        let requestBuilder = apiV2LanguagesGetWithRequestBuilder(id: id, name: name, code: code, description: description, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all Languages.

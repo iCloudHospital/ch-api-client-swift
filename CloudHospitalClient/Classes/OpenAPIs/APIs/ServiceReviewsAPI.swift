@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -34,28 +31,33 @@ open class ServiceReviewsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<ServiceReviewsModel, Error>
+     - returns: ServiceReviewsModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsGet(id: UUID? = nil, hospitalId: UUID? = nil, hospitalSpecialtyId: UUID? = nil, serviceId: UUID? = nil, serviceName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, gender: Gender? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<ServiceReviewsModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ServiceReviewsModel, Error> { promise in
-            requestTask = apiV2ServicereviewsGetWithRequestBuilder(id: id, hospitalId: hospitalId, hospitalSpecialtyId: hospitalSpecialtyId, serviceId: serviceId, serviceName: serviceName, patientId: patientId, patientName: patientName, gender: gender, recommended: recommended, rate: rate, reviewType: reviewType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ServicereviewsGet(id: UUID? = nil, hospitalId: UUID? = nil, hospitalSpecialtyId: UUID? = nil, serviceId: UUID? = nil, serviceName: String? = nil, patientId: UUID? = nil, patientName: String? = nil, gender: Gender? = nil, recommended: Bool? = nil, rate: Int? = nil, reviewType: ReviewType? = nil, languageCode: String? = nil, showHidden: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> ServiceReviewsModel {
+        let requestBuilder = apiV2ServicereviewsGetWithRequestBuilder(id: id, hospitalId: hospitalId, hospitalSpecialtyId: hospitalSpecialtyId, serviceId: serviceId, serviceName: serviceName, patientId: patientId, patientName: patientName, gender: gender, recommended: recommended, rate: rate, reviewType: reviewType, languageCode: languageCode, showHidden: showHidden, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all ServiceReviews.
@@ -118,28 +120,33 @@ open class ServiceReviewsAPI {
      Create a ServiceReview.
      
      - parameter createServiceReviewCommand: (body)  (optional)
-     - returns: AnyPublisher<ServiceReviewModel, Error>
+     - returns: ServiceReviewModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsPost(createServiceReviewCommand: CreateServiceReviewCommand? = nil) -> AnyPublisher<ServiceReviewModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ServiceReviewModel, Error> { promise in
-            requestTask = apiV2ServicereviewsPostWithRequestBuilder(createServiceReviewCommand: createServiceReviewCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ServicereviewsPost(createServiceReviewCommand: CreateServiceReviewCommand? = nil) async throws -> ServiceReviewModel {
+        let requestBuilder = apiV2ServicereviewsPostWithRequestBuilder(createServiceReviewCommand: createServiceReviewCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Create a ServiceReview.
@@ -172,28 +179,33 @@ open class ServiceReviewsAPI {
      Delete ServiceReview.
      
      - parameter serviceReviewId: (path)  
-     - returns: AnyPublisher<Bool, Error>
+     - returns: Bool
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdDelete(serviceReviewId: UUID) -> AnyPublisher<Bool, Error> {
-        var requestTask: RequestTask?
-        return Future<Bool, Error> { promise in
-            requestTask = apiV2ServicereviewsServiceReviewIdDeleteWithRequestBuilder(serviceReviewId: serviceReviewId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ServicereviewsServiceReviewIdDelete(serviceReviewId: UUID) async throws -> Bool {
+        let requestBuilder = apiV2ServicereviewsServiceReviewIdDeleteWithRequestBuilder(serviceReviewId: serviceReviewId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Delete ServiceReview.
@@ -230,28 +242,33 @@ open class ServiceReviewsAPI {
      
      - parameter serviceReviewId: (path)  
      - parameter languageCode: (query)  (optional)
-     - returns: AnyPublisher<ServiceReviewModel, Error>
+     - returns: ServiceReviewModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdGet(serviceReviewId: UUID, languageCode: String? = nil) -> AnyPublisher<ServiceReviewModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ServiceReviewModel, Error> { promise in
-            requestTask = apiV2ServicereviewsServiceReviewIdGetWithRequestBuilder(serviceReviewId: serviceReviewId, languageCode: languageCode).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ServicereviewsServiceReviewIdGet(serviceReviewId: UUID, languageCode: String? = nil) async throws -> ServiceReviewModel {
+        let requestBuilder = apiV2ServicereviewsServiceReviewIdGetWithRequestBuilder(serviceReviewId: serviceReviewId, languageCode: languageCode)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      
@@ -293,28 +310,33 @@ open class ServiceReviewsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<MediasModel, Error>
+     - returns: MediasModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdMediasGet(serviceReviewId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MediasModel, Error> {
-        var requestTask: RequestTask?
-        return Future<MediasModel, Error> { promise in
-            requestTask = apiV2ServicereviewsServiceReviewIdMediasGetWithRequestBuilder(serviceReviewId: serviceReviewId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ServicereviewsServiceReviewIdMediasGet(serviceReviewId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> MediasModel {
+        let requestBuilder = apiV2ServicereviewsServiceReviewIdMediasGetWithRequestBuilder(serviceReviewId: serviceReviewId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all ServiceReviewMedias.
@@ -360,28 +382,33 @@ open class ServiceReviewsAPI {
      
      - parameter serviceReviewId: (path)  
      - parameter mediaId: (path)  
-     - returns: AnyPublisher<Bool, Error>
+     - returns: Bool
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdDelete(serviceReviewId: UUID, mediaId: UUID) -> AnyPublisher<Bool, Error> {
-        var requestTask: RequestTask?
-        return Future<Bool, Error> { promise in
-            requestTask = apiV2ServicereviewsServiceReviewIdMediasMediaIdDeleteWithRequestBuilder(serviceReviewId: serviceReviewId, mediaId: mediaId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdDelete(serviceReviewId: UUID, mediaId: UUID) async throws -> Bool {
+        let requestBuilder = apiV2ServicereviewsServiceReviewIdMediasMediaIdDeleteWithRequestBuilder(serviceReviewId: serviceReviewId, mediaId: mediaId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Delete ServiceReviewMedia
@@ -422,28 +449,33 @@ open class ServiceReviewsAPI {
      
      - parameter serviceReviewId: (path)  
      - parameter mediaId: (path)  
-     - returns: AnyPublisher<MediaModel, Error>
+     - returns: MediaModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdGet(serviceReviewId: UUID, mediaId: UUID) -> AnyPublisher<MediaModel, Error> {
-        var requestTask: RequestTask?
-        return Future<MediaModel, Error> { promise in
-            requestTask = apiV2ServicereviewsServiceReviewIdMediasMediaIdGetWithRequestBuilder(serviceReviewId: serviceReviewId, mediaId: mediaId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdGet(serviceReviewId: UUID, mediaId: UUID) async throws -> MediaModel {
+        let requestBuilder = apiV2ServicereviewsServiceReviewIdMediasMediaIdGetWithRequestBuilder(serviceReviewId: serviceReviewId, mediaId: mediaId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get ServiceReviewMedia.
@@ -482,28 +514,33 @@ open class ServiceReviewsAPI {
      - parameter serviceReviewId: (path)  
      - parameter mediaId: (path)  
      - parameter updateMediaCommand: (body)  (optional)
-     - returns: AnyPublisher<MediaModel, Error>
+     - returns: MediaModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdPut(serviceReviewId: UUID, mediaId: UUID, updateMediaCommand: UpdateMediaCommand? = nil) -> AnyPublisher<MediaModel, Error> {
-        var requestTask: RequestTask?
-        return Future<MediaModel, Error> { promise in
-            requestTask = apiV2ServicereviewsServiceReviewIdMediasMediaIdPutWithRequestBuilder(serviceReviewId: serviceReviewId, mediaId: mediaId, updateMediaCommand: updateMediaCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ServicereviewsServiceReviewIdMediasMediaIdPut(serviceReviewId: UUID, mediaId: UUID, updateMediaCommand: UpdateMediaCommand? = nil) async throws -> MediaModel {
+        let requestBuilder = apiV2ServicereviewsServiceReviewIdMediasMediaIdPutWithRequestBuilder(serviceReviewId: serviceReviewId, mediaId: mediaId, updateMediaCommand: updateMediaCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Update ServiceReviewMedia.
@@ -545,28 +582,33 @@ open class ServiceReviewsAPI {
      
      - parameter serviceReviewId: (path)  
      - parameter createMediaCommand: (body)  (optional)
-     - returns: AnyPublisher<MediaModel, Error>
+     - returns: MediaModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdMediasPost(serviceReviewId: UUID, createMediaCommand: CreateMediaCommand? = nil) -> AnyPublisher<MediaModel, Error> {
-        var requestTask: RequestTask?
-        return Future<MediaModel, Error> { promise in
-            requestTask = apiV2ServicereviewsServiceReviewIdMediasPostWithRequestBuilder(serviceReviewId: serviceReviewId, createMediaCommand: createMediaCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ServicereviewsServiceReviewIdMediasPost(serviceReviewId: UUID, createMediaCommand: CreateMediaCommand? = nil) async throws -> MediaModel {
+        let requestBuilder = apiV2ServicereviewsServiceReviewIdMediasPostWithRequestBuilder(serviceReviewId: serviceReviewId, createMediaCommand: createMediaCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Create ServiceReviewMedia.
@@ -604,28 +646,33 @@ open class ServiceReviewsAPI {
      
      - parameter serviceReviewId: (path)  
      - parameter updateServiceReviewCommand: (body)  (optional)
-     - returns: AnyPublisher<ServiceReviewModel, Error>
+     - returns: ServiceReviewModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ServicereviewsServiceReviewIdPut(serviceReviewId: UUID, updateServiceReviewCommand: UpdateServiceReviewCommand? = nil) -> AnyPublisher<ServiceReviewModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ServiceReviewModel, Error> { promise in
-            requestTask = apiV2ServicereviewsServiceReviewIdPutWithRequestBuilder(serviceReviewId: serviceReviewId, updateServiceReviewCommand: updateServiceReviewCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ServicereviewsServiceReviewIdPut(serviceReviewId: UUID, updateServiceReviewCommand: UpdateServiceReviewCommand? = nil) async throws -> ServiceReviewModel {
+        let requestBuilder = apiV2ServicereviewsServiceReviewIdPutWithRequestBuilder(serviceReviewId: serviceReviewId, updateServiceReviewCommand: updateServiceReviewCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Update ServiceReview.

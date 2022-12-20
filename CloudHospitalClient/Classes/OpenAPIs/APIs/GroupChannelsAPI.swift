@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -19,28 +16,33 @@ open class GroupChannelsAPI {
 
      - parameter channelUrl: (path)  
      - parameter inviteSendBirdGroupChannelCommand: (body)  (optional)
-     - returns: AnyPublisher<SendBirdGroupChannelModel, Error>
+     - returns: SendBirdGroupChannelModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2GroupchannelsChannelUrlInvitePost(channelUrl: String, inviteSendBirdGroupChannelCommand: InviteSendBirdGroupChannelCommand? = nil) -> AnyPublisher<SendBirdGroupChannelModel, Error> {
-        var requestTask: RequestTask?
-        return Future<SendBirdGroupChannelModel, Error> { promise in
-            requestTask = apiV2GroupchannelsChannelUrlInvitePostWithRequestBuilder(channelUrl: channelUrl, inviteSendBirdGroupChannelCommand: inviteSendBirdGroupChannelCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2GroupchannelsChannelUrlInvitePost(channelUrl: String, inviteSendBirdGroupChannelCommand: InviteSendBirdGroupChannelCommand? = nil) async throws -> SendBirdGroupChannelModel {
+        let requestBuilder = apiV2GroupchannelsChannelUrlInvitePostWithRequestBuilder(channelUrl: channelUrl, inviteSendBirdGroupChannelCommand: inviteSendBirdGroupChannelCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - POST /api/v2/groupchannels/{channelUrl}/invite
@@ -77,28 +79,33 @@ open class GroupChannelsAPI {
      - parameter dealId: (path)  
      - parameter hospitalId: (query)  (optional)
      - parameter isExternal: (query)  (optional)
-     - returns: AnyPublisher<String, Error>
+     - returns: String
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2GroupchannelsDealDealIdGet(dealId: UUID, hospitalId: UUID? = nil, isExternal: Bool? = nil) -> AnyPublisher<String, Error> {
-        var requestTask: RequestTask?
-        return Future<String, Error> { promise in
-            requestTask = apiV2GroupchannelsDealDealIdGetWithRequestBuilder(dealId: dealId, hospitalId: hospitalId, isExternal: isExternal).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2GroupchannelsDealDealIdGet(dealId: UUID, hospitalId: UUID? = nil, isExternal: Bool? = nil) async throws -> String {
+        let requestBuilder = apiV2GroupchannelsDealDealIdGetWithRequestBuilder(dealId: dealId, hospitalId: hospitalId, isExternal: isExternal)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - GET /api/v2/groupchannels/deal/{dealId}
@@ -140,28 +147,33 @@ open class GroupChannelsAPI {
      - parameter doctorId: (path)  
      - parameter hospitalId: (query)  (optional)
      - parameter isExternal: (query)  (optional)
-     - returns: AnyPublisher<String, Error>
+     - returns: String
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2GroupchannelsDoctorDoctorIdGet(doctorId: UUID, hospitalId: UUID? = nil, isExternal: Bool? = nil) -> AnyPublisher<String, Error> {
-        var requestTask: RequestTask?
-        return Future<String, Error> { promise in
-            requestTask = apiV2GroupchannelsDoctorDoctorIdGetWithRequestBuilder(doctorId: doctorId, hospitalId: hospitalId, isExternal: isExternal).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2GroupchannelsDoctorDoctorIdGet(doctorId: UUID, hospitalId: UUID? = nil, isExternal: Bool? = nil) async throws -> String {
+        let requestBuilder = apiV2GroupchannelsDoctorDoctorIdGetWithRequestBuilder(doctorId: doctorId, hospitalId: hospitalId, isExternal: isExternal)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - GET /api/v2/groupchannels/doctor/{doctorId}
@@ -202,28 +214,33 @@ open class GroupChannelsAPI {
 
      - parameter hospitalId: (path)  
      - parameter isExternal: (query)  (optional)
-     - returns: AnyPublisher<String, Error>
+     - returns: String
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2GroupchannelsHospitalHospitalIdGet(hospitalId: UUID, isExternal: Bool? = nil) -> AnyPublisher<String, Error> {
-        var requestTask: RequestTask?
-        return Future<String, Error> { promise in
-            requestTask = apiV2GroupchannelsHospitalHospitalIdGetWithRequestBuilder(hospitalId: hospitalId, isExternal: isExternal).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2GroupchannelsHospitalHospitalIdGet(hospitalId: UUID, isExternal: Bool? = nil) async throws -> String {
+        let requestBuilder = apiV2GroupchannelsHospitalHospitalIdGetWithRequestBuilder(hospitalId: hospitalId, isExternal: isExternal)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - GET /api/v2/groupchannels/hospital/{hospitalId}

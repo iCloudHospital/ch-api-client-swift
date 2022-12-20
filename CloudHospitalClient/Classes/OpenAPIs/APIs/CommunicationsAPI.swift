@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -18,28 +15,33 @@ open class CommunicationsAPI {
     /**
      Delete CommunicationUser.
      
-     - returns: AnyPublisher<Int, Error>
+     - returns: Int
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2CommunicationsDelete() -> AnyPublisher<Int, Error> {
-        var requestTask: RequestTask?
-        return Future<Int, Error> { promise in
-            requestTask = apiV2CommunicationsDeleteWithRequestBuilder().execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2CommunicationsDelete() async throws -> Int {
+        let requestBuilder = apiV2CommunicationsDeleteWithRequestBuilder()
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Delete CommunicationUser.
@@ -70,28 +72,33 @@ open class CommunicationsAPI {
     /**
      Get CommunicationUser.
      
-     - returns: AnyPublisher<CommunicationUserTokenModel, Error>
+     - returns: CommunicationUserTokenModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2CommunicationsGet() -> AnyPublisher<CommunicationUserTokenModel, Error> {
-        var requestTask: RequestTask?
-        return Future<CommunicationUserTokenModel, Error> { promise in
-            requestTask = apiV2CommunicationsGetWithRequestBuilder().execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2CommunicationsGet() async throws -> CommunicationUserTokenModel {
+        let requestBuilder = apiV2CommunicationsGetWithRequestBuilder()
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get CommunicationUser.
@@ -122,28 +129,33 @@ open class CommunicationsAPI {
     /**
      Revoke CommunicationUser.
      
-     - returns: AnyPublisher<CommunicationUserTokenModel, Error>
+     - returns: CommunicationUserTokenModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2CommunicationsPut() -> AnyPublisher<CommunicationUserTokenModel, Error> {
-        var requestTask: RequestTask?
-        return Future<CommunicationUserTokenModel, Error> { promise in
-            requestTask = apiV2CommunicationsPutWithRequestBuilder().execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2CommunicationsPut() async throws -> CommunicationUserTokenModel {
+        let requestBuilder = apiV2CommunicationsPutWithRequestBuilder()
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Revoke CommunicationUser.

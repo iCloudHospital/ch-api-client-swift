@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -19,28 +16,33 @@ open class PatientsAPI {
      Delete Patient.
      
      - parameter patientId: (path)  
-     - returns: AnyPublisher<Bool, Error>
+     - returns: Bool
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2PatientsPatientIdDelete(patientId: UUID) -> AnyPublisher<Bool, Error> {
-        var requestTask: RequestTask?
-        return Future<Bool, Error> { promise in
-            requestTask = apiV2PatientsPatientIdDeleteWithRequestBuilder(patientId: patientId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2PatientsPatientIdDelete(patientId: UUID) async throws -> Bool {
+        let requestBuilder = apiV2PatientsPatientIdDeleteWithRequestBuilder(patientId: patientId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Delete Patient.
@@ -76,28 +78,33 @@ open class PatientsAPI {
      Get Patient.
      
      - parameter patientId: (path)  
-     - returns: AnyPublisher<PatientModel, Error>
+     - returns: PatientModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2PatientsPatientIdGet(patientId: UUID) -> AnyPublisher<PatientModel, Error> {
-        var requestTask: RequestTask?
-        return Future<PatientModel, Error> { promise in
-            requestTask = apiV2PatientsPatientIdGetWithRequestBuilder(patientId: patientId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2PatientsPatientIdGet(patientId: UUID) async throws -> PatientModel {
+        let requestBuilder = apiV2PatientsPatientIdGetWithRequestBuilder(patientId: patientId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get Patient.
@@ -134,28 +141,33 @@ open class PatientsAPI {
      
      - parameter patientId: (path)  
      - parameter updatePatientCommand: (body)  (optional)
-     - returns: AnyPublisher<PatientModel, Error>
+     - returns: PatientModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2PatientsPatientIdPut(patientId: UUID, updatePatientCommand: UpdatePatientCommand? = nil) -> AnyPublisher<PatientModel, Error> {
-        var requestTask: RequestTask?
-        return Future<PatientModel, Error> { promise in
-            requestTask = apiV2PatientsPatientIdPutWithRequestBuilder(patientId: patientId, updatePatientCommand: updatePatientCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2PatientsPatientIdPut(patientId: UUID, updatePatientCommand: UpdatePatientCommand? = nil) async throws -> PatientModel {
+        let requestBuilder = apiV2PatientsPatientIdPutWithRequestBuilder(patientId: patientId, updatePatientCommand: updatePatientCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Update Patient.
@@ -192,28 +204,33 @@ open class PatientsAPI {
      Create a Patient.
      
      - parameter createPatientCommand: (body)  (optional)
-     - returns: AnyPublisher<PatientModel, Error>
+     - returns: PatientModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2PatientsPost(createPatientCommand: CreatePatientCommand? = nil) -> AnyPublisher<PatientModel, Error> {
-        var requestTask: RequestTask?
-        return Future<PatientModel, Error> { promise in
-            requestTask = apiV2PatientsPostWithRequestBuilder(createPatientCommand: createPatientCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2PatientsPost(createPatientCommand: CreatePatientCommand? = nil) async throws -> PatientModel {
+        let requestBuilder = apiV2PatientsPostWithRequestBuilder(createPatientCommand: createPatientCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Create a Patient.

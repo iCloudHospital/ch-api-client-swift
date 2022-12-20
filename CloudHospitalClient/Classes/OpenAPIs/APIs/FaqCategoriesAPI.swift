@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -20,28 +17,33 @@ open class FaqCategoriesAPI {
      
      - parameter faqCategoryId: (path)  
      - parameter languageCode: (query)  (optional)
-     - returns: AnyPublisher<FaqCategoryModel, Error>
+     - returns: FaqCategoryModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2FaqcategoriesFaqCategoryIdGet(faqCategoryId: UUID, languageCode: String? = nil) -> AnyPublisher<FaqCategoryModel, Error> {
-        var requestTask: RequestTask?
-        return Future<FaqCategoryModel, Error> { promise in
-            requestTask = apiV2FaqcategoriesFaqCategoryIdGetWithRequestBuilder(faqCategoryId: faqCategoryId, languageCode: languageCode).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2FaqcategoriesFaqCategoryIdGet(faqCategoryId: UUID, languageCode: String? = nil) async throws -> FaqCategoryModel {
+        let requestBuilder = apiV2FaqcategoriesFaqCategoryIdGetWithRequestBuilder(faqCategoryId: faqCategoryId, languageCode: languageCode)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get FaqCategory.
@@ -88,28 +90,33 @@ open class FaqCategoriesAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<FaqCategoriesModel, Error>
+     - returns: FaqCategoriesModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2FaqcategoriesGet(id: UUID? = nil, parentId: UUID? = nil, name: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<FaqCategoriesModel, Error> {
-        var requestTask: RequestTask?
-        return Future<FaqCategoriesModel, Error> { promise in
-            requestTask = apiV2FaqcategoriesGetWithRequestBuilder(id: id, parentId: parentId, name: name, hospitalId: hospitalId, hospitalName: hospitalName, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2FaqcategoriesGet(id: UUID? = nil, parentId: UUID? = nil, name: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> FaqCategoriesModel {
+        let requestBuilder = apiV2FaqcategoriesGetWithRequestBuilder(id: id, parentId: parentId, name: name, hospitalId: hospitalId, hospitalName: hospitalName, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all FaqCategories.
@@ -163,28 +170,33 @@ open class FaqCategoriesAPI {
      
      - parameter slug: (path)  
      - parameter languageCode: (query)  (optional)
-     - returns: AnyPublisher<FaqCategoryModel, Error>
+     - returns: FaqCategoryModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2FaqcategoriesSlugGet(slug: String, languageCode: String? = nil) -> AnyPublisher<FaqCategoryModel, Error> {
-        var requestTask: RequestTask?
-        return Future<FaqCategoryModel, Error> { promise in
-            requestTask = apiV2FaqcategoriesSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2FaqcategoriesSlugGet(slug: String, languageCode: String? = nil) async throws -> FaqCategoryModel {
+        let requestBuilder = apiV2FaqcategoriesSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get FaqCategory by slug.

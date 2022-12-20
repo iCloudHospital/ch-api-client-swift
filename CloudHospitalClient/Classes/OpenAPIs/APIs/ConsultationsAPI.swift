@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -20,28 +17,33 @@ open class ConsultationsAPI {
      
      - parameter consultationId: (path)  
      - parameter languageCode: (query)  (optional)
-     - returns: AnyPublisher<ConsultationModel, Error>
+     - returns: ConsultationModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ConsultationsConsultationIdGet(consultationId: UUID, languageCode: String? = nil) -> AnyPublisher<ConsultationModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ConsultationModel, Error> { promise in
-            requestTask = apiV2ConsultationsConsultationIdGetWithRequestBuilder(consultationId: consultationId, languageCode: languageCode).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ConsultationsConsultationIdGet(consultationId: UUID, languageCode: String? = nil) async throws -> ConsultationModel {
+        let requestBuilder = apiV2ConsultationsConsultationIdGetWithRequestBuilder(consultationId: consultationId, languageCode: languageCode)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get consultation.
@@ -81,28 +83,33 @@ open class ConsultationsAPI {
      Pay consultation.
      
      - parameter consultationId: (path)  
-     - returns: AnyPublisher<String, Error>
+     - returns: String
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ConsultationsConsultationIdPayPost(consultationId: UUID) -> AnyPublisher<String, Error> {
-        var requestTask: RequestTask?
-        return Future<String, Error> { promise in
-            requestTask = apiV2ConsultationsConsultationIdPayPostWithRequestBuilder(consultationId: consultationId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ConsultationsConsultationIdPayPost(consultationId: UUID) async throws -> String {
+        let requestBuilder = apiV2ConsultationsConsultationIdPayPostWithRequestBuilder(consultationId: consultationId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Pay consultation.
@@ -139,28 +146,33 @@ open class ConsultationsAPI {
      
      - parameter consultationId: (path)  
      - parameter updateConsultationCommand: (body)  (optional)
-     - returns: AnyPublisher<ConsultationModel, Error>
+     - returns: ConsultationModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ConsultationsConsultationIdPut(consultationId: UUID, updateConsultationCommand: UpdateConsultationCommand? = nil) -> AnyPublisher<ConsultationModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ConsultationModel, Error> { promise in
-            requestTask = apiV2ConsultationsConsultationIdPutWithRequestBuilder(consultationId: consultationId, updateConsultationCommand: updateConsultationCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ConsultationsConsultationIdPut(consultationId: UUID, updateConsultationCommand: UpdateConsultationCommand? = nil) async throws -> ConsultationModel {
+        let requestBuilder = apiV2ConsultationsConsultationIdPutWithRequestBuilder(consultationId: consultationId, updateConsultationCommand: updateConsultationCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Update consultation.
@@ -210,28 +222,33 @@ open class ConsultationsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<ConsultationsModel, Error>
+     - returns: ConsultationsModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ConsultationsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, dealId: UUID? = nil, dealName: String? = nil, isOpen: Bool? = nil, isCompleted: Bool? = nil, status: ConsultationStatus? = nil, consultationType: ConsultationType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<ConsultationsModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ConsultationsModel, Error> { promise in
-            requestTask = apiV2ConsultationsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, doctorId: doctorId, doctorName: doctorName, dealId: dealId, dealName: dealName, isOpen: isOpen, isCompleted: isCompleted, status: status, consultationType: consultationType, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ConsultationsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, doctorId: UUID? = nil, doctorName: String? = nil, dealId: UUID? = nil, dealName: String? = nil, isOpen: Bool? = nil, isCompleted: Bool? = nil, status: ConsultationStatus? = nil, consultationType: ConsultationType? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> ConsultationsModel {
+        let requestBuilder = apiV2ConsultationsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, doctorId: doctorId, doctorName: doctorName, dealId: dealId, dealName: dealName, isOpen: isOpen, isCompleted: isCompleted, status: status, consultationType: consultationType, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all consultations.
@@ -294,28 +311,33 @@ open class ConsultationsAPI {
      
      - parameter requestId: (path)  
      - parameter createConsultationCommand: (body)  (optional)
-     - returns: AnyPublisher<ConsultationModel, Error>
+     - returns: ConsultationModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ConsultationsRequestIdPost(requestId: UUID, createConsultationCommand: CreateConsultationCommand? = nil) -> AnyPublisher<ConsultationModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ConsultationModel, Error> { promise in
-            requestTask = apiV2ConsultationsRequestIdPostWithRequestBuilder(requestId: requestId, createConsultationCommand: createConsultationCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ConsultationsRequestIdPost(requestId: UUID, createConsultationCommand: CreateConsultationCommand? = nil) async throws -> ConsultationModel {
+        let requestBuilder = apiV2ConsultationsRequestIdPostWithRequestBuilder(requestId: requestId, createConsultationCommand: createConsultationCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Create consultation.

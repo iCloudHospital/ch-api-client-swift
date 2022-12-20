@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -17,28 +14,33 @@ open class ChatUsersAPI {
 
     /**
 
-     - returns: AnyPublisher<ChatUserModel, Error>
+     - returns: ChatUserModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ChatusersCurrentGet() -> AnyPublisher<ChatUserModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ChatUserModel, Error> { promise in
-            requestTask = apiV2ChatusersCurrentGetWithRequestBuilder().execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ChatusersCurrentGet() async throws -> ChatUserModel {
+        let requestBuilder = apiV2ChatusersCurrentGetWithRequestBuilder()
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      - GET /api/v2/chatusers/current
@@ -68,28 +70,33 @@ open class ChatUsersAPI {
     /**
      Delete chatUser.
      
-     - returns: AnyPublisher<Bool, Error>
+     - returns: Bool
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ChatusersDelete() -> AnyPublisher<Bool, Error> {
-        var requestTask: RequestTask?
-        return Future<Bool, Error> { promise in
-            requestTask = apiV2ChatusersDeleteWithRequestBuilder().execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ChatusersDelete() async throws -> Bool {
+        let requestBuilder = apiV2ChatusersDeleteWithRequestBuilder()
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Delete chatUser.
@@ -125,28 +132,33 @@ open class ChatUsersAPI {
      - parameter userIds: (query)  (optional)
      - parameter nickname: (query)  (optional)
      - parameter nicknameStartswith: (query)  (optional)
-     - returns: AnyPublisher<ChatUsersModel, Error>
+     - returns: ChatUsersModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ChatusersGet(limit: Int? = nil, token: String? = nil, userIds: String? = nil, nickname: String? = nil, nicknameStartswith: String? = nil) -> AnyPublisher<ChatUsersModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ChatUsersModel, Error> { promise in
-            requestTask = apiV2ChatusersGetWithRequestBuilder(limit: limit, token: token, userIds: userIds, nickname: nickname, nicknameStartswith: nicknameStartswith).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ChatusersGet(limit: Int? = nil, token: String? = nil, userIds: String? = nil, nickname: String? = nil, nicknameStartswith: String? = nil) async throws -> ChatUsersModel {
+        let requestBuilder = apiV2ChatusersGetWithRequestBuilder(limit: limit, token: token, userIds: userIds, nickname: nickname, nicknameStartswith: nicknameStartswith)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all chatUsers.
@@ -190,28 +202,33 @@ open class ChatUsersAPI {
      Create a chatUser.
      
      - parameter createChatUserCommand: (body)  (optional)
-     - returns: AnyPublisher<ChatUserModel, Error>
+     - returns: ChatUserModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ChatusersPost(createChatUserCommand: CreateChatUserCommand? = nil) -> AnyPublisher<ChatUserModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ChatUserModel, Error> { promise in
-            requestTask = apiV2ChatusersPostWithRequestBuilder(createChatUserCommand: createChatUserCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ChatusersPost(createChatUserCommand: CreateChatUserCommand? = nil) async throws -> ChatUserModel {
+        let requestBuilder = apiV2ChatusersPostWithRequestBuilder(createChatUserCommand: createChatUserCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Create a chatUser.
@@ -244,28 +261,33 @@ open class ChatUsersAPI {
      Update chatUser.
      
      - parameter updateChatUserCommand: (body)  (optional)
-     - returns: AnyPublisher<ChatUserModel, Error>
+     - returns: ChatUserModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ChatusersPut(updateChatUserCommand: UpdateChatUserCommand? = nil) -> AnyPublisher<ChatUserModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ChatUserModel, Error> { promise in
-            requestTask = apiV2ChatusersPutWithRequestBuilder(updateChatUserCommand: updateChatUserCommand).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ChatusersPut(updateChatUserCommand: UpdateChatUserCommand? = nil) async throws -> ChatUserModel {
+        let requestBuilder = apiV2ChatusersPutWithRequestBuilder(updateChatUserCommand: updateChatUserCommand)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Update chatUser.
@@ -298,28 +320,33 @@ open class ChatUsersAPI {
      Get chatUser.
      
      - parameter userId: (path)  
-     - returns: AnyPublisher<ChatUserModel, Error>
+     - returns: ChatUserModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2ChatusersUserIdGet(userId: UUID) -> AnyPublisher<ChatUserModel, Error> {
-        var requestTask: RequestTask?
-        return Future<ChatUserModel, Error> { promise in
-            requestTask = apiV2ChatusersUserIdGetWithRequestBuilder(userId: userId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2ChatusersUserIdGet(userId: UUID) async throws -> ChatUserModel {
+        let requestBuilder = apiV2ChatusersUserIdGetWithRequestBuilder(userId: userId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get chatUser.

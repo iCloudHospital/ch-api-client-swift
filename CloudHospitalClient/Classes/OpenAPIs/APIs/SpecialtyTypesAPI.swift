@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -32,28 +29,33 @@ open class SpecialtyTypesAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<SpecialtyTypesModel, Error>
+     - returns: SpecialtyTypesModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2SpecialtytypesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, ids: [UUID]? = nil, specialtyTypeCategoryId: UUID? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<SpecialtyTypesModel, Error> {
-        var requestTask: RequestTask?
-        return Future<SpecialtyTypesModel, Error> { promise in
-            requestTask = apiV2SpecialtytypesGetWithRequestBuilder(id: id, name: name, description: description, marketingType: marketingType, hospitalId: hospitalId, created: created, ids: ids, specialtyTypeCategoryId: specialtyTypeCategoryId, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2SpecialtytypesGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, ids: [UUID]? = nil, specialtyTypeCategoryId: UUID? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> SpecialtyTypesModel {
+        let requestBuilder = apiV2SpecialtytypesGetWithRequestBuilder(id: id, name: name, description: description, marketingType: marketingType, hospitalId: hospitalId, created: created, ids: ids, specialtyTypeCategoryId: specialtyTypeCategoryId, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all Departments.
@@ -125,28 +127,33 @@ open class SpecialtyTypesAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<SpecialtyTypesSimpleModel, Error>
+     - returns: SpecialtyTypesSimpleModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2SpecialtytypesSimpleGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, ids: [UUID]? = nil, specialtyTypeCategoryId: UUID? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<SpecialtyTypesSimpleModel, Error> {
-        var requestTask: RequestTask?
-        return Future<SpecialtyTypesSimpleModel, Error> { promise in
-            requestTask = apiV2SpecialtytypesSimpleGetWithRequestBuilder(id: id, name: name, description: description, marketingType: marketingType, hospitalId: hospitalId, created: created, ids: ids, specialtyTypeCategoryId: specialtyTypeCategoryId, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2SpecialtytypesSimpleGet(id: UUID? = nil, name: String? = nil, description: String? = nil, marketingType: MarketingType? = nil, hospitalId: UUID? = nil, created: Date? = nil, ids: [UUID]? = nil, specialtyTypeCategoryId: UUID? = nil, languageCode: String? = nil, showHidden: Bool? = nil, returnDefaultValue: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> SpecialtyTypesSimpleModel {
+        let requestBuilder = apiV2SpecialtytypesSimpleGetWithRequestBuilder(id: id, name: name, description: description, marketingType: marketingType, hospitalId: hospitalId, created: created, ids: ids, specialtyTypeCategoryId: specialtyTypeCategoryId, languageCode: languageCode, showHidden: showHidden, returnDefaultValue: returnDefaultValue, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all Hospitals.
@@ -207,28 +214,33 @@ open class SpecialtyTypesAPI {
      - parameter slug: (path)  
      - parameter languageCode: (query)  (optional)
      - parameter returnDefaultValue: (query)  (optional)
-     - returns: AnyPublisher<SpecialtyTypeModel, Error>
+     - returns: SpecialtyTypeModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2SpecialtytypesSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> AnyPublisher<SpecialtyTypeModel, Error> {
-        var requestTask: RequestTask?
-        return Future<SpecialtyTypeModel, Error> { promise in
-            requestTask = apiV2SpecialtytypesSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2SpecialtytypesSlugGet(slug: String, languageCode: String? = nil, returnDefaultValue: Bool? = nil) async throws -> SpecialtyTypeModel {
+        let requestBuilder = apiV2SpecialtytypesSlugGetWithRequestBuilder(slug: slug, languageCode: languageCode, returnDefaultValue: returnDefaultValue)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      
@@ -269,28 +281,33 @@ open class SpecialtyTypesAPI {
      - parameter specialtyTypeId: (path)  
      - parameter languageCode: (query)  (optional)
      - parameter returnDefaultValue: (query)  (optional)
-     - returns: AnyPublisher<SpecialtyTypeModel, Error>
+     - returns: SpecialtyTypeModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2SpecialtytypesSpecialtyTypeIdGet(specialtyTypeId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> AnyPublisher<SpecialtyTypeModel, Error> {
-        var requestTask: RequestTask?
-        return Future<SpecialtyTypeModel, Error> { promise in
-            requestTask = apiV2SpecialtytypesSpecialtyTypeIdGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2SpecialtytypesSpecialtyTypeIdGet(specialtyTypeId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) async throws -> SpecialtyTypeModel {
+        let requestBuilder = apiV2SpecialtytypesSpecialtyTypeIdGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, languageCode: languageCode, returnDefaultValue: returnDefaultValue)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      
@@ -334,28 +351,33 @@ open class SpecialtyTypesAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<MediasModel, Error>
+     - returns: MediasModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2SpecialtytypesSpecialtyTypeIdMediasGet(specialtyTypeId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MediasModel, Error> {
-        var requestTask: RequestTask?
-        return Future<MediasModel, Error> { promise in
-            requestTask = apiV2SpecialtytypesSpecialtyTypeIdMediasGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2SpecialtytypesSpecialtyTypeIdMediasGet(specialtyTypeId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> MediasModel {
+        let requestBuilder = apiV2SpecialtytypesSpecialtyTypeIdMediasGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all SpecialtyTypeMedias.
@@ -401,28 +423,33 @@ open class SpecialtyTypesAPI {
      
      - parameter specialtyTypeId: (path)  
      - parameter mediaId: (path)  
-     - returns: AnyPublisher<MediaModel, Error>
+     - returns: MediaModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGet(specialtyTypeId: UUID, mediaId: UUID) -> AnyPublisher<MediaModel, Error> {
-        var requestTask: RequestTask?
-        return Future<MediaModel, Error> { promise in
-            requestTask = apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, mediaId: mediaId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGet(specialtyTypeId: UUID, mediaId: UUID) async throws -> MediaModel {
+        let requestBuilder = apiV2SpecialtytypesSpecialtyTypeIdMediasMediaIdGetWithRequestBuilder(specialtyTypeId: specialtyTypeId, mediaId: mediaId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get SpecialtyTypeMedia.

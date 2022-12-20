@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(Combine)
-import Combine
-#endif
 #if canImport(AnyCodable)
 import AnyCodable
 #endif
@@ -20,28 +17,33 @@ open class DoctorsAPI {
      
      - parameter doctorId: (path)  
      - parameter certificateId: (path)  
-     - returns: AnyPublisher<DoctorCertificateModel, Error>
+     - returns: DoctorCertificateModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdCertificatesCertificateIdGet(doctorId: UUID, certificateId: UUID) -> AnyPublisher<DoctorCertificateModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorCertificateModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdCertificatesCertificateIdGetWithRequestBuilder(doctorId: doctorId, certificateId: certificateId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdCertificatesCertificateIdGet(doctorId: UUID, certificateId: UUID) async throws -> DoctorCertificateModel {
+        let requestBuilder = apiV2DoctorsDoctorIdCertificatesCertificateIdGetWithRequestBuilder(doctorId: doctorId, certificateId: certificateId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get DoctorCertificate.
@@ -86,28 +88,33 @@ open class DoctorsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<DoctorCertificatesModel, Error>
+     - returns: DoctorCertificatesModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdCertificatesGet(doctorId: UUID, doctorName: String? = nil, certificateId: UUID? = nil, certificate: String? = nil, activeFrom: Date? = nil, activeTo: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<DoctorCertificatesModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorCertificatesModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdCertificatesGetWithRequestBuilder(doctorId: doctorId, doctorName: doctorName, certificateId: certificateId, certificate: certificate, activeFrom: activeFrom, activeTo: activeTo, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdCertificatesGet(doctorId: UUID, doctorName: String? = nil, certificateId: UUID? = nil, certificate: String? = nil, activeFrom: Date? = nil, activeTo: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> DoctorCertificatesModel {
+        let requestBuilder = apiV2DoctorsDoctorIdCertificatesGetWithRequestBuilder(doctorId: doctorId, doctorName: doctorName, certificateId: certificateId, certificate: certificate, activeFrom: activeFrom, activeTo: activeTo, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get All DoctorCertificate.
@@ -159,28 +166,33 @@ open class DoctorsAPI {
      
      - parameter doctorId: (path)  
      - parameter educationId: (path)  
-     - returns: AnyPublisher<DoctorEducationModel, Error>
+     - returns: DoctorEducationModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdEducationsEducationIdGet(doctorId: UUID, educationId: UUID) -> AnyPublisher<DoctorEducationModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorEducationModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdEducationsEducationIdGetWithRequestBuilder(doctorId: doctorId, educationId: educationId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdEducationsEducationIdGet(doctorId: UUID, educationId: UUID) async throws -> DoctorEducationModel {
+        let requestBuilder = apiV2DoctorsDoctorIdEducationsEducationIdGetWithRequestBuilder(doctorId: doctorId, educationId: educationId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get DoctorEducation.
@@ -225,28 +237,33 @@ open class DoctorsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<DoctorEducationsModel, Error>
+     - returns: DoctorEducationsModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdEducationsGet(doctorId: UUID, doctorName: String? = nil, educationId: UUID? = nil, institution: String? = nil, qualification: String? = nil, graduationDate: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<DoctorEducationsModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorEducationsModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdEducationsGetWithRequestBuilder(doctorId: doctorId, doctorName: doctorName, educationId: educationId, institution: institution, qualification: qualification, graduationDate: graduationDate, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdEducationsGet(doctorId: UUID, doctorName: String? = nil, educationId: UUID? = nil, institution: String? = nil, qualification: String? = nil, graduationDate: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> DoctorEducationsModel {
+        let requestBuilder = apiV2DoctorsDoctorIdEducationsGetWithRequestBuilder(doctorId: doctorId, doctorName: doctorName, educationId: educationId, institution: institution, qualification: qualification, graduationDate: graduationDate, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all DoctorEducations.
@@ -299,28 +316,33 @@ open class DoctorsAPI {
      - parameter doctorId: (path)  
      - parameter languageCode: (query)  (optional)
      - parameter returnDefaultValue: (query)  (optional)
-     - returns: AnyPublisher<DoctorModel, Error>
+     - returns: DoctorModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdGet(doctorId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) -> AnyPublisher<DoctorModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdGetWithRequestBuilder(doctorId: doctorId, languageCode: languageCode, returnDefaultValue: returnDefaultValue).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdGet(doctorId: UUID, languageCode: String? = nil, returnDefaultValue: Bool? = nil) async throws -> DoctorModel {
+        let requestBuilder = apiV2DoctorsDoctorIdGetWithRequestBuilder(doctorId: doctorId, languageCode: languageCode, returnDefaultValue: returnDefaultValue)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      
@@ -363,28 +385,33 @@ open class DoctorsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<DoctorLanguagesModel, Error>
+     - returns: DoctorLanguagesModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdLanguagesGet(doctorId: UUID, language: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<DoctorLanguagesModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorLanguagesModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdLanguagesGetWithRequestBuilder(doctorId: doctorId, language: language, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdLanguagesGet(doctorId: UUID, language: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> DoctorLanguagesModel {
+        let requestBuilder = apiV2DoctorsDoctorIdLanguagesGetWithRequestBuilder(doctorId: doctorId, language: language, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all DoctorLanguages.
@@ -428,28 +455,33 @@ open class DoctorsAPI {
      
      - parameter doctorId: (path)  
      - parameter languageId: (path)  
-     - returns: AnyPublisher<DoctorLanguageModel, Error>
+     - returns: DoctorLanguageModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdLanguagesLanguageIdGet(doctorId: UUID, languageId: UUID) -> AnyPublisher<DoctorLanguageModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorLanguageModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdLanguagesLanguageIdGetWithRequestBuilder(doctorId: doctorId, languageId: languageId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdLanguagesLanguageIdGet(doctorId: UUID, languageId: UUID) async throws -> DoctorLanguageModel {
+        let requestBuilder = apiV2DoctorsDoctorIdLanguagesLanguageIdGetWithRequestBuilder(doctorId: doctorId, languageId: languageId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get DoctorLanguage.
@@ -491,28 +523,33 @@ open class DoctorsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<MediasModel, Error>
+     - returns: MediasModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdMediasGet(doctorId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<MediasModel, Error> {
-        var requestTask: RequestTask?
-        return Future<MediasModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdMediasGetWithRequestBuilder(doctorId: doctorId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdMediasGet(doctorId: UUID, id: UUID? = nil, mediaType: MediaType? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> MediasModel {
+        let requestBuilder = apiV2DoctorsDoctorIdMediasGetWithRequestBuilder(doctorId: doctorId, id: id, mediaType: mediaType, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all DoctorMedias.
@@ -558,28 +595,33 @@ open class DoctorsAPI {
      
      - parameter doctorId: (path)  
      - parameter mediaId: (path)  
-     - returns: AnyPublisher<MediaModel, Error>
+     - returns: MediaModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdMediasMediaIdGet(doctorId: UUID, mediaId: UUID) -> AnyPublisher<MediaModel, Error> {
-        var requestTask: RequestTask?
-        return Future<MediaModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdMediasMediaIdGetWithRequestBuilder(doctorId: doctorId, mediaId: mediaId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdMediasMediaIdGet(doctorId: UUID, mediaId: UUID) async throws -> MediaModel {
+        let requestBuilder = apiV2DoctorsDoctorIdMediasMediaIdGetWithRequestBuilder(doctorId: doctorId, mediaId: mediaId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get DoctorMedia.
@@ -622,28 +664,33 @@ open class DoctorsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<DoctorPortfoliosModel, Error>
+     - returns: DoctorPortfoliosModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdPortfoliosGet(doctorId: UUID, doctorName: String? = nil, portfolioId: UUID? = nil, name: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<DoctorPortfoliosModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorPortfoliosModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdPortfoliosGetWithRequestBuilder(doctorId: doctorId, doctorName: doctorName, portfolioId: portfolioId, name: name, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdPortfoliosGet(doctorId: UUID, doctorName: String? = nil, portfolioId: UUID? = nil, name: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> DoctorPortfoliosModel {
+        let requestBuilder = apiV2DoctorsDoctorIdPortfoliosGetWithRequestBuilder(doctorId: doctorId, doctorName: doctorName, portfolioId: portfolioId, name: name, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get All DoctorPortfolios
@@ -691,28 +738,33 @@ open class DoctorsAPI {
      
      - parameter doctorId: (path)  
      - parameter portfolioId: (path)  
-     - returns: AnyPublisher<DoctorPortfolioModel, Error>
+     - returns: DoctorPortfolioModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdPortfoliosPortfolioIdGet(doctorId: UUID, portfolioId: UUID) -> AnyPublisher<DoctorPortfolioModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorPortfolioModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdPortfoliosPortfolioIdGetWithRequestBuilder(doctorId: doctorId, portfolioId: portfolioId).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdPortfoliosPortfolioIdGet(doctorId: UUID, portfolioId: UUID) async throws -> DoctorPortfolioModel {
+        let requestBuilder = apiV2DoctorsDoctorIdPortfoliosPortfolioIdGetWithRequestBuilder(doctorId: doctorId, portfolioId: portfolioId)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get DoctorPortfolio.
@@ -756,28 +808,33 @@ open class DoctorsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<DoctorSpecialtiesModel, Error>
+     - returns: DoctorSpecialtiesModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdSpecialtiesGet(doctorId: UUID, doctorName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<DoctorSpecialtiesModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorSpecialtiesModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdSpecialtiesGetWithRequestBuilder(doctorId: doctorId, doctorName: doctorName, specialtyId: specialtyId, specialtyName: specialtyName, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdSpecialtiesGet(doctorId: UUID, doctorName: String? = nil, specialtyId: UUID? = nil, specialtyName: String? = nil, languageCode: String? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> DoctorSpecialtiesModel {
+        let requestBuilder = apiV2DoctorsDoctorIdSpecialtiesGetWithRequestBuilder(doctorId: doctorId, doctorName: doctorName, specialtyId: specialtyId, specialtyName: specialtyName, languageCode: languageCode, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get All DoctorSpecialties.
@@ -828,28 +885,33 @@ open class DoctorsAPI {
      - parameter doctorId: (path)  
      - parameter specialtyId: (path)  
      - parameter languageCode: (query)  (optional)
-     - returns: AnyPublisher<DoctorSpecialtyModel, Error>
+     - returns: DoctorSpecialtyModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsDoctorIdSpecialtiesSpecialtyIdGet(doctorId: UUID, specialtyId: UUID, languageCode: String? = nil) -> AnyPublisher<DoctorSpecialtyModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorSpecialtyModel, Error> { promise in
-            requestTask = apiV2DoctorsDoctorIdSpecialtiesSpecialtyIdGetWithRequestBuilder(doctorId: doctorId, specialtyId: specialtyId, languageCode: languageCode).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsDoctorIdSpecialtiesSpecialtyIdGet(doctorId: UUID, specialtyId: UUID, languageCode: String? = nil) async throws -> DoctorSpecialtyModel {
+        let requestBuilder = apiV2DoctorsDoctorIdSpecialtiesSpecialtyIdGetWithRequestBuilder(doctorId: doctorId, specialtyId: specialtyId, languageCode: languageCode)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get DoctorSpecialty
@@ -904,28 +966,33 @@ open class DoctorsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<DoctorsModel, Error>
+     - returns: DoctorsModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, ids: [UUID]? = nil, specialtyId: UUID? = nil, consultationEnabled: Bool? = nil, languageCode: String? = nil, id: UUID? = nil, fullname: String? = nil, email: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<DoctorsModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorsModel, Error> { promise in
-            requestTask = apiV2DoctorsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, ids: ids, specialtyId: specialtyId, consultationEnabled: consultationEnabled, languageCode: languageCode, id: id, fullname: fullname, email: email, gender: gender, dateOfBirth: dateOfBirth, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsGet(hospitalId: UUID? = nil, hospitalName: String? = nil, ids: [UUID]? = nil, specialtyId: UUID? = nil, consultationEnabled: Bool? = nil, languageCode: String? = nil, id: UUID? = nil, fullname: String? = nil, email: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> DoctorsModel {
+        let requestBuilder = apiV2DoctorsGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, ids: ids, specialtyId: specialtyId, consultationEnabled: consultationEnabled, languageCode: languageCode, id: id, fullname: fullname, email: email, gender: gender, dateOfBirth: dateOfBirth, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all Doctors.
@@ -1000,28 +1067,33 @@ open class DoctorsAPI {
      - parameter page: (query)  (optional)
      - parameter limit: (query)  (optional)
      - parameter lastRetrieved: (query)  (optional)
-     - returns: AnyPublisher<DoctorsSimpleModel, Error>
+     - returns: DoctorsSimpleModel
      */
-    #if canImport(Combine)
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2DoctorsSimpleGet(hospitalId: UUID? = nil, hospitalName: String? = nil, ids: [UUID]? = nil, specialtyId: UUID? = nil, consultationEnabled: Bool? = nil, languageCode: String? = nil, id: UUID? = nil, fullname: String? = nil, email: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> AnyPublisher<DoctorsSimpleModel, Error> {
-        var requestTask: RequestTask?
-        return Future<DoctorsSimpleModel, Error> { promise in
-            requestTask = apiV2DoctorsSimpleGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, ids: ids, specialtyId: specialtyId, consultationEnabled: consultationEnabled, languageCode: languageCode, id: id, fullname: fullname, email: email, gender: gender, dateOfBirth: dateOfBirth, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved).execute { result in
-                switch result {
-                case let .success(response):
-                    promise(.success(response.body))
-                case let .failure(error):
-                    promise(.failure(error))
+    open class func apiV2DoctorsSimpleGet(hospitalId: UUID? = nil, hospitalName: String? = nil, ids: [UUID]? = nil, specialtyId: UUID? = nil, consultationEnabled: Bool? = nil, languageCode: String? = nil, id: UUID? = nil, fullname: String? = nil, email: String? = nil, gender: Gender? = nil, dateOfBirth: Date? = nil, created: Date? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> DoctorsSimpleModel {
+        let requestBuilder = apiV2DoctorsSimpleGetWithRequestBuilder(hospitalId: hospitalId, hospitalName: hospitalName, ids: ids, specialtyId: specialtyId, consultationEnabled: consultationEnabled, languageCode: languageCode, id: id, fullname: fullname, email: email, gender: gender, dateOfBirth: dateOfBirth, created: created, page: page, limit: limit, lastRetrieved: lastRetrieved)
+        let requestTask = requestBuilder.requestTask
+        return try await withTaskCancellationHandler {
+            try Task.checkCancellation()
+            return try await withCheckedThrowingContinuation { continuation in
+                guard !Task.isCancelled else {
+                  continuation.resume(throwing: CancellationError())
+                  return
+                }
+
+                requestBuilder.execute { result in
+                    switch result {
+                    case let .success(response):
+                        continuation.resume(returning: response.body)
+                    case let .failure(error):
+                        continuation.resume(throwing: error)
+                    }
                 }
             }
+        } onCancel: {
+            requestTask.cancel()
         }
-        .handleEvents(receiveCancel: {
-            requestTask?.cancel()
-        })
-        .eraseToAnyPublisher()
     }
-    #endif
 
     /**
      Get all Doctors.
