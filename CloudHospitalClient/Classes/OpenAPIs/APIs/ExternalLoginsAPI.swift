@@ -53,7 +53,7 @@ open class ExternalLoginsAPI {
      */
     open class func apiV1ExternalLoginsDeleteWithRequestBuilder(externalLoginInfo: ExternalLoginInfo? = nil) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/externalLogins"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: externalLoginInfo)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -108,7 +108,7 @@ open class ExternalLoginsAPI {
      */
     open class func apiV1ExternalLoginsGetWithRequestBuilder() -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/externalLogins"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -165,7 +165,7 @@ open class ExternalLoginsAPI {
      */
     open class func apiV1ExternalLoginsPostWithRequestBuilder(externalLoginInfo: ExternalLoginInfo? = nil) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/externalLogins"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: externalLoginInfo)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -227,7 +227,7 @@ open class ExternalLoginsAPI {
         let keyPreEscape = "\(APIHelper.mapValueToPathItem(key))"
         let keyPostEscape = keyPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{key}", with: keyPostEscape, options: .literal, range: nil)
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -289,7 +289,7 @@ open class ExternalLoginsAPI {
         let keyPreEscape = "\(APIHelper.mapValueToPathItem(key))"
         let keyPostEscape = keyPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{key}", with: keyPostEscape, options: .literal, range: nil)
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -345,7 +345,7 @@ open class ExternalLoginsAPI {
      */
     open class func facebookPatchWithRequestBuilder(apiVersion: String? = nil, facebookUserDataDeletionRequestModel: FacebookUserDataDeletionRequestModel? = nil) -> RequestBuilder<FacebookUserDataDeletionResponseModel> {
         let localVariablePath = "/facebook"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: facebookUserDataDeletionRequestModel)
 
         var localVariableUrlComponents = URLComponents(string: localVariableURLString)

@@ -53,7 +53,7 @@ open class AccountsAPI {
      */
     open class func apiV1AccountsChangeEmailPostWithRequestBuilder(changeEmailModel: ChangeEmailModel? = nil) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/accounts/changeEmail"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: changeEmailModel)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -110,7 +110,7 @@ open class AccountsAPI {
      */
     open class func apiV1AccountsChangePasswordPostWithRequestBuilder(setPasswordRequestModel: SetPasswordRequestModel? = nil) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/accounts/changePassword"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: setPasswordRequestModel)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -167,7 +167,7 @@ open class AccountsAPI {
      */
     open class func apiV1AccountsConfirmEmailPostWithRequestBuilder(confirmEmailModel: ConfirmEmailModel? = nil) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/accounts/confirmEmail"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: confirmEmailModel)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -222,7 +222,7 @@ open class AccountsAPI {
      */
     open class func apiV1AccountsDeleteWithRequestBuilder() -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/accounts"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -276,7 +276,7 @@ open class AccountsAPI {
      */
     open class func apiV1AccountsForgotPasswordPostWithRequestBuilder(forgotPasswordViewModel: ForgotPasswordViewModel? = nil) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/accounts/forgotPassword"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: forgotPasswordViewModel)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -331,7 +331,7 @@ open class AccountsAPI {
      */
     open class func apiV1AccountsGetWithRequestBuilder() -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/accounts"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -385,7 +385,7 @@ open class AccountsAPI {
      */
     open class func apiV1AccountsPostWithRequestBuilder(registerViewModel: RegisterViewModel? = nil) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/accounts"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: registerViewModel)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -439,7 +439,7 @@ open class AccountsAPI {
      */
     open class func apiV1AccountsResetPasswordPostWithRequestBuilder(resetPasswordViewModel: ResetPasswordViewModel? = nil) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/accounts/resetPassword"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: resetPasswordViewModel)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -494,7 +494,7 @@ open class AccountsAPI {
      */
     open class func apiV1AccountsSendVerificationEmailPostWithRequestBuilder() -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/accounts/sendVerificationEmail"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)

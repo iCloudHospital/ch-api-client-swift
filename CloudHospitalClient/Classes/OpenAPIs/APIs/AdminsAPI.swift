@@ -53,7 +53,7 @@ open class AdminsAPI {
      */
     open class func apiV1AdminsChangeUserEmailPostWithRequestBuilder(changeUserEmailModel: ChangeUserEmailModel? = nil) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/admins/changeUserEmail"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: changeUserEmailModel)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -110,7 +110,7 @@ open class AdminsAPI {
      */
     open class func apiV1AdminsCreateUserPostWithRequestBuilder(registerUserViewModel: RegisterUserViewModel? = nil) -> RequestBuilder<Void> {
         let localVariablePath = "/api/v1/admins/createUser"
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters = JSONEncodingHelper.encodingParameters(forEncodableObject: registerUserViewModel)
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -170,7 +170,7 @@ open class AdminsAPI {
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -230,7 +230,7 @@ open class AdminsAPI {
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
@@ -290,7 +290,7 @@ open class AdminsAPI {
         let idPreEscape = "\(APIHelper.mapValueToPathItem(id))"
         let idPostEscape = idPreEscape.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         localVariablePath = localVariablePath.replacingOccurrences(of: "{id}", with: idPostEscape, options: .literal, range: nil)
-        let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
+        let localVariableURLString = CloudHospitalClientAPI.identityBasePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
 
         let localVariableUrlComponents = URLComponents(string: localVariableURLString)
