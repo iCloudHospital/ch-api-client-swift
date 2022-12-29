@@ -41,7 +41,7 @@ public struct IdentityToken: Codable, JSONEncodable, Hashable {
         try container.encodeIfPresent(expires_in, forKey: .expires_in)
         try container.encodeIfPresent(expires_at, forKey: .expires_at)
         try container.encodeIfPresent(refresh_token, forKey: .refresh_token)
-        try container.encodeIfPresent(scope, forKey: .cscopeode)
+        try container.encodeIfPresent(scope, forKey: .scope)
         try container.encodeIfPresent(token_type, forKey: .token_type)
     }
 }
