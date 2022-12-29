@@ -431,7 +431,15 @@ open class AccountsAPI {
                     case .success:
                         continuation.resume(returning: ())
                     case let .failure(error):
-                        continuation.resume(throwing: error)
+                        if case let ErrorResponse.error(status, _, _, _) = error {
+                            if status == 200 {
+                                continuation.resume(returning: ())
+                            } else {
+                                continuation.resume(throwing: error)
+                            }
+                        } else {
+                            continuation.resume(throwing: error)
+                        }
                     }
                 }
             }
