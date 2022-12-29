@@ -40,7 +40,7 @@ Method | HTTP request | Description
 
 # **apiV2HospitalsGet**
 ```swift
-    open class func apiV2HospitalsGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalsModel?, _ error: Error?) -> Void)
+    open class func apiV2HospitalsGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, mediaCount: Int? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalsModel?, _ error: Error?) -> Void)
 ```
 
 Get all Hospitals.
@@ -58,6 +58,7 @@ let marketingType = MarketingType() // MarketingType |  (optional)
 let specialtyTypeId = 987 // UUID |  (optional)
 let specialtyId = 987 // UUID |  (optional)
 let exceptHospitalId = 987 // UUID |  (optional)
+let mediaCount = 987 // Int |  (optional)
 let showHidden = true // Bool |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
 let ids = [123] // [UUID] |  (optional)
@@ -68,7 +69,7 @@ let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 
 // Get all Hospitals.
-HospitalsAPI.apiV2HospitalsGet(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+HospitalsAPI.apiV2HospitalsGet(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, mediaCount: mediaCount, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -92,6 +93,7 @@ Name | Type | Description  | Notes
  **specialtyTypeId** | **UUID** |  | [optional] 
  **specialtyId** | **UUID** |  | [optional] 
  **exceptHospitalId** | **UUID** |  | [optional] 
+ **mediaCount** | **Int** |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
  **ids** | [**[UUID]**](UUID.md) |  | [optional] 
@@ -1779,7 +1781,7 @@ No authorization required
 
 # **apiV2HospitalsSimpleGet**
 ```swift
-    open class func apiV2HospitalsSimpleGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalsSimpleModel?, _ error: Error?) -> Void)
+    open class func apiV2HospitalsSimpleGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, mediaCount: Int? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil, completion: @escaping (_ data: HospitalsSimpleModel?, _ error: Error?) -> Void)
 ```
 
 Get all Hospitals.
@@ -1797,6 +1799,7 @@ let marketingType = MarketingType() // MarketingType |  (optional)
 let specialtyTypeId = 987 // UUID |  (optional)
 let specialtyId = 987 // UUID |  (optional)
 let exceptHospitalId = 987 // UUID |  (optional)
+let mediaCount = 987 // Int |  (optional)
 let showHidden = true // Bool |  (optional)
 let languageCode = "languageCode_example" // String |  (optional)
 let ids = [123] // [UUID] |  (optional)
@@ -1807,7 +1810,7 @@ let limit = 987 // Int |  (optional)
 let lastRetrieved = Date() // Date |  (optional)
 
 // Get all Hospitals.
-HospitalsAPI.apiV2HospitalsSimpleGet(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
+HospitalsAPI.apiV2HospitalsSimpleGet(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, mediaCount: mediaCount, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved) { (response, error) in
     guard error == nil else {
         print(error)
         return
@@ -1831,6 +1834,7 @@ Name | Type | Description  | Notes
  **specialtyTypeId** | **UUID** |  | [optional] 
  **specialtyId** | **UUID** |  | [optional] 
  **exceptHospitalId** | **UUID** |  | [optional] 
+ **mediaCount** | **Int** |  | [optional] 
  **showHidden** | **Bool** |  | [optional] 
  **languageCode** | **String** |  | [optional] 
  **ids** | [**[UUID]**](UUID.md) |  | [optional] 

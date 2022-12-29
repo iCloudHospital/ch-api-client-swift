@@ -223,7 +223,6 @@ CloudHospitalClient/Classes/OpenAPIs/Models/ServiceCategoryModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceReviewItemModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceReviewModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/ServiceReviewsModel.swift
-CloudHospitalClient/Classes/OpenAPIs/Models/SnsHandle.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SnsHandleModel.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SnsType.swift
 CloudHospitalClient/Classes/OpenAPIs/Models/SortingOrder.swift
@@ -470,7 +469,6 @@ docs/ServiceReviewsAPI.md
 docs/ServiceReviewsModel.md
 docs/ServicesAPI.md
 docs/ServicesCategoriesAPI.md
-docs/SnsHandle.md
 docs/SnsHandleModel.md
 docs/SnsType.md
 docs/SortingOrder.md

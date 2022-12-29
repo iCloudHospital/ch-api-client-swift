@@ -23,6 +23,7 @@ open class HospitalsAPI {
      - parameter specialtyTypeId: (query)  (optional)
      - parameter specialtyId: (query)  (optional)
      - parameter exceptHospitalId: (query)  (optional)
+     - parameter mediaCount: (query)  (optional)
      - parameter showHidden: (query)  (optional)
      - parameter languageCode: (query)  (optional)
      - parameter ids: (query)  (optional)
@@ -34,8 +35,8 @@ open class HospitalsAPI {
      - returns: HospitalsModel
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> HospitalsModel {
-        let requestBuilder = apiV2HospitalsGetWithRequestBuilder(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved)
+    open class func apiV2HospitalsGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, mediaCount: Int? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> HospitalsModel {
+        let requestBuilder = apiV2HospitalsGetWithRequestBuilder(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, mediaCount: mediaCount, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved)
         let requestTask = requestBuilder.requestTask
         return try await withTaskCancellationHandler {
             try Task.checkCancellation()
@@ -70,6 +71,7 @@ open class HospitalsAPI {
      - parameter specialtyTypeId: (query)  (optional)
      - parameter specialtyId: (query)  (optional)
      - parameter exceptHospitalId: (query)  (optional)
+     - parameter mediaCount: (query)  (optional)
      - parameter showHidden: (query)  (optional)
      - parameter languageCode: (query)  (optional)
      - parameter ids: (query)  (optional)
@@ -80,7 +82,7 @@ open class HospitalsAPI {
      - parameter lastRetrieved: (query)  (optional)
      - returns: RequestBuilder<HospitalsModel> 
      */
-    open class func apiV2HospitalsGetWithRequestBuilder(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalsModel> {
+    open class func apiV2HospitalsGetWithRequestBuilder(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, mediaCount: Int? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalsModel> {
         let localVariablePath = "/api/v2/hospitals"
         let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -95,6 +97,7 @@ open class HospitalsAPI {
             "SpecialtyTypeId": (wrappedValue: specialtyTypeId?.encodeToJSON(), isExplode: true),
             "SpecialtyId": (wrappedValue: specialtyId?.encodeToJSON(), isExplode: true),
             "ExceptHospitalId": (wrappedValue: exceptHospitalId?.encodeToJSON(), isExplode: true),
+            "MediaCount": (wrappedValue: mediaCount?.encodeToJSON(), isExplode: true),
             "ShowHidden": (wrappedValue: showHidden?.encodeToJSON(), isExplode: true),
             "LanguageCode": (wrappedValue: languageCode?.encodeToJSON(), isExplode: true),
             "Ids": (wrappedValue: ids?.encodeToJSON(), isExplode: true),
@@ -2328,6 +2331,7 @@ open class HospitalsAPI {
      - parameter specialtyTypeId: (query)  (optional)
      - parameter specialtyId: (query)  (optional)
      - parameter exceptHospitalId: (query)  (optional)
+     - parameter mediaCount: (query)  (optional)
      - parameter showHidden: (query)  (optional)
      - parameter languageCode: (query)  (optional)
      - parameter ids: (query)  (optional)
@@ -2339,8 +2343,8 @@ open class HospitalsAPI {
      - returns: HospitalsSimpleModel
      */
     @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-    open class func apiV2HospitalsSimpleGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> HospitalsSimpleModel {
-        let requestBuilder = apiV2HospitalsSimpleGetWithRequestBuilder(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved)
+    open class func apiV2HospitalsSimpleGet(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, mediaCount: Int? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) async throws -> HospitalsSimpleModel {
+        let requestBuilder = apiV2HospitalsSimpleGetWithRequestBuilder(hospitalId: hospitalId, name: name, countryId: countryId, created: created, marketingType: marketingType, specialtyTypeId: specialtyTypeId, specialtyId: specialtyId, exceptHospitalId: exceptHospitalId, mediaCount: mediaCount, showHidden: showHidden, languageCode: languageCode, ids: ids, returnDefaultValue: returnDefaultValue, paymentEnabled: paymentEnabled, page: page, limit: limit, lastRetrieved: lastRetrieved)
         let requestTask = requestBuilder.requestTask
         return try await withTaskCancellationHandler {
             try Task.checkCancellation()
@@ -2375,6 +2379,7 @@ open class HospitalsAPI {
      - parameter specialtyTypeId: (query)  (optional)
      - parameter specialtyId: (query)  (optional)
      - parameter exceptHospitalId: (query)  (optional)
+     - parameter mediaCount: (query)  (optional)
      - parameter showHidden: (query)  (optional)
      - parameter languageCode: (query)  (optional)
      - parameter ids: (query)  (optional)
@@ -2385,7 +2390,7 @@ open class HospitalsAPI {
      - parameter lastRetrieved: (query)  (optional)
      - returns: RequestBuilder<HospitalsSimpleModel> 
      */
-    open class func apiV2HospitalsSimpleGetWithRequestBuilder(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalsSimpleModel> {
+    open class func apiV2HospitalsSimpleGetWithRequestBuilder(hospitalId: UUID? = nil, name: String? = nil, countryId: UUID? = nil, created: Date? = nil, marketingType: MarketingType? = nil, specialtyTypeId: UUID? = nil, specialtyId: UUID? = nil, exceptHospitalId: UUID? = nil, mediaCount: Int? = nil, showHidden: Bool? = nil, languageCode: String? = nil, ids: [UUID]? = nil, returnDefaultValue: Bool? = nil, paymentEnabled: Bool? = nil, page: Int? = nil, limit: Int? = nil, lastRetrieved: Date? = nil) -> RequestBuilder<HospitalsSimpleModel> {
         let localVariablePath = "/api/v2/hospitals/simple"
         let localVariableURLString = CloudHospitalClientAPI.basePath + localVariablePath
         let localVariableParameters: [String: Any]? = nil
@@ -2400,6 +2405,7 @@ open class HospitalsAPI {
             "SpecialtyTypeId": (wrappedValue: specialtyTypeId?.encodeToJSON(), isExplode: true),
             "SpecialtyId": (wrappedValue: specialtyId?.encodeToJSON(), isExplode: true),
             "ExceptHospitalId": (wrappedValue: exceptHospitalId?.encodeToJSON(), isExplode: true),
+            "MediaCount": (wrappedValue: mediaCount?.encodeToJSON(), isExplode: true),
             "ShowHidden": (wrappedValue: showHidden?.encodeToJSON(), isExplode: true),
             "LanguageCode": (wrappedValue: languageCode?.encodeToJSON(), isExplode: true),
             "Ids": (wrappedValue: ids?.encodeToJSON(), isExplode: true),

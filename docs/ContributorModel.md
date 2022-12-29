@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **auditableEntity** | [**AuditableEntity**](AuditableEntity.md) |  | [optional] 
 **overview** | **String** |  | [optional] [readonly] 
 **content** | **String** |  | [optional] [readonly] 
-**snsHandles** | [SnsHandle] |  | [optional] 
+**snsHandles** | [SnsHandleModel] |  | [optional] 
 **localizedUrls** | [LocalizedUrlModel] |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

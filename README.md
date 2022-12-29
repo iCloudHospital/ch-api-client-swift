@@ -386,7 +386,6 @@ Class | Method | HTTP request | Description
  - [ServiceReviewItemModel](docs/ServiceReviewItemModel.md)
  - [ServiceReviewModel](docs/ServiceReviewModel.md)
  - [ServiceReviewsModel](docs/ServiceReviewsModel.md)
- - [SnsHandle](docs/SnsHandle.md)
  - [SnsHandleModel](docs/SnsHandleModel.md)
  - [SnsType](docs/SnsType.md)
  - [SortingOrder](docs/SortingOrder.md)

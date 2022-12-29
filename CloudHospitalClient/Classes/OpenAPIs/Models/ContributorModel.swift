@@ -29,10 +29,10 @@ public struct ContributorModel: Codable, JSONEncodable, Hashable {
     public var auditableEntity: AuditableEntity?
     public var overview: String?
     public var content: String?
-    public var snsHandles: [SnsHandle]?
+    public var snsHandles: [SnsHandleModel]?
     public var localizedUrls: [LocalizedUrlModel]?
 
-    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, description: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, hospitalWebsiteUrl: String? = nil, email: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, order: Int? = nil, auditableEntity: AuditableEntity? = nil, overview: String? = nil, content: String? = nil, snsHandles: [SnsHandle]? = nil, localizedUrls: [LocalizedUrlModel]? = nil) {
+    public init(id: UUID? = nil, languageCode: String? = nil, name: String? = nil, slug: String? = nil, confirmed: Bool? = nil, description: String? = nil, hospitalId: UUID? = nil, hospitalName: String? = nil, hospitalSlug: String? = nil, hospitalWebsiteUrl: String? = nil, email: String? = nil, photo: String? = nil, photoThumbnail: String? = nil, order: Int? = nil, auditableEntity: AuditableEntity? = nil, overview: String? = nil, content: String? = nil, snsHandles: [SnsHandleModel]? = nil, localizedUrls: [LocalizedUrlModel]? = nil) {
         self.id = id
         self.languageCode = languageCode
         self.name = name
