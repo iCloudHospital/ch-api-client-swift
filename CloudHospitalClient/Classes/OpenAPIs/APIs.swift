@@ -15,6 +15,7 @@ public typealias CloudHospitalClient = CloudHospitalClientAPI
 
 open class CloudHospitalClientAPI {
     public static var basePath = "http://localhost"
+    public static var identityBasePath = "http://localhost"
     public static var customHeaders: [String: String] = [:]
     public static var credential: URLCredential?
     public static var requestBuilderFactory: RequestBuilderFactory = AlamofireRequestBuilderFactory()
