@@ -7,10 +7,10 @@ targets:
     sources: [CloudHospitalClient]
     info:
       path: ./Info.plist
-      version: 2.0.3
+      version: 2.0.4
     settings:
       APPLICATION_EXTENSION_API_ONLY: true
     scheme: {}
     dependencies:
-      - carthage: AnyCodable
-      - carthage: Alamofire
+    - carthage: AnyCodable
+    - carthage: Alamofire
